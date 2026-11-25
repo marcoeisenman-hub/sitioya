@@ -392,8 +392,9 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <h2 class="rv">Cotiza tu página en 1 minuto</h2>
     <p class="sub rv">Llena esto y se abre WhatsApp con tu mensaje listo. Te contestamos con el precio exacto y cuándo queda lista.</p>
     <ul class="qlist rv"><li><b>1</b>Nos cuentas qué vendes</li><li><b>2</b>Te mandamos precio y tiempo</li><li><b>3</b>Pagas la mitad para empezar y la otra mitad al entregar</li></ul>
+    <noscript><style>#qform{display:none}</style><p style="margin-top:20px"><a class="btn" href="https://wa.me/50769197559">Escríbenos por WhatsApp</a></p></noscript>
   </div>
-  <form class="qform rv" id="qform" method="post" action="https://wa.me/50769197559" novalidate>
+  <form class="qform" id="qform" method="post" action="https://wa.me/50769197559" novalidate>
     <div class="two">
       <label>Tu nombre<input name="nombre" autocomplete="name" placeholder="Ej: Ana" required></label>
       <label>Tu negocio <small>(opcional)</small><input name="negocio" placeholder="Ej: Luna Panadería"></label>
@@ -402,7 +403,7 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <label>Qué necesitas<select name="plan">
       <option>Hazla tú · $19</option><option selected>Plantilla lista · $69</option><option>Básica · $99</option><option>Completa · $199</option><option>Diseño único · desde $369</option><option>No sé todavía, ayúdenme</option></select></label>
     <label>Cuéntanos más <small>(opcional)</small><textarea name="msg" placeholder="Qué vendes, si tienes Instagram, para cuándo la necesitas…"></textarea></label>
-    <p class="err" id="qerr" aria-live="polite"></p><noscript><a class="btn" href="https://wa.me/50769197559">Escríbenos por WhatsApp</a></noscript>
+    <p class="err" id="qerr" aria-live="polite"></p>
     <button type="submit" id="qbtn" disabled><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Enviar por WhatsApp</button>
   </form>
 </div></section>
