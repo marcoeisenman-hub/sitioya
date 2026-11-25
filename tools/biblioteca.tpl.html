@@ -63,7 +63,7 @@ h1 span{background:linear-gradient(90deg,var(--coral),var(--yel));-webkit-backgr
 .r b{display:block;font-size:15px}.r small{color:var(--soft);font-size:13px}
 .ft{display:flex;gap:16px;padding:10px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--soft)}
 .ft kbd{font-family:inherit;border:1px solid var(--line);border-radius:5px;padding:0 5px;margin-right:4px}
-.pm{padding:22px}
+.pm{padding:22px;position:relative}.x{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--txt);font-size:16px;cursor:pointer}
 .pm h3{font-size:22px;font-weight:900}.pm .k{color:var(--soft);font-size:14px;margin-top:4px}
 .code{position:relative;margin-top:16px;background:#060810;border:1px solid var(--line);border-radius:14px;padding:18px;font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.6;color:#C9D1E3;white-space:pre-wrap;max-height:300px;overflow:hidden}
 .code .lock{filter:blur(5px);user-select:none}
@@ -101,14 +101,8 @@ const T = /*DATA*/[];
 const WA = "50769197559";
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-const prompt = t => `Actúa como diseñador web experto. Crea una página web de una sola página para mi ${t.k.toLowerCase()} llamada [NOMBRE DE TU NEGOCIO], basada en la plantilla "${t.n}" de SitioYa.
-
-Estilo: ${t.fm.toLowerCase()}, moderno, que se vea perfecto en el celular.
-Secciones: portada con foto grande y botón de WhatsApp, ${t.f.join(", ").toLowerCase()}, ubicación con mapa y horario.
-Colores: [TUS COLORES]. Fotos: [ADJUNTA TUS FOTOS].
-WhatsApp: [TU NÚMERO]. Todos los botones de pedir o reservar abren WhatsApp con un mensaje listo.
-Animaciones suaves al bajar, tipografía grande y textos cortos que vendan.
-Entrega un solo archivo HTML con CSS y JavaScript incluidos, listo para publicar gratis.`;
+const prompt = t => [`Actúa como diseñador web experto. Crea una página web de una sola página para mi ${t.k.toLowerCase()} llamada [NOMBRE DE TU NEGOCIO], basada en la plantilla "${t.n}" de SitioYa.`, ""];
+const LOCKED = "Estilo: ████████ ██████, ████ ██ ██ ███████.\nSecciones: ███████ ███ ████ ██████ █ ██████ ██ ████████, ████████.\nColores: ████. Fotos: █████ ███ █████.\nWhatsApp: ██ ██████. ██████ ███ ███████ ██ █████.\n███████████ ██████ ██ █████, ███████████ ██████.";
 document.getElementById("cnt").textContent = T.length;
 
 // filtros
@@ -138,17 +132,17 @@ function closeOv() { ov.classList.remove("on"); document.body.style.overflow = "
 ov.addEventListener("click", e => { if (e.target === ov) closeOv(); });
 
 function showPrompt(s, from) {
-  const t = T.find(x => x.s === s); const p = prompt(t).split("\n");
+  const t = T.find(x => x.s === s); const p = prompt(t);
   const msg = encodeURIComponent(`Hola SitioYa! Quiero desbloquear el prompt de la plantilla ${t.n} (${t.k}) por $9.`);
-  openOv(`<div class="pm"><h3>✨ Prompt · ${esc(t.n)}</h3><div class="k">${esc(t.k)} · ${esc(t.fm)}</div>
-    <div class="code">${esc(p.slice(0,2).join("\n"))}\n<span class="lock">${esc(p.slice(2).join("\n"))}</span></div>
+  openOv(`<div class="pm"><button class="x" aria-label="Cerrar" onclick="closeOv()">✕</button><h3>✨ Prompt · ${esc(t.n)}</h3><div class="k">${esc(t.k)} · ${esc(t.fm)}</div>
+    <div class="code">${esc(p.slice(0,2).join("\n"))}\n<span class="lock" aria-hidden="true">${LOCKED}</span></div>
     <div class="unl"><a class="b wa" href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener">🔓 Desbloquear por $9</a><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a></div>
     <p class="note">Te lo mandamos por WhatsApp con una guía paso a paso. ¿Prefieres que te la hagamos? <a href="./#cotizar" style="color:var(--coral);font-weight:700">Cotiza aquí</a>.</p></div>`, from);
   md.querySelector(".wa").focus();
 }
 
 function openSearch() {
-  openOv(`<div class="sq"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C93A6" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" placeholder="Busca por negocio o estilo: café, uñas, oscura…" autocomplete="off" aria-label="Buscar plantillas"></div><div class="res" id="res" role="listbox"></div><div class="ft"><span><kbd>↑</kbd><kbd>↓</kbd>moverse</span><span><kbd>↵</kbd>abrir</span><span><kbd>esc</kbd>cerrar</span></div>`, document.getElementById("open"));
+  openOv(`<div class="sq"><button class="x" style="position:static;order:2" aria-label="Cerrar" onclick="closeOv()">✕</button><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C93A6" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" placeholder="Busca por negocio o estilo: café, uñas, oscura…" autocomplete="off" aria-label="Buscar plantillas"></div><div class="res" id="res" role="listbox"></div><div class="ft"><span><kbd>↑</kbd><kbd>↓</kbd>moverse</span><span><kbd>↵</kbd>abrir</span><span><kbd>esc</kbd>cerrar</span></div>`, document.getElementById("open"));
   const q = document.getElementById("q"); q.focus(); search(""); q.addEventListener("input", () => search(q.value));
 }
 function search(v) {
@@ -164,6 +158,7 @@ addEventListener("keydown", e => {
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); ov.classList.contains("on") ? closeOv() : openSearch(); return; }
   if (!ov.classList.contains("on")) return;
   if (e.key === "Escape") return closeOv();
+  if (e.key === "Tab") { const f = [...md.querySelectorAll("a,button,input")]; if (!f.length) return; const i = f.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length-1].focus(); } else if (!e.shiftKey && i === f.length-1) { e.preventDefault(); f[0].focus(); } }
   if (!document.getElementById("res")) return;
   if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); if (!hits.length) return; sel = (sel + (e.key === "ArrowDown" ? 1 : -1) + hits.length) % hits.length; document.querySelectorAll(".r").forEach((r, i) => r.classList.toggle("on", i === sel)); }
   if (e.key === "Enter") { e.preventDefault(); pick(sel); }
