@@ -154,7 +154,7 @@ header.s{background:rgba(255,246,236,.88);backdrop-filter:blur(12px);box-shadow:
 .plan li::before{color:var(--coral)}
 .plan .tag{align-self:flex-start;font-size:12.5px;font-weight:800;background:var(--mint);color:var(--navy);border-radius:999px;padding:4px 12px}
 .plan .btn{margin-top:auto}
-.extra{margin-top:16px;color:var(--soft);font-size:15px}
+.extra{max-width:1200px;margin:22px auto 0;padding:0 max(4vw,18px)}.mant{display:flex;align-items:center;gap:16px;background:#fff;border:1.5px solid #F1E4D6;border-radius:20px;padding:18px 22px}.mant .mi{flex:none;width:46px;height:46px;border-radius:14px;background:var(--blush,#FFE3DC);color:#FF6B5B;display:grid;place-items:center}.mant b{display:block;color:#1B2A4A;font-size:16px}.mant p{margin:3px 0 0;color:var(--soft);font-size:15px;line-height:1.45}@media(max-width:700px){.extra{padding:0 20px}.mant{align-items:flex-start;padding:16px}}
 .tabs{position:relative;display:inline-flex;gap:4px;background:#fff;border:2px solid var(--line);border-radius:999px;padding:5px;margin-bottom:24px;flex-wrap:wrap}
 .tab{position:relative;z-index:1;min-height:46px;padding:0 20px;border:0;background:none;border-radius:999px;font:inherit;font-weight:800;font-size:15px;color:var(--soft);cursor:pointer;transition:color .3s}
 .tab.on{color:#FFF6EC}
@@ -383,7 +383,7 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
     </div>
   </div>
-  <p class="extra">Mantenimiento opcional en cualquier plan: $15/mes (cambios de precios, fotos y horarios cuando los necesites).</p>
+  <div class="extra"><div class="mant"><span class="mi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><div><b>Mantenimiento opcional · $15/mes</b><p>Para cualquier plan. Te cambiamos precios, fotos y horarios cada vez que lo necesites.</p></div></div></div>
 </div></section>
 
 <section class="band" style="padding-top:0"><div class="in grow">
