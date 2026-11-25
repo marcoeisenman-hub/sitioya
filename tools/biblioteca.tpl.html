@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biblioteca SitioYa · Plantillas y prompts</title>
+<meta name="description" content="Plantillas web para negocios en Panamá, con su prompt para crearlas con IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090F;--card:#10141F;--line:rgba(255,255,255,.08);--txt:#F4F1EC;--soft:#8C93A6;--coral:#FF6B5B;--mint:#7ED6C1;--yel:#FFD36B}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.glow{position:fixed;inset:-20% -10% auto;height:80vh;background:radial-gradient(600px 400px at 20% 20%,rgba(255,107,91,.18),transparent 70%),radial-gradient(600px 400px at 80% 0%,rgba(126,214,193,.14),transparent 70%);pointer-events:none;z-index:0}
+.w{max-width:1240px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+nav{position:sticky;top:0;z-index:30;background:rgba(7,9,15,.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .w{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px}.logo b{color:var(--coral)}
+.nl{display:flex;gap:6px;align-items:center}
+.nl a{font-weight:700;font-size:14px;color:var(--soft);padding:8px 12px;border-radius:99px}.nl a.on{background:rgba(255,255,255,.08);color:var(--txt)}
+.sbtn{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--soft);border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;cursor:pointer;min-width:200px}
+.sbtn kbd{margin-left:auto;font-family:inherit;font-size:12px;border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+@media(max-width:700px){.nl a:not(.keep){display:none}.sbtn{min-width:0}.sbtn span,.sbtn kbd{display:none}}
+header{padding:70px 0 34px}
+.kick{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--soft)}
+.kick i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
+h1{font-size:clamp(42px,7vw,92px);font-weight:900;letter-spacing:-.045em;line-height:.95;margin:20px 0 18px}
+h1 span{background:linear-gradient(90deg,var(--coral),var(--yel));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:18px;color:var(--soft);max-width:620px;line-height:1.55}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:30px 0 26px}
+.chip{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--soft);border-radius:99px;padding:9px 16px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:.2s}
+.chip.on,.chip:hover{background:var(--txt);color:var(--bg);border-color:var(--txt)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-bottom:80px}
+@media(max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.grid{grid-template-columns:1fr}}
+.it{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .3s;opacity:0;transform:translateY(24px)}
+.it.v{opacity:1;transform:none}
+.it:hover{border-color:rgba(255,255,255,.22);transform:translateY(-6px)}
+.shot{display:block;position:relative;aspect-ratio:16/10;overflow:hidden;background:#000}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.it:hover .shot img{transform:scale(1.06)}
+.shot .tg{position:absolute;left:12px;top:12px;background:rgba(7,9,15,.8);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:99px;font-size:12px;font-weight:800;padding:5px 11px}
+.body{padding:18px 20px 20px}
+.body h3{font-size:20px;font-weight:900;letter-spacing:-.02em}
+.body p{color:var(--soft);font-size:14px;margin-top:4px;line-height:1.45}
+.acts{display:flex;gap:8px;margin-top:16px}
+.b{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:12px;font:inherit;font-weight:800;font-size:14px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--txt)}
+.b.p{background:var(--coral);border-color:var(--coral);color:#fff}
+/* modal prompt */
+.ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding:10vh 16px 16px}
+.ov.on{display:flex}
+.md{width:min(640px,100%);background:#0D111B;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -20px rgba(0,0,0,.8);animation:in .25s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(-10px) scale(.98)}}
+.sq{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.sq input{flex:1;background:none;border:0;outline:0;color:var(--txt);font:inherit;font-size:18px}
+.res{max-height:50vh;overflow:auto;padding:8px}
+.r{display:flex;align-items:center;gap:14px;padding:10px;border-radius:12px;cursor:pointer}
+.r.on,.r:hover{background:rgba(255,255,255,.06)}
+.r img{width:72px;height:46px;object-fit:cover;object-position:top;border-radius:8px;flex:none}
+.r b{display:block;font-size:15px}.r small{color:var(--soft);font-size:13px}
+.ft{display:flex;gap:16px;padding:10px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--soft)}
+.ft kbd{font-family:inherit;border:1px solid var(--line);border-radius:5px;padding:0 5px;margin-right:4px}
+.pm{padding:22px}
+.pm h3{font-size:22px;font-weight:900}.pm .k{color:var(--soft);font-size:14px;margin-top:4px}
+.code{position:relative;margin-top:16px;background:#060810;border:1px solid var(--line);border-radius:14px;padding:18px;font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.6;color:#C9D1E3;white-space:pre-wrap;max-height:300px;overflow:hidden}
+.code .lock{filter:blur(5px);user-select:none}
+.code::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60%;background:linear-gradient(transparent,#060810)}
+.unl{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.unl .b{flex:1 1 200px}
+.wa{background:#25D366!important;border-color:#25D366!important;color:#fff!important}
+.note{font-size:12.5px;color:var(--soft);margin-top:12px}
+footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--soft);font-size:14px;text-align:center}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.it{opacity:1;transform:none}}
+</style>
+<noscript><style>.it{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+<div class="glow"></div>
+<nav><div class="w">
+  <a class="logo" href="./"><svg width="34" height="34" viewBox="0 0 100 100"><rect width="100" height="100" rx="26" fill="#FF6B5B"/><rect x="16" y="20" width="60" height="47" rx="7" fill="#FFF6EC" stroke="#1B2A4A" stroke-width="6"/><path d="M16 33H76" stroke="#1B2A4A" stroke-width="6"/><path d="M54 46L54 84L63.5 74.5L70 88L76.5 85L70 71.5L83.5 71.5Z" fill="#1B2A4A" stroke="#FF6B5B" stroke-width="9" stroke-linejoin="round" paint-order="stroke"/></svg>Sitio<b>Ya</b></a>
+  <div class="nl"><a href="./">Inicio</a><a class="on keep" href="biblioteca.html">Biblioteca</a><a href="./#precios">Precios</a>
+  <button class="sbtn" id="open" aria-label="Buscar plantillas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>Buscar plantillas…</span><kbd>⌘K</kbd></button></div>
+</div></nav>
+
+<header class="w">
+  <span class="kick"><i></i><span id="cnt"></span> plantillas · con su prompt para IA</span>
+  <h1>Páginas web que <span>venden</span>, listas para tu negocio</h1>
+  <p class="lead">Elige una plantilla y pruébala en vivo. Cada una trae su <b>prompt</b>: lo pegas en tu IA (Claude, ChatGPT…) y te arma la página con tu nombre, tus fotos y tu WhatsApp.</p>
+  <div class="chips" id="chips"></div>
+</header>
+<main class="w"><div class="grid" id="grid"></div></main>
+<footer class="w">SitioYa · Páginas web para negocios en Panamá 🇵🇦 · <a href="./#cotizar" style="color:var(--coral);font-weight:700">¿Prefieres que te la hagamos? Cotiza aquí</a></footer>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="Buscar"><div class="md" id="md"></div></div>
+
+<script>
+const T = /*DATA*/[];
+const WA = "50769197559";
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const prompt = t => `Actúa como diseñador web experto. Crea una página web de una sola página para mi ${t.k.toLowerCase()} llamada [NOMBRE DE TU NEGOCIO], basada en la plantilla "${t.n}" de SitioYa.
+
+Estilo: ${t.fm.toLowerCase()}, moderno, que se vea perfecto en el celular.
+Secciones: portada con foto grande y botón de WhatsApp, ${t.f.join(", ").toLowerCase()}, ubicación con mapa y horario.
+Colores: [TUS COLORES]. Fotos: [ADJUNTA TUS FOTOS].
+WhatsApp: [TU NÚMERO]. Todos los botones de pedir o reservar abren WhatsApp con un mensaje listo.
+Animaciones suaves al bajar, tipografía grande y textos cortos que vendan.
+Entrega un solo archivo HTML con CSS y JavaScript incluidos, listo para publicar gratis.`;
+document.getElementById("cnt").textContent = T.length;
+
+// filtros
+const G = [["todos","Todos"],["comida","Comida"],["belleza","Belleza"],["tiendas","Tiendas"],["servicios","Servicios"]];
+let g = "todos";
+const chips = document.getElementById("chips");
+chips.innerHTML = G.map(([v,l]) => `<button class="chip${v===g?" on":""}" data-v="${v}">${l}</button>`).join("");
+chips.onclick = e => { const b = e.target.closest(".chip"); if (!b) return; g = b.dataset.v; chips.querySelectorAll(".chip").forEach(x => x.classList.toggle("on", x === b)); draw(); };
+
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("v"); io.unobserve(e.target); } }), { threshold: .1 });
+function draw() {
+  const L = T.filter(t => g === "todos" || t.g === g);
+  const grid = document.getElementById("grid");
+  grid.innerHTML = L.map(t => `<article class="it"><a class="shot" href="plantillas/${t.s}.html" target="_blank" rel="noopener"><img src="img/shots/${t.s}.jpg" alt="Plantilla ${esc(t.k)}" loading="lazy"><span class="tg">${esc(t.k)}</span></a>
+    <div class="body"><h3>${esc(t.n)}</h3><p>${esc(t.d)}</p>
+    <div class="acts"><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a><button class="b p" data-s="${t.s}">✨ Prompt</button></div></div></article>`).join("");
+  grid.querySelectorAll(".it").forEach((el, i) => { el.style.transitionDelay = (i % 6) * 60 + "ms"; io.observe(el); });
+}
+draw();
+document.getElementById("grid").addEventListener("click", e => { const b = e.target.closest("button[data-s]"); if (b) showPrompt(b.dataset.s, b); });
+
+// modal
+const ov = document.getElementById("ov"), md = document.getElementById("md");
+let lastFocus = null, sel = 0, hits = [];
+function openOv(html, from) { lastFocus = from || document.activeElement; md.innerHTML = html; ov.classList.add("on"); document.body.style.overflow = "hidden"; }
+function closeOv() { ov.classList.remove("on"); document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+ov.addEventListener("click", e => { if (e.target === ov) closeOv(); });
+
+function showPrompt(s, from) {
+  const t = T.find(x => x.s === s); const p = prompt(t).split("\n");
+  const msg = encodeURIComponent(`Hola SitioYa! Quiero desbloquear el prompt de la plantilla ${t.n} (${t.k}) por $9.`);
+  openOv(`<div class="pm"><h3>✨ Prompt · ${esc(t.n)}</h3><div class="k">${esc(t.k)} · ${esc(t.fm)}</div>
+    <div class="code">${esc(p.slice(0,2).join("\n"))}\n<span class="lock">${esc(p.slice(2).join("\n"))}</span></div>
+    <div class="unl"><a class="b wa" href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener">🔓 Desbloquear por $9</a><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a></div>
+    <p class="note">Te lo mandamos por WhatsApp con una guía paso a paso. ¿Prefieres que te la hagamos? <a href="./#cotizar" style="color:var(--coral);font-weight:700">Cotiza aquí</a>.</p></div>`, from);
+  md.querySelector(".wa").focus();
+}
+
+function openSearch() {
+  openOv(`<div class="sq"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C93A6" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" placeholder="Busca por negocio o estilo: café, uñas, oscura…" autocomplete="off" aria-label="Buscar plantillas"></div><div class="res" id="res" role="listbox"></div><div class="ft"><span><kbd>↑</kbd><kbd>↓</kbd>moverse</span><span><kbd>↵</kbd>abrir</span><span><kbd>esc</kbd>cerrar</span></div>`, document.getElementById("open"));
+  const q = document.getElementById("q"); q.focus(); search(""); q.addEventListener("input", () => search(q.value));
+}
+function search(v) {
+  const n = norm(v.trim());
+  hits = T.filter(t => !n || norm([t.n, t.k, t.d, t.fm, t.kw, t.st.join(" ")].join(" ")).includes(n)).slice(0, 8); sel = 0;
+  const res = document.getElementById("res");
+  res.innerHTML = hits.length ? hits.map((t, i) => `<div class="r${i===sel?" on":""}" role="option" data-i="${i}"><img src="img/shots/${t.s}.jpg" alt=""><div><b>${esc(t.n)}</b><small>${esc(t.k)} · ${esc(t.fm)}</small></div></div>`).join("") : `<p style="padding:16px;color:var(--soft)">No encontramos esa. Escríbenos y te la hacemos 😉</p>`;
+  res.onclick = e => { const r = e.target.closest(".r"); if (r) pick(+r.dataset.i); };
+}
+function pick(i) { const t = hits[i]; if (t) showPrompt(t.s, document.getElementById("open")); }
+document.getElementById("open").onclick = openSearch;
+addEventListener("keydown", e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); ov.classList.contains("on") ? closeOv() : openSearch(); return; }
+  if (!ov.classList.contains("on")) return;
+  if (e.key === "Escape") return closeOv();
+  if (!document.getElementById("res")) return;
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); if (!hits.length) return; sel = (sel + (e.key === "ArrowDown" ? 1 : -1) + hits.length) % hits.length; document.querySelectorAll(".r").forEach((r, i) => r.classList.toggle("on", i === sel)); }
+  if (e.key === "Enter") { e.preventDefault(); pick(sel); }
+});
+</script>
+</body>
+</html>
