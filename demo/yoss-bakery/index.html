@@ -121,7 +121,7 @@ footer{padding:40px 0 110px;text-align:center;color:var(--soft);font-size:14px}
 @media(max-width:700px){.grow .fr{aspect-ratio:3/4;width:88vw}}
 @media(prefers-reduced-motion:reduce){.hero h1 .ln>span{transform:none}.grow{height:auto}.grow .st{position:relative;height:auto;padding:40px 0}}
 </style>
-<noscript><style>.rv{opacity:1;transform:none}.book{aspect-ratio:auto;display:grid;gap:14px;perspective:none}.base,.bctl{display:none}.page{position:relative;width:100%;transform:none!important;display:grid;gap:14px}.face,.face.back{position:relative;transform:none;backface-visibility:visible;border-radius:18px}</style></noscript>
+<noscript><style>.grow{height:auto}.grow .st{position:relative;height:auto;padding:40px 0}.hero h1 .ln>span{transform:none}.rv{opacity:1;transform:none}.book{aspect-ratio:auto;display:grid;gap:14px;perspective:none}.base,.bctl{display:none}.page{position:relative;width:100%;transform:none!important;display:grid;gap:14px}.face,.face.back{position:relative;transform:none;backface-visibility:visible;border-radius:18px}</style></noscript>
 </head>
 <body>
 <div class="demo">✨ Página de muestra hecha por <a href="https://sitioya.vercel.app" target="_blank" rel="noopener">SitioYa</a> para Yoss Bakery · precios de ejemplo</div>
@@ -249,12 +249,13 @@ book.addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouche
 addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
 
 // polvo de harina flotando
-(function(){const c=document.getElementById('dust');if(!c||RM)return;const x=c.getContext('2d');let W,H,P=[];const rs=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;P=Array.from({length:Math.round(W/14)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,v:Math.random()*.35+.1,a:Math.random()*.5+.15}))};rs();addEventListener('resize',rs);
-(function f(){x.clearRect(0,0,W,H);for(const p of P){p.y-=p.v;p.x+=Math.sin(p.y/40)*.2;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}x.globalAlpha=p.a;x.fillStyle='#F2C46B';x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill()}requestAnimationFrame(f)})()})();
+(function(){const c=document.getElementById('dust');if(!c)return;const x=c.getContext('2d');let W,H,P=[];const rs=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;P=Array.from({length:Math.round(W/14)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,v:Math.random()*.35+.1,a:Math.random()*.5+.15}))};rs();addEventListener('resize',rs);
+let vis=true;new IntersectionObserver(e=>{vis=e[0].isIntersecting;if(vis&&!RM)requestAnimationFrame(f)}).observe(c);RMq.addEventListener('change',()=>{if(!RM&&vis)requestAnimationFrame(f)});
+function f(){if(!vis||RM){x.clearRect(0,0,W,H);return}x.clearRect(0,0,W,H);for(const p of P){p.y-=p.v;p.x+=Math.sin(p.y/40)*.2;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}x.globalAlpha=p.a;x.fillStyle='#F2C46B';x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill()}requestAnimationFrame(f)}})();
 // galería que crece al bajar
 (function(){const g=document.getElementById('grow'),fr=document.getElementById('fr');if(!g)return;const im=[...fr.querySelectorAll('img')];const caps=[['Hecho a mano','Desde las 7 a.m.'],['Recién horneados','Croissants de mantequilla'],['Kosher','Panes para Shabat']];
 const k=document.getElementById('capk'),t=document.getElementById('capt');let last=-1;
-function u(){const r=g.getBoundingClientRect(),h=g.offsetHeight-innerHeight;const p=Math.min(1,Math.max(0,-r.top/h));const sc=RM?1:.55+.45*Math.min(1,p*2.2);fr.style.transform=`scale(${sc})`;fr.style.borderRadius=(28*(1.4-sc))+'px';const i=Math.min(im.length-1,Math.floor(p*im.length));if(i!==last){im.forEach((m,j)=>m.classList.toggle('on',j===i));k.textContent=caps[i][0];t.textContent=caps[i][1];last=i}}
+function u(){if(RM){fr.style.transform='none';return}const r=g.getBoundingClientRect(),h=g.offsetHeight-innerHeight;if(h<=0)return;const p=Math.min(1,Math.max(0,-r.top/h));const sc=RM?1:.55+.45*Math.min(1,p*2.2);fr.style.transform=`scale(${sc})`;fr.style.borderRadius=(28*(1.4-sc))+'px';const i=Math.min(im.length-1,Math.floor(p*im.length));if(i!==last){im.forEach((m,j)=>m.classList.toggle('on',j===i));k.textContent=caps[i][0];t.textContent=caps[i][1];last=i}}
 addEventListener('scroll',u,{passive:true});u()})();
 </script>
 </body>
