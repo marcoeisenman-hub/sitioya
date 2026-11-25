@@ -566,6 +566,7 @@ tabs.forEach(t => t.addEventListener("click", () => {
   movePill(t);
 }));
 movePill(tabs[0]); addEventListener("resize", () => movePill(document.querySelector(".tab.on")));
+tabs.forEach((t, i) => t.addEventListener("keydown", e => { const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (!d) return; e.preventDefault(); const n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); n.click(); }));
 
 // header + floating button
 const hd = document.getElementById("hd"), dm = document.getElementById("dm");
