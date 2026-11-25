@@ -1,0 +1,78 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Nieve &amp; Co. · Helados artesanales en Albrook</title><meta name="description" content="Helados artesanales en Albrook">
+<!--
+  PLANTILLA SITIOYA · Heladería · formato divertida
+  1. Cambia textos, precios y horario abajo.  2. Colores en :root.
+  3. Tu WhatsApp al final (const WHATSAPP).  4. Cambia las fotos (src="...") por las tuyas.
+  Fotos de ejemplo: Unsplash (licencia libre).  5. Publícala gratis en app.netlify.com/drop
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Chewy&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"><style>:root{--bg:#FFF8F2;--ink:#3A2440;--soft:#7A6380;--line:#F1E3EA;--accent:#FF5C8A;--on-accent:#fff;--accent-ink:#E0427A;--panel:#3A2440;--panel-ink:#FFF0F5;--foot:#2C1A31;--foot-ink:#FFE3EC;--head:'Chewy',system-ui,sans-serif;--body:'Nunito',system-ui,sans-serif}*{box-sizing:border-box;min-width:0}html{scroll-behavior:smooth;overflow-x:clip}body{margin:0;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+input,select,textarea{font:15px inherit;font-family:inherit;height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(0,0,0,.12);background:#fff;color:#1d1d1d;width:100%}
+textarea{height:96px;padding:12px 14px}label{display:grid;gap:6px;font-size:13px;font-weight:600}form{display:grid;gap:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}.fade.in{opacity:1;transform:none}
+.wa{position:fixed;right:20px;bottom:20px;height:54px;padding:0 20px;border-radius:999px;background:#25D366;color:#fff;display:flex;align-items:center;gap:10px;font-weight:600;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:60}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.fade,.rise,.zoom{opacity:1!important;transform:none!important}}
+@media(max-width:600px){.two{grid-template-columns:1fr}}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--body)}
+.w{max-width:1200px;margin:0 auto;padding:0 max(4vw,20px)}
+header{position:sticky;top:14px;z-index:40;padding:0 max(4vw,20px)}
+.pillnav{max-width:1100px;margin:0 auto;background:#fff;border-radius:999px;display:flex;align-items:center;gap:20px;padding:10px 10px 10px 26px;box-shadow:0 14px 30px -18px rgba(36,48,74,.4)}
+.logo{font-family:var(--head);font-size:30px;font-weight:800;line-height:1}.pillnav nav{display:flex;gap:22px;margin-left:auto;font-weight:600;font-size:15px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:54px;padding:0 26px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-family:var(--head);font-weight:800;font-size:19px;border:0;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.25);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.25)}.btn.y{background:#FFC93C;color:#24304A}
+.hero{position:relative;padding:60px 0 120px;overflow:hidden}.hero .w{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero h1{font-family:var(--head);font-size:clamp(46px,6.4vw,84px);line-height:.95;margin:0 0 18px;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--accent-ink);display:inline-block;animation:wig 2.6s ease-in-out infinite}
+@keyframes wig{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.hero p{font-size:19px;color:var(--soft);margin:0 0 26px;max-width:28em}
+.blobi{position:relative;aspect-ratio:1}.blobi img{width:100%;height:100%;object-fit:cover;border-radius:58% 42% 50% 50%/50% 55% 45% 50%;animation:morph 9s ease-in-out infinite;border:10px solid #fff;box-shadow:0 30px 60px -30px rgba(36,48,74,.5)}
+@keyframes morph{50%{border-radius:42% 58% 45% 55%/55% 42% 58% 45%}}
+.stk{position:absolute;background:#fff;border-radius:20px;padding:10px 16px;font-weight:800;font-family:var(--head);font-size:18px;box-shadow:0 12px 24px -12px rgba(36,48,74,.4);animation:bounce 3s ease-in-out infinite}
+.s1{left:-10px;top:12%;transform:rotate(-8deg);background:#FFC93C}.s2{right:-6px;bottom:16%;animation-delay:-1.5s;background:#FFB3C7}.s3{right:14%;top:-10px;animation-delay:-.8s;background:#B5E8D5}
+@keyframes bounce{0%,100%{translate:0 0}50%{translate:0 -14px}}
+.wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:90px;color:var(--panel)}
+.paws{position:absolute;inset:0;opacity:.07;background-image:radial-gradient(circle at 20px 20px,#24304A 7px,transparent 8px),radial-gradient(circle at 36px 10px,#24304A 4px,transparent 5px);background-size:120px 120px;pointer-events:none}
+.band{background:var(--panel);color:var(--panel-ink);padding:40px 0 110px;position:relative}
+h2{font-family:var(--head);font-size:clamp(38px,5vw,60px);line-height:1;margin:0 0 30px;font-weight:800;text-align:center}
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.sv{border-radius:28px;padding:14px 14px 20px;color:#24304A;transition:transform .3s;display:flex;flex-direction:column}
+.sv:nth-child(4n+1){background:#FFC93C;transform:rotate(-2deg)}.sv:nth-child(4n+2){background:#FFB3C7;transform:rotate(1.5deg)}.sv:nth-child(4n+3){background:#B5E8D5;transform:rotate(-1deg)}.sv:nth-child(4n+4){background:#C9D7FF;transform:rotate(2deg)}
+.sv:hover{transform:rotate(0) scale(1.05)!important}.sv img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:20px}.sv h3{font-family:var(--head);font-size:24px;margin:12px 6px 0;line-height:1.1}.sv p{margin:2px 6px 10px;font-size:14px;opacity:.8}
+.sv .pr{display:flex;justify-content:space-between;align-items:center;margin:auto 6px 0}.sv .pr b{font-family:var(--head);font-size:26px}.sv .pr span{background:#24304A;color:#fff;border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px}
+.wave2{position:absolute;left:0;right:0;bottom:-1px;height:90px;width:100%;color:var(--bg)}
+section{padding:clamp(60px,8vw,110px) 0;position:relative}
+.pol{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+.pol figure{margin:0;background:#fff;padding:12px 12px 40px;box-shadow:0 18px 30px -18px rgba(36,48,74,.45);width:220px;transition:transform .3s}
+.pol figure:nth-child(odd){transform:rotate(-4deg)}.pol figure:nth-child(even){transform:rotate(3deg) translateY(16px)}.pol figure:hover{transform:rotate(0) scale(1.08);z-index:2}
+.pol img{width:100%;aspect-ratio:1;object-fit:cover}
+.book{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}.card{background:#fff;border-radius:34px;padding:clamp(26px,4vw,44px);box-shadow:0 30px 60px -36px rgba(36,48,74,.5);position:relative;overflow:hidden}
+.card h2{text-align:left;font-size:clamp(34px,4vw,48px);margin-bottom:10px}.card .eyebrow{font-weight:800}.card .btn{width:100%}.card label{color:#24304A}
+.split img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:50%;border:10px solid #fff;box-shadow:0 30px 60px -30px rgba(36,48,74,.5);animation:morph 10s ease-in-out infinite}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.ib{background:#fff;border-radius:26px;padding:24px}.ib h3{font-family:var(--head);font-size:24px;margin:0 0 8px}.ib p,.ib li{margin:4px 0;color:var(--soft);font-size:15px}.ib ul{list-style:none;padding:0;margin:0}.ib li b{color:var(--ink);margin-left:6px}
+footer{background:var(--foot);color:var(--foot-ink);text-align:center;padding:70px 20px 30px;position:relative;margin-top:60px}footer svg{position:absolute;left:0;right:0;top:-1px;width:100%;height:60px;color:var(--bg)}
+footer .logo{font-size:40px}footer p{opacity:.75;margin:6px 0}
+@media(max-width:900px){.pillnav nav{display:none}.hero .w,.book{grid-template-columns:1fr}.svc{grid-template-columns:1fr 1fr}.info{grid-template-columns:1fr}.pol figure{width:44%}}
+</style></head><body>
+<header><div class="pillnav"><a class="logo" href="#">nieve<span style='color:#FF5C8A'>&amp;</span>co</a><nav><a href="#sabores">Sabores</a><a href="#pedido">Pedido</a><a href="#galeria">Fotos</a><a href="#ubicacion">Ubicación</a></nav><a class="btn" style="height:46px;font-size:17px" href="#" data-wa="Hola, quiero hacer un pedido de helado">Pedir helado</a></div></header>
+<div class="hero"><div class="paws"></div><div class="w"><div class="fade"><h1>Helado artesanal <em>hecho cada mañana</em></h1><p>Más de 20 sabores con fruta de verdad, conos waffle recién hechos y potes para llevar. ¿Fiesta? Te llevamos el carrito.</p><a class="btn" href="#" data-wa="Hola, quiero hacer un pedido de helado">Pedir helado</a> &nbsp; <a class="btn y" href="#sabores">Ver sabores</a></div>
+<div class="blobi fade"><img src="../img/f/1497034825429-c343d7c6a68f.jpg" alt="Cono de helado de fresa"><span class="stk s1">Fruta de verdad</span><span class="stk s2">Delivery en potes</span><span class="stk s3">♥ Carrito para fiestas</span></div></div><svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 40c120 30 240 50 360 30S600 0 720 10s240 60 360 60 240-40 360-50v70H0z"/></svg></div>
+<div class="band" id="sabores"><div class="w"><h2>Sabores favoritos</h2><div class="svc"><a class="sv fade" href="#" data-wa="Hola, quiero: Chocolate belga"><img src="../img/f/1562790879-dfde82829db0.jpg" alt="Chocolate belga" loading="lazy"><h3>Chocolate belga</h3><p>Cono o vaso</p><div class="pr"><b>$3.50</b><span>Pedir</span></div></a><a class="sv fade" href="#" data-wa="Hola, quiero: Pistacho"><img src="../img/f/1782861162217-a69b974cacb6.jpg" alt="Pistacho" loading="lazy"><h3>Pistacho</h3><p>Con trocitos</p><div class="pr"><b>$4</b><span>Pedir</span></div></a><a class="sv fade" href="#" data-wa="Hola, quiero: Fresa con chispas"><img src="../img/f/1629385701021-fcd568a743e8.jpg" alt="Fresa con chispas" loading="lazy"><h3>Fresa con chispas</h3><p>Para los niños</p><div class="pr"><b>$3.50</b><span>Pedir</span></div></a><a class="sv fade" href="#" data-wa="Hola, quiero: Mango maracuyá"><img src="../img/f/1774113351718-cdd37ec6b1e8.jpg" alt="Mango maracuyá" loading="lazy"><h3>Mango maracuyá</h3><p>Sorbete sin lácteos</p><div class="pr"><b>$3.50</b><span>Pedir</span></div></a><a class="sv fade" href="#" data-wa="Hola, quiero: Cono clásico"><img src="../img/f/1477505982272-ead89926a577.jpg" alt="Cono clásico" loading="lazy"><h3>Cono clásico</h3><p>Vainilla de la casa</p><div class="pr"><b>$3</b><span>Pedir</span></div></a><a class="sv fade" href="#" data-wa="Hola, quiero: Waffle con helado"><img src="../img/f/1580915411954-282cb1b0d780.jpg" alt="Waffle con helado" loading="lazy"><h3>Waffle con helado</h3><p>Recién hecho</p><div class="pr"><b>$6.50</b><span>Pedir</span></div></a><a class="sv fade" href="#" data-wa="Hola, quiero: Triple cono"><img src="../img/f/1629385697093-57be2cc97fa6.jpg" alt="Triple cono" loading="lazy"><h3>Triple cono</h3><p>Tres sabores</p><div class="pr"><b>$5.50</b><span>Pedir</span></div></a><a class="sv fade" href="#" data-wa="Hola, quiero: Soft de vainilla"><img src="../img/f/1782149461714-0b033e08c15f.jpg" alt="Soft de vainilla" loading="lazy"><h3>Soft de vainilla</h3><p>Suave y cremoso</p><div class="pr"><b>$2.50</b><span>Pedir</span></div></a></div></div><svg class="wave2" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 40c120 30 240 50 360 30S600 0 720 10s240 60 360 60 240-40 360-50v70H0z"/></svg></div>
+<section id="galeria"><div class="w"><h2>Momentos dulces</h2><div class="pol"><figure class="fade"><img src="../img/f/1629385701021-fcd568a743e8.jpg" alt="Cliente feliz" loading="lazy"></figure><figure class="fade"><img src="../img/f/1782861162217-a69b974cacb6.jpg" alt="Cliente feliz" loading="lazy"></figure><figure class="fade"><img src="../img/f/1580915411954-282cb1b0d780.jpg" alt="Cliente feliz" loading="lazy"></figure><figure class="fade"><img src="../img/f/1562790879-dfde82829db0.jpg" alt="Cliente feliz" loading="lazy"></figure></div></div></section>
+<section id="pedido"><div class="w book"><div class="split fade"><img src="../img/f/1633933358116-a27b902fad35.jpg" alt="" loading="lazy"></div><div class="card fade"><div class="paws"></div><span class="eyebrow" style="color:#FF5C8A">Pedido</span><h2>Pide tu helado</h2><p style="opacity:.8">Potes de 1 litro, conos para fiestas o el carrito para tu evento.</p><form data-wa-form="Hola, quiero hacer un pedido de helado"><label>Nombre<input data-label="Nombre" required></label><div class="two"><label>Pedido<select data-label="Pedido"><option>Pote de 1 litro</option><option>Conos para fiesta</option><option>Carrito para evento</option></select></label><label>Sabores<input data-label="Sabores" placeholder="Ej: chocolate y mango"></label></div><div class="two"><label>Día<input type="date" data-label="Día"></label><label>Hora<input type="time" data-label="Hora"></label></div><button class="btn" style="background:#FF5C8A;color:#fff">Pedir por WhatsApp</button></form></div></div></section>
+<section id="ubicacion" style="padding-top:0"><div class="w info"><div class="ib fade"><h3>Horario</h3><ul><li><span>Todos los días</span><b>11 am – 10 pm</b></li></ul></div><div class="ib fade"><h3>Dónde estamos</h3><p>Albrook Mall, pasillo del Canguro, Ciudad de Panamá</p></div><div class="ib fade"><h3>Escríbenos</h3><p>WhatsApp: +507 6000-0000</p><p>Instagram: @nieveyco.pty</p></div></div></section>
+<footer><svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 0h1440v20c-120 30-240 40-360 20S840 0 720 10 480 50 360 50 120 30 0 20z"/></svg><div class="logo">nieve<span style='color:#FF5C8A'>&amp;</span>co</div><p>Helados artesanales en Albrook</p><p>© <span id="y"></span> Nieve &amp; Co. · Hecho con una plantilla de SitioYa</p></footer><a class="wa" href="#" data-wa="Hola, quiero información"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 27l2-6A11 11 0 1 1 11 25z"/><path d="M12 11c0 5 4 9 9 9l1.5-2.5-3-1.5-1.5 1.5c-1.5-.5-3-2-3.5-3.5l1.5-1.5-1.5-3z"/></svg> WhatsApp</a><script>
+// ====== EDITA AQUÍ: tu WhatsApp (507 + número, sin espacios) ======
+const WHATSAPP = "50760000000";
+// ==================================================================
+{
+const wa = m => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m);
+document.querySelectorAll("[data-wa]").forEach(a => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+document.querySelectorAll("form[data-wa-form]").forEach(f => f.addEventListener("submit", e => {
+  e.preventDefault(); const l = [f.dataset.waForm];
+  f.querySelectorAll("input,select,textarea").forEach(el => el.value && l.push(el.dataset.label + ": " + el.value));
+  const a = document.createElement("a"); a.href = wa(l.join("\n")); a.target = "_blank"; a.rel = "noopener"; a.click();
+}));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold: .12});
+document.querySelectorAll(".fade,.rise,.zoom").forEach(el => io.observe(el));
+const y = document.getElementById("y"); if (y) y.textContent = new Date().getFullYear();
+}</script></body></html>

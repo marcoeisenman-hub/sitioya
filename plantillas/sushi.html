@@ -1,0 +1,81 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kumo Sushi · Sushi y cocina nikkei en San Francisco</title><meta name="description" content="Sushi y cocina nikkei en San Francisco">
+<!--
+  PLANTILLA SITIOYA · Restaurante de sushi · formato editorial
+  1. Cambia textos, precios y horario abajo.  2. Colores en :root.
+  3. Tu WhatsApp al final (const WHATSAPP).  4. Cambia las fotos (src="...") por las tuyas.
+  Fotos de ejemplo: Unsplash (licencia libre).  5. Publícala gratis en app.netlify.com/drop
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><style>:root{--bg:#F6F3EE;--ink:#151515;--soft:#6F6A63;--line:#E4DED5;--card:#fff;--field:#EFEAE2;--accent:#C8102E;--on-accent:#fff;--accent-ink:#C8102E;--hero:#ECE6DC;--panel:#151515;--panel-ink:#F6F3EE;--foot:#101010;--foot-ink:#E4DED5;--head:'Shippori Mincho',Georgia,serif;--body:'Inter',system-ui,sans-serif}*{box-sizing:border-box;min-width:0}html{scroll-behavior:smooth;overflow-x:clip}body{margin:0;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+input,select,textarea{font:15px inherit;font-family:inherit;height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(0,0,0,.12);background:#fff;color:#1d1d1d;width:100%}
+textarea{height:96px;padding:12px 14px}label{display:grid;gap:6px;font-size:13px;font-weight:600}form{display:grid;gap:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}.fade.in{opacity:1;transform:none}
+.wa{position:fixed;right:20px;bottom:20px;height:54px;padding:0 20px;border-radius:999px;background:#25D366;color:#fff;display:flex;align-items:center;gap:10px;font-weight:600;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:60}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.fade,.rise,.zoom{opacity:1!important;transform:none!important}}
+@media(max-width:600px){.two{grid-template-columns:1fr}}
+body{background:var(--bg);color:var(--ink);font:17px/1.65 var(--body)}
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px max(4vw,20px);color:#fff;transition:background .4s,padding .4s,color .4s}
+.nav.s{background:var(--bg);color:var(--ink);padding:14px max(4vw,20px);box-shadow:0 1px 0 var(--line)}
+.logo{font-family:var(--head);font-size:28px;font-weight:700}.nav nav{display:flex;gap:28px;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 28px;border:1px solid currentColor;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;transition:background .3s,color .3s;cursor:pointer;background:transparent;font-family:inherit;color:inherit}
+.btn.fill{background:var(--accent);border-color:var(--accent);color:#fff}.btn:hover{background:#fff;color:#111;border-color:#fff}
+.hero{position:relative;height:100svh;min-height:600px;display:grid;place-items:center;text-align:center;color:#fff;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12);animation:kb 18s ease-out forwards}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.25) 40%,rgba(0,0,0,.65))}
+.hero .t{position:relative;z-index:1;max-width:820px;padding:0 24px}
+.hero small{letter-spacing:.3em;text-transform:uppercase;font-size:13px;opacity:.85}
+.hero h1{font-family:var(--head);font-weight:700;font-size:clamp(48px,8vw,104px);line-height:.98;margin:18px 0}
+.hero p{font-size:19px;opacity:.88;max-width:34em;margin:0 auto 30px}
+.hero .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.scroll{position:absolute;bottom:26px;left:50%;width:1px;height:60px;background:rgba(255,255,255,.4);z-index:1;overflow:hidden}.scroll::after{content:"";position:absolute;inset:0;background:#fff;animation:drip 2s infinite}
+@keyframes kb{to{transform:scale(1)}}@keyframes drip{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+.w{max-width:1180px;margin:0 auto;padding:0 max(4vw,20px)}
+section{padding:clamp(70px,9vw,130px) 0}
+.eyebrow{color:var(--accent-ink);letter-spacing:.24em;text-transform:uppercase;font-size:12px;font-weight:700}
+h2{font-family:var(--head);font-weight:700;font-size:clamp(38px,5vw,64px);line-height:1;margin:12px 0 20px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:center}
+.frame{position:relative}.frame img{width:100%;aspect-ratio:4/5;object-fit:cover}.frame::before{content:"";position:absolute;inset:24px -24px -24px 24px;border:1px solid var(--accent);z-index:-1}
+.about p{color:var(--soft);font-size:18px}
+.feats{display:flex;gap:30px;margin-top:30px;flex-wrap:wrap}.feats div{border-left:2px solid var(--accent);padding-left:14px}.feats b{display:block;font-family:var(--head);font-size:22px}.feats span{font-size:14px;color:var(--soft)}
+.menu{background:var(--hero)}
+.tabs{display:flex;gap:6px;justify-content:center;margin:10px 0 44px;flex-wrap:wrap}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:10px 18px;font:600 14px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);cursor:pointer}.tab.on{color:var(--ink);border-color:var(--accent)}
+.dishes{display:grid;grid-template-columns:1fr 1fr;gap:26px 70px}
+.dish{display:grid;grid-template-columns:76px 1fr;gap:18px;align-items:center}.dish img{width:76px;height:76px;border-radius:50%;object-fit:cover}
+.dish .r{display:flex;align-items:baseline;gap:10px}.dish h3{font-family:var(--head);font-size:24px;margin:0;font-weight:700;white-space:nowrap}.dish i{flex:1;border-bottom:1px dotted var(--soft);transform:translateY(-5px)}
+.dish b{font-family:var(--head);font-size:22px;color:var(--accent-ink)}.dish p{margin:2px 0 0;font-size:14px;color:var(--soft)}
+.strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 max(4vw,20px) 10px}.strip img{flex:none;width:min(420px,78vw);aspect-ratio:3/4;object-fit:cover;scroll-snap-align:start}
+.res{position:relative;color:var(--panel-ink);text-align:center;overflow:hidden}.res>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.res::before{content:"";position:absolute;inset:0;background:rgba(20,12,8,.78);z-index:1}
+.res .w{position:relative;z-index:2;max-width:620px}.res form{text-align:left;margin-top:26px}.res .eyebrow{color:#E9A58D}
+.res p{opacity:.8}.res .btn.fill{width:100%}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center}.info h3{font-family:var(--head);font-size:26px;margin:0 0 10px}.info p,.info li{color:var(--soft);margin:4px 0;font-size:15px}.info ul{list-style:none;padding:0;margin:0}.info li b{color:var(--ink);font-weight:600;margin-left:8px}
+footer{border-top:1px solid var(--line);padding:30px max(4vw,20px);display:flex;justify-content:space-between;color:var(--soft);font-size:14px;flex-wrap:wrap;gap:10px}
+@media(max-width:820px){.nav nav{display:none}.about,.dishes,.info{grid-template-columns:1fr}.frame::before{display:none}}
+</style></head><body>
+<header class="nav"><a class="logo" href="#">Kumo <span style='color:#C8102E'>雲</span></a><nav><a href="#carta">Carta</a><a href="#reservas">Reservas</a><a href="#galeria">Ambiente</a><a href="#ubicacion">Ubicación</a></nav><a class="btn" href="#" data-wa="Hola, quiero reservar en Kumo">Reservar mesa</a></header>
+<div class="hero"><img src="../img/f/1553621042-f6e147245754.jpg" alt="Variedad de sushi"><div class="t"><small>Sushi · Nikkei</small><h1>Precisión en cada pieza</h1><p>Pescado fresco cada mañana, arroz al punto y rolls de autor. Para comer aquí, para llevar o para tu evento.</p>
+<div class="ctas"><a class="btn fill" href="#" data-wa="Hola, quiero reservar en Kumo">Reservar mesa</a><a class="btn" href="#carta">Ver carta</a></div></div><span class="scroll"></span></div>
+<section><div class="w about"><div class="frame fade"><img src="../img/f/1772285283419-b34f42b4a4df.jpg" alt="Nuestra cocina" loading="lazy"></div>
+<div class="fade"><span class="eyebrow">Nuestra historia</span><h2>Sushi y cocina nikkei en San Francisco</h2><p>Pescado fresco cada mañana, arroz al punto y rolls de autor. Para comer aquí, para llevar o para tu evento.</p><div class="feats"><div><b>Pescado del día</b><span>Llega cada mañana</span></div><div><b>Omakase</b><span>Menú del chef con reserva</span></div><div><b>Para llevar</b><span>Pide por WhatsApp</span></div></div></div></div></section>
+<section class="menu" id="carta"><div class="w"><div style="text-align:center"><span class="eyebrow">La carta</span><h2>La carta</h2></div><div class="tabs"><button class="tab on" data-c="all">Todo</button><button class="tab" data-c="roll">Rolls</button><button class="tab" data-c="niguiri">Niguiri y sashimi</button></div><div class="dishes"><div class="dish fade" data-c="roll"><img src="../img/f/1611143669185-af224c5e3252.jpg" alt="Kumo roll" loading="lazy"><div><div class="r"><h3>Kumo roll</h3><i></i><b>$12</b></div><p>Salmón, aguacate y ponzu</p></div></div><div class="dish fade" data-c="roll"><img src="../img/f/1617196034796-73dfa7b1fd56.jpg" alt="Dragon roll" loading="lazy"><div><div class="r"><h3>Dragon roll</h3><i></i><b>$14</b></div><p>Langostino tempura y anguila</p></div></div><div class="dish fade" data-c="roll"><img src="../img/f/1763647756796-af9230245bf8.jpg" alt="Tabla mixta" loading="lazy"><div><div class="r"><h3>Tabla mixta</h3><i></i><b>$32</b></div><p>24 piezas</p></div></div><div class="dish fade" data-c="roll"><img src="../img/f/1774635800472-41eaa93c1453.jpg" alt="Salmon lover" loading="lazy"><div><div class="r"><h3>Salmon lover</h3><i></i><b>$13</b></div><p>Salmón, queso crema y ajonjolí</p></div></div><div class="dish fade" data-c="roll"><img src="../img/f/1709984110217-57d7d18e5299.jpg" alt="Combo para dos" loading="lazy"><div><div class="r"><h3>Combo para dos</h3><i></i><b>$28</b></div><p>Rolls y niguiris</p></div></div><div class="dish fade" data-c="roll"><img src="../img/f/1653122024993-31e02aedb1ac.jpg" alt="Acevichado" loading="lazy"><div><div class="r"><h3>Acevichado</h3><i></i><b>$13.50</b></div><p>Pescado blanco y salsa nikkei</p></div></div><div class="dish fade" data-c="niguiri"><img src="../img/f/1770164520620-a5612325635b.jpg" alt="Barco Kumo" loading="lazy"><div><div class="r"><h3>Barco Kumo</h3><i></i><b>$55</b></div><p>40 piezas para compartir</p></div></div><div class="dish fade" data-c="niguiri"><img src="../img/f/1636425730695-febe95eda12e.jpg" alt="Niguiri de la casa" loading="lazy"><div><div class="r"><h3>Niguiri de la casa</h3><i></i><b>$16</b></div><p>8 piezas surtidas</p></div></div></div></div></section>
+<section id="galeria" style="padding-bottom:40px"><div class="w"><span class="eyebrow">Ambiente</span><h2>El ambiente</h2></div><div class="strip"><img src="../img/f/1788016634163-77b7c547b9d4.jpg" alt="Foto de Kumo Sushi" loading="lazy"><img src="../img/f/1611143669185-af224c5e3252.jpg" alt="Foto de Kumo Sushi" loading="lazy"><img src="../img/f/1763647756796-af9230245bf8.jpg" alt="Foto de Kumo Sushi" loading="lazy"><img src="../img/f/1629684782790-385ed5adb497.jpg" alt="Foto de Kumo Sushi" loading="lazy"><img src="../img/f/1611143669185-af224c5e3252.jpg" alt="Foto de Kumo Sushi" loading="lazy"></div></section>
+<section class="res" id="reservas"><img src="../img/f/1788016634163-77b7c547b9d4.jpg" alt="" loading="lazy"><div class="w"><span class="eyebrow" style="color:#F0A3AE">Reservas</span><h2>Reserva tu mesa</h2><p style="opacity:.8">Barra omakase o mesa. Te confirmamos por WhatsApp.</p><form data-wa-form="Hola, quiero reservar en Kumo"><label>Nombre<input data-label="Nombre" required></label><div class="two"><label>Personas<select data-label="Personas"><option>2</option><option>3–4</option><option>5–8</option></select></label><label>Lugar<select data-label="Lugar"><option>Mesa</option><option>Barra omakase</option></select></label></div><div class="two"><label>Día<input type="date" data-label="Día"></label><label>Hora<input type="time" data-label="Hora"></label></div><button class="btn fill" style="background:#F6F3EE;color:#151515">Reservar por WhatsApp</button></form></div></section>
+<section id="ubicacion"><div class="w info"><div class="fade"><h3>Horario</h3><ul><li><span>Martes a domingo</span><b>12 pm – 10 pm</b></li><li><span>Lunes</span><b>Cerrado</b></li></ul></div><div class="fade"><h3>Dónde estamos</h3><p>Calle 72, San Francisco, Ciudad de Panamá</p><p><a style="text-decoration:underline" href="https://maps.google.com/?q=San+Francisco+Panama" target="_blank" rel="noopener">Cómo llegar</a></p></div>
+<div class="fade"><h3>Contacto</h3><p>WhatsApp: +507 6000-0000</p><p>Instagram: @kumosushi.pty</p></div></div></section>
+<footer><span>© <span id="y"></span> Kumo Sushi</span><span>Hecho con una plantilla de SitioYa</span></footer><a class="wa" href="#" data-wa="Hola, quiero información"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 27l2-6A11 11 0 1 1 11 25z"/><path d="M12 11c0 5 4 9 9 9l1.5-2.5-3-1.5-1.5 1.5c-1.5-.5-3-2-3.5-3.5l1.5-1.5-1.5-3z"/></svg> WhatsApp</a><script>
+// ====== EDITA AQUÍ: tu WhatsApp (507 + número, sin espacios) ======
+const WHATSAPP = "50760000000";
+// ==================================================================
+{
+const wa = m => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m);
+document.querySelectorAll("[data-wa]").forEach(a => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+document.querySelectorAll("form[data-wa-form]").forEach(f => f.addEventListener("submit", e => {
+  e.preventDefault(); const l = [f.dataset.waForm];
+  f.querySelectorAll("input,select,textarea").forEach(el => el.value && l.push(el.dataset.label + ": " + el.value));
+  const a = document.createElement("a"); a.href = wa(l.join("\n")); a.target = "_blank"; a.rel = "noopener"; a.click();
+}));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold: .12});
+document.querySelectorAll(".fade,.rise,.zoom").forEach(el => io.observe(el));
+const y = document.getElementById("y"); if (y) y.textContent = new Date().getFullYear();
+const nav=document.querySelector(".nav");addEventListener("scroll",()=>nav.classList.toggle("s",scrollY>60),{passive:true});
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));document.querySelectorAll(".dish").forEach(d=>d.style.display=(t.dataset.c==="all"||d.dataset.c===t.dataset.c)?"":"none")}));}</script></body></html>
