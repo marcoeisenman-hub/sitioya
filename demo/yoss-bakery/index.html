@@ -96,7 +96,7 @@ section{padding:90px 0}
 .map{border-radius:32px;overflow:hidden;min-height:340px;background:var(--masa)}
 .map iframe{width:100%;height:100%;border:0;min-height:340px}
 @media(max-width:860px){.visit{grid-template-columns:1fr}}
-footer{color:var(--soft)}
+footer{padding:40px 0 110px;text-align:center;color:var(--soft);font-size:14px}
 .fab{position:fixed;right:18px;bottom:18px;z-index:30;width:62px;height:62px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 10px 30px -10px rgba(0,0,0,.8);border:1px solid #000}
 @keyframes pulse{50%{box-shadow:0 0 0 14px rgba(37,211,102,0),0 16px 30px -10px rgba(37,211,102,.8)}}
 .rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}.rv.v{opacity:1;transform:none}
@@ -110,16 +110,18 @@ footer{color:var(--soft)}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.12s}.hero h1 .ln:nth-child(3)>span{animation-delay:.24s}
 @keyframes up{to{transform:none;opacity:1}}
 .card3d .ph{box-shadow:0 40px 80px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06)}
-/* galería que crece al bajar (estilo brews) */
-.grow{height:260vh;position:relative}
-.grow .st{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
-.grow .fr{position:relative;width:min(92vw,1100px);aspect-ratio:16/9;border-radius:28px;overflow:hidden;will-change:transform}
-.grow .fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
-.grow .fr img.on{opacity:1}
-.grow .cap{position:absolute;left:0;right:0;bottom:8vh;text-align:center;font-family:Fraunces,serif;font-weight:900;font-size:clamp(34px,6vw,80px);text-shadow:0 10px 40px rgba(0,0,0,.6)}
-.grow .cap small{display:block;font-family:"DM Sans";font-size:14px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--miel);margin-bottom:8px}
-@media(max-width:700px){.grow .fr{aspect-ratio:3/4;width:88vw}}
-@media(prefers-reduced-motion:reduce){.hero h1 .ln>span{transform:none;opacity:1}.grow{height:auto}.grow .st{position:relative;height:auto;padding:40px 0}}
+/* tres fotos lado a lado */
+.trio{padding:70px 0 20px}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tg figure{position:relative;margin:0;border-radius:24px;overflow:hidden;aspect-ratio:3/4}
+.tg figure:nth-child(2){transform:translateY(40px)}
+.tg img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.tg figure:hover img{transform:scale(1.06)}
+.tg figcaption{position:absolute;left:0;right:0;bottom:0;padding:50px 22px 20px;background:linear-gradient(transparent,rgba(0,0,0,.75));font-family:Antonio,Oswald,sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(20px,2.2vw,30px);line-height:1.05}
+.tg figcaption small{display:block;font-family:"DM Sans";font-size:11px;letter-spacing:.2em;color:#ddd;margin-bottom:6px}
+.trio+section{padding-top:110px}
+@media(max-width:700px){.tg{grid-template-columns:1fr 1fr;gap:10px}.tg figure:nth-child(2){transform:none}.tg figure:nth-child(3){grid-column:1/-1;aspect-ratio:16/10}}
+@media(prefers-reduced-motion:reduce){.hero h1 .ln>span{transform:none;opacity:1}}
 
 .ylogo{width:44px;height:44px;flex:none;border-radius:50%}
 .logo span{font-family:Oswald,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:22px}
@@ -128,78 +130,28 @@ footer{color:var(--soft)}
 .giant{font-family:Antonio,Oswald,sans-serif;font-weight:700}
 .cover h3{font-family:Oswald,sans-serif;text-transform:uppercase}
 .hlogo{width:120px;height:120px;margin-bottom:6px;border-radius:50%}.cover .hlogo{margin-inline:auto}
-
-.btn{border-radius:0;min-height:50px;padding:0 24px;font-family:"DM Sans";font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:background .25s,color .25s,gap .25s}
-.btn:hover{gap:16px}
-.wa{background:#fff;color:#000;border:1px solid #fff}.wa:hover{background:transparent;color:#fff}
-.gh{border:1px solid rgba(255,255,255,.35)!important;color:#fff}.gh:hover{border-color:#fff!important}
-nav .btn{min-height:40px!important;padding:0 18px!important;font-size:12px}
-nav .links a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--soft)}nav .links a:hover{color:#fff}
-.pc{border-radius:0;background:transparent;border:0}.pc:hover{transform:none;box-shadow:none}.pc img{transition:transform .6s}.pc:hover img{transform:scale(1.04)}.pc{overflow:hidden}
-.pc div{padding:14px 0 0}.pc b{font-family:Antonio,Oswald,sans-serif;text-transform:uppercase;font-size:24px;letter-spacing:.01em}
-/* abajo: visita + pie minimalista */
-.vis{border-top:1px solid rgba(255,255,255,.12);padding:90px 0 0}
-.vis .g{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
-.vis h5{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:16px}
-.vis ul{padding:0;margin:0}.vis p,.vis li{font-size:17px;line-height:1.7;list-style:none}
-.vis li{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);padding:6px 0}
-.vis li b{font-weight:500}
-.vis a.l{color:#fff;text-underline-offset:4px}
-.vmap{margin-top:60px;height:340px;filter:grayscale(1) invert(.92) contrast(.9);border:0;width:100%;display:block}
-.foot{padding:70px 0 110px;overflow:hidden}
-.foot .big{font-family:Antonio,Oswald,sans-serif;font-weight:700;font-size:clamp(60px,16.5vw,230px);line-height:.85;letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap;color:#fff}
-.foot .bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:22px;margin-top:30px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
-.foot .bot a{color:var(--soft)}
-@media(max-width:800px){.vis .g{grid-template-columns:1fr}}
-
-.dia{padding:120px 0}
-.eyb{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:14px}
-.dhead{margin-bottom:50px}
-.dgrid{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:stretch}
-.dlist{list-style:none;padding:0;margin:0;border-top:1px solid rgba(255,255,255,.12)}
-.dl{position:relative;width:100%;display:flex;gap:22px;align-items:baseline;padding:22px 0;background:none;border:0;border-bottom:1px solid rgba(255,255,255,.12);color:var(--soft);cursor:pointer;text-align:left;font:inherit;transition:color .3s,padding .4s cubic-bezier(.2,.8,.2,1)}
-.dl .t{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;min-width:70px}
-.dl .n{font-family:Antonio,Oswald,sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(24px,2.6vw,36px);line-height:1}
-.dl:hover,.dl[aria-pressed=true]{color:#fff}.dl[aria-pressed=true]{padding-left:14px}
-.dl .bar{position:absolute;left:0;bottom:-1px;height:1px;width:0;background:#fff}
-.dl .bar{transition:width .5s cubic-bezier(.2,.8,.2,1)}.dl[aria-pressed=true] .bar{width:100%}
-
-.dstage{position:relative;min-height:520px;overflow:hidden;background:#111}
-.dstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 100% 0);transform:scale(1.12);transition:clip-path 1s cubic-bezier(.7,0,.2,1),transform 1.6s cubic-bezier(.2,.8,.2,1)}
-.dstage img.on{clip-path:inset(0 0 0 0);transform:scale(1);z-index:2}
-.dstage img.out{clip-path:inset(0 0 0 0);z-index:1}
-.dcap{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:60px 28px 24px;background:linear-gradient(transparent,rgba(0,0,0,.75));display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-.dcap>span{font-family:Antonio,Oswald,sans-serif;font-size:44px;font-weight:700;line-height:1}.dcap>span+span{font-size:18px;color:var(--soft)}
-.dcap p{flex-basis:100%;font-size:16px;color:#ddd}
-.ft{border-top:1px solid rgba(255,255,255,.12);padding:70px 0 110px}
-.ftop{display:grid;grid-template-columns:auto repeat(3,1fr);gap:48px;align-items:start}
-.flogo{border-radius:50%}
-.ft h5{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:12px}
-.ft p{font-size:15px;line-height:1.8;color:#e8e8e8}
-.ft a.l{color:#fff;text-underline-offset:4px;font-size:15px}
-.dhint{margin-top:14px;color:var(--soft);font-size:15px}.fcta{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-bottom:50px;margin-bottom:50px;border-bottom:1px solid rgba(255,255,255,.12)}.ft p{font-size:16px}.ft h5{color:#fff}.ft .h2,.dia .h2{color:#fff}
-.fbot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:56px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
-.fbot a{color:var(--soft)}
-@media(max-width:860px){.dgrid{grid-template-columns:1fr;gap:28px}.dstage{min-height:0;aspect-ratio:4/5;order:-1}.ftop{grid-template-columns:1fr 1fr}.flogo{grid-column:1/-1}}
-@media(prefers-reduced-motion:reduce){.dstage img{transition:none;transform:none}.dl .bar{transition:none}}
+.hero h1.brand{font-size:clamp(84px,12vw,170px);line-height:.9;letter-spacing:-.01em}.hero h1.brand .sub{display:block;font-family:"DM Sans";font-size:clamp(15px,1.4vw,19px);letter-spacing:.24em;font-weight:700;color:var(--soft);margin-top:18px;line-height:1.4}
 </style>
-<noscript><style>.grow{height:auto}.grow .st{position:relative;height:auto;padding:40px 0}.hero h1 .ln>span{transform:none;opacity:1}.rv{opacity:1;transform:none}.book{aspect-ratio:auto;display:grid;gap:14px;perspective:none}.base,.bctl{display:none}.page{position:relative;width:100%;transform:none!important;display:grid;gap:14px}.face,.face.back{position:relative;transform:none;backface-visibility:visible;border-radius:18px}</style></noscript>
+<noscript><style>.hero h1 .ln>span{transform:none;opacity:1}.rv{opacity:1;transform:none}.book{aspect-ratio:auto;display:grid;gap:14px;perspective:none}.base,.bctl{display:none}.page{position:relative;width:100%;transform:none!important;display:grid;gap:14px}.face,.face.back{position:relative;transform:none;backface-visibility:visible;border-radius:18px}</style></noscript>
 </head>
 <body>
 <div class="demo">✨ Página de muestra hecha por <a href="https://sitioya.vercel.app" target="_blank" rel="noopener">SitioYa</a> para Yoss Bakery · precios de ejemplo</div>
-<nav><div class="w"><a class="logo" href="#"><img class="ylogo" src="logo-yoss.png" alt="" width="44" height="44"><span>Yoss Bakery + Cafe</span></a><div class="links"><a href="#menu">Menú</a><a href="#dia">Un día</a><a href="#contacto">Visítanos</a></div><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></nav>
+<nav><div class="w"><a class="logo" href="#"><img class="ylogo" src="logo-yoss.png" alt="" width="44" height="44"><span>Yoss Bakery + Cafe</span></a><div class="links"><a href="#menu">Menú</a><a href="#favoritos">Favoritos</a><a href="#visita">Visítanos</a></div><a class="btn wa" style="min-height:44px;padding:0 18px;font-size:14px" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir</a></div></nav>
 
-<header class="w hero"><div class="bgw"></div><div class="giant" aria-hidden="true">YOSS</div><canvas id="dust" aria-hidden="true"></canvas>
+<header class="w hero"><div class="bgw"></div><canvas id="dust" aria-hidden="true"></canvas>
   <div>
-    <img class="hlogo" style="display:block;width:96px;height:96px;margin-bottom:18px" src="logo-yoss.png" alt="Logo Yoss Bakery + Cafe" width="96" height="96"><span class="kick">Kosher · Paitilla Mall</span>
-    <h1><span class="ln"><span>Pan recién</span></span><span class="ln"><span><em>horneado</em>,</span></span><span class="ln"><span>todos los días</span></span></h1>
+    <img class="hlogo" style="display:block;width:96px;height:96px;margin-bottom:18px" src="logo-yoss.png" alt="Logo Yoss Bakery + Cafe" width="96" height="96"><span class="kick">✡ Kosher · Paitilla Mall</span>
+    <h1 class="brand"><span class="ln"><span>Yoss</span></span><span class="ln"><span><em>Bakery</em></span></span><span class="sub">Pan recién horneado, todos los días</span></h1>
     <p>Panes, croissants, sándwiches, ensaladas, postres y frappés kosher en Paitilla Mall. Pide por WhatsApp y te lo llevamos con delivery.</p>
-    <div class="ctas"><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir por WhatsApp <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn gh" href="#menu">Ver el menú</a></div>
-    <div class="facts"><span>Panes y challah</span><span>Delivery 6217-6666</span><span>Kosher</span></div>
+    <div class="ctas"><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">💬 Pedir por WhatsApp</a><a class="btn gh" href="#menu">📖 Ver el menú</a></div>
+    <div class="facts"><span>🥖 Panes y challah</span><span>🛵 Delivery 6217-6666</span><span>✡ Kosher</span></div>
   </div>
   <div class="stage" id="stage">
     <div class="card3d" id="card">
       <div class="ph"><img src="../../img/f/1530610476181-d83430b64dcd.jpg" alt="Croissant de mantequilla recién horneado"></div>
+      <div class="chip c1 float">🔥<div>Recién salido<small>del horno</small></div></div>
+      <div class="chip c2 float" style="animation-delay:-2s">✡<div>Kosher<small>certificado</small></div></div>
+      <div class="chip c3 float" style="animation-delay:-4s">🥐 Croissants</div>
     </div>
   </div>
 </header>
@@ -209,11 +161,11 @@ nav .links a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-w
 <span>Challah</span><b>✦</b><span>Croissants</span><b>✦</b><span>Shakshuka</span><b>✦</b><span>Sufganiot</span><b>✦</b><span>Frappés</span><b>✦</b><span>Postres</span><b>✦</b>
 </div></div>
 
-<section class="grow" id="grow" aria-label="Hecho a mano"><div class="st"><div class="fr" id="fr">
-<img class="on" src="../../img/f/1742299807170-4eecb934a7a3.jpg" alt="Vitrina de panes y dulces">
-<img src="../../img/f/1693483640461-267d788b6148.jpg" alt="Croissants">
-<img src="../../img/f/1568254183919-78a4f43a2877.jpg" alt="Pan de masa madre">
-<div class="cap"><small id="capk">Hecho a mano</small><span id="capt">Desde las 7 a.m.</span></div></div></div></section>
+<section class="trio" aria-label="Hecho a mano"><div class="w"><div class="tg">
+<figure class="rv"><img src="../../img/f/1742299807170-4eecb934a7a3.jpg" alt="Vitrina de panes y dulces" loading="lazy"><figcaption><small>Hecho a mano</small>Desde las 7 a.m.</figcaption></figure>
+<figure class="rv"><img src="../../img/f/1693483640461-267d788b6148.jpg" alt="Croissants" loading="lazy"><figcaption><small>Recién horneados</small>Croissants de mantequilla</figcaption></figure>
+<figure class="rv"><img src="../../img/f/1568254183919-78a4f43a2877.jpg" alt="Pan de masa madre" loading="lazy"><figcaption><small>Kosher</small>Panes para Shabat</figcaption></figure>
+</div></div></section>
 
 <section id="menu"><div class="w">
   <h2 class="h2 rv">Nuestro menú 📖</h2>
@@ -254,24 +206,31 @@ nav .links a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-w
   </div>
 </div></section>
 
-<section id="dia" class="dia"><div class="w">
-  <div class="dhead rv"><span class="eyb">Un día en Yoss</span><h2 class="h2">Del primer café<br>a la challah del viernes</h2><p class="dhint">👆 Toca cada momento para ver qué hay en Yoss a esa hora.</p></div>
-  <div class="dgrid rv">
-    <ol class="dlist" aria-label="Momentos del día"><li><button type="button" class="dl" data-i="0" aria-pressed="true"><span class="t">07:00</span><span class="n">Café y croissant</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="1" aria-pressed="false"><span class="t">08:30</span><span class="n">Recién horneados</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="2" aria-pressed="false"><span class="t">10:00</span><span class="n">Desayunos</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="3" aria-pressed="false"><span class="t">13:00</span><span class="n">Panes de masa madre</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="4" aria-pressed="false"><span class="t">16:00</span><span class="n">La vitrina</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="5" aria-pressed="false"><span class="t">Viernes</span><span class="n">Challah para Shabat</span><span class="bar" aria-hidden="true"></span></button></li></ol>
-    <div class="dstage" id="dstage"><img src="../../img/f/1512568400610-62da28bc8a13.jpg" alt="Latte en Yoss Bakery" loading="lazy" class="on" data-d="Abrimos con el horno lleno y el café listo."><img src="../../img/f/1693483640461-267d788b6148.jpg" alt="Croissants recién horneados" loading="lazy" class="" data-d="Croissants de mantequilla, saliendo cada mañana."><img src="../../img/f/1612366747681-e4ca6992b1e9.jpg" alt="Desayuno servido" loading="lazy" class="" data-d="Shakshuka, bagels y huevos a tu gusto."><img src="../../img/f/1568254183919-78a4f43a2877.jpg" alt="Pan de masa madre" loading="lazy" class="" data-d="Fermentación lenta, corteza crujiente."><img src="../../img/f/1742299807170-4eecb934a7a3.jpg" alt="Vitrina de postres" loading="lazy" class="" data-d="Postres y dulces para la tarde."><img src="../../img/f/1651604033534-e66b281f1981.jpg" alt="Panes para Shabat" loading="lazy" class="" data-d="Encárgala antes y pásala a buscar."><div class="dcap"><span id="dnum">01</span><span>/ 06</span><p id="ddesc" aria-live="polite">Abrimos con el horno lleno y el café listo.</p></div></div>
+<section id="favoritos" style="background:linear-gradient(180deg,var(--crema),#140E09)"><div class="w">
+  <h2 class="h2 rv">Los favoritos ❤️</h2>
+  <p class="lead rv">Lo que más se llevan nuestros clientes.</p>
+  <div class="pop">
+    <div class="pc rv"><img src="../../img/f/1530610476181-d83430b64dcd.jpg" alt="Croissant" loading="lazy"><div><b>Croissant</b><p>Mantequilla, hojaldrado y dorado</p></div></div>
+    <div class="pc rv"><img src="../../img/f/1568254183919-78a4f43a2877.jpg" alt="Masa madre" loading="lazy"><div><b>Masa madre</b><p>Corteza crujiente, miga suave</p></div></div>
+    <div class="pc rv"><img src="../../img/f/1651604033534-e66b281f1981.jpg" alt="Panecillos" loading="lazy"><div><b>Panecillos</b><p>Perfectos para el desayuno</p></div></div>
+    <div class="pc rv"><img src="../../img/f/1742299807170-4eecb934a7a3.jpg" alt="Vitrina" loading="lazy"><div><b>La vitrina</b><p>Ven a ver lo que salió hoy</p></div></div>
   </div>
 </div></section>
 
-<footer class="ft" id="contacto"><div class="w">
-  <div class="fcta"><div><span class="eyb">Visítanos o pide a domicilio</span><h2 class="h2">¿Se te antojó algo?</h2></div><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Hacer un pedido →</a></div>
-  <div class="ftop">
-    <img src="logo-yoss.png" alt="Logo Yoss Bakery + Cafe" width="72" height="72" class="flogo">
-    <div><h5>📍 Dirección</h5><p>Paitilla Mall, Local 2<br>Punta Paitilla, Panamá</p><a class="l" href="https://www.google.com/maps/search/?api=1&query=Yoss+Bakery+Paitilla+Mall+Panama" target="_blank" rel="noopener">Cómo llegar →</a></div>
-    <div><h5>🕖 Horario</h5><p>Dom – Jue · 7:00 – 18:00<br>Viernes · 7:00 – 16:30<br>Sábado · cerrado</p></div>
-    <div><h5>🛵 Delivery</h5><p><a class="l" href="https://wa.me/50762176666" target="_blank" rel="noopener">6217-6666</a><br><a class="l" href="https://www.instagram.com/yoss_bakery/" target="_blank" rel="noopener">@yoss_bakery</a></p></div>
+<section id="visita"><div class="w visit">
+  <div class="vbox rv"><h2>Visítanos 📍</h2>
+    <p style="font-size:18px;line-height:1.5">Paitilla Mall, Local 2<br>Punta Paitilla, Ciudad de Panamá<br>🛵 Delivery: 6217-6666</p>
+    <div style="margin-top:22px">
+      <div class="row"><span>Domingo a jueves</span><b>7:00 a.m. – 6:00 p.m.</b></div>
+      <div class="row"><span>Viernes</span><b>7:00 a.m. – 4:30 p.m.</b></div>
+      <div class="row"><span>Sábado</span><b>Cerrado (Shabat)</b></div>
+    </div>
+    <div class="ctas"><a class="btn wa" href="https://wa.me/50762176666" target="_blank" rel="noopener">💬 WhatsApp</a><a class="btn gh" style="border-color:var(--masa);color:var(--masa)" href="https://www.google.com/maps/search/?api=1&query=Yoss+Bakery+Paitilla+Mall+Panama" target="_blank" rel="noopener">🗺️ Cómo llegar</a></div>
   </div>
-  <div class="fbot"><span>© Yoss Bakery + Cafe · Kosher</span><span>Página de muestra por <a href="https://sitioya.vercel.app">SitioYa</a></span></div>
-</div></footer>
+  <div class="map rv"><iframe title="Mapa de Punta Paitilla" loading="lazy" src="https://www.google.com/maps?q=Paitilla+Mall+Panama&output=embed"></iframe></div>
+</div></section>
+
+<footer>© Yoss Bakery · Página de muestra creada por <a href="https://sitioya.vercel.app">SitioYa</a> 🇵🇦</footer>
 <a class="fab" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="#000"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
 
 <script>
@@ -304,17 +263,6 @@ addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='Arr
 (function(){const c=document.getElementById('dust');if(!c)return;const x=c.getContext('2d');let W,H,P=[];const rs=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;P=Array.from({length:Math.round(W/14)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,v:Math.random()*.35+.1,a:Math.random()*.5+.15}))};rs();addEventListener('resize',rs);
 let vis=true,id=0;const go=()=>{if(!id&&vis&&!RM)id=requestAnimationFrame(f)};new IntersectionObserver(e=>{vis=e[0].isIntersecting;go()}).observe(c);RMq.addEventListener('change',go);
 function f(){id=0;if(!vis||RM){x.clearRect(0,0,W,H);return}x.clearRect(0,0,W,H);for(const p of P){p.y-=p.v;p.x+=Math.sin(p.y/40)*.2;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}x.globalAlpha=p.a;x.fillStyle='#F3EADB';x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill()}go()}})();
-// galería que crece al bajar
-(function(){const g=document.getElementById('grow'),fr=document.getElementById('fr');if(!g)return;const im=[...fr.querySelectorAll('img')];const caps=[['Hecho a mano','Desde las 7 a.m.'],['Recién horneados','Croissants de mantequilla'],['Kosher','Panes para Shabat']];
-const k=document.getElementById('capk'),t=document.getElementById('capt');let last=-1;
-function u(){if(RM){fr.style.transform='none';return}const r=g.getBoundingClientRect(),h=g.offsetHeight-innerHeight;if(h<=0)return;const p=Math.min(1,Math.max(0,-r.top/h));const sc=RM?1:.55+.45*Math.min(1,p*2.2);fr.style.transform=`scale(${sc})`;fr.style.borderRadius=(28*(1.4-sc))+'px';const i=Math.min(im.length-1,Math.floor(p*im.length));if(i!==last){im.forEach((m,j)=>m.classList.toggle('on',j===i));k.textContent=caps[i][0];t.textContent=caps[i][1];last=i}}
-addEventListener('scroll',u,{passive:true});RMq.addEventListener('change',u);u()})();
-
-// un día en Yoss: tocar o pasar el mouse cambia la foto
-(function(){const sec=document.getElementById('dia');if(!sec)return;const bs=[...sec.querySelectorAll('.dl')],im=[...sec.querySelectorAll('.dstage img')],num=document.getElementById('dnum'),de=document.getElementById('ddesc');let i=0;
-im.forEach((m,j)=>m.setAttribute('aria-hidden',j!==0));
-function show(n){if(n===i)return;im.forEach(m=>m.classList.remove('out'));im[i].classList.remove('on');im[i].classList.add('out');i=n;im[i].classList.add('on');im.forEach((m,j)=>m.setAttribute('aria-hidden',j!==i));bs.forEach((b,j)=>b.setAttribute('aria-pressed',j===i));num.textContent=String(i+1).padStart(2,'0');de.textContent=im[i].dataset.d}
-bs.forEach((b,j)=>{b.addEventListener('click',()=>show(j));b.addEventListener('mouseenter',()=>{if(matchMedia('(hover:hover)').matches)show(j)})})})();
 </script>
 </body>
 </html>
