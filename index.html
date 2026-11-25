@@ -279,10 +279,10 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <a class="logo" href="#inicio" aria-label="SitioYa, inicio">
     <svg width="38" height="38" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="26" fill="#FF6B5B"/><rect x="16" y="20" width="60" height="47" rx="7" fill="#FFF6EC" stroke="#1B2A4A" stroke-width="6"/><path d="M16 33H76" stroke="#1B2A4A" stroke-width="6"/><circle cx="22.5" cy="25.5" r="1.6" fill="#1B2A4A"/><path d="M25 44.5H45M25 56H37" stroke="#1B2A4A" stroke-width="6" stroke-linecap="round"/><path d="M54 46L54 84L63.5 74.5L70 88L76.5 85L70 71.5L83.5 71.5Z" fill="#1B2A4A" stroke="#FF6B5B" stroke-width="9" stroke-linejoin="round" paint-order="stroke"/></svg>
     <span>Sitio<b>Ya</b></span></a>
-  <nav class="links"><a href="#plantillas">Ejemplos</a><a href="#trabajos">Trabajos</a><a href="#precios">Precios</a><a href="#como">Cómo funciona</a><a href="#cotizar">Cotizar</a><a href="biblioteca.html">Biblioteca</a><a href="#preguntas">Preguntas</a></nav>
+  <nav class="links"><a href="#plantillas">Ejemplos</a><a href="#trabajos">Trabajos</a><a href="#precios">Precios</a><a href="#como">Cómo funciona</a><a href="#cotizar">Cotizar</a><a href="#preguntas">Preguntas</a></nav>
   <a class="btn sm dark" href="https://ig.me/m/sitioya.pty">Escríbenos</a>
 </div>
-<nav class="mnav" aria-label="Secciones"><a href="#plantillas">Ejemplos</a><a href="#trabajos">Trabajos</a><a href="#precios">Precios</a><a href="#cotizar" class="hl">Cotizar</a><a href="biblioteca.html">Biblioteca ✨</a><a href="#como">Cómo funciona</a><a href="#preguntas">Preguntas</a></nav></header>
+<nav class="mnav" aria-label="Secciones"><a href="#plantillas">Ejemplos</a><a href="#trabajos">Trabajos</a><a href="#precios">Precios</a><a href="#cotizar" class="hl">Cotizar</a><a href="#como">Cómo funciona</a><a href="#preguntas">Preguntas</a></nav></header>
 
 <main id="inicio">
 <section class="in hero">
@@ -394,7 +394,6 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </div>
       </div>
     </div>
-  </div>
   <div class="extra"><div class="mant"><span class="mi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><div><b>Mantenimiento opcional · $15/mes</b><p>Para cualquier plan. Te cambiamos precios, fotos y horarios cada vez que lo necesites.</p></div></div></div>
 </div></section>
 
@@ -499,10 +498,10 @@ document.getElementById("cat").innerHTML = T.map((t, i) => {
   const anim = t.st.includes("animada");
   return `<article class="tpl rv${anim ? " anim" : ""}" data-i="${i}" style="--d:${(i % 3) * .08}s">
   <a class="win" href="plantillas/${t.s}.html" target="_blank" rel="noopener" aria-label="Abrir demo de ${esc(t.n)}"><img src="img/shots/${t.s}_full.jpg" alt="Ejemplo ${esc(t.k)}" loading="lazy"><span class="tag">${esc(t.k)}</span><span class="fmt${anim ? " anim" : ""}">${anim ? "Animada" : "Formato " + esc(t.fm).toLowerCase()}</span><span class="hint">Pasa el mouse ↓</span></a>
-  <div class="tb"><div class="top"><h3>${esc(t.n)}</h3><span class="price">$19</span></div><p>${esc(t.d)}</p>
+  <div class="tb"><div class="top"><h3>${esc(t.n)}</h3></div><p>${esc(t.d)}</p>
    <div class="sty">${t.st.map(x => `<span>${esc(STY[x])}</span>`).join("")}</div>
    <div class="feat">${t.f.map(x => `<span>${esc(x)}</span>`).join("")}</div>
-   <div class="row"><a class="btn ghost sm" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a><a class="btn sm" href="${ig}">La quiero</a></div></div>
+   <div class="row"><a class="btn ghost sm" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a><a class="btn sm" href="${ig}">Quiero una así</a></div></div>
  </article>`}).join("");
 const sizeWins = () => document.querySelectorAll(".win").forEach(w => w.style.setProperty("--h", w.clientHeight + "px"));
 sizeWins(); addEventListener("resize", sizeWins);
