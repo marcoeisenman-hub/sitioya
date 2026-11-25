@@ -341,7 +341,7 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <section class="band" id="plantillas" style="padding-top:0"><div class="in">
   <div class="head">
-    <div><div class="kick rv"><i></i>Algunos estilos para inspirarte<span id="ntpl" hidden></span></div><h2 class="rv">Tu página la hacemos desde cero para tu negocio</h2><p class="sub rv">Estos son solo ejemplos de estilos. La tuya es única: con tu marca, tus colores, tus fotos y lo que vendes. Ábrelos y pruébalos.</p></div>
+    <div><div class="kick rv"><i></i>Algunos estilos para inspirarte<span id="ntpl" hidden></span></div><h2 class="rv">Tu página, hecha para tu negocio</h2><p class="sub rv">Estos son solo ejemplos de estilos. La tuya es única: con tu marca, tus colores, tus fotos y lo que vendes. Ábrelos y pruébalos.</p></div>
     <label class="search rv"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Busca: animada, tienda, vender productos, restaurante…" aria-label="Buscar ejemplos"></label></div>
   <div class="frow rv"><span>Estilo</span><div class="filters" id="fs" role="group" aria-label="Filtrar por estilo"></div></div>
   <div class="frow rv"><span>Negocio</span><div class="filters" id="fg" role="group" aria-label="Filtrar por tipo de negocio"></div></div>
@@ -528,7 +528,7 @@ bindRow(fs, v => fSty = v); bindRow(fg, v => fGrp = v);
 q.addEventListener("input", apply); apply();
 
 // marquee
-const mqHtml = T.map(t => `<a href="plantillas/${t.s}.html" target="_blank" rel="noopener"><img src="img/shots/${t.s}.jpg" alt="" loading="lazy"><b>${esc(t.k)}</b></a>`).join("");
+const mqHtml = T.slice(0, 6).map(t => `<a href="plantillas/${t.s}.html" target="_blank" rel="noopener"><img src="img/shots/${t.s}.jpg" alt="" loading="lazy"><b>${esc(t.k)}</b></a>`).join("");
 document.getElementById("mq").innerHTML = mqHtml + mqHtml;
 
 // hero devices
