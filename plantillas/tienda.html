@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>brisa. · Ropa fresca hecha para el calor</title><meta name="description" content="Ropa fresca hecha para el calor">
+<!--
+  PLANTILLA SITIOYA · Tienda de ropa / Instagram
+  1. Cambia textos, precios y horario directamente abajo.
+  2. Cambia colores en :root.  3. Pon tu WhatsApp al final (const WHATSAPP).
+  4. Cambia cada foto (src="...") por las tuyas: <img src="mi-foto.jpg">.
+  Las fotos de ejemplo son de Unsplash (licencia libre).
+  5. Publícala gratis en app.netlify.com/drop
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>:root{--bg:#FFFFFF;--ink:#111111;--soft:#757575;--line:#EAEAEA;--card:#F5F5F3;--field:#F5F5F3;--top:#111111;--top-ink:#F5F5F5;--accent:#111111;--on-accent:#fff;--accent-ink:#111;--hero:#ECEAE4;--panel:#F1EEE8;--panel-ink:#111;--foot:#111;--foot-ink:#EEE;--badge:#111;--r:20px;--btn-r:999px;--ratio:3/4;--head:'Inter Tight',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--hw:600;--track:-.03em}
+*{box-sizing:border-box;min-width:0}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+.w{max-width:1240px;margin:0 auto;padding:0 24px}
+.top{background:var(--top);color:var(--top-ink);font-size:13px}
+.top .w{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:16px}
+header{background:var(--bg);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.nav{display:flex;align-items:center;gap:28px;min-height:72px}
+.logo{font-family:var(--head);font-size:26px;font-weight:var(--hw);letter-spacing:var(--track);white-space:nowrap}
+.links{display:flex;gap:24px;font-size:15px;font-weight:500}.links a{opacity:.8}.links a:hover{opacity:1}
+.search{flex:1;max-width:340px;margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:0 16px;height:42px;color:var(--soft);font-size:14px;background:var(--field)}
+.icons{display:flex;gap:18px;align-items:center}
+.cart{position:relative}.cart b{position:absolute;top:-7px;right:-9px;background:var(--accent);color:var(--on-accent);font-size:10px;border-radius:999px;min-width:17px;height:17px;display:flex;align-items:center;justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 24px;border-radius:var(--btn-r);background:var(--accent);color:var(--on-accent);font-weight:600;font-size:15px;border:0;cursor:pointer;font-family:inherit;transition:filter .2s,transform .2s;white-space:nowrap}
+.btn:hover{filter:brightness(1.08)}.btn.out{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.sm{height:38px;padding:0 16px;font-size:14px}
+/* hero */
+.hero{margin:22px auto 0;border-radius:var(--r);overflow:hidden;background:var(--hero);display:grid;grid-template-columns:1fr 1fr;min-height:440px}
+.hero .txt{padding:56px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.hero h1{font-family:var(--head);font-weight:var(--hw);letter-spacing:var(--track);font-size:clamp(38px,4.6vw,60px);line-height:1.04;margin:0}
+.hero p{font-size:17px;opacity:.78;max-width:30em;margin:0}
+.hero .img{position:relative}.hero .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+/* features */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.feat{display:flex;gap:14px;align-items:center;padding:18px 20px;border:1px solid var(--line);border-radius:calc(var(--r) - 8px);background:var(--card)}
+.feat b{display:block;font-size:15px}.feat span{font-size:13px;color:var(--soft)}
+/* section */
+section{padding:64px 0 0}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.sh h2{font-family:var(--head);font-weight:var(--hw);letter-spacing:var(--track);font-size:clamp(28px,3vw,38px);margin:0;line-height:1.1}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);font:500 14px var(--body);color:var(--ink);cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.prod{display:flex;flex-direction:column;gap:10px}
+.ph{position:relative;border-radius:calc(var(--r) - 6px);overflow:hidden;background:var(--card);aspect-ratio:var(--ratio)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.prod:hover .ph img{transform:scale(1.05)}
+.fav{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);color:#222;display:flex;align-items:center;justify-content:center}
+.badge{position:absolute;top:10px;left:10px;background:var(--badge);color:#fff;font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px}
+.prod h3{font-size:16px;font-weight:600;margin:4px 0 0;line-height:1.3}
+.prod .d{font-size:13px;color:var(--soft);margin:0}
+.stars{font-size:13px;color:#F5A524;letter-spacing:1px}.stars span{color:var(--soft);letter-spacing:0;margin-left:4px}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:2px}
+.price{font-weight:700;font-size:18px}.price sup{font-size:11px;margin-left:1px}
+/* split block */
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:28px;align-items:stretch}
+.split .pic{border-radius:var(--r);overflow:hidden;min-height:420px;position:relative}.split .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.panel{background:var(--panel);color:var(--panel-ink);border-radius:var(--r);padding:44px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.panel h2{font-family:var(--head);font-weight:var(--hw);letter-spacing:var(--track);font-size:clamp(28px,3vw,40px);margin:0;line-height:1.1}
+form{display:grid;gap:12px}
+label{display:grid;gap:6px;font-size:13px;font-weight:600}
+input,select,textarea{font:15px var(--body);height:46px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#fff;color:#1d1d1d}
+textarea{height:90px;padding:12px 14px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* gallery */
+.gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:220px 220px;gap:14px}
+.gal div{border-radius:calc(var(--r) - 6px);overflow:hidden}.gal div:first-child{grid-row:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .6s}.gal div:hover img{transform:scale(1.05)}
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.rev{border:1px solid var(--line);border-radius:calc(var(--r) - 6px);padding:24px;background:var(--card)}
+.rev p{margin:10px 0 16px;font-size:15px}.rev b{font-size:14px}
+/* info */
+.info{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.box{border:1px solid var(--line);border-radius:calc(var(--r) - 6px);padding:26px;background:var(--card)}
+.box h3{margin:0 0 10px;font-size:17px}
+.box p,.box li{font-size:14px;color:var(--soft);margin:4px 0}.box ul{padding:0;list-style:none;margin:0}
+.box li{display:flex;justify-content:space-between}.box li b{color:var(--ink);font-weight:600}
+footer{margin-top:72px;background:var(--foot);color:var(--foot-ink);padding:48px 0 28px;font-size:14px}
+.fcols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px}
+.fcols h4{margin:0 0 10px;font-size:14px}.fcols a{display:block;opacity:.75;margin:6px 0}
+.legal{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(127,127,127,.25);margin-top:32px;padding-top:18px;opacity:.7;font-size:13px}
+.wa{position:fixed;right:20px;bottom:20px;height:54px;padding:0 20px;border-radius:999px;background:#25D366;color:#fff;display:flex;align-items:center;gap:10px;font-weight:600;box-shadow:0 10px 24px rgba(0,0,0,.2);z-index:30}
+.fade{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}.fade.in{opacity:1;transform:none}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.links,.search{display:none}.hero,.split{grid-template-columns:1fr}.hero .img{min-height:280px}
+  .hero .txt{padding:32px}.feats,.revs,.info{grid-template-columns:1fr}.gal{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px 180px}.gal div:first-child{grid-column:span 2;grid-row:auto}.fcols{grid-template-columns:1fr 1fr}.top .hide{display:none}}
+@media (prefers-reduced-motion:reduce){.fade{opacity:1;transform:none}*{transition:none!important}}
+.hero{grid-template-columns:1fr;position:relative;min-height:560px}.hero .img{position:absolute;inset:0}.hero .txt{position:relative;z-index:1;max-width:560px;margin:auto 0 0;padding:56px;color:#fff;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent)}.hero .txt p{opacity:.9}.hero .btn.out{color:#fff;box-shadow:inset 0 0 0 1.5px #fff}.hero .eyebrow{color:#fff}.hero .img img{animation:kb 14s ease-out forwards;transform:scale(1.1)}@keyframes kb{to{transform:scale(1)}}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}</style></head><body>
+<div class="top"><div class="w"><span>Envío gratis desde $50</span><span class="hide">Nueva colección de temporada</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg> Envíos en todo Panamá</span></div></div>
+<header><div class="w nav"><a class="logo" href="#">brisa.</a><nav class="links"><a href="#nuevo">Nuevo</a><a href="#comprar">Cómo comprar</a><a href="#galeria">Looks</a><a href="#tienda">Tienda</a></nav>
+<div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg> Buscar vestidos, camisas…</div><div class="icons"><a href="#" aria-label="Cuenta"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></a><a class="cart" href="#" data-wa="Hola, quiero hacer un pedido" aria-label="Pedido"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><b>0</b></a></div></div></header>
+<main class="w">
+<div class="hero"><div class="txt"><span class="eyebrow">Nueva colección</span><h1>Ropa fresca para los días de calor</h1><p>Lino, algodón y cortes cómodos pensados para Panamá. Compra por WhatsApp y recíbelo mañana.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><a class="btn" href="#" data-wa="Hola, quiero ver la colección">Comprar ahora</a><a class="btn out" href="#nuevo">Ver lo nuevo</a></div></div>
+<div class="img"><img src="../img/f/1613915617430-8ab0fd7c6baf.jpg" alt="Modelo con blazer"></div></div>
+<div class="feats"><div class="feat"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><div><b>Envío en 24 h</b><span>En Ciudad de Panamá</span></div></div><div class="feat"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg><div><b>Paga con Yappy</b><span>O tarjeta y transferencia</span></div></div><div class="feat"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><div><b>Cambios fáciles</b><span>Hasta 15 días</span></div></div></div>
+
+<section id="nuevo"><div class="sh"><h2>Lo nuevo</h2><a href="#" data-wa="Hola, quiero ver todo" style="font-weight:600;font-size:14px">Ver todo →</a></div>
+<div class="filters"><button class="chip on" data-cat="all">Todo</button><button class="chip" data-cat="vestidos">Vestidos</button><button class="chip" data-cat="tops">Tops</button><button class="chip" data-cat="look">Looks</button><span class="chip">Talla <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span><span class="chip">Color <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span><span class="chip">Precio <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></div><div class="grid"><a class="prod fade" data-cat="vestidos" href="#" data-wa="Hola, me interesa: Vestido azul lino"><div class="ph"><img src="../img/f/1656504450814-398cf348c038.jpg" alt="Vestido azul lino" loading="lazy"><span class=badge>Nuevo</span><span class="fav" role="button" aria-label="Favorito"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span></div><h3>Vestido azul lino</h3><p class="d">Tallas XS–L</p><div class="stars">★★★★★<span>(34)</span></div><div class="prow"><span class="price">$48<sup>00</sup></span><span class="btn sm out">Lo quiero</span></div></a><a class="prod fade" data-cat="look" href="#" data-wa="Hola, me interesa: Set blanco y rojo"><div class="ph"><img src="../img/f/1628667970085-82d3731ef568.jpg" alt="Set blanco y rojo" loading="lazy"><span class="fav" role="button" aria-label="Favorito"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span></div><h3>Set blanco y rojo</h3><p class="d">Camisa + falda</p><div class="stars">★★★★★<span>(21)</span></div><div class="prow"><span class="price">$56<sup>00</sup></span><span class="btn sm out">Lo quiero</span></div></a><a class="prod fade" data-cat="vestidos" href="#" data-wa="Hola, me interesa: Vestido blanco"><div class="ph"><img src="../img/f/1659522761084-79196b64abe4.jpg" alt="Vestido blanco" loading="lazy"><span class="fav" role="button" aria-label="Favorito"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span></div><h3>Vestido blanco</h3><p class="d">Algodón ligero</p><div class="stars">★★★★★<span>(45)</span></div><div class="prow"><span class="price">$42<sup>00</sup></span><span class="btn sm out">Lo quiero</span></div></a><a class="prod fade" data-cat="vestidos" href="#" data-wa="Hola, me interesa: Vestido rojo"><div class="ph"><img src="../img/f/1664515226058-03952a19bd76.jpg" alt="Vestido rojo" loading="lazy"><span class="fav" role="button" aria-label="Favorito"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span></div><h3>Vestido rojo</h3><p class="d">Corte midi</p><div class="stars">★★★★★<span>(18)</span></div><div class="prow"><span class="price">$52<sup>00</sup></span><span class="btn sm out">Lo quiero</span></div></a><a class="prod fade" data-cat="tops" href="#" data-wa="Hola, me interesa: Camisa azul"><div class="ph"><img src="../img/f/1661705150795-b608b9fe58c6.jpg" alt="Camisa azul" loading="lazy"><span class="fav" role="button" aria-label="Favorito"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span></div><h3>Camisa azul</h3><p class="d">Unisex</p><div class="stars">★★★★★<span>(27)</span></div><div class="prow"><span class="price">$29<sup>00</sup></span><span class="btn sm out">Lo quiero</span></div></a><a class="prod fade" data-cat="tops" href="#" data-wa="Hola, me interesa: Chaqueta blanca"><div class="ph"><img src="../img/f/1678884399113-0a2b079a31f5.jpg" alt="Chaqueta blanca" loading="lazy"><span class=badge>Top</span><span class="fav" role="button" aria-label="Favorito"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span></div><h3>Chaqueta blanca</h3><p class="d">Para la noche</p><div class="stars">★★★★★<span>(39)</span></div><div class="prow"><span class="price">$64<sup>00</sup></span><span class="btn sm out">Lo quiero</span></div></a><a class="prod fade" data-cat="look" href="#" data-wa="Hola, me interesa: Look casual"><div class="ph"><img src="../img/f/1516762689617-e1cffcef479d.jpg" alt="Look casual" loading="lazy"><span class="fav" role="button" aria-label="Favorito"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span></div><h3>Look casual</h3><p class="d">Cárdigan y jeans</p><div class="stars">★★★★★<span>(16)</span></div><div class="prow"><span class="price">$58<sup>00</sup></span><span class="btn sm out">Lo quiero</span></div></a><a class="prod fade" data-cat="tops" href="#" data-wa="Hola, me interesa: Blazer arena"><div class="ph"><img src="../img/f/1613915617430-8ab0fd7c6baf.jpg" alt="Blazer arena" loading="lazy"><span class="fav" role="button" aria-label="Favorito"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span></div><h3>Blazer arena</h3><p class="d">Corte recto</p><div class="stars">★★★★★<span>(22)</span></div><div class="prow"><span class="price">$72<sup>00</sup></span><span class="btn sm out">Lo quiero</span></div></a></div></section>
+
+<section id="comprar"><div class="split"><div class="pic fade"><img src="../img/f/1603400521630-9f2de124b33b.jpg" alt="brisa." loading="lazy"></div>
+<div class="panel fade"><span class="eyebrow">Cómo comprar</span><h2>Elige, confirma y recíbelo</h2><p style="color:#555">Te escribimos para confirmar talla y color. Pagas con Yappy y te lo llevamos.</p>
+ <form data-wa-form="Hola, quiero hacer un pedido"><label>Nombre<input data-label="Nombre" required></label><div class="two"><label>Producto<select data-label="Producto"><option>Vestido azul lino</option><option>Vestido blanco</option><option>Chaqueta blanca</option></select></label>
+ <label>Talla<select data-label="Talla"><option>XS</option><option>S</option><option>M</option><option>L</option></select></label></div><label>Zona de entrega<input data-label="Entrega" placeholder="Ej: Costa del Este"></label><button class="btn">Pedir por WhatsApp</button></form></div></div></section>
+
+<section id="galeria"><div class="sh"><h2>Looks de la temporada</h2><a href="https://instagram.com/brisa.store" style="font-weight:600;font-size:14px">@brisa.store →</a></div><div class="gal"><div class="fade"><img src="../img/f/1532453288672-3a27e9be9efd.jpg" alt="Foto de brisa." loading="lazy"></div><div class="fade"><img src="../img/f/1767968037382-8eb9c564339f.jpg" alt="Foto de brisa." loading="lazy"></div><div class="fade"><img src="../img/f/1582719188393-bb71ca45dbb9.jpg" alt="Foto de brisa." loading="lazy"></div><div class="fade"><img src="../img/f/1705675451868-014a161e591b.jpg" alt="Foto de brisa." loading="lazy"></div><div class="fade"><img src="../img/f/1653040321630-698cfc09254e.jpg" alt="Foto de brisa." loading="lazy"></div></div></section>
+
+<section><div class="sh"><h2>Lo que dicen nuestros clientes</h2></div><div class="revs"><div class="rev fade"><div class="stars">★★★★★</div><p>“Aquí va la reseña de un cliente feliz. Cópiala de Google o Instagram.”</p><b>Nombre del cliente</b></div><div class="rev fade"><div class="stars">★★★★★</div><p>“Otra reseña corta sobre lo que más les gusta de tu negocio.”</p><b>Nombre del cliente</b></div><div class="rev fade"><div class="stars">★★★★★</div><p>“Una tercera reseña. Con tres ya generas mucha confianza.”</p><b>Nombre del cliente</b></div></div></section>
+
+<section id="tienda"><div class="info">
+<div class="box fade"><h3>Horario</h3><ul><li><span>Lunes a sábado</span><b>10 am – 7 pm</b></li><li><span>Domingo</span><b>Solo pedidos online</b></li></ul></div>
+<div class="box fade"><h3>Dirección</h3><p>Showroom en Costa del Este (con cita)</p><p style="margin-top:14px"><a class="btn sm out" href="https://maps.google.com/?q=Costa+del+Este+Panama" target="_blank" rel="noopener">Cómo llegar</a></p></div>
+<div class="box fade"><h3>Contacto</h3><p>WhatsApp: +507 6000-0000</p><p>Instagram: @brisa.store</p><p style="margin-top:14px"><a class="btn sm" href="#" data-wa="Hola, tengo una pregunta">Escribir por WhatsApp</a></p></div>
+</div></section>
+</main>
+<footer><div class="w"><div class="fcols"><div><div class="logo" style="margin-bottom:10px">brisa.</div><p style="opacity:.75;max-width:28em">Ropa fresca hecha para el calor. Showroom en Costa del Este (con cita)</p></div>
+<div><h4>Tienda</h4><a href="#nuevo">Nuevo</a><a href="#comprar">Cómo comprar</a><a href="#galeria">Looks</a><a href="#tienda">Tienda</a></div><div><h4>Ayuda</h4><a href="#">Pedidos</a><a href="#">Entregas</a><a href="#">Pagos con Yappy</a></div>
+<div><h4>Síguenos</h4><a href="https://instagram.com/brisa.store">Instagram</a><a href="#">TikTok</a><a href="#">Facebook</a></div></div>
+<div class="legal"><span>© <span id="y"></span> brisa.</span><span>Hecho con una plantilla de SitioYa</span></div></div></footer>
+<a class="wa" href="#" data-wa="Hola, quiero información"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 27l2-6A11 11 0 1 1 11 25z"/><path d="M12 11c0 5 4 9 9 9l1.5-2.5-3-1.5-1.5 1.5c-1.5-.5-3-2-3.5-3.5l1.5-1.5-1.5-3z"/></svg> WhatsApp</a>
+<script>
+// ====== EDITA AQUÍ: tu WhatsApp (507 + número, sin espacios) ======
+const WHATSAPP = "50760000000";
+// ==================================================================
+{
+const wa = m => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m);
+document.querySelectorAll("[data-wa]").forEach(a => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+document.querySelectorAll("form[data-wa-form]").forEach(f => f.addEventListener("submit", e => {
+  e.preventDefault(); const l = [f.dataset.waForm];
+  f.querySelectorAll("input,select,textarea").forEach(el => el.value && l.push(el.dataset.label + ": " + el.value));
+  const a = document.createElement("a"); a.href = wa(l.join("\n")); a.target = "_blank"; a.rel = "noopener"; a.click();
+}));
+document.querySelectorAll(".chip[data-cat]").forEach(c => c.addEventListener("click", () => {
+  document.querySelectorAll(".chip[data-cat]").forEach(x => x.classList.toggle("on", x === c));
+  document.querySelectorAll(".prod[data-cat]").forEach(p => p.style.display = (c.dataset.cat === "all" || p.dataset.cat === c.dataset.cat) ? "" : "none");
+}));
+document.querySelectorAll(".fav").forEach(f => f.addEventListener("click", e => { e.preventDefault(); f.style.color = f.style.color ? "" : "#E5383B"; }));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold: .12});
+document.querySelectorAll(".fade").forEach(el => io.observe(el));
+document.getElementById("y").textContent = new Date().getFullYear();
+}
+</script></body></html>

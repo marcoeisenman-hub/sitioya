@@ -1,0 +1,89 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>FORJA · Gimnasio y clases grupales en Obarrio</title><meta name="description" content="Gimnasio y clases grupales en Obarrio">
+<!--
+  PLANTILLA SITIOYA · Gimnasio / Entrenador · formato animada
+  1. Cambia textos, precios y horario abajo.  2. Colores en :root.
+  3. Tu WhatsApp al final (const WHATSAPP).  4. Cambia las fotos (src="...") por las tuyas.
+  Fotos de ejemplo: Unsplash (licencia libre).  5. Publícala gratis en app.netlify.com/drop
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--bg:#0D0D0D;--ink:#F4F4F4;--soft:#9A9A9A;--line:#262626;--card:#161616;--field:#161616;--top:#D7FF3A;--top-ink:#0D0D0D;--accent:#D7FF3A;--on-accent:#0D0D0D;--accent-ink:#D7FF3A;--hero:#161616;--panel:#D7FF3A;--panel-ink:#0D0D0D;--foot:#080808;--foot-ink:#EEE;--badge:#E5383B;--r:14px;--btn-r:6px;--ratio:4/5;--head:'Archivo',Impact,sans-serif;--body:'Inter',system-ui,sans-serif;--hw:800;--track:-.02em}*{box-sizing:border-box;min-width:0}html{scroll-behavior:smooth}body{margin:0;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+input,select,textarea{font:15px inherit;font-family:inherit;height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(0,0,0,.12);background:#fff;color:#1d1d1d;width:100%}
+textarea{height:96px;padding:12px 14px}label{display:grid;gap:6px;font-size:13px;font-weight:600}form{display:grid;gap:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}.fade.in{opacity:1;transform:none}
+.wa{position:fixed;right:20px;bottom:20px;height:54px;padding:0 20px;border-radius:999px;background:#25D366;color:#fff;display:flex;align-items:center;gap:10px;font-weight:600;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:60}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.fade,.rise,.zoom{opacity:1!important;transform:none!important}}
+@media(max-width:600px){.two{grid-template-columns:1fr}}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--body)}
+.w{max-width:1240px;margin:0 auto;padding:0 max(4vw,20px)}
+header{position:fixed;inset:0 0 auto;z-index:50;mix-blend-mode:difference;color:#fff}
+header .w{display:flex;justify-content:space-between;align-items:center;height:78px}.logo{font-family:var(--head);font-size:28px;letter-spacing:.02em}
+header nav{display:flex;gap:26px;font-size:14px;text-transform:uppercase;letter-spacing:.1em}
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;background:var(--accent);color:var(--on-accent);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:14px;border:0;border-radius:var(--btn-r);cursor:pointer;font-family:inherit;transition:transform .25s}
+.btn:hover{transform:translateY(-3px) rotate(-1deg)}.btn.out{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.hero{min-height:100svh;display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:30px;padding:120px max(4vw,20px) 60px;position:relative;overflow:hidden}
+.hero h1{font-family:var(--head);font-size:clamp(56px,10vw,150px);line-height:.86;margin:0;text-transform:uppercase;letter-spacing:-.01em}
+.hero h1 span{display:block;overflow:hidden}.hero h1 span i{display:block;font-style:normal;transform:translateY(105%);animation:up 1s cubic-bezier(.2,.8,.1,1) forwards}
+.hero h1 span:nth-child(2) i{animation-delay:.12s;color:var(--accent)}.hero h1 span:nth-child(3) i{animation-delay:.24s}
+@keyframes up{to{transform:none}}
+.hero p{font-size:19px;color:var(--soft);max-width:30em;margin:26px 0;opacity:0;animation:fadein 1s .6s forwards}.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadein 1s .8s forwards}
+@keyframes fadein{to{opacity:1}}
+.himg{position:relative;height:min(74vh,680px);overflow:hidden;border-radius:var(--r);clip-path:inset(100% 0 0 0);animation:wipe 1.3s .3s cubic-bezier(.7,0,.2,1) forwards}
+.himg img{width:100%;height:100%;object-fit:cover;transform:scale(1.25);animation:zoomout 2.4s .3s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes wipe{to{clip-path:inset(0 0 0 0)}}@keyframes zoomout{to{transform:scale(1.02)}}
+.hv{position:relative}.badge{position:absolute;left:-55px;bottom:40px;width:130px;height:130px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;text-align:center;font-weight:900;font-size:13px;text-transform:uppercase;line-height:1.1;animation:spin 14s linear infinite;z-index:2}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mq{background:var(--accent);color:var(--on-accent);overflow:hidden;transform:rotate(-2deg);margin:40px -20px;padding:18px 0}
+.mq div{display:flex;gap:40px;width:max-content;animation:mq 22s linear infinite;font-family:var(--head);font-size:clamp(30px,4vw,54px);text-transform:uppercase;white-space:nowrap}
+.mq div span::after{content:"✦";margin-left:40px}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:clamp(70px,9vw,130px) 0}
+h2{font-family:var(--head);font-size:clamp(44px,6vw,90px);line-height:.9;margin:0 0 30px;text-transform:uppercase}
+.list{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:60px 1fr auto auto;gap:20px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line);position:relative;transition:padding .35s,color .35s}
+.row .n{color:var(--soft);font-size:14px}.row h3{font-family:var(--head);font-size:clamp(28px,3.4vw,48px);margin:0;text-transform:uppercase;line-height:1}
+.row p{margin:0;color:var(--soft);font-size:14px}.row b{font-size:22px}.row .go{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:.35s}
+.row:hover{padding-left:18px;color:var(--accent)}.row:hover .go{background:var(--accent);color:var(--on-accent);border-color:var(--accent);transform:rotate(-45deg)}
+.peek{position:fixed;left:0;top:0;width:260px;height:320px;border-radius:14px;overflow:hidden;pointer-events:none;z-index:40;opacity:0;transform:translate(-50%,-50%) scale(.6);transition:opacity .25s,transform .25s}
+.peek.on{opacity:1;transform:translate(-50%,-50%) scale(1)}.peek img{width:100%;height:100%;object-fit:cover}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:center}
+.par{height:640px;overflow:hidden;border-radius:var(--r)}.par img{width:100%;height:125%;object-fit:cover;will-change:transform}
+.panel{background:var(--panel);color:var(--panel-ink);padding:clamp(28px,4vw,52px);border-radius:var(--r)}.panel h2{font-size:clamp(36px,4vw,60px)}.panel .eyebrow{font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:13px}
+.panel .btn{width:100%;justify-content:center}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:260px;gap:12px}.gal div{overflow:hidden;border-radius:12px}.gal div:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gal img{width:100%;height:100%;object-fit:cover}.zoom img{transform:scale(1.3);opacity:0;transition:transform 1.4s cubic-bezier(.2,.7,.2,1),opacity 1s}.zoom.in img{transform:scale(1);opacity:1}
+.big{display:block;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
+.big div{display:flex;gap:50px;width:max-content;animation:mq 16s linear infinite reverse;font-family:var(--head);font-size:clamp(60px,10vw,160px);text-transform:uppercase;line-height:1;white-space:nowrap}
+.big:hover div{color:var(--accent);animation-duration:8s}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.info h3{text-transform:uppercase;font-size:14px;letter-spacing:.14em;color:var(--accent);margin:0 0 10px}.info p,.info li{margin:4px 0;color:var(--soft)}.info ul{list-style:none;padding:0;margin:0}.info li b{color:var(--ink);margin-left:8px}
+footer{padding:30px max(4vw,20px);display:flex;justify-content:space-between;color:var(--soft);font-size:14px;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line)}
+@media(max-width:860px){.badge{left:auto;right:12px;bottom:-30px;width:110px;height:110px;font-size:11px}header nav{display:none}.hero,.split{grid-template-columns:1fr}.himg{height:420px}.row{grid-template-columns:1fr auto}.row .n,.row .go{display:none}.gal{grid-template-columns:1fr 1fr}.info{grid-template-columns:1fr}.par{height:420px}}
+</style></head><body>
+<header><div class="w"><a class="logo" href="#">FORJA<span style='color:#D7FF3A'>.</span></a><nav><a href="#clases">Clases</a><a href="#prueba">Prueba gratis</a><a href="#galeria">El gym</a><a href="#ubicacion">Ubicación</a></nav></div></header>
+<div class="hero"><div><h1><span><i>Más</i></span><span><i>fuerte</i></span><span><i>cada semana</i></span></h1><p>Pesas, funcional y clases grupales con entrenadores que te corrigen de verdad. Sin contratos largos.</p><div class="ctas"><a class="btn" href="#" data-wa="Hola, quiero mi clase de prueba gratis">Prueba gratis →</a><a class="btn out" href="#clases">Ver clases</a></div></div>
+<div class="hv"><div class="himg"><img src="../img/f/1761839258420-5c3e2f2e2a74.jpg" alt="Mujer entrenando con barra"></div><div class="badge">Tu primera clase es gratis</div></div></div>
+<div class="mq"><div><span>Abierto 5 am – 10 pm</span><span>Entrenadores certificados</span><span>Planes desde $35</span><span>Abierto 5 am – 10 pm</span><span>Entrenadores certificados</span><span>Planes desde $35</span><span>Abierto 5 am – 10 pm</span><span>Entrenadores certificados</span><span>Planes desde $35</span><span>Abierto 5 am – 10 pm</span><span>Entrenadores certificados</span><span>Planes desde $35</span></div></div>
+<section id="clases"><div class="w"><h2 class="fade">Clases y planes</h2><div class="list"><a class="row fade" href="#" data-wa="Hola, me interesa: Fuerza" data-img="../img/f/1517836357463-d25dfeac3438.jpg"><span class="n">01</span><div><h3>Fuerza</h3><p>Pesas guiadas · 60 min</p></div><b>$8</b><span class="go">→</span></a><a class="row fade" href="#" data-wa="Hola, me interesa: Calistenia" data-img="../img/f/1526506118085-60ce8714f8c5.jpg"><span class="n">02</span><div><h3>Calistenia</h3><p>Tu peso corporal · 50 min</p></div><b>$8</b><span class="go">→</span></a><a class="row fade" href="#" data-wa="Hola, me interesa: Plan mensual" data-img="../img/f/1605296867304-46d5465a13f1.jpg"><span class="n">03</span><div><h3>Plan mensual</h3><p>Acceso libre</p></div><b>$35</b><span class="go">→</span></a><a class="row fade" href="#" data-wa="Hola, me interesa: Entrenador personal" data-img="../img/f/1581009146145-b5ef050c2e1e.jpg"><span class="n">04</span><div><h3>Entrenador personal</h3><p>8 sesiones</p></div><b>$120</b><span class="go">→</span></a><a class="row fade" href="#" data-wa="Hola, me interesa: Funcional" data-img="../img/f/1758875569612-94d5e0f1a35f.jpg"><span class="n">05</span><div><h3>Funcional</h3><p>Cuerdas y circuito · 45 min</p></div><b>$8</b><span class="go">→</span></a><a class="row fade" href="#" data-wa="Hola, me interesa: Olímpico" data-img="../img/f/1722925541142-5db2668ca492.jpg"><span class="n">06</span><div><h3>Olímpico</h3><p>Técnica de barra · 60 min</p></div><b>$10</b><span class="go">→</span></a><a class="row fade" href="#" data-wa="Hola, me interesa: Plan mujeres" data-img="../img/f/1548690312-e3b507d8c110.jpg"><span class="n">07</span><div><h3>Plan mujeres</h3><p>Clases + nutrición</p></div><b>$45</b><span class="go">→</span></a><a class="row fade" href="#" data-wa="Hola, me interesa: Plan anual" data-img="../img/f/1641337221253-fdc7237f6b61.jpg"><span class="n">08</span><div><h3>Plan anual</h3><p>Paga 10, entrena 12</p></div><b>$350</b><span class="go">→</span></a></div></div></section>
+<div class="peek"><img alt=""></div>
+<section id="prueba"><div class="w split"><div class="par"><img src="../img/f/1778828494354-9b717d36dc99.jpg" alt="" loading="lazy"></div><div class="panel fade"><span class="eyebrow" style="color:#0D0D0D">Prueba gratis</span><h2>Tu primera clase va por nosotros</h2><p style="opacity:.8">Dinos qué te interesa y te reservamos un cupo.</p><form data-wa-form="Hola, quiero mi clase de prueba gratis"><label>Nombre<input data-label="Nombre" required></label><label>Clase<select data-label="Clase"><option>Fuerza</option><option>Funcional</option><option>Calistenia</option><option>Olímpico</option></select></label><div class="two"><label>Día<input type="date" data-label="Día"></label><label>Hora<input type="time" data-label="Hora"></label></div><button class="btn" style="">Reservar por WhatsApp</button></form></div></div></section>
+<section id="galeria" style="padding-top:0"><div class="w"><h2 class="fade">Así es FORJA</h2><div class="gal"><div class="zoom"><img src="../img/f/1689877020200-403d8542d95d.jpg" alt="Foto de FORJA" loading="lazy"></div><div class="zoom"><img src="../img/f/1599058917212-d750089bc07e.jpg" alt="Foto de FORJA" loading="lazy"></div><div class="zoom"><img src="../img/f/1772450014622-1c209d012c2e.jpg" alt="Foto de FORJA" loading="lazy"></div><div class="zoom"><img src="../img/f/1577221084712-45b0445d2b00.jpg" alt="Foto de FORJA" loading="lazy"></div><div class="zoom"><img src="../img/f/1550345332-09e3ac987658.jpg" alt="Foto de FORJA" loading="lazy"></div></div></div></section>
+<a class="big" href="#" data-wa="Hola, quiero mi clase de prueba gratis"><div><span>Prueba gratis →</span><span>Prueba gratis →</span><span>Prueba gratis →</span><span>Prueba gratis →</span><span>Prueba gratis →</span><span>Prueba gratis →</span></div></a>
+<section id="ubicacion"><div class="w info"><div><h3>Horario</h3><ul><li><span>Lunes a viernes</span><b>5 am – 10 pm</b></li><li><span>Sábado</span><b>7 am – 6 pm</b></li><li><span>Domingo</span><b>8 am – 1 pm</b></li></ul></div><div><h3>Dirección</h3><p>Calle 53 Este, Obarrio, Ciudad de Panamá</p><p><a style="text-decoration:underline" href="https://maps.google.com/?q=Obarrio+Panama" target="_blank" rel="noopener">Cómo llegar</a></p></div><div><h3>Contacto</h3><p>WhatsApp: +507 6000-0000</p><p>Instagram: @forja.gym</p></div></div></section>
+<footer><span>© <span id="y"></span> FORJA</span><span>Hecho con una plantilla de SitioYa</span></footer><a class="wa" href="#" data-wa="Hola, quiero información"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 27l2-6A11 11 0 1 1 11 25z"/><path d="M12 11c0 5 4 9 9 9l1.5-2.5-3-1.5-1.5 1.5c-1.5-.5-3-2-3.5-3.5l1.5-1.5-1.5-3z"/></svg> WhatsApp</a><script>
+// ====== EDITA AQUÍ: tu WhatsApp (507 + número, sin espacios) ======
+const WHATSAPP = "50760000000";
+// ==================================================================
+{
+const wa = m => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m);
+document.querySelectorAll("[data-wa]").forEach(a => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+document.querySelectorAll("form[data-wa-form]").forEach(f => f.addEventListener("submit", e => {
+  e.preventDefault(); const l = [f.dataset.waForm];
+  f.querySelectorAll("input,select,textarea").forEach(el => el.value && l.push(el.dataset.label + ": " + el.value));
+  const a = document.createElement("a"); a.href = wa(l.join("\n")); a.target = "_blank"; a.rel = "noopener"; a.click();
+}));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold: .12});
+document.querySelectorAll(".fade,.rise,.zoom").forEach(el => io.observe(el));
+const y = document.getElementById("y"); if (y) y.textContent = new Date().getFullYear();
+const peek=document.querySelector(".peek"),pim=peek.querySelector("img");
+if(matchMedia("(hover:hover)").matches){document.querySelectorAll(".row").forEach(r=>{r.addEventListener("mouseenter",()=>{pim.src=r.dataset.img;peek.classList.add("on")});r.addEventListener("mouseleave",()=>peek.classList.remove("on"))});
+addEventListener("mousemove",e=>{peek.style.left=e.clientX+"px";peek.style.top=e.clientY+"px"})}
+const par=document.querySelector(".par img");addEventListener("scroll",()=>{const r=par.parentElement.getBoundingClientRect();par.style.transform=`translateY(${(r.top/innerHeight)*-12-6}%)`},{passive:true});}</script></body></html>

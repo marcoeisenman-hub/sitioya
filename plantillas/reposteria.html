@@ -1,0 +1,69 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dulce Nube · Pasteles por encargo en Betania</title><meta name="description" content="Pasteles por encargo en Betania">
+<!--
+  PLANTILLA SITIOYA · Repostería / Pasteles por encargo · formato minimal
+  1. Cambia textos, precios y horario abajo.  2. Colores en :root.
+  3. Tu WhatsApp al final (const WHATSAPP).  4. Cambia las fotos (src="...") por las tuyas.
+  Fotos de ejemplo: Unsplash (licencia libre).  5. Publícala gratis en app.netlify.com/drop
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--bg:#FFFBFA;--ink:#3B2330;--soft:#86707B;--line:#F1E2E6;--card:#FFFFFF;--field:#FFF3F5;--top:#E8A0B4;--top-ink:#3B2330;--accent:#3B2330;--on-accent:#fff;--accent-ink:#C2577B;--hero:#FCE7EC;--panel:#3B2330;--panel-ink:#FCE7EC;--foot:#2C1A24;--foot-ink:#F7E3E9;--badge:#C2577B;--r:24px;--btn-r:999px;--ratio:1/1;--head:'Playfair Display',Georgia,serif;--body:'Inter',system-ui,sans-serif;--hw:600;--track:-.01em}*{box-sizing:border-box;min-width:0}html{scroll-behavior:smooth}body{margin:0;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+input,select,textarea{font:15px inherit;font-family:inherit;height:48px;padding:0 14px;border-radius:12px;border:1px solid rgba(0,0,0,.12);background:#fff;color:#1d1d1d;width:100%}
+textarea{height:96px;padding:12px 14px}label{display:grid;gap:6px;font-size:13px;font-weight:600}form{display:grid;gap:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}.fade.in{opacity:1;transform:none}
+.wa{position:fixed;right:20px;bottom:20px;height:54px;padding:0 20px;border-radius:999px;background:#25D366;color:#fff;display:flex;align-items:center;gap:10px;font-weight:600;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:60}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.fade,.rise,.zoom{opacity:1!important;transform:none!important}}
+@media(max-width:600px){.two{grid-template-columns:1fr}}
+body{background:var(--bg);color:var(--ink);font:16px/1.7 var(--body)}
+.w{max-width:1240px;margin:0 auto;padding:0 max(4vw,20px)}
+header .w{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:84px}
+header nav{display:flex;gap:28px;font-size:14px}header nav:last-child{justify-content:flex-end}.logo{font-family:var(--head);font-size:30px;text-align:center}
+.hero{text-align:center;padding:50px 0 0}.hero small{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-ink)}
+.hero h1{font-family:var(--head);font-weight:var(--hw);font-size:clamp(46px,8vw,120px);line-height:.95;letter-spacing:-.03em;margin:16px auto 22px;max-width:12ch}
+.hero p{color:var(--soft);max-width:34em;margin:0 auto 30px;font-size:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 30px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:600;font-size:15px;border:0;cursor:pointer;font-family:inherit;transition:transform .3s}.btn:hover{transform:translateY(-2px)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.trio{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:16px;align-items:end;margin-top:60px}
+.trio div{overflow:hidden;border-radius:var(--r)}.trio div:nth-child(1){height:380px}.trio div:nth-child(2){height:520px}.trio div:nth-child(3){height:440px}
+.trio img{width:100%;height:100%;object-fit:cover}.rise{opacity:0;transform:translateY(80px);transition:opacity 1s,transform 1.2s cubic-bezier(.2,.7,.2,1)}.rise.in{opacity:1;transform:none}
+.trio div:nth-child(2){transition-delay:.15s}.trio div:nth-child(3){transition-delay:.3s}
+.state{padding:clamp(80px,10vw,150px) 0;text-align:center}.state p{font-family:var(--head);font-size:clamp(28px,3.6vw,48px);line-height:1.2;max-width:22ch;margin:0 auto;letter-spacing:-.01em}
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:start}
+.stick{position:sticky;top:30px;border-radius:var(--r);overflow:hidden;height:min(80vh,680px)}.stick img{width:100%;height:100%;object-fit:cover}
+h2{font-family:var(--head);font-weight:var(--hw);font-size:clamp(36px,4.6vw,62px);letter-spacing:-.02em;line-height:1;margin:0 0 30px}
+.it{display:grid;grid-template-columns:50px 1fr auto;gap:12px;padding:24px 0;border-bottom:1px solid var(--line);transition:background .3s}
+.it .n{font-size:13px;color:var(--accent-ink);padding-top:6px}.it h3{margin:0;font-size:20px;font-weight:600}.it p{margin:2px 0 0;color:var(--soft);font-size:14px}.it b{font-size:18px;font-weight:600;white-space:nowrap}
+.it:hover h3{color:var(--accent-ink)}
+section{padding:clamp(70px,8vw,120px) 0}
+.mason{columns:3;column-gap:16px}.mason div{break-inside:avoid;margin-bottom:16px;border-radius:var(--r);overflow:hidden}.mason img{width:100%;transition:transform .8s}.mason div:hover img{transform:scale(1.06)}
+.book{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);background:var(--panel);color:var(--panel-ink);border-radius:calc(var(--r) + 8px);padding:clamp(28px,5vw,64px)}
+.book h2{margin-bottom:12px}.book ul{list-style:none;padding:0;margin:24px 0 0}.book li{display:flex;justify-content:space-between;border-bottom:1px solid rgba(127,127,127,.25);padding:10px 0;font-size:15px}
+.book .btn{width:100%}
+footer .w{display:flex;justify-content:space-between;padding:34px max(4vw,20px);color:var(--soft);font-size:14px;flex-wrap:wrap;gap:10px}
+@media(max-width:860px){header .w{grid-template-columns:auto 1fr}header nav:first-child{display:none}.trio{grid-template-columns:1fr 1fr}.trio div:nth-child(3){display:none}.trio div{height:300px!important}.svc,.book{grid-template-columns:1fr}.stick{position:relative;height:340px}.mason{columns:2}}
+</style></head><body>
+<header><div class="w"><nav><a href="#pasteles">Pasteles</a><a href="#encargo">Encargar</a></nav><a class="logo" href="#">Dulce <i style='color:#C2577B'>Nube</i></a><nav><a href="#galeria">Galería</a><a href="#contacto">Contacto</a></nav></div></header>
+<div class="w hero"><small>Hecho a mano</small><h1>Pasteles que se roban la fiesta</h1><p>Cumpleaños, bodas y baby showers. Diseñamos tu pastel a la medida, con ingredientes frescos y mucho cariño.</p><a class="btn" href="#" data-wa="Hola, quiero encargar un pastel">Encargar pastel</a> &nbsp; <a class="btn line" href="#pasteles">Ver pasteles</a>
+<div class="trio"><div class="rise"><img src="../img/f/1711141326113-e6b607fd78ef.jpg" alt=""></div><div class="rise"><img src="../img/f/1572095755818-8fd546d228a1.jpg" alt="Pasteles de colores"></div><div class="rise"><img src="../img/f/1693059740560-21151639561f.jpg" alt=""></div></div></div>
+<div class="w state fade"><p>Pasteles por encargo en Betania. Hecho el día antes, delivery.</p></div>
+<section id="pasteles" style="padding-top:0"><div class="w svc"><div class="stick"><img src="../img/f/1583338917451-face2751d8d5.jpg" alt="" loading="lazy"></div><div><h2>Nuestros favoritos</h2><a class="it fade" href="#" data-wa="Hola, quiero encargar: Pastel blanco y dorado"><span class="n">01</span><div><h3>Pastel blanco y dorado</h3><p>Para 15 personas</p></div><b>$55</b></a><a class="it fade" href="#" data-wa="Hola, quiero encargar: Pastel de chocolate"><span class="n">02</span><div><h3>Pastel de chocolate</h3><p>Para 12 personas</p></div><b>$45</b></a><a class="it fade" href="#" data-wa="Hola, quiero encargar: Pastel rosa"><span class="n">03</span><div><h3>Pastel rosa</h3><p>Para 10 personas</p></div><b>$40</b></a><a class="it fade" href="#" data-wa="Hola, quiero encargar: Cupcakes clásicos x12"><span class="n">04</span><div><h3>Cupcakes clásicos x12</h3><p>Decorados a tu tema</p></div><b>$24</b></a><a class="it fade" href="#" data-wa="Hola, quiero encargar: Cupcakes rosados x12"><span class="n">05</span><div><h3>Cupcakes rosados x12</h3><p>Vainilla y fresa</p></div><b>$24</b></a><a class="it fade" href="#" data-wa="Hola, quiero encargar: Cupcakes de avellana x12"><span class="n">06</span><div><h3>Cupcakes de avellana x12</h3><p>Con trufa</p></div><b>$28</b></a><a class="it fade" href="#" data-wa="Hola, quiero encargar: Donuts x6"><span class="n">07</span><div><h3>Donuts x6</h3><p>Glaseados surtidos</p></div><b>$10</b></a><a class="it fade" href="#" data-wa="Hola, quiero encargar: Porción de pastel"><span class="n">08</span><div><h3>Porción de pastel</h3><p>Para probar</p></div><b>$4.50</b></a></div></div></section>
+<section id="galeria"><div class="w"><h2 class="fade" style="text-align:center">Algunas creaciones</h2><div class="mason"><div class="fade"><img src="../img/f/1711141326113-e6b607fd78ef.jpg" alt="Trabajo de Dulce Nube" loading="lazy"></div><div class="fade"><img src="../img/f/1659549591823-c6efec55b82f.jpg" alt="Trabajo de Dulce Nube" loading="lazy"></div><div class="fade"><img src="../img/f/1612203985729-70726954388c.jpg" alt="Trabajo de Dulce Nube" loading="lazy"></div><div class="fade"><img src="../img/f/1639832899627-5d77c5ce1eb8.jpg" alt="Trabajo de Dulce Nube" loading="lazy"></div><div class="fade"><img src="../img/f/1587668178277-295251f900ce.jpg" alt="Trabajo de Dulce Nube" loading="lazy"></div><div class="fade"><img src="../img/f/1693059740560-21151639561f.jpg" alt="Trabajo de Dulce Nube" loading="lazy"></div><div class="fade"><img src="../img/f/1693040743049-71cd4630ab5a.jpg" alt="Trabajo de Dulce Nube" loading="lazy"></div><div class="fade"><img src="../img/f/1621303837174-89787a7d4729.jpg" alt="Trabajo de Dulce Nube" loading="lazy"></div><div class="fade"><img src="../img/f/1614707267537-b85aaf00c4b7.jpg" alt="Trabajo de Dulce Nube" loading="lazy"></div></div></div></section>
+<section id="encargo" style="padding-top:0"><div class="w"><div class="book fade"><div><h2>Visítanos</h2><p style="opacity:.8">Retiro en Betania, Ciudad de Panamá · Delivery disponible</p><ul><li><span>Lunes a sábado</span><b>9 am – 6 pm</b></li><li><span>Domingo</span><b>Solo entregas</b></li></ul></div><div><span class="eyebrow" style="color:#E8A0B4">Haz tu pedido</span><h2>Arma tu pastel</h2><p style="opacity:.8">Te respondemos con el precio exacto e ideas de diseño.</p>
+ <form data-wa-form="Hola, quiero encargar un pastel"><label>Nombre<input data-label="Nombre" required></label><div class="two"><label>Sabor<select data-label="Sabor"><option>Vainilla</option><option>Chocolate</option><option>Red velvet</option><option>Tres leches</option></select></label>
+ <label>Personas<select data-label="Personas"><option>10–12</option><option>20–25</option><option>30–40</option></select></label></div><label>Fecha<input type="date" data-label="Fecha"></label>
+ <label>Tu idea<textarea data-label="Idea" placeholder="Ej: tema flores, que diga Feliz cumple Sofi"></textarea></label><button class="btn" style="background:#FCE7EC;color:#3B2330">Enviar por WhatsApp</button></form></div></div></div></section>
+<footer id="contacto"><div class="w"><span>© <span id="y"></span> Dulce Nube · @dulcenube.pty</span><span>Hecho con una plantilla de SitioYa</span></div></footer><a class="wa" href="#" data-wa="Hola, quiero información"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 27l2-6A11 11 0 1 1 11 25z"/><path d="M12 11c0 5 4 9 9 9l1.5-2.5-3-1.5-1.5 1.5c-1.5-.5-3-2-3.5-3.5l1.5-1.5-1.5-3z"/></svg> WhatsApp</a><script>
+// ====== EDITA AQUÍ: tu WhatsApp (507 + número, sin espacios) ======
+const WHATSAPP = "50760000000";
+// ==================================================================
+{
+const wa = m => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m);
+document.querySelectorAll("[data-wa]").forEach(a => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+document.querySelectorAll("form[data-wa-form]").forEach(f => f.addEventListener("submit", e => {
+  e.preventDefault(); const l = [f.dataset.waForm];
+  f.querySelectorAll("input,select,textarea").forEach(el => el.value && l.push(el.dataset.label + ": " + el.value));
+  const a = document.createElement("a"); a.href = wa(l.join("\n")); a.target = "_blank"; a.rel = "noopener"; a.click();
+}));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold: .12});
+document.querySelectorAll(".fade,.rise,.zoom").forEach(el => io.observe(el));
+const y = document.getElementById("y"); if (y) y.textContent = new Date().getFullYear();
+}</script></body></html>
