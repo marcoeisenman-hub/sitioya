@@ -161,7 +161,7 @@ addEventListener("keydown", e => {
   if (e.key === "Tab") { const f = [...md.querySelectorAll("a,button,input")]; if (!f.length) return; const i = f.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length-1].focus(); } else if (!e.shiftKey && i === f.length-1) { e.preventDefault(); f[0].focus(); } }
   if (!document.getElementById("res")) return;
   if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); if (!hits.length) return; sel = (sel + (e.key === "ArrowDown" ? 1 : -1) + hits.length) % hits.length; document.querySelectorAll(".r").forEach((r, i) => r.classList.toggle("on", i === sel)); }
-  if (e.key === "Enter") { e.preventDefault(); pick(sel); }
+  if (e.key === "Enter" && document.activeElement && document.activeElement.id === "q") { e.preventDefault(); pick(sel); }
 });
 </script>
 </body>
