@@ -528,7 +528,7 @@ bindRow(fs, v => fSty = v); bindRow(fg, v => fGrp = v);
 q.addEventListener("input", apply); apply();
 
 // marquee
-const mqHtml = T.slice(0, 6).map(t => `<a href="plantillas/${t.s}.html" target="_blank" rel="noopener"><img src="img/shots/${t.s}.jpg" alt="" loading="lazy"><b>${esc(t.k)}</b></a>`).join("");
+const mqHtml = [...T.slice(0, 6), ...T.slice(0, 6)].map(t => `<a href="plantillas/${t.s}.html" target="_blank" rel="noopener"><img src="img/shots/${t.s}.jpg" alt="" loading="lazy"><b>${esc(t.k)}</b></a>`).join("");
 document.getElementById("mq").innerHTML = mqHtml + mqHtml;
 
 // hero devices
