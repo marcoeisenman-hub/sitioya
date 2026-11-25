@@ -129,7 +129,7 @@ footer{padding:40px 0 110px;text-align:center;color:var(--soft);font-size:14px}
 
 <div class="mq" aria-hidden="true"><div>
 <span>Challah</span><b>✦</b><span>Croissants</span><b>✦</b><span>Shakshuka</span><b>✦</b><span>Sufganiot</span><b>✦</b><span>Frappés</span><b>✦</b><span>Postres</span><b>✦</b>
-<span>Pan de masa madre</span><b>✦</b><span>Croissants</span><b>✦</b><span>Challah</span><b>✦</b><span>Sándwiches</span><b>✦</b><span>Café</span><b>✦</b>
+<span>Challah</span><b>✦</b><span>Croissants</span><b>✦</b><span>Shakshuka</span><b>✦</b><span>Sufganiot</span><b>✦</b><span>Frappés</span><b>✦</b><span>Postres</span><b>✦</b>
 </div></div>
 
 <section id="menu"><div class="w">
@@ -209,7 +209,7 @@ const tilt=(x,y)=>card.style.transform=RM?'none':`rotateY(${x*16}deg) rotateX(${
 stage.addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect();tilt((e.clientX-r.left)/r.width-.5,(e.clientY-r.top)/r.height-.5)});
 stage.addEventListener('pointerleave',()=>tilt(0,0));
 RMq.addEventListener('change',e=>{RM=e.matches;tilt(0,0)});
-(function idle(t){if(!RM&&!matchMedia('(hover:hover)').matches){tilt(Math.sin(t/1600)*.35,Math.cos(t/2100)*.25)}requestAnimationFrame(idle)})(0);
+if(!matchMedia('(hover:hover)').matches)(function idle(t){if(RM)return;tilt(Math.sin(t/1600)*.35,Math.cos(t/2100)*.25);requestAnimationFrame(idle)})(0);
 // libro con sonido de página
 const pages=[...document.querySelectorAll('.page')];let cur=0,sound=true,ac;document.getElementById('lastwa').tabIndex=-1;
 const names=['Portada','Panes · Hojaldres','Sándwiches · Café','¡Pide ahora!'];
