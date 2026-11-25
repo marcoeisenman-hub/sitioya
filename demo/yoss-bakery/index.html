@@ -96,7 +96,7 @@ section{padding:90px 0}
 .map{border-radius:32px;overflow:hidden;min-height:340px;background:var(--masa)}
 .map iframe{width:100%;height:100%;border:0;min-height:340px}
 @media(max-width:860px){.visit{grid-template-columns:1fr}}
-footer{padding:40px 0 110px;text-align:center;color:var(--soft);font-size:14px}
+footer{color:var(--soft)}
 .fab{position:fixed;right:18px;bottom:18px;z-index:30;width:62px;height:62px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 10px 30px -10px rgba(0,0,0,.8);border:1px solid #000}
 @keyframes pulse{50%{box-shadow:0 0 0 14px rgba(37,211,102,0),0 16px 30px -10px rgba(37,211,102,.8)}}
 .rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}.rv.v{opacity:1;transform:none}
@@ -128,27 +128,47 @@ footer{padding:40px 0 110px;text-align:center;color:var(--soft);font-size:14px}
 .giant{font-family:Antonio,Oswald,sans-serif;font-weight:700}
 .cover h3{font-family:Oswald,sans-serif;text-transform:uppercase}
 .hlogo{width:120px;height:120px;margin-bottom:6px;border-radius:50%}.cover .hlogo{margin-inline:auto}
+
+.btn{border-radius:0;min-height:50px;padding:0 24px;font-family:"DM Sans";font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:background .25s,color .25s,gap .25s}
+.btn:hover{gap:16px}
+.wa{background:#fff;color:#000;border:1px solid #fff}.wa:hover{background:transparent;color:#fff}
+.gh{border:1px solid rgba(255,255,255,.35)!important;color:#fff}.gh:hover{border-color:#fff!important}
+nav .btn{min-height:40px!important;padding:0 18px!important;font-size:12px}
+nav .links a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--soft)}nav .links a:hover{color:#fff}
+.pc{border-radius:0;background:transparent;border:0}.pc:hover{transform:none;box-shadow:none}.pc img{transition:transform .6s}.pc:hover img{transform:scale(1.04)}.pc{overflow:hidden}
+.pc div{padding:14px 0 0}.pc b{font-family:Antonio,Oswald,sans-serif;text-transform:uppercase;font-size:24px;letter-spacing:.01em}
+/* abajo: visita + pie minimalista */
+.vis{border-top:1px solid rgba(255,255,255,.12);padding:90px 0 0}
+.vis .g{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.vis h5{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:16px}
+.vis ul{padding:0;margin:0}.vis p,.vis li{font-size:17px;line-height:1.7;list-style:none}
+.vis li{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);padding:6px 0}
+.vis li b{font-weight:500}
+.vis a.l{color:#fff;text-underline-offset:4px}
+.vmap{margin-top:60px;height:340px;filter:grayscale(1) invert(.92) contrast(.9);border:0;width:100%;display:block}
+.foot{padding:70px 0 40px;overflow:hidden}
+.foot .big{font-family:Antonio,Oswald,sans-serif;font-weight:700;font-size:clamp(60px,16.5vw,230px);line-height:.85;letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap;color:#fff}
+.foot .bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:22px;margin-top:30px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.foot .bot a{color:var(--soft)}
+@media(max-width:800px){.vis .g{grid-template-columns:1fr}}
 </style>
 <noscript><style>.grow{height:auto}.grow .st{position:relative;height:auto;padding:40px 0}.hero h1 .ln>span{transform:none;opacity:1}.rv{opacity:1;transform:none}.book{aspect-ratio:auto;display:grid;gap:14px;perspective:none}.base,.bctl{display:none}.page{position:relative;width:100%;transform:none!important;display:grid;gap:14px}.face,.face.back{position:relative;transform:none;backface-visibility:visible;border-radius:18px}</style></noscript>
 </head>
 <body>
 <div class="demo">✨ Página de muestra hecha por <a href="https://sitioya.vercel.app" target="_blank" rel="noopener">SitioYa</a> para Yoss Bakery · precios de ejemplo</div>
-<nav><div class="w"><a class="logo" href="#"><img class="ylogo" src="logo-yoss.png" alt="" width="44" height="44"><span>Yoss Bakery + Cafe</span></a><div class="links"><a href="#menu">Menú</a><a href="#favoritos">Favoritos</a><a href="#visita">Visítanos</a></div><a class="btn wa" style="min-height:44px;padding:0 18px;font-size:14px" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir</a></div></nav>
+<nav><div class="w"><a class="logo" href="#"><img class="ylogo" src="logo-yoss.png" alt="" width="44" height="44"><span>Yoss Bakery + Cafe</span></a><div class="links"><a href="#menu">Menú</a><a href="#favoritos">Favoritos</a><a href="#visita">Visítanos</a></div><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></nav>
 
 <header class="w hero"><div class="bgw"></div><div class="giant" aria-hidden="true">YOSS</div><canvas id="dust" aria-hidden="true"></canvas>
   <div>
-    <img class="hlogo" style="display:block;width:96px;height:96px;margin-bottom:18px" src="logo-yoss.png" alt="Logo Yoss Bakery + Cafe" width="96" height="96"><span class="kick">✡ Kosher · Paitilla Mall</span>
+    <img class="hlogo" style="display:block;width:96px;height:96px;margin-bottom:18px" src="logo-yoss.png" alt="Logo Yoss Bakery + Cafe" width="96" height="96"><span class="kick">Kosher · Paitilla Mall</span>
     <h1><span class="ln"><span>Pan recién</span></span><span class="ln"><span><em>horneado</em>,</span></span><span class="ln"><span>todos los días</span></span></h1>
     <p>Panes, croissants, sándwiches, ensaladas, postres y frappés kosher en Paitilla Mall. Pide por WhatsApp y te lo llevamos con delivery.</p>
-    <div class="ctas"><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">💬 Pedir por WhatsApp</a><a class="btn gh" href="#menu">📖 Ver el menú</a></div>
-    <div class="facts"><span>🥖 Panes y challah</span><span>🛵 Delivery 6217-6666</span><span>✡ Kosher</span></div>
+    <div class="ctas"><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir por WhatsApp <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn gh" href="#menu">Ver el menú</a></div>
+    <div class="facts"><span>Panes y challah</span><span>Delivery 6217-6666</span><span>Kosher</span></div>
   </div>
   <div class="stage" id="stage">
     <div class="card3d" id="card">
       <div class="ph"><img src="../../img/f/1530610476181-d83430b64dcd.jpg" alt="Croissant de mantequilla recién horneado"></div>
-      <div class="chip c1 float">🔥<div>Recién salido<small>del horno</small></div></div>
-      <div class="chip c2 float" style="animation-delay:-2s">✡<div>Kosher<small>certificado</small></div></div>
-      <div class="chip c3 float" style="animation-delay:-4s">🥐 Croissants</div>
     </div>
   </div>
 </header>
@@ -214,20 +234,21 @@ footer{padding:40px 0 110px;text-align:center;color:var(--soft);font-size:14px}
   </div>
 </div></section>
 
-<section id="visita"><div class="w visit">
-  <div class="vbox rv"><h2>Visítanos 📍</h2>
-    <p style="font-size:18px;line-height:1.5">Paitilla Mall, Local 2<br>Punta Paitilla, Ciudad de Panamá<br>🛵 Delivery: 6217-6666</p>
-    <div style="margin-top:22px">
-      <div class="row"><span>Domingo a jueves</span><b>7:00 a.m. – 6:00 p.m.</b></div>
-      <div class="row"><span>Viernes</span><b>7:00 a.m. – 4:30 p.m.</b></div>
-      <div class="row"><span>Sábado</span><b>Cerrado (Shabat)</b></div>
-    </div>
-    <div class="ctas"><a class="btn wa" href="https://wa.me/50762176666" target="_blank" rel="noopener">💬 WhatsApp</a><a class="btn gh" style="border-color:var(--masa);color:var(--masa)" href="https://www.google.com/maps/search/?api=1&query=Yoss+Bakery+Paitilla+Mall+Panama" target="_blank" rel="noopener">🗺️ Cómo llegar</a></div>
+<section id="visita" class="vis"><div class="w">
+  <h2 class="h2 rv" style="margin-bottom:50px">Visítanos</h2>
+  <div class="g rv">
+    <div><h5>Dirección</h5><p>Paitilla Mall, Local 2<br>Punta Paitilla<br>Ciudad de Panamá</p><p style="margin-top:12px"><a class="l" href="https://www.google.com/maps/search/?api=1&query=Paitilla+Mall+Panama" target="_blank" rel="noopener">Cómo llegar →</a></p></div>
+    <div><h5>Horario</h5><ul><li><span>Dom – Jue</span><b>7:00 – 18:00</b></li><li><span>Viernes</span><b>7:00 – 16:30</b></li><li><span>Sábado</span><b>Cerrado</b></li></ul></div>
+    <div><h5>Pedidos</h5><p>Delivery y encargos<br><a class="l" href="https://wa.me/50762176666" target="_blank" rel="noopener">6217-6666</a></p><p style="margin-top:12px"><a class="l" href="https://www.instagram.com/yoss_bakery/" target="_blank" rel="noopener">@yoss_bakery</a></p></div>
   </div>
-  <div class="map rv"><iframe title="Mapa de Punta Paitilla" loading="lazy" src="https://www.google.com/maps?q=Paitilla+Mall+Panama&output=embed"></iframe></div>
-</div></section>
+</div>
+<iframe class="vmap" title="Mapa de Paitilla Mall" loading="lazy" src="https://www.google.com/maps?q=Paitilla+Mall+Panama&output=embed"></iframe>
+</section>
 
-<footer>© Yoss Bakery · Página de muestra creada por <a href="https://sitioya.vercel.app">SitioYa</a> 🇵🇦</footer>
+<footer class="foot"><div class="w">
+  <div class="big" aria-hidden="true">Yoss Bakery</div>
+  <div class="bot"><span>Yoss Bakery + Cafe · Kosher</span><span>Página de muestra por <a href="https://sitioya.vercel.app">SitioYa</a></span></div>
+</div></footer>
 <a class="fab" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="#000"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
 
 <script>
