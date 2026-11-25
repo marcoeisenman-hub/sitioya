@@ -216,6 +216,26 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media(max-width:600px){.cat{grid-template-columns:1fr}.c2{display:none}.c1{left:0;bottom:4%}.mq a{width:230px}body{font-size:16px}.sub{font-size:17px}.nav .btn{display:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.msg{opacity:1;transform:none}.scr img.on{transform:none}}
 .wks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.wk{background:#fff;border:2px solid var(--line);border-radius:22px;overflow:hidden;text-decoration:none;transition:transform .3s}.wk:hover{transform:translateY(-6px)}.wk img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-bottom:2px solid var(--line)}.wk div{padding:14px 18px 18px;display:grid;gap:2px}.wk span{color:var(--soft);font-size:15px}@media(max-width:900px){.wks{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.wks{grid-template-columns:1fr}}
+
+/* --- Claude: cotización + celular --- */
+.hero{padding-left:max(4vw,18px);padding-right:max(4vw,18px)}
+.mnav{display:none}
+@media(max-width:820px){.mnav{display:flex;gap:8px;overflow-x:auto;padding:0 18px 12px;scrollbar-width:none}.mnav::-webkit-scrollbar{display:none}.mnav a{flex:none;text-decoration:none;font-weight:700;font-size:14px;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:99px;padding:7px 14px}.mnav a.hl{background:var(--coral);border-color:var(--coral);color:#fff}}
+@media(max-width:600px){h1{font-size:clamp(34px,10vw,44px)}h2{font-size:clamp(28px,8.4vw,38px)}.band{padding:48px 0}.ctas{flex-direction:column;align-items:stretch}.ctas .btn{justify-content:center;text-align:center}.plan,.diy{padding:22px}.plan .amt{font-size:36px}.tabs{overflow-x:auto;max-width:100%}.cta{padding:30px 22px}}
+.quote{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.qform{background:#fff;border:2px solid var(--line);border-radius:28px;padding:clamp(22px,3vw,34px);display:grid;gap:16px}
+.qform label{display:grid;gap:6px;font-weight:700;font-size:15px}
+.qform label small{font-weight:500;color:var(--soft)}
+.qform input,.qform select,.qform textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:13px 15px;width:100%}
+.qform input:focus,.qform select:focus,.qform textarea:focus{outline:none;border-color:var(--coral)}
+.qform textarea{min-height:96px;resize:vertical}
+.qform .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.qform button{border:0;cursor:pointer;font:inherit;font-weight:800;font-size:17px;background:#25D366;color:#fff;border-radius:999px;padding:16px 22px;display:flex;align-items:center;justify-content:center;gap:10px}
+.qform .err{color:var(--coral-d);font-weight:700;font-size:14px;min-height:1em}
+.qlist{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:12px;font-weight:600}
+.qlist li{display:flex;gap:12px;align-items:flex-start}.qlist li b{flex:none;width:30px;height:30px;border-radius:50%;background:var(--mint);display:grid;place-items:center;font-size:14px}
+@media(max-width:820px){.quote{grid-template-columns:1fr}}
+@media(max-width:480px){.qform .two{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -223,9 +243,10 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <a class="logo" href="#inicio" aria-label="SitioYa, inicio">
     <svg width="38" height="38" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="26" fill="#FF6B5B"/><rect x="16" y="20" width="60" height="47" rx="7" fill="#FFF6EC" stroke="#1B2A4A" stroke-width="6"/><path d="M16 33H76" stroke="#1B2A4A" stroke-width="6"/><circle cx="22.5" cy="25.5" r="1.6" fill="#1B2A4A"/><path d="M25 44.5H45M25 56H37" stroke="#1B2A4A" stroke-width="6" stroke-linecap="round"/><path d="M54 46L54 84L63.5 74.5L70 88L76.5 85L70 71.5L83.5 71.5Z" fill="#1B2A4A" stroke="#FF6B5B" stroke-width="9" stroke-linejoin="round" paint-order="stroke"/></svg>
     Sitio<b>Ya</b></a>
-  <nav class="links"><a href="#plantillas">Plantillas</a><a href="#trabajos">Trabajos</a><a href="#precios">Precios</a><a href="#como">Cómo funciona</a><a href="#preguntas">Preguntas</a></nav>
+  <nav class="links"><a href="#plantillas">Plantillas</a><a href="#trabajos">Trabajos</a><a href="#precios">Precios</a><a href="#como">Cómo funciona</a><a href="#cotizar">Cotizar</a><a href="#preguntas">Preguntas</a></nav>
   <a class="btn sm dark" href="https://ig.me/m/sitioya.pty">Escríbenos</a>
-</div></header>
+</div>
+<nav class="mnav" aria-label="Secciones"><a href="#plantillas">Plantillas</a><a href="#trabajos">Trabajos</a><a href="#precios">Precios</a><a href="#cotizar" class="hl">Cotizar</a><a href="#como">Cómo funciona</a><a href="#preguntas">Preguntas</a></nav></header>
 
 <main id="inicio">
 <section class="in hero">
@@ -363,6 +384,27 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="step rv" style="--d:.15s"><div class="n">2</div><h3>Escríbenos por DM</h3><p>Te pasamos la plantilla o te pedimos tus fotos, precios y logo.</p></div>
     <div class="step rv" style="--d:.3s"><div class="n">3</div><h3>Comparte tu link</h3><p>Ponlo en tu bio, en Google y en WhatsApp. Y a recibir pedidos.</p></div>
   </div>
+</div></section>
+
+<section class="band" id="cotizar" style="padding-top:0"><div class="in quote">
+  <div>
+    <div class="kick rv"><i></i>Cotiza gratis</div>
+    <h2 class="rv">Cotiza tu página en 1 minuto</h2>
+    <p class="sub rv">Llena esto y se abre WhatsApp con tu mensaje listo. Te contestamos con el precio exacto y cuándo queda lista.</p>
+    <ul class="qlist rv"><li><b>1</b>Nos cuentas qué vendes</li><li><b>2</b>Te mandamos precio y tiempo</li><li><b>3</b>Pagas la mitad para empezar y la otra mitad al entregar</li></ul>
+  </div>
+  <form class="qform rv" id="qform" novalidate>
+    <div class="two">
+      <label>Tu nombre<input name="nombre" autocomplete="name" placeholder="Ej: Ana" required></label>
+      <label>Tu negocio <small>(opcional)</small><input name="negocio" placeholder="Ej: Luna Panadería"></label>
+    </div>
+    <label>Tipo de negocio<select name="tipo"><option>Comida o café</option><option>Panadería o repostería</option><option>Barbería o salón</option><option>Tienda de ropa</option><option>Gimnasio</option><option>Clínica o salud</option><option>Otro</option></select></label>
+    <label>Qué necesitas<select name="plan">
+      <option>Hazla tú · $19</option><option selected>Plantilla lista · $69</option><option>Básica · $99</option><option>Completa · $199</option><option>Diseño único · desde $369</option><option>No sé todavía, ayúdenme</option></select></label>
+    <label>Cuéntanos más <small>(opcional)</small><textarea name="msg" placeholder="Qué vendes, si tienes Instagram, para cuándo la necesitas…"></textarea></label>
+    <p class="err" id="qerr" aria-live="polite"></p>
+    <button type="submit"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Enviar por WhatsApp</button>
+  </form>
 </div></section>
 
 <section class="band" id="preguntas"><div class="in">
@@ -505,6 +547,11 @@ const hd = document.getElementById("hd"), dm = document.getElementById("dm");
 const onScroll = () => { hd.classList.toggle("s", scrollY > 10); dm.classList.toggle("on", scrollY > 600); };
 addEventListener("scroll", onScroll, {passive: true}); onScroll();
 }
+</script>
+<script>
+(function(){var f=document.getElementById('qform');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var d=new FormData(f),n=(d.get('nombre')||'').trim();if(!n){document.getElementById('qerr').textContent='Pon tu nombre para poder contestarte.';f.nombre.focus();return}
+var t='Hola SitioYa! Soy '+n+(d.get('negocio')?' de '+d.get('negocio').trim():'')+'.\nTipo de negocio: '+d.get('tipo')+'\nMe interesa: '+d.get('plan')+(d.get('msg').trim()?'\n'+d.get('msg').trim():'');
+window.open('https://wa.me/50769197559?text='+encodeURIComponent(t),'_blank','noopener');document.getElementById('qerr').textContent='';});})();
 </script>
 </body>
 </html>
