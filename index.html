@@ -561,11 +561,11 @@ so.observe(document.getElementById("steps"));
 const tabs = [...document.querySelectorAll(".tab")], pill = document.querySelector(".pill");
 const movePill = t => { pill.style.width = t.offsetWidth + "px"; pill.style.transform = `translate(${t.offsetLeft - 5}px, ${t.offsetTop - 5}px)`; };
 tabs.forEach(t => t.addEventListener("click", () => {
-  tabs.forEach(x => { x.classList.toggle("on", x === t); x.setAttribute("aria-selected", x === t); });
+  tabs.forEach(x => { x.classList.toggle("on", x === t); x.setAttribute("aria-selected", x === t); x.tabIndex = x === t ? 0 : -1; });
   document.querySelectorAll(".pane").forEach(p => p.classList.toggle("on", p.id === t.dataset.t));
   movePill(t);
 }));
-movePill(tabs[0]); addEventListener("resize", () => movePill(document.querySelector(".tab.on")));
+tabs.forEach((x, i) => x.tabIndex = i ? -1 : 0); movePill(tabs[0]); addEventListener("resize", () => movePill(document.querySelector(".tab.on")));
 tabs.forEach((t, i) => t.addEventListener("keydown", e => { const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (!d) return; e.preventDefault(); const n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); n.click(); }));
 
 // header + floating button
