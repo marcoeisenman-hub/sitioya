@@ -208,8 +208,9 @@ const RMq=matchMedia('(prefers-reduced-motion: reduce)');let RM=RMq.matches;
 const tilt=(x,y)=>card.style.transform=RM?'none':`rotateY(${x*16}deg) rotateX(${-y*12}deg)`;
 stage.addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect();tilt((e.clientX-r.left)/r.width-.5,(e.clientY-r.top)/r.height-.5)});
 stage.addEventListener('pointerleave',()=>tilt(0,0));
-RMq.addEventListener('change',e=>{RM=e.matches;tilt(0,0)});
-if(!matchMedia('(hover:hover)').matches)(function idle(t){if(RM)return;tilt(Math.sin(t/1600)*.35,Math.cos(t/2100)*.25);requestAnimationFrame(idle)})(0);
+RMq.addEventListener('change',e=>{RM=e.matches;tilt(0,0);if(!RM&&touch)requestAnimationFrame(idle)});
+const touch=!matchMedia('(hover:hover)').matches;function idle(t){if(RM)return;tilt(Math.sin(t/1600)*.35,Math.cos(t/2100)*.25);requestAnimationFrame(idle)}
+if(touch)requestAnimationFrame(idle);
 // libro con sonido de página
 const pages=[...document.querySelectorAll('.page')];let cur=0,sound=true,ac;document.getElementById('lastwa').tabIndex=-1;
 const names=['Portada','Panes · Hojaldres','Sándwiches · Café','¡Pide ahora!'];
