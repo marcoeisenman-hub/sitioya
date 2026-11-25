@@ -151,12 +151,44 @@ nav .links a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-w
 .foot .bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:22px;margin-top:30px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
 .foot .bot a{color:var(--soft)}
 @media(max-width:800px){.vis .g{grid-template-columns:1fr}}
+
+.dia{padding:120px 0}
+.eyb{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:14px}
+.dhead{margin-bottom:50px}
+.dgrid{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:stretch}
+.dlist{list-style:none;padding:0;margin:0;border-top:1px solid rgba(255,255,255,.12)}
+.dl{position:relative;width:100%;display:flex;gap:22px;align-items:baseline;padding:22px 0;background:none;border:0;border-bottom:1px solid rgba(255,255,255,.12);color:var(--soft);cursor:pointer;text-align:left;font:inherit;transition:color .3s,padding .4s cubic-bezier(.2,.8,.2,1)}
+.dl .t{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;min-width:70px}
+.dl .n{font-family:Antonio,Oswald,sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(24px,2.6vw,36px);line-height:1}
+.dl:hover,.dl[aria-pressed=true]{color:#fff}.dl[aria-pressed=true]{padding-left:14px}
+.dl .bar{position:absolute;left:0;bottom:-1px;height:1px;width:0;background:#fff}
+.dl[aria-pressed=true] .bar{animation:fill var(--dur,5s) linear forwards}
+.dia.paused .dl .bar{animation-play-state:paused}
+@keyframes fill{to{width:100%}}
+.dstage{position:relative;min-height:520px;overflow:hidden;background:#111}
+.dstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 100% 0);transform:scale(1.12);transition:clip-path 1s cubic-bezier(.7,0,.2,1),transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.dstage img.on{clip-path:inset(0 0 0 0);transform:scale(1);z-index:2}
+.dstage img.out{clip-path:inset(0 0 0 0);z-index:1}
+.dcap{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:60px 28px 24px;background:linear-gradient(transparent,rgba(0,0,0,.75));display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.dcap>span{font-family:Antonio,Oswald,sans-serif;font-size:44px;font-weight:700;line-height:1}.dcap>span+span{font-size:18px;color:var(--soft)}
+.dcap p{flex-basis:100%;font-size:16px;color:#ddd}
+.ft{border-top:1px solid rgba(255,255,255,.12);padding:70px 0 110px}
+.ftop{display:grid;grid-template-columns:auto repeat(3,1fr);gap:48px;align-items:start}
+.flogo{border-radius:50%}
+.ft h5{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:12px}
+.ft p{font-size:15px;line-height:1.8;color:#e8e8e8}
+.ft a.l{color:#fff;text-underline-offset:4px;font-size:15px}
+.dhint{margin-top:14px;color:var(--soft);font-size:15px}.fcta{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-bottom:50px;margin-bottom:50px;border-bottom:1px solid rgba(255,255,255,.12)}.ft p{font-size:16px}.ft h5{color:#fff}.ft .h2,.dia .h2{color:#fff}
+.fbot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:56px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.fbot a{color:var(--soft)}
+@media(max-width:860px){.dgrid{grid-template-columns:1fr;gap:28px}.dstage{min-height:0;aspect-ratio:4/5;order:-1}.ftop{grid-template-columns:1fr 1fr}.flogo{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){.dstage img{transition:none;transform:none}.dl .bar{display:none}}
 </style>
 <noscript><style>.grow{height:auto}.grow .st{position:relative;height:auto;padding:40px 0}.hero h1 .ln>span{transform:none;opacity:1}.rv{opacity:1;transform:none}.book{aspect-ratio:auto;display:grid;gap:14px;perspective:none}.base,.bctl{display:none}.page{position:relative;width:100%;transform:none!important;display:grid;gap:14px}.face,.face.back{position:relative;transform:none;backface-visibility:visible;border-radius:18px}</style></noscript>
 </head>
 <body>
 <div class="demo">✨ Página de muestra hecha por <a href="https://sitioya.vercel.app" target="_blank" rel="noopener">SitioYa</a> para Yoss Bakery · precios de ejemplo</div>
-<nav><div class="w"><a class="logo" href="#"><img class="ylogo" src="logo-yoss.png" alt="" width="44" height="44"><span>Yoss Bakery + Cafe</span></a><div class="links"><a href="#menu">Menú</a><a href="#favoritos">Favoritos</a><a href="#visita">Visítanos</a></div><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></nav>
+<nav><div class="w"><a class="logo" href="#"><img class="ylogo" src="logo-yoss.png" alt="" width="44" height="44"><span>Yoss Bakery + Cafe</span></a><div class="links"><a href="#menu">Menú</a><a href="#dia">Un día</a><a href="#contacto">Visítanos</a></div><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></nav>
 
 <header class="w hero"><div class="bgw"></div><div class="giant" aria-hidden="true">YOSS</div><canvas id="dust" aria-hidden="true"></canvas>
   <div>
@@ -223,31 +255,23 @@ nav .links a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-w
   </div>
 </div></section>
 
-<section id="favoritos" style="background:linear-gradient(180deg,var(--crema),#140E09)"><div class="w">
-  <h2 class="h2 rv">Los favoritos ❤️</h2>
-  <p class="lead rv">Lo que más se llevan nuestros clientes.</p>
-  <div class="pop">
-    <div class="pc rv"><img src="../../img/f/1530610476181-d83430b64dcd.jpg" alt="Croissant" loading="lazy"><div><b>Croissant</b><p>Mantequilla, hojaldrado y dorado</p></div></div>
-    <div class="pc rv"><img src="../../img/f/1568254183919-78a4f43a2877.jpg" alt="Masa madre" loading="lazy"><div><b>Masa madre</b><p>Corteza crujiente, miga suave</p></div></div>
-    <div class="pc rv"><img src="../../img/f/1651604033534-e66b281f1981.jpg" alt="Panecillos" loading="lazy"><div><b>Panecillos</b><p>Perfectos para el desayuno</p></div></div>
-    <div class="pc rv"><img src="../../img/f/1742299807170-4eecb934a7a3.jpg" alt="Vitrina" loading="lazy"><div><b>La vitrina</b><p>Ven a ver lo que salió hoy</p></div></div>
+<section id="dia" class="dia"><div class="w">
+  <div class="dhead rv"><span class="eyb">Un día en Yoss</span><h2 class="h2">Del primer café<br>a la challah del viernes</h2><p class="dhint">👆 Toca cada momento para ver qué hay en Yoss a esa hora.</p></div>
+  <div class="dgrid rv">
+    <ol class="dlist" aria-label="Momentos del día"><li><button type="button" class="dl" data-i="0" aria-pressed="true"><span class="t">07:00</span><span class="n">Café y croissant</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="1" aria-pressed="false"><span class="t">08:30</span><span class="n">Recién horneados</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="2" aria-pressed="false"><span class="t">10:00</span><span class="n">Desayunos</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="3" aria-pressed="false"><span class="t">13:00</span><span class="n">Panes de masa madre</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="4" aria-pressed="false"><span class="t">16:00</span><span class="n">La vitrina</span><span class="bar" aria-hidden="true"></span></button></li><li><button type="button" class="dl" data-i="5" aria-pressed="false"><span class="t">Viernes</span><span class="n">Challah para Shabat</span><span class="bar" aria-hidden="true"></span></button></li></ol>
+    <div class="dstage" id="dstage" aria-live="polite"><img src="../../img/f/1512568400610-62da28bc8a13.jpg" alt="Latte en Yoss Bakery" loading="lazy" class="on" data-d="Abrimos con el horno lleno y el café listo."><img src="../../img/f/1693483640461-267d788b6148.jpg" alt="Croissants recién horneados" loading="lazy" class="" data-d="Croissants de mantequilla, saliendo cada mañana."><img src="../../img/f/1612366747681-e4ca6992b1e9.jpg" alt="Desayuno servido" loading="lazy" class="" data-d="Shakshuka, bagels y huevos a tu gusto."><img src="../../img/f/1568254183919-78a4f43a2877.jpg" alt="Pan de masa madre" loading="lazy" class="" data-d="Fermentación lenta, corteza crujiente."><img src="../../img/f/1742299807170-4eecb934a7a3.jpg" alt="Vitrina de postres" loading="lazy" class="" data-d="Postres y dulces para la tarde."><img src="../../img/f/1651604033534-e66b281f1981.jpg" alt="Panes para Shabat" loading="lazy" class="" data-d="Encárgala antes y pásala a buscar."><div class="dcap"><span id="dnum">01</span><span>/ 06</span><p id="ddesc">Abrimos con el horno lleno y el café listo.</p></div></div>
   </div>
 </div></section>
 
-<section id="visita" class="vis"><div class="w">
-  <h2 class="h2 rv" style="margin-bottom:50px">Visítanos</h2>
-  <div class="g rv">
-    <div><h5>Dirección</h5><p>Paitilla Mall, Local 2<br>Punta Paitilla<br>Ciudad de Panamá</p><p style="margin-top:12px"><a class="l" href="https://www.google.com/maps/search/?api=1&query=Yoss+Bakery+Paitilla+Mall+Panama" target="_blank" rel="noopener">Cómo llegar →</a></p></div>
-    <div><h5>Horario</h5><ul><li><span>Dom – Jue</span><b>7:00 – 18:00</b></li><li><span>Viernes</span><b>7:00 – 16:30</b></li><li><span>Sábado</span><b>Cerrado</b></li></ul></div>
-    <div><h5>Pedidos</h5><p>Delivery y encargos<br><a class="l" href="https://wa.me/50762176666" target="_blank" rel="noopener">6217-6666</a></p><p style="margin-top:12px"><a class="l" href="https://www.instagram.com/yoss_bakery/" target="_blank" rel="noopener">@yoss_bakery</a></p></div>
+<footer class="ft" id="contacto"><div class="w">
+  <div class="fcta"><div><span class="eyb">Visítanos o pide a domicilio</span><h2 class="h2">¿Se te antojó algo?</h2></div><a class="btn wa" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Hacer un pedido →</a></div>
+  <div class="ftop">
+    <img src="logo-yoss.png" alt="Logo Yoss Bakery + Cafe" width="72" height="72" class="flogo">
+    <div><h5>📍 Dirección</h5><p>Paitilla Mall, Local 2<br>Punta Paitilla, Panamá</p><a class="l" href="https://www.google.com/maps/search/?api=1&query=Yoss+Bakery+Paitilla+Mall+Panama" target="_blank" rel="noopener">Cómo llegar →</a></div>
+    <div><h5>🕖 Horario</h5><p>Dom – Jue · 7:00 – 18:00<br>Viernes · 7:00 – 16:30<br>Sábado · cerrado</p></div>
+    <div><h5>🛵 Delivery</h5><p><a class="l" href="https://wa.me/50762176666" target="_blank" rel="noopener">6217-6666</a><br><a class="l" href="https://www.instagram.com/yoss_bakery/" target="_blank" rel="noopener">@yoss_bakery</a></p></div>
   </div>
-</div>
-<iframe class="vmap" title="Mapa de Paitilla Mall" loading="lazy" src="https://www.google.com/maps?q=Paitilla+Mall+Panama&output=embed"></iframe>
-</section>
-
-<footer class="foot"><div class="w">
-  <div class="big" aria-hidden="true">Yoss Bakery</div>
-  <div class="bot"><span>Yoss Bakery + Cafe · Kosher</span><span>Página de muestra por <a href="https://sitioya.vercel.app">SitioYa</a></span></div>
+  <div class="fbot"><span>© Yoss Bakery + Cafe · Kosher</span><span>Página de muestra por <a href="https://sitioya.vercel.app">SitioYa</a></span></div>
 </div></footer>
 <a class="fab" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="#000"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
 
@@ -286,6 +310,15 @@ function f(){id=0;if(!vis||RM){x.clearRect(0,0,W,H);return}x.clearRect(0,0,W,H);
 const k=document.getElementById('capk'),t=document.getElementById('capt');let last=-1;
 function u(){if(RM){fr.style.transform='none';return}const r=g.getBoundingClientRect(),h=g.offsetHeight-innerHeight;if(h<=0)return;const p=Math.min(1,Math.max(0,-r.top/h));const sc=RM?1:.55+.45*Math.min(1,p*2.2);fr.style.transform=`scale(${sc})`;fr.style.borderRadius=(28*(1.4-sc))+'px';const i=Math.min(im.length-1,Math.floor(p*im.length));if(i!==last){im.forEach((m,j)=>m.classList.toggle('on',j===i));k.textContent=caps[i][0];t.textContent=caps[i][1];last=i}}
 addEventListener('scroll',u,{passive:true});RMq.addEventListener('change',u);u()})();
+
+// un día en Yoss: tocar cambia la foto, y avanza solo
+(function(){const sec=document.getElementById('dia');if(!sec)return;const bs=[...sec.querySelectorAll('.dl')],im=[...sec.querySelectorAll('.dstage img')],num=document.getElementById('dnum'),de=document.getElementById('ddesc');let i=0,tm=0,vis=false,hold=false;const D=5000;
+function show(n){if(n===i)return;im.forEach(m=>m.classList.remove('out'));im[i].classList.remove('on');im[i].classList.add('out');i=n;im[i].classList.add('on');bs.forEach((b,j)=>b.setAttribute('aria-pressed',j===i));num.textContent=String(i+1).padStart(2,'0');de.textContent=im[i].dataset.d;plan()}
+function plan(){clearTimeout(tm);const b=bs[i].querySelector('.bar');b.style.animation='none';b.offsetWidth;b.style.animation='';if(vis&&!hold&&!RM)tm=setTimeout(()=>show((i+1)%bs.length),D)}
+bs.forEach((b,j)=>{b.addEventListener('click',()=>{show(j);plan()});b.addEventListener('mouseenter',()=>{if(matchMedia('(hover:hover)').matches)show(j)})});
+sec.addEventListener('mouseenter',()=>{hold=true;sec.classList.add('paused');clearTimeout(tm)});sec.addEventListener('mouseleave',()=>{hold=false;sec.classList.remove('paused');plan()});
+sec.addEventListener('focusin',()=>{hold=true;clearTimeout(tm)});sec.addEventListener('focusout',()=>{hold=false;plan()});
+new IntersectionObserver(e=>{vis=e[0].isIntersecting;vis?plan():clearTimeout(tm)},{threshold:.3}).observe(sec);RMq.addEventListener('change',plan)})();
 </script>
 </body>
 </html>
