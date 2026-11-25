@@ -51,7 +51,6 @@ nav .links a{text-decoration:none;color:var(--soft)}
 .float{animation:fl 6s ease-in-out infinite}
 @keyframes fl{50%{translate:0 -12px}}
 @media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:30px}.stage{height:420px}.card3d{inset:10px 26px}}
-@media(max-width:600px){.c2{right:-8px}.c1{left:-10px}.book{aspect-ratio:2/2.9}.face{padding:12px}.face .big{height:30%}.item{font-size:11.5px}.face h4{font-size:18px}}
 /* marquee */
 .mq{overflow:hidden;background:var(--cafe);color:var(--masa);padding:18px 0;font-family:Fraunces,serif;font-size:28px;font-weight:700;white-space:nowrap}
 .mq div{display:inline-block;animation:mq 24s linear infinite}
@@ -101,9 +100,10 @@ footer{padding:40px 0 110px;text-align:center;color:var(--soft);font-size:14px}
 .fab{position:fixed;right:18px;bottom:18px;z-index:30;width:62px;height:62px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 16px 30px -10px rgba(37,211,102,.8);animation:pulse 2.4s infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 14px rgba(37,211,102,0),0 16px 30px -10px rgba(37,211,102,.8)}}
 .rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}.rv.v{opacity:1;transform:none}
+@media(max-width:600px){.c2{right:-8px}.c1{left:-10px}.book{aspect-ratio:2/2.9}.face{padding:12px}.face .big{height:30%}.item{font-size:11.5px}.face h4{font-size:18px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
-<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
+<noscript><style>.rv{opacity:1;transform:none}.book{aspect-ratio:auto;display:grid;gap:14px;perspective:none}.base,.bctl{display:none}.page{position:relative;width:100%;transform:none!important;display:grid;gap:14px}.face,.face.back{position:relative;transform:none;backface-visibility:visible;border-radius:18px}</style></noscript>
 </head>
 <body>
 <div class="demo">✨ Página de muestra hecha por <a href="https://sitioya.vercel.app" target="_blank" rel="noopener">SitioYa</a> para Yoss Bakery · precios de ejemplo</div>
@@ -163,7 +163,7 @@ footer{padding:40px 0 110px;text-align:center;color:var(--soft);font-size:14px}
           <div class="item"><div><b>Espresso</b></div><span>$2.00</span></div>
           <div class="item"><div><b>Latte</b></div><span>$3.50</span></div>
           <div class="item"><div><b>Café con leche</b></div><span>$3.00</span></div><div class="pn">4</div></div>
-        <div class="face back cover"><div><h3>¿Te antojaste? 😋</h3><p>Pide por WhatsApp</p><a class="btn wa" style="margin-top:20px" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener" onclick="event.stopPropagation()">💬 Pedir ahora</a></div></div>
+        <div class="face back cover"><div><h3>¿Te antojaste? 😋</h3><p>Pide por WhatsApp</p><a class="btn wa" style="margin-top:20px" href="https://wa.me/50762176666?text=Hola%20Yoss%20Bakery%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener" id="lastwa" tabindex="-1" onclick="event.stopPropagation()">💬 Pedir ahora</a></div></div>
       </div>
     </div>
     <div class="bctl"><button id="prev" aria-label="Página anterior">←</button><small id="pg">Portada</small><button id="next" aria-label="Página siguiente">→</button><button id="snd" aria-label="Sonido" title="Sonido">🔊</button></div>
@@ -204,15 +204,16 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 // tarjeta 3D que sigue al mouse o al celular
 const card=document.getElementById('card'),stage=document.getElementById('stage');
-const tilt=(x,y)=>card.style.transform=`rotateY(${x*16}deg) rotateX(${-y*12}deg)`;
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const tilt=(x,y)=>RM?0:card.style.transform=`rotateY(${x*16}deg) rotateX(${-y*12}deg)`;
 stage.addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect();tilt((e.clientX-r.left)/r.width-.5,(e.clientY-r.top)/r.height-.5)});
 stage.addEventListener('pointerleave',()=>tilt(0,0));
-let t0=0;(function idle(t){if(!matchMedia('(hover:hover)').matches){tilt(Math.sin(t/1600)*.35,Math.cos(t/2100)*.25)}requestAnimationFrame(idle)})(0);
+if(!RM)(function idle(t){if(!matchMedia('(hover:hover)').matches){tilt(Math.sin(t/1600)*.35,Math.cos(t/2100)*.25)}requestAnimationFrame(idle)})(0);
 // libro con sonido de página
 const pages=[...document.querySelectorAll('.page')];let cur=0,sound=true,ac;
 const names=['Portada','Panes · Hojaldres','Sándwiches · Café','¡Pide ahora!'];
 function rustle(){if(!sound)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const d=.35,b=ac.createBuffer(1,ac.sampleRate*d,ac.sampleRate),ch=b.getChannelData(0);for(let i=0;i<ch.length;i++){const k=i/ch.length;ch[i]=(Math.random()*2-1)*Math.pow(1-k,2)*(.4+.6*Math.sin(k*40))}const s=ac.createBufferSource();s.buffer=b;const f=ac.createBiquadFilter();f.type='bandpass';f.frequency.value=2600;f.Q.value=.7;const g=ac.createGain();g.gain.value=.5;s.connect(f).connect(g).connect(ac.destination);s.start()}catch(e){}}
-function go(n){n=Math.max(0,Math.min(pages.length,n));if(n===cur)return;rustle();pages.forEach((p,i)=>{const f=i<n;p.classList.toggle('flip',f);p.style.zIndex=f?10+i:pages.length-i});cur=n;document.getElementById('pg').textContent=names[cur]}
+function go(n){n=Math.max(0,Math.min(pages.length,n));if(n===cur)return;rustle();pages.forEach((p,i)=>{const f=i<n;p.classList.toggle('flip',f);p.style.zIndex=f?10+i:pages.length-i});cur=n;document.getElementById('pg').textContent=names[cur];document.getElementById('lastwa').tabIndex=cur===pages.length?0:-1}
 pages.forEach((p,i)=>p.addEventListener('click',()=>go(p.classList.contains('flip')?i:i+1)));
 document.getElementById('next').onclick=()=>go(cur+1);document.getElementById('prev').onclick=()=>go(cur-1);
 document.getElementById('snd').onclick=e=>{sound=!sound;e.currentTarget.textContent=sound?'🔊':'🔇'};
