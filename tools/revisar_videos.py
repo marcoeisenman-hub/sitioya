@@ -78,7 +78,8 @@ def publicar(temporal, video):
             n += 1
             continue
         except OSError as e:
-            # solo si el disco no acepta enlaces (exFAT); otros errores se reportan
+            # solo si el disco no acepta enlaces (exFAT); otros errores se reportan.
+            # Límite conocido: en ese caso la copia aparece con su nombre final mientras se copia.
             if e.errno not in (errno.EPERM, errno.ENOTSUP, errno.EOPNOTSUPP, errno.EXDEV, errno.EMLINK):
                 raise
         try:
