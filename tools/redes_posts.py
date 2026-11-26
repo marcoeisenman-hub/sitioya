@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from redes_heladeria import (  # noqa: E402
     BLANCO, BLUSH, CORAL, CORAL_D, CREMA, MENTA, NAVY, SOFT, RAIZ,
-    base, envolver, foto, fuente, kicker, logo_sitioya, pantalla_portada, parrafo, pastilla,
+    base, boton_cierre, pie, envolver, foto, fuente, kicker, logo_sitioya, pantalla_portada, parrafo, pastilla,
     puntos_fondo, sombra, texto_ancho,
 )
 
@@ -63,23 +63,6 @@ def pie_simple(im, oscuro=False):
     f = fuente(28, 700)
     t = '@sitioya.pty'
     d.text((W - 70 - texto_ancho(d, t, f), H - 106), t, font=f, fill=CREMA if oscuro else SOFT)
-
-
-def boton_pagina(d, cy, fondo=CORAL, color=NAVY, tam=42):
-    """Botón 'Comenta PÁGINA y te contamos' centrado, con PÁGINA subrayada."""
-    f = fuente(tam, 900)
-    t1, t2, t3 = 'Comenta ', 'PÁGINA', ' y te contamos'
-    ancho_total = texto_ancho(d, t1 + t2 + t3, f) + 80
-    x = (1080 - ancho_total) / 2
-    alto = tam + 54
-    d.rounded_rectangle((x, cy, x + ancho_total, cy + alto), alto / 2, fill=fondo)
-    tx = x + 40
-    for parte in (t1, t2, t3):
-        d.text((tx, cy + 22), parte, font=f, fill=color)
-        if parte == t2:
-            d.rounded_rectangle((tx, cy + tam + 34, tx + texto_ancho(d, parte, f), cy + tam + 40), 3, fill=color)
-        tx += texto_ancho(d, parte, f)
-    return cy + alto
 
 
 # ---------- 1. Precios ----------
@@ -199,7 +182,7 @@ def post_como_funciona():
         for linea in ld:
             d.text((256, ty), linea, font=fd, fill=SOFT); ty += 36
         y += alto + 22
-    fin = boton_pagina(d, y + 24)
+    fin = boton_cierre(d, y + 24, [('Escríbenos al ', False), ('6919-7559', True)])
     assert fin < 1200, fin
     pie_simple(im)
     return im
@@ -228,37 +211,6 @@ def post_tu_negocio():
     d = ImageDraw.Draw(im)
     d.text((72, 1156), 'Negocios y datos de ejemplo', font=fuente(24, 500), fill=SOFT)
     pie_simple(im)
-    return im
-
-
-# ---------- 5. Síguenos para más ----------
-
-def post_siguenos():
-    im = base(1080, 1350, NAVY)
-    puntos_fondo(im, (36, 54, 90, 255), paso=80, r=5)
-    d = ImageDraw.Draw(im)
-    tam = 110
-    fl = fuente(int(tam * 0.62), 900)
-    ancho_logo = tam + tam * 0.22 + texto_ancho(d, 'SitioYa', fl)
-    logo_sitioya(im, ((1080 - ancho_logo) / 2, 150), tam, oscuro=True)
-    d = ImageDraw.Draw(im)
-    f = fuente(150, 900)
-    y = 340
-    for linea, c in (('Síguenos', CREMA), ('para más', CORAL)):
-        d.text(((1080 - texto_ancho(d, linea, f)) / 2, y), linea, font=f, fill=c); y += 160
-    y += 40
-    fi = fuente(40, 700)
-    items = ('Páginas de ejemplo', 'Precios claros', 'Tips para tu negocio')
-    ancho_lista = max(texto_ancho(d, t, fi) for t in items) + 50
-    x = (1080 - ancho_lista) / 2
-    for t in items:
-        d.rounded_rectangle((x, y + 14, x + 24, y + 38), 7, fill=MENTA)
-        d.text((x + 50, y), t, font=fi, fill=CREMA)
-        y += 74
-    y += 40
-    pastilla(d, (540, y), '@sitioya.pty', fuente(56, 900), CORAL, NAVY, pad=(48, 24), centro=True)
-    parrafo(d, (540, 1200), 'Hacemos páginas web para negocios en Panamá', fuente(30, 500), '#C9D1E3', 900, 1.3,
-            centrado=True)
     return im
 
 
@@ -298,7 +250,7 @@ def post_tres_cosas():
         for linea in ld:
             d.text((248, ty), linea, font=fd, fill=SOFT); ty += 36
         y += alto + 22
-    fin = boton_pagina(d, y + 18)
+    fin = boton_cierre(d, y + 18, [('Guárdalo', True), (' para cuando armes la tuya', False)])
     assert fin < 1200, fin
     pie_simple(im)
     return im
@@ -546,7 +498,7 @@ def post_pierde_sin_pagina():
         for linea in ld:
             d.text((248, ty), linea, font=fd, fill=SOFT); ty += 36
         y += alto + 20
-    fin = boton_pagina(d, y + 16)
+    fin = boton_cierre(d, y + 16, [('Guárdalo', True), (' para cuando lo necesites', False)])
     assert fin < 1200, fin
     pie_simple(im)
     return im
@@ -646,7 +598,7 @@ def post_ejemplo_gratis():
     return im
 
 
-# ---------- 13. Síguenos: Tu negocio merece una página web ----------
+# ---------- 9. Síguenos: Tu negocio merece una página web ----------
 # Celulares con dos páginas de ejemplo: la Heladería del carrusel "Ejemplo de la
 # semana" (Nieve & Co) y el menú de Mesa Lunar (plantillas/menu.html).
 
@@ -686,6 +638,48 @@ def post_merece_pagina():
     return im
 
 
+# ---------- Carrusel "3 mitos de tener página web": portada (slide 1 de 4) ----------
+# Va en su propia carpeta (redes/mitos-pagina-web/). Los slides 2-4 los arma Cam.
+MITOS = os.path.join(RAIZ, 'redes', 'mitos-pagina-web')
+
+
+def tarjeta_mito(n, ancho=300, alto=190):
+    """Tarjeta blanca con 'MITO n' y una ✕, para girarla y apilarla."""
+    t = Image.new('RGBA', (ancho, alto), (0, 0, 0, 0))
+    g = ImageDraw.Draw(t)
+    g.rounded_rectangle((0, 0, ancho - 1, alto - 1), 30, fill=BLANCO)
+    pastilla(g, (30, 30), f'MITO {n}', fuente(28, 900), BLUSH, CORAL_D, pad=(20, 10))
+    for i, w in enumerate((0.78, 0.56)):
+        g.rounded_rectangle((30, 112 + i * 34, 30 + (ancho - 60) * w, 128 + i * 34), 8, fill=GRIS)
+    cx, cy, r = ancho - 56, 52, 26
+    g.ellipse((cx - r, cy - r, cx + r, cy + r), fill=CORAL)
+    g.line((cx - 10, cy - 10, cx + 10, cy + 10), fill=BLANCO, width=6)
+    g.line((cx - 10, cy + 10, cx + 10, cy - 10), fill=BLANCO, width=6)
+    return t
+
+
+def mitos_portada():
+    im = base(1080, 1350)
+    d = ImageDraw.Draw(im)
+    d.ellipse((560, 520, 1300, 1260), fill=BLUSH)
+    d.ellipse((-200, 1040, 220, 1460), fill=MENTA_CLARO)
+    pastilla(d, (70, 80), 'LO QUE NADIE TE DICE', fuente(30, 900), CORAL, NAVY, pad=(30, 16))
+    d.text((66, 160), '3 mitos', font=fuente(170, 900), fill=NAVY)
+    f = fuente(104, 900)
+    for i, linea in enumerate(('de tener', 'página web')):
+        assert 66 + texto_ancho(d, linea, f) < 1030, linea
+        d.text((66, 352 + i * 112), linea, font=f, fill=CORAL)
+    parrafo(d, (72, 610), 'Y lo que pasa de verdad con tu negocio.', fuente(38, 600), SOFT, 470, 1.3)
+    d.text((72, 800), 'Desliza →', font=fuente(36, 800), fill=CORAL_D)
+    # tres tarjetas apiladas a la derecha, un poco giradas
+    for n, (x, y, giro) in enumerate(((600, 600, 6), (640, 790, -4), (590, 980, 3)), 1):
+        t = tarjeta_mito(n).rotate(giro, resample=Image.BICUBIC, expand=True)
+        sombra(im, (x + 14, y + 14, x + t.width - 14, y + t.height - 10), 30, desp=(0, 16), difuso=22, alfa=40)
+        im.alpha_composite(t, (x, y))
+    pie(im, 1)
+    return im
+
+
 # Orden sugerido de publicación (el último en salir queda arriba en el perfil).
 # El 4 es el carrusel de la Heladería, que sale de tools/redes_heladeria.py.
 HELADERIA = 'heladeria'
@@ -714,9 +708,10 @@ FEED = [
     ('8-precios.png', post_precios, 'Precios',
      'Precios claros: Básica $99, Completa $199 y Diseño único desde $369. Pagas una sola vez y el '
      'mantenimiento de $15/mes es opcional. Comenta PÁGINA y te contamos'),
-    ('9-siguenos.png', post_siguenos, 'Síguenos para más',
-     'Síguenos para ver páginas de ejemplo, precios claros y tips para tu negocio. Hacemos páginas web para '
-     'negocios en Panamá'),
+    # el 9 es el Síguenos nuevo (Tu negocio merece una página web); reemplazó al Síguenos viejo
+    ('9-siguenos-tu-negocio-merece-pagina.png', post_merece_pagina, 'Síguenos: Tu negocio merece una página web',
+     'Hacemos páginas web para negocios en Panamá. Síguenos para ver más ejemplos y tips para tu '
+     'negocio'),
     # extra (se publican después del 9, así el 12 queda arriba en el perfil)
     ('10-tres-cosas-que-pierde-tu-negocio.png', post_pierde_sin_pagina, '3 cosas que pierde tu negocio sin página',
      '3 cosas que pierde tu negocio sin página: clientes que te buscan, tiempo contestando lo mismo y pedidos '
@@ -728,9 +723,6 @@ FEED = [
     ('12-ejemplo-gratis-de-tu-pagina.png', post_ejemplo_gratis, 'Te armamos un ejemplo gratis de tu página',
      'Te armamos un ejemplo gratis de tu página para que veas cómo quedaría tu negocio antes de decidir. '
      'Comenta PÁGINA y te contamos'),
-    ('13-siguenos-tu-negocio-merece-pagina.png', post_merece_pagina, 'Síguenos: Tu negocio merece una página web',
-     'Hacemos páginas web para negocios en Panamá. Síguenos para ver más ejemplos y tips para tu '
-     'negocio'),
 ]
 STORY = ('/redes/ejemplo-heladeria/story-encuesta.png', 'Story: ¿Tu negocio tiene página web?',
          'En el recuadro de arriba va el sticker de encuesta con la pregunta "¿Tu negocio tiene página web?" y '
@@ -789,6 +781,11 @@ def main():
         print(nombre, im.size)
     galeria()
     print('index.html')
+    os.makedirs(MITOS, exist_ok=True)
+    im = mitos_portada()
+    assert im.size == (1080, 1350), im.size
+    im.convert('RGB').save(os.path.join(MITOS, 'mitos-1-portada.png'), optimize=True)
+    print('mitos-1-portada.png', im.size)
 
 
 if __name__ == '__main__':

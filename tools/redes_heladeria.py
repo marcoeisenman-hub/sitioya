@@ -340,6 +340,23 @@ def pie(im, n, total=4, oscuro=False):
         d.ellipse((x + i * 26, H - 98, x + i * 26 + 14, H - 84), fill=c)
 
 
+def boton_cierre(d, cy, partes, fondo=CORAL, color=NAVY, tam=42):
+    """Botón de cierre centrado (1080 de ancho). partes = [(texto, subrayado), ...]."""
+    f = fuente(tam, 900)
+    ancho_total = sum(texto_ancho(d, t, f) for t, _ in partes) + 80
+    assert ancho_total < 1000, ancho_total
+    x = (1080 - ancho_total) / 2
+    alto = tam + 54
+    d.rounded_rectangle((x, cy, x + ancho_total, cy + alto), alto / 2, fill=fondo)
+    tx = x + 40
+    for t, subrayado in partes:
+        d.text((tx, cy + 22), t, font=f, fill=color)
+        if subrayado:
+            d.rounded_rectangle((tx, cy + tam + 34, tx + texto_ancho(d, t, f), cy + tam + 40), 3, fill=color)
+        tx += texto_ancho(d, t, f)
+    return cy + alto
+
+
 def kicker(d, xy, s, oscuro=False):
     f = fuente(28, 800)
     x, y = xy
@@ -418,18 +435,7 @@ def slide4():
         d.text(((1080 - texto_ancho(d, t, f)) / 2, y), t, font=f, fill=c); y += 92
     y += 30
     parrafo(d, (540, y), 'Con tus fotos, tus productos y tu estilo.', fuente(34, 500), '#C9D1E3', 820, 1.3, centrado=True)
-    f = fuente(42, 900)
-    t1, t2, t3 = 'Comenta ', 'PÁGINA', ' y te contamos'
-    ancho_total = texto_ancho(d, t1 + t2 + t3, f) + 80
-    x = (1080 - ancho_total) / 2
-    by = y + 90
-    d.rounded_rectangle((x, by, x + ancho_total, by + 96), 48, fill=CORAL)
-    tx = x + 40
-    for parte in (t1, t2, t3):
-        d.text((tx, by + 22), parte, font=f, fill=NAVY)
-        if parte == t2:  # subrayado para resaltar la palabra que hay que comentar
-            d.rounded_rectangle((tx, by + 76, tx + texto_ancho(d, parte, f), by + 82), 3, fill=NAVY)
-        tx += texto_ancho(d, parte, f)
+    boton_cierre(d, y + 90, [('Escríbenos al ', False), ('6919-7559', True)])
     pie(im, 4, oscuro=True)
     return im
 

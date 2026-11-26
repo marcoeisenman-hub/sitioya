@@ -1,6 +1,8 @@
 {
   "redirects": [
     { "source": "/redes/posts/4-precios.png", "destination": "/redes/posts/8-precios.png", "permanent": false },
-    { "source": "/redes/posts/5-siguenos.png", "destination": "/redes/posts/9-siguenos.png", "permanent": false }
+    { "source": "/redes/posts/5-siguenos.png", "destination": "/redes/posts/9-siguenos-tu-negocio-merece-pagina.png", "permanent": false },
+    { "source": "/redes/posts/9-siguenos.png", "destination": "/redes/posts/9-siguenos-tu-negocio-merece-pagina.png", "permanent": false },
+    { "source": "/redes/posts/13-siguenos-tu-negocio-merece-pagina.png", "destination": "/redes/posts/9-siguenos-tu-negocio-merece-pagina.png", "permanent": false }
   ]
 }
