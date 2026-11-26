@@ -120,7 +120,7 @@ def recortar(ffmpeg, video, hasta):
         subprocess.run(cmd + [str(temporal)], check=True)
         # se revisa la copia antes de publicarla
         dc = duracion(ffmpeg, temporal)
-        if dc is None or dc > MAXIMO:
+        if dc is None or dc > MAXIMO + 0.1:  # margen de un cuadro (29,97 fps deja ~30,03 s)
             raise ValueError("la copia no quedó de 30 s o menos")
         return publicar(temporal, video), dc
     finally:
