@@ -118,9 +118,18 @@ def recortar(ffmpeg, video, hasta):
     temporal = Path(nombre_tmp)
     try:
         subprocess.run(cmd + [str(temporal)], check=True)
-        return publicar(temporal, video)
+        # se revisa la copia antes de publicarla
+        dc = duracion(ffmpeg, temporal)
+        if dc is None or dc > MAXIMO:
+            raise ValueError("la copia no quedó de 30 s o menos")
+        return publicar(temporal, video), dc
     finally:
         temporal.unlink(missing_ok=True)  # no deja copias a medias
+
+
+def es_copia(x):
+    """Las copias que hace este script: <nombre>-corto.mp4 o <nombre>-corto-N.mp4."""
+    return x.suffix.lower() == ".mp4" and re.search(r"-corto(-\d+)?$", x.stem)
 
 
 def juntar_videos(rutas):
@@ -128,13 +137,15 @@ def juntar_videos(rutas):
     for r in rutas:
         p = Path(r)
         if p.is_dir():
-            videos += sorted(
+            candidatos = sorted(
                 x for x in p.iterdir()
-                if x.suffix.lower() in EXTENSIONES
-                and not x.name.startswith(".")
-                # salta solo las copias que hace este script (siempre .mp4)
-                and not (x.suffix.lower() == ".mp4" and re.search(r"-corto(-\d+)?$", x.stem))
+                if x.is_file() and x.suffix.lower() in EXTENSIONES and not x.name.startswith(".")
             )
+            saltados = [x for x in candidatos if es_copia(x)]
+            videos += [x for x in candidatos if not es_copia(x)]
+            if saltados:
+                # un original con ese nombre se puede revisar pasándolo directo
+                print(f"(salto {len(saltados)} copia(s) -corto.mp4 de {p}; para revisarlas, pásalas por nombre)")
         elif p.is_file():
             videos.append(p)
         else:
@@ -170,16 +181,12 @@ def main():
             print(f"LARGO  {v.name}: {d:.1f} s (máximo {MAXIMO:g} s)")
             if args.recortar:
                 try:
-                    destino = recortar(ffmpeg, v, args.hasta)
-                except (subprocess.CalledProcessError, OSError) as e:
+                    destino, dc = recortar(ffmpeg, v, args.hasta)
+                except (subprocess.CalledProcessError, OSError, ValueError) as e:
                     fallos += 1
-                    print(f"       no pude recortarlo ({e.__class__.__name__}), sigo con los demás")
+                    print(f"       no pude recortarlo ({e}), sigo con los demás")
                     continue
-                dc = duracion(ffmpeg, destino)
-                if dc is None:
-                    fallos += 1
-                texto = f"{dc:.1f} s" if dc is not None else "no pude leer la duración de la copia"
-                print(f"       copia corta: {destino.name} ({texto})")
+                print(f"       copia corta: {destino.name} ({dc:.1f} s)")
         elif d < MINIMO:
             print(f"CORTO  {v.name}: {d:.1f} s (mínimo {MINIMO:g} s, se puede dejar si se entiende)")
         else:
