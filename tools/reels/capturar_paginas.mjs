@@ -12,6 +12,7 @@ const ALTO = 3400; // px css que se capturan de cada página
 const b = await chromium.launch({ headless: true, executablePath: process.env.PW_CHROME || undefined });
 try {
   const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+  await ctx.addInitScript(() => { window.__sinCotiza = true; }); // sin el botón "Cotiza tu página" ni su espacio en el pie
   for (const n of nombres) {
     if (!/^[a-z-]+$/.test(n)) throw new Error("nombre raro: " + n);
     const p = await ctx.newPage();

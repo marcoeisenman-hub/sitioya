@@ -2,11 +2,12 @@
 // Abre el WhatsApp de SitioYa (6919-7559) con un mensaje listo. Va abajo a la izquierda
 // para no chocar con el botón de WhatsApp del negocio de ejemplo (abajo a la derecha).
 (function () {
-  if (document.getElementById("sy-cotiza")) return;
+  // window.__sinCotiza lo pone tools/reels/capturar_paginas.mjs para sacar capturas limpias
+  if (window.__sinCotiza || document.getElementById("sy-cotiza")) return;
   var msg = "Hola, vi un ejemplo en SitioYa y quiero cotizar una página para mi negocio";
   var st = document.createElement("style");
   st.textContent =
-    "#sy-cotiza{position:fixed;left:16px;bottom:20px;z-index:2147483000;display:flex;align-items:center;gap:8px;" +
+    "#sy-cotiza{position:fixed;left:16px;bottom:20px;z-index:110;display:flex;align-items:center;gap:8px;" +
     "height:46px;padding:0 16px 0 8px;border-radius:999px;background:#FF6B5B;color:#1B2A4A;text-decoration:none;" +
     "font:800 14px/1 'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;letter-spacing:0;" +
     "box-shadow:0 10px 24px rgba(0,0,0,.28);mix-blend-mode:normal;white-space:nowrap}" +
@@ -16,6 +17,9 @@
     "@media(max-width:400px){#sy-cotiza{left:12px;gap:6px;padding:0 14px 0 7px;font-size:13px}}" +
     // en celulares muy angostos no cabe al lado del botón de WhatsApp: va encima
     "@media(max-width:359px){#sy-cotiza{bottom:84px}}" +
+    // espacio al final del pie solo en pantalla (al imprimir no hace falta)
+    "@media screen{footer.sy-espacio{padding-bottom:calc(var(--sy-base,0px) + 84px)!important}}" +
+    "@media screen and (max-width:359px){footer.sy-espacio{padding-bottom:calc(var(--sy-base,0px) + 140px)!important}}" +
     "@media print{#sy-cotiza{display:none}}";
   document.head.appendChild(st);
   var a = document.createElement("a");
@@ -34,8 +38,6 @@
   // ni el de WhatsApp del ejemplo tapen el texto del pie.
   var fs = document.getElementsByTagName("footer"), f = fs[fs.length - 1];
   if (!f) return;
-  var base = parseFloat(getComputedStyle(f).paddingBottom) || 0, mq = matchMedia("(max-width:359px)");
-  function espacio() { f.style.paddingBottom = base + (mq.matches ? 140 : 84) + "px"; }
-  espacio();
-  if (mq.addEventListener) mq.addEventListener("change", espacio);
+  f.style.setProperty("--sy-base", (parseFloat(getComputedStyle(f).paddingBottom) || 0) + "px");
+  f.classList.add("sy-espacio");
 })();
