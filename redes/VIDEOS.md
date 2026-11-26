@@ -11,7 +11,7 @@ python3 tools/revisar_videos.py carpeta-con-los-videos/
 python3 tools/revisar_videos.py --recortar --hasta 25 video-largo.mp4
 ```
 - Sin `--recortar` solo dice cuánto dura cada uno (OK, LARGO o CORTO).
-- Con `--recortar` hace `<nombre>-corto.mp4` al lado del original, con los primeros segundos y un fundido de 0.5 s al final. El original no se toca.
+- Con `--recortar` hace `<nombre>-corto.mp4` al lado del original, con los primeros segundos y un fundido de 0.5 s al final. El original no se toca y nunca pisa un archivo que ya exista (si ya hay uno, sale `-corto-2.mp4`).
 - Ese recorte corta el final del video. Si el cierre con el DM queda afuera, mejor quitar escenas del medio en el editor siguiendo los tiempos de abajo.
 
 ## Estado de los videos ya hechos (2026-11-25)
@@ -48,9 +48,9 @@ Si un video ya hecho es más largo, se recorta siguiendo estos bloques: se acort
 | Segundos | Qué va |
 |---|---|
 | 0-2 | Gancho: "3 cosas que pierde tu negocio sin página" |
-| 2-8 | 1 |
-| 8-14 | 2 |
-| 14-20 | 3 |
+| 2-8 | Lo 1.º que pierde (el mismo texto del post "3 cosas que pierde tu negocio sin página") |
+| 8-14 | Lo 2.º |
+| 14-20 | Lo 3.º |
 | 20-25 | Cierre: Escríbenos por DM @sitioya.pty |
 
 Recordatorio: negocios ficticios, sin marcas ni logos de terceros y sin reseñas ni cifras inventadas.

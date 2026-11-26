@@ -61,13 +61,24 @@ def tiene_audio(ffmpeg, video):
     return "Audio:" in salida
 
 
-def recortar(ffmpeg, video, hasta):
+def nombre_libre(video):
+    """<nombre>-corto.mp4 sin pisar nada (reel.mov y reel.webm no chocan)."""
     destino = video.with_name(f"{video.stem}-corto.mp4")
+    n = 2
+    while destino.exists():
+        destino = video.with_name(f"{video.stem}-corto-{n}.mp4")
+        n += 1
+    return destino
+
+
+def recortar(ffmpeg, video, hasta):
+    destino = nombre_libre(video)
     inicio_fundido = max(hasta - FUNDIDO, 0)
     cmd = [
-        ffmpeg, "-hide_banner", "-loglevel", "error", "-y",
+        ffmpeg, "-hide_banner", "-loglevel", "error", "-n",
         "-i", str(video), "-t", f"{hasta}",
-        "-vf", f"fade=t=out:st={inicio_fundido}:d={FUNDIDO}",
+        # medidas pares (libx264 + yuv420p no acepta impares) y fundido al final
+        "-vf", f"scale=trunc(iw/2)*2:trunc(ih/2)*2,fade=t=out:st={inicio_fundido}:d={FUNDIDO}",
         "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
         "-movflags", "+faststart",
     ]
@@ -87,7 +98,7 @@ def juntar_videos(rutas):
         if p.is_dir():
             videos += sorted(
                 x for x in p.iterdir()
-                if x.suffix.lower() in EXTENSIONES and not x.stem.endswith("-corto")
+                if x.suffix.lower() in EXTENSIONES and not re.search(r"-corto(-\d+)?$", x.stem)
             )
         elif p.is_file():
             videos.append(p)
@@ -121,7 +132,11 @@ def main():
             largos += 1
             print(f"LARGO  {v.name}: {d:.1f} s (máximo {MAXIMO:g} s)")
             if args.recortar:
-                destino = recortar(ffmpeg, v, args.hasta)
+                try:
+                    destino = recortar(ffmpeg, v, args.hasta)
+                except subprocess.CalledProcessError:
+                    print("       no pude recortarlo (ffmpeg falló), sigo con los demás")
+                    continue
                 print(f"       copia corta: {destino.name} ({duracion(ffmpeg, destino):.1f} s)")
         elif d < MINIMO:
             print(f"CORTO  {v.name}: {d:.1f} s (mínimo {MINIMO:g} s, se puede dejar si se entiende)")
