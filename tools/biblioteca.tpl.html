@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Biblioteca SitioYa · Plantillas y prompts</title>
-<meta name="description" content="Plantillas web para negocios en Panamá, con su prompt para crearlas con IA.">
+<title>Biblioteca SitioYa · Ejemplos de páginas</title>
+<meta name="description" content="Ejemplos de páginas web para negocios en Panamá. Así podría quedar la página de tu negocio.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -83,17 +83,17 @@ footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--soft);fo
 <nav><div class="w">
   <a class="logo" href="./"><svg width="34" height="34" viewBox="0 0 100 100"><rect width="100" height="100" rx="26" fill="#FF6B5B"/><rect x="16" y="20" width="60" height="47" rx="7" fill="#FFF6EC" stroke="#1B2A4A" stroke-width="6"/><path d="M16 33H76" stroke="#1B2A4A" stroke-width="6"/><path d="M54 46L54 84L63.5 74.5L70 88L76.5 85L70 71.5L83.5 71.5Z" fill="#1B2A4A" stroke="#FF6B5B" stroke-width="9" stroke-linejoin="round" paint-order="stroke"/></svg>Sitio<b>Ya</b></a>
   <div class="nl"><a href="./">Inicio</a><a class="on keep" href="biblioteca.html">Biblioteca</a><a href="./#precios">Precios</a>
-  <button class="sbtn" id="open" aria-label="Buscar plantillas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>Buscar plantillas…</span><kbd>⌘K</kbd></button></div>
+  <button class="sbtn" id="open" aria-label="Buscar ejemplos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>Buscar ejemplos…</span><kbd>⌘K</kbd></button></div>
 </div></nav>
 
 <header class="w">
-  <span class="kick"><i></i><span id="cnt"></span> plantillas · con su prompt para IA</span>
-  <h1>Páginas web que <span>venden</span>, listas para tu negocio</h1>
-  <p class="lead">Elige una plantilla y pruébala en vivo. Cada una trae su <b>prompt</b>: lo pegas en tu asistente de inteligencia artificial y te arma la página con tu nombre, tus fotos y tu WhatsApp.</p>
+  <span class="kick"><i></i><span id="cnt"></span> páginas de ejemplo</span>
+  <h1>Así podría quedar <span>tu página</span></h1>
+  <p class="lead">Abre los ejemplos y pruébalos en vivo. Son solo ideas de estilo: la tuya la hacemos nosotros con tu nombre, tus fotos, tus precios y tu WhatsApp. Si te gusta uno, pide tu cotización.</p>
   <div class="chips" id="chips"></div>
 </header>
 <main class="w"><div class="grid" id="grid"></div></main>
-<footer class="w">SitioYa · Páginas web para negocios en Panamá 🇵🇦 · <a href="./#cotizar" style="color:var(--coral);font-weight:700">¿Prefieres que te la hagamos? Cotiza aquí</a></footer>
+<footer class="w">SitioYa · Páginas web para negocios en Panamá 🇵🇦 · <a href="./#cotizar" style="color:var(--coral);font-weight:700">¿Te gustó alguno? Cotiza tu página aquí</a></footer>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="Buscar"><div class="md" id="md"></div></div>
 
@@ -102,8 +102,7 @@ const T = /*DATA*/[];
 const WA = "50769197559";
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-const prompt = t => [`Actúa como diseñador web experto. Crea una página web de una sola página para mi ${t.k.toLowerCase()} llamada [NOMBRE DE TU NEGOCIO], basada en la plantilla "${t.n}" de SitioYa.`, ""];
-const LOCKED = "Estilo: ████████ ██████, ████ ██ ██ ███████.\nSecciones: ███████ ███ ████ ██████ █ ██████ ██ ████████, ████████.\nColores: ████. Fotos: █████ ███ █████.\nWhatsApp: ██ ██████. ██████ ███ ███████ ██ █████.\n███████████ ██████ ██ █████, ███████████ ██████.";
+const cot = t => `./?ej=${encodeURIComponent(t.s)}#cotizar`;
 document.getElementById("cnt").textContent = T.length;
 
 // filtros
@@ -117,13 +116,12 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting
 function draw() {
   const L = T.filter(t => g === "todos" || t.g === g);
   const grid = document.getElementById("grid");
-  grid.innerHTML = L.map(t => `<article class="it"><a class="shot" href="plantillas/${t.s}.html" target="_blank" rel="noopener"><img src="img/shots/${t.s}.jpg" alt="Plantilla ${esc(t.k)}" loading="lazy"><span class="tg">${esc(t.k)}</span></a>
+  grid.innerHTML = L.map(t => `<article class="it"><a class="shot" href="plantillas/${t.s}.html" target="_blank" rel="noopener"><img src="img/shots/${t.s}.jpg" alt="Ejemplo ${esc(t.k)}" loading="lazy"><span class="tg">${esc(t.k)}</span></a>
     <div class="body"><h3>${esc(t.n)}</h3><p>${esc(t.d)}</p>
-    <div class="acts"><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a><button class="b p" data-s="${t.s}">✨ Prompt</button></div></div></article>`).join("");
+    <div class="acts"><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a><a class="b p" href="${cot(t)}">Quiero una así</a></div></div></article>`).join("");
   grid.querySelectorAll(".it").forEach((el, i) => { el.style.transitionDelay = (i % 6) * 60 + "ms"; io.observe(el); });
 }
 draw();
-document.getElementById("grid").addEventListener("click", e => { const b = e.target.closest("button[data-s]"); if (b) showPrompt(b.dataset.s, b); });
 
 // modal
 const ov = document.getElementById("ov"), md = document.getElementById("md");
@@ -132,28 +130,26 @@ function openOv(html, from) { lastFocus = from || document.activeElement; md.inn
 function closeOv() { ov.classList.remove("on"); document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
 ov.addEventListener("click", e => { if (e.target === ov) closeOv(); });
 
-function showPrompt(s, from) {
-  const t = T.find(x => x.s === s); const p = prompt(t);
-  const msg = encodeURIComponent(`Hola SitioYa! Quiero desbloquear el prompt de la plantilla ${t.n} (${t.k}) por $9.`);
-  openOv(`<div class="pm"><button class="x" aria-label="Cerrar" onclick="closeOv()">✕</button><h3>✨ Prompt · ${esc(t.n)}</h3><div class="k">${esc(t.k)} · ${esc(t.fm)}</div>
-    <div class="code">${esc(p.slice(0,2).join("\n"))}\n<span class="lock" aria-hidden="true">${LOCKED}</span></div>
-    <div class="unl"><a class="b wa" href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener">🔓 Desbloquear por $9</a><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a></div>
-    <p class="note">Te lo mandamos por WhatsApp con una guía paso a paso. ¿Prefieres que te la hagamos? <a href="./#cotizar" style="color:var(--coral);font-weight:700">Cotiza aquí</a>.</p></div>`, from);
+function showEj(s, from) {
+  const t = T.find(x => x.s === s);
+  openOv(`<div class="pm"><button class="x" aria-label="Cerrar" onclick="closeOv()">✕</button><h3>${esc(t.n)}</h3><div class="k">${esc(t.k)} · ${esc(t.fm)}</div>
+    <p class="note">Así podría quedar la página de tu negocio, con tu nombre, tus fotos y tus precios.</p>
+    <div class="unl"><a class="b wa" href="${cot(t)}">Quiero una así</a><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a></div></div>`, from);
   md.querySelector(".wa").focus();
 }
 
 function openSearch() {
-  openOv(`<div class="sq"><button class="x" style="position:static;order:2" aria-label="Cerrar" onclick="closeOv()">✕</button><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C93A6" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" placeholder="Busca por negocio o estilo: café, uñas, oscura…" autocomplete="off" aria-label="Buscar plantillas"></div><div class="res" id="res" role="listbox"></div><div class="ft"><span><kbd>↑</kbd><kbd>↓</kbd>moverse</span><span><kbd>↵</kbd>abrir</span><span><kbd>esc</kbd>cerrar</span></div>`, document.getElementById("open"));
+  openOv(`<div class="sq"><button class="x" style="position:static;order:2" aria-label="Cerrar" onclick="closeOv()">✕</button><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C93A6" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" placeholder="Busca por negocio o estilo: café, uñas, oscura…" autocomplete="off" aria-label="Buscar ejemplos"></div><div class="res" id="res" role="listbox"></div><div class="ft"><span><kbd>↑</kbd><kbd>↓</kbd>moverse</span><span><kbd>↵</kbd>abrir</span><span><kbd>esc</kbd>cerrar</span></div>`, document.getElementById("open"));
   const q = document.getElementById("q"); q.focus(); search(""); q.addEventListener("input", () => search(q.value));
 }
 function search(v) {
   const n = norm(v.trim());
   hits = T.filter(t => !n || norm([t.n, t.k, t.d, t.fm, t.kw, t.st.join(" ")].join(" ")).includes(n)).slice(0, 8); sel = 0;
   const res = document.getElementById("res");
-  res.innerHTML = hits.length ? hits.map((t, i) => `<div class="r${i===sel?" on":""}" role="option" data-i="${i}"><img src="img/shots/${t.s}.jpg" alt=""><div><b>${esc(t.n)}</b><small>${esc(t.k)} · ${esc(t.fm)}</small></div></div>`).join("") : `<p style="padding:16px;color:var(--soft)">No encontramos esa. Escríbenos y te la hacemos 😉</p>`;
+  res.innerHTML = hits.length ? hits.map((t, i) => `<div class="r${i===sel?" on":""}" role="option" data-i="${i}"><img src="img/shots/${t.s}.jpg" alt=""><div><b>${esc(t.n)}</b><small>${esc(t.k)} · ${esc(t.fm)}</small></div></div>`).join("") : `<p style="padding:16px;color:var(--soft)">Todavía no tenemos un ejemplo de eso. Escríbenos y te la hacemos 😉</p>`;
   res.onclick = e => { const r = e.target.closest(".r"); if (r) pick(+r.dataset.i); };
 }
-function pick(i) { const t = hits[i]; if (t) showPrompt(t.s, document.getElementById("open")); }
+function pick(i) { const t = hits[i]; if (t) showEj(t.s, document.getElementById("open")); }
 document.getElementById("open").onclick = openSearch;
 addEventListener("keydown", e => {
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); ov.classList.contains("on") ? closeOv() : openSearch(); return; }
