@@ -4,8 +4,8 @@ Salen de `tools/redes_posts.py` (correr `python3 tools/redes_posts.py`): hace la
 
 Se ven y se bajan en https://sitioya.vercel.app/redes/posts/
 
-## Orden sugerido para publicar (feed completo, 12 posts + 1 story)
-El número es el orden: se publica del 1 al 12. Los 10, 11 y 12 son extra y van después del 9, así el 12 (Te armamos un ejemplo gratis) queda arriba en el perfil. Si los 1-9 ya salieron, hoy toca publicar el 10, el 11 y el 12, en ese orden.
+## Orden sugerido para publicar (feed completo, 13 posts + 1 story)
+El número es el orden: se publica del 1 al 13. Los 10, 11 y 12 son extra y van después del 9. El 13 (Síguenos: Tu negocio merece una página web) es el más nuevo y va después del 12, así queda arriba en el perfil. Si los 1-12 ya salieron, toca publicar el 13.
 
 1. `1-tu-negocio-en-internet.png` · Tu negocio en internet, ya
    > Tu negocio en internet, ya. Hacemos páginas web para negocios en Panamá, listas en pocos días. Comenta PÁGINA y te contamos
@@ -43,6 +43,9 @@ El número es el orden: se publica del 1 al 12. Los 10, 11 y 12 son extra y van 
 12. `12-ejemplo-gratis-de-tu-pagina.png` · Te armamos un ejemplo gratis de tu página
    > Te armamos un ejemplo gratis de tu página para que veas cómo quedaría tu negocio antes de decidir. Comenta PÁGINA y te contamos
 
+13. `13-siguenos-tu-negocio-merece-pagina.png` · Síguenos: Tu negocio merece una página web (celulares con la Heladería del carrusel y el menú de Mesa Lunar)
+   > Hacemos páginas web para negocios en Panamá. Síguenos para ver ejemplos y tips. Comenta PÁGINA y te contamos
+
 Story (1080x1920): `redes/ejemplo-heladeria/story-encuesta.png` · ¿Tu negocio tiene página web? Se puede subir el mismo día que el 10. En el recuadro de arriba va el sticker de encuesta con "¿Tu negocio tiene página web?" y las opciones Sí / No; en el de abajo, el sticker de mención @sitioya.pty. Ya trae el texto "Hacemos páginas web para negocios en Panamá. Síguenos en @sitioya.pty y mira ejemplos" (sale de `tools/redes_heladeria.py`).
 
 Los videos los hace Cam (ver `redes/VIDEOS.md`). Los nombres viejos `4-precios.png` y `5-siguenos.png` redirigen a los nuevos (`vercel.json`).
@@ -51,4 +54,4 @@ Los videos los hace Cam (ver `redes/VIDEOS.md`). Los nombres viejos `4-precios.p
 - No dicen la palabra de antes en ningún lado: se habla de páginas y de ejemplos.
 - Precios: solo los de la web (Básica $99, Completa $199, Diseño único desde $369, mantenimiento opcional $15/mes). El post 7 no muestra precios.
 - Sin logos ni marcas de terceros: a las capturas se les cortó el botón flotante de abajo; el perfil del post 7 es genérico (sin logo de ninguna red, sin @ ni cifras de seguidores) y el botón "Pedir por WhatsApp" es solo texto. "WhatsApp" e "Instagram" solo aparecen como texto.
-- Los negocios (Luna, Norte Barber, brisa., Dulce Nube, Nieve & Co) son ficticios, igual que sus datos, y cada post con capturas lo dice ("Negocios y datos de ejemplo"). Sin reseñas ni cifras inventadas.
+- Los negocios (Luna, Norte Barber, brisa., Dulce Nube, Nieve & Co, Mesa Lunar) son ficticios, igual que sus datos, y cada post con capturas lo dice ("Negocios y datos de ejemplo"). Sin reseñas ni cifras inventadas.

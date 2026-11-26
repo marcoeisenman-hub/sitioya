@@ -639,6 +639,46 @@ def post_ejemplo_gratis():
     return im
 
 
+# ---------- 13. Síguenos: Tu negocio merece una página web ----------
+# Celulares con dos páginas de ejemplo: la Heladería del carrusel "Ejemplo de la
+# semana" (Nieve & Co) y el menú de Mesa Lunar (plantillas/menu.html).
+
+def post_merece_pagina():
+    im = base(1080, 1350)
+    d = ImageDraw.Draw(im)
+    d.ellipse((-260, 420, 520, 1200), fill=BLUSH)
+    d.ellipse((600, 500, 1380, 1280), fill=MENTA_CLARO)
+    pastilla(d, (70, 74), 'SÍGUENOS', fuente(30, 900), CORAL, NAVY, pad=(30, 16))
+    f = fuente(100, 900)
+    for i, (linea, c) in enumerate((('Tu negocio merece', NAVY), ('una página web', CORAL))):
+        assert 66 + texto_ancho(d, linea, f) < 1010, linea
+        d.text((66, 152 + i * 108), linea, font=f, fill=c)
+    # dos celulares, un poco girados
+    ancho = 304
+    telefonos = (
+        (130, 404, pantalla_portada(600, 1170), -4, 'Heladería'),
+        (640, 390, captura('menu'), 4, 'Menú de restaurante'),
+    )
+    for x, y, pantalla, giro, nombre in telefonos:
+        w, h = celular_chico(im, (x, y), pantalla, ancho, girar=giro)
+        d = ImageDraw.Draw(im)
+        x2, y2 = pastilla(d, (x + w / 2, y + h - 34), nombre, fuente(28, 900), NAVY, CREMA, pad=(24, 12), centro=True)
+        assert y2 < 1064, (nombre, y2)
+    # texto de abajo
+    y = parrafo(d, (540, 1082), 'Hacemos páginas para negocios en Panamá.', fuente(34, 800), NAVY, 960, 1.25,
+                centrado=True)
+    fs = fuente(34, 800)
+    partes = (('Síguenos en ', NAVY), ('@sitioya.pty', CORAL_D), (' y mira ejemplos', NAVY))
+    x = (1080 - sum(texto_ancho(d, t, fs) for t, _ in partes)) / 2
+    for t, c in partes:
+        d.text((x, y), t, font=fs, fill=c)
+        x += texto_ancho(d, t, fs)
+    assert y + 44 < 1170, y
+    d.text((72, 1180), 'Negocios y datos de ejemplo', font=fuente(22, 500), fill=SOFT)
+    pie_simple(im)
+    return im
+
+
 # Orden sugerido de publicación (el último en salir queda arriba en el perfil).
 # El 4 es el carrusel de la Heladería, que sale de tools/redes_heladeria.py.
 HELADERIA = 'heladeria'
@@ -679,6 +719,9 @@ FEED = [
     ('12-ejemplo-gratis-de-tu-pagina.png', post_ejemplo_gratis, 'Te armamos un ejemplo gratis de tu página',
      'Te armamos un ejemplo gratis de tu página para que veas cómo quedaría tu negocio antes de decidir. '
      'Comenta PÁGINA y te contamos'),
+    ('13-siguenos-tu-negocio-merece-pagina.png', post_merece_pagina, 'Síguenos: Tu negocio merece una página web',
+     'Hacemos páginas web para negocios en Panamá. Síguenos para ver ejemplos y tips. Comenta PÁGINA y te '
+     'contamos'),
 ]
 STORY = ('/redes/ejemplo-heladeria/story-encuesta.png', 'Story: ¿Tu negocio tiene página web?',
          'En el recuadro de arriba va el sticker de encuesta con la pregunta "¿Tu negocio tiene página web?" y '
