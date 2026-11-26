@@ -336,7 +336,7 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </div>
     <label>Tipo de negocio<select name="tipo"><option>Comida o café</option><option>Panadería o repostería</option><option>Barbería o salón</option><option>Tienda de ropa</option><option>Gimnasio</option><option>Clínica o salud</option><option>Otro</option></select></label>
     <label>Qué necesitas<select name="plan">
-      <option selected>Básica · $99</option><option>Completa · $199</option></select></label>
+      <option value="" selected disabled>Elige Básica o Completa</option><option>Básica · $99</option><option>Completa · $199</option></select></label>
         <label>Cuéntanos más <small>(opcional)</small><textarea name="msg" placeholder="Qué vendes, si tienes Instagram, para cuándo la necesitas…"></textarea></label>
     <p class="err" id="qerr" aria-live="polite"></p>
     <button type="submit" id="qbtn" disabled><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Enviar por WhatsApp</button>
@@ -448,6 +448,7 @@ addEventListener("scroll", onScroll, {passive: true}); onScroll();
 </script>
 <script>
 (function(){var f=document.getElementById('qform');if(!f)return;document.getElementById('qbtn').disabled=false;f.addEventListener('submit',function(e){e.preventDefault();var d=new FormData(f),n=(d.get('nombre')||'').trim();if(!n){document.getElementById('qerr').textContent='Pon tu nombre para poder contestarte.';f.nombre.focus();return}
+if(!d.get('plan')){document.getElementById('qerr').textContent='Elige Básica o Completa.';f.plan.focus();return}
 var neg=(d.get('negocio')||'').trim(),m=(d.get('msg')||'').trim();var t='¡Hola, SitioYa! 👋\nMe gustaría cotizar una página web para mi negocio.\n\n*Nombre:* '+n+(neg?'\n*Negocio:* '+neg:'')+'\n*Tipo de negocio:* '+d.get('tipo')+'\n*Plan que me interesa:* '+d.get('plan')+(m?'\n*Detalles:* '+m:'')+'\n\n¿Me cuentan cuáles son los siguientes pasos? ¡Gracias!';
 window.open('https://wa.me/50769197559?text='+encodeURIComponent(t),'_blank','noopener');document.getElementById('qerr').textContent='';});})();
 </script>
