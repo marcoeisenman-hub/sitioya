@@ -78,13 +78,13 @@ def story():
     d = ImageDraw.Draw(im)
     f = fuente(94, 900)
     y = lineas(d, (W / 2, 262), TITULO[:1], f, NAVY, centrado=True, ancho_max=990)
-    y = lineas(d, (W / 2, y), TITULO[1:], f, CORAL, centrado=True, ancho_max=990)
+    y = lineas(d, (W / 2, y), TITULO[1:], f, CORAL_D, centrado=True, ancho_max=990)
     fs = fuente(42, 700)
     sub = envolver(d, SUBTITULO, fs, 900)
     assert len(sub) <= 2, sub
     y = lineas(d, (W / 2, y + 26), sub, fs, SOFT, interlineado=1.3, centrado=True)
     # celular con la heladería
-    ancho = 410
+    ancho = 372
     y_tel = y + 46
     w, h = celular_chico(im, ((W - ancho) / 2, y_tel), pantalla_portada(600, 1170), ancho)
     d = ImageDraw.Draw(im)
@@ -97,7 +97,7 @@ def story():
     nota_y = caja[3] + 22
     d.text(((W - texto_ancho(d, NOTA, fuente(24, 500))) / 2, nota_y), NOTA, font=fuente(24, 500), fill=SOFT)
     # todo tiene que quedar arriba de la barra de "responder" de la story (~200 px de abajo)
-    assert nota_y + 30 < H - 150, nota_y
+    assert nota_y + 30 < H - 200, nota_y
     return im
 
 
@@ -113,7 +113,7 @@ def cuadrado():
     ancho_txt = 560
     f = fuente(80, 900)
     y = lineas(d, (izq, 168), ('¿Tu negocio', 'necesita'), f, NAVY, ancho_max=ancho_txt)
-    y = lineas(d, (izq, y), ('página web?',), f, CORAL, ancho_max=ancho_txt)
+    y = lineas(d, (izq, y), ('página web?',), f, CORAL_D, ancho_max=ancho_txt)
     fs = fuente(34, 700)
     y = lineas(d, (izq, y + 22), envolver(d, SUBTITULO, fs, 520), fs, SOFT, interlineado=1.3)
     assert y < 640, y
