@@ -151,7 +151,7 @@ def post_ejemplos():
         d = ImageDraw.Draw(im)
         f = fuente(32, 800)
         d.text((x + (ancho - texto_ancho(d, nombre, f)) / 2, y + h + 22), nombre, font=f, fill=NAVY)
-    d.text((72, 1156), 'Negocios ficticios de ejemplo', font=fuente(24, 500), fill=SOFT)
+    d.text((72, 1156), 'Negocios y datos de ejemplo', font=fuente(24, 500), fill=SOFT)
     pie_simple(im)
     return im
 
@@ -221,7 +221,7 @@ def post_tu_negocio():
     celular_chico(im, (548, 700), captura('panaderia'), 240, girar=-5)
     celular_chico(im, (784, 650), pantalla_portada(600, 1170), 240, girar=4)
     d = ImageDraw.Draw(im)
-    d.text((72, 1156), 'Negocios de ejemplo', font=fuente(24, 500), fill=SOFT)
+    d.text((72, 1156), 'Negocios y datos de ejemplo', font=fuente(24, 500), fill=SOFT)
     pie_simple(im)
     return im
 

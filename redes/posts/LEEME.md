@@ -11,7 +11,7 @@ El número del archivo es el orden. El carrusel de la Heladería (`redes/ejemplo
    > Tu negocio en internet, ya. Hacemos páginas web para negocios en Panamá, listas en pocos días. Comenta PÁGINA y te contamos
 
 2. `2-como-funciona.png` · ¿Cómo funciona?
-   > ¿Cómo funciona? 1. Nos escribes 2. Te armamos un ejemplo de tu página 3. Lista en pocos días y compartes tu link. Comenta PÁGINA y te contamos
+   > ¿Cómo funciona? 1. Escríbenos 2. Te armamos un ejemplo de tu página 3. Lista en pocos días y compartes tu link. Comenta PÁGINA y te contamos
 
 3. `3-paginas-de-ejemplo.png` · 4 páginas de ejemplo
    > 4 páginas de ejemplo: panadería, barbería, tienda y repostería. ¿Cuál estilo va con tu negocio? Comenta PÁGINA y te contamos
@@ -29,4 +29,4 @@ El número del archivo es el orden. El carrusel de la Heladería (`redes/ejemplo
 - No dicen la palabra de antes en ningún lado: se habla de páginas y de ejemplos.
 - Precios: solo los de la web (Básica $99, Completa $199, Diseño único desde $369, mantenimiento opcional $15/mes).
 - Sin logos ni marcas de terceros: a las capturas se les cortó el botón flotante de abajo. "WhatsApp" e "Instagram" solo aparecen como texto.
-- Los negocios de las capturas (Luna, Norte Barber, brisa., Dulce Nube, Nieve & Co) son ficticios y el post lo dice.
+- Los negocios de las capturas (Luna, Norte Barber, brisa., Dulce Nube, Nieve & Co) son ficticios, igual que sus datos (horarios, envíos, precios), y el post lo dice.
