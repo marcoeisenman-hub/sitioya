@@ -4,8 +4,8 @@ Salen de `tools/redes_posts.py` (correr `python3 tools/redes_posts.py`): hace la
 
 Se ven y se bajan en https://sitioya.vercel.app/redes/posts/
 
-## Orden sugerido para publicar (feed completo, 9 posts)
-El número es el orden: se publica del 1 al 9. Así el último (Síguenos para más) queda arriba en el perfil y el de Precios justo debajo.
+## Orden sugerido para publicar (feed completo, 12 posts + 1 story)
+El número es el orden: se publica del 1 al 12. Los 10, 11 y 12 son extra y van después del 9, así el 12 (Te armamos un ejemplo gratis) queda arriba en el perfil. Si los 1-9 ya salieron, hoy toca publicar el 10, el 11 y el 12, en ese orden.
 
 1. `1-tu-negocio-en-internet.png` · Tu negocio en internet, ya
    > Tu negocio en internet, ya. Hacemos páginas web para negocios en Panamá, listas en pocos días. Comenta PÁGINA y te contamos
@@ -33,6 +33,17 @@ El número es el orden: se publica del 1 al 9. Así el último (Síguenos para m
 
 9. `9-siguenos.png` · Síguenos para más
    > Síguenos para ver páginas de ejemplo, precios claros y tips para tu negocio. Hacemos páginas web para negocios en Panamá
+
+10. `10-tres-cosas-que-pierde-tu-negocio.png` · 3 cosas que pierde tu negocio sin página
+   > 3 cosas que pierde tu negocio sin página: clientes que te buscan, tiempo contestando lo mismo y pedidos cuando estás ocupado. Comenta PÁGINA y te contamos
+
+11. `11-pagina-y-no-solo-instagram.png` · Por qué página y no solo Instagram
+   > Instagram para que te conozcan y tu página para que te compren: tus productos ordenados, tus precios y tu horario a la vista y un link que cualquiera abre. Comenta PÁGINA y te contamos
+
+12. `12-ejemplo-gratis-de-tu-pagina.png` · Te armamos un ejemplo gratis de tu página
+   > Te armamos un ejemplo gratis de tu página para que veas cómo quedaría tu negocio antes de decidir. Comenta PÁGINA y te contamos
+
+Story (1080x1920): `redes/ejemplo-heladeria/story-encuesta.png` · ¿Tu negocio tiene página web? Se puede subir el mismo día que el 10. En el recuadro de arriba va el sticker de encuesta con "¿Tu negocio tiene página web?" y las opciones Sí / No; en el de abajo, el sticker de mención @sitioya.pty. Ya trae el texto "Hacemos páginas web para negocios en Panamá. Síguenos en @sitioya.pty y mira ejemplos" (sale de `tools/redes_heladeria.py`).
 
 Los videos los hace Cam (ver `redes/VIDEOS.md`). Los nombres viejos `4-precios.png` y `5-siguenos.png` redirigen a los nuevos (`vercel.json`).
 

@@ -502,6 +502,143 @@ def post_vendes_instagram():
     return im
 
 
+# ---------- 10. 3 cosas que pierde tu negocio sin página ----------
+
+PIERDE = [
+    ('Clientes que te buscan', 'Te buscan en internet y no te encuentran.'),
+    ('Tiempo', 'Contestas lo mismo todo el día: precio, horario y dónde estás.'),
+    ('Pedidos cuando estás ocupado', 'Si no puedes contestar, nadie ve lo que vendes.'),
+]
+
+
+def post_pierde_sin_pagina():
+    im = base(1080, 1350)
+    d = ImageDraw.Draw(im)
+    d.ellipse((640, -260, 1340, 440), fill=BLUSH)
+    d.ellipse((-240, 980, 300, 1520), fill=MENTA_CLARO)
+    kicker(d, (70, 80), 'Ojo con esto')
+    f = fuente(92, 900)
+    for i, (linea, c) in enumerate((('3 cosas que', NAVY), ('pierde tu negocio', CORAL), ('sin página', CORAL))):
+        assert 66 + texto_ancho(d, linea, f) < 1030, linea
+        d.text((66, 134 + i * 100), linea, font=f, fill=c)
+    y = 480
+    ft, fd = fuente(38, 900), fuente(27, 500)
+    for n, (titulo, desc) in enumerate(PIERDE, 1):
+        ld = envolver(d, desc, fd, 700)
+        alto = 34 + 48 + 8 + len(ld) * 36 + 32
+        sombra(im, (70, y, 1010, y + alto), 34, desp=(0, 12), difuso=22, alfa=28)
+        d = ImageDraw.Draw(im)
+        d.rounded_rectangle((70, y, 1010, y + alto), 34, fill=BLANCO)
+        cy = y + alto / 2
+        d.ellipse((104, cy - 52, 208, cy + 52), fill=BLUSH)
+        fnum = fuente(60, 900)
+        s = str(n)
+        d.text((156 - texto_ancho(d, s, fnum) / 2, cy - 38), s, font=fnum, fill=CORAL_D)
+        d.text((248, y + 34), titulo, font=ft, fill=NAVY)
+        ty = y + 34 + 48 + 8
+        for linea in ld:
+            d.text((248, ty), linea, font=fd, fill=SOFT); ty += 36
+        y += alto + 22
+    fin = boton_pagina(d, y + 18)
+    assert fin < 1200, fin
+    pie_simple(im)
+    return im
+
+
+# ---------- 11. Por qué tu negocio necesita página y no solo Instagram ----------
+
+COMPARA = [
+    ('Tus productos se pierden entre posts', 'Tus productos ordenados en un catálogo'),
+    ('Te preguntan todo por mensaje', 'Precios, horario y ubicación a la vista'),
+    ('Solo te ven los que usan la app', 'Cualquiera abre tu link, sin cuenta'),
+    ('Dependes de una sola red', 'Un lugar en internet que es tuyo'),
+]
+
+
+def post_no_solo_instagram():
+    im = base(1080, 1350)
+    d = ImageDraw.Draw(im)
+    d.ellipse((620, -280, 1340, 420), fill=MENTA_CLARO)
+    f = fuente(76, 900)
+    for i, (linea, c) in enumerate((('¿Por qué tu negocio', NAVY), ('necesita página', CORAL),
+                                    ('y no solo Instagram?', NAVY))):
+        assert 66 + texto_ancho(d, linea, f) < 1030, linea
+        d.text((66, 80 + i * 86), linea, font=f, fill=c)
+    # encabezados de las dos columnas
+    pastilla(d, (305, 372), 'SOLO INSTAGRAM', fuente(26, 900), GRIS, '#8E847B', pad=(26, 12), centro=True)
+    pastilla(d, (775, 372), 'CON PÁGINA', fuente(26, 900), CORAL, NAVY, pad=(26, 12), centro=True)
+    y = 450
+    fi = fuente(28, 700)
+    for antes, despues in COMPARA:
+        la = envolver(d, antes, fi, 362)
+        lb = envolver(d, despues, fi, 362)
+        alto = 30 + max(len(la), len(lb)) * 36 + 26
+        sombra(im, (70, y, 1010, y + alto), 30, desp=(0, 10), difuso=20, alfa=26)
+        d = ImageDraw.Draw(im)
+        d.rounded_rectangle((70, y, 1010, y + alto), 30, fill=BLANCO)
+        d.rounded_rectangle((540, y, 1010, y + alto), 30, fill='#FFF1EC')
+        d.rectangle((540, y, 580, y + alto), fill='#FFF1EC')
+        cy = y + alto / 2
+        for x, lineas, ok in ((70, la, False), (540, lb, True)):
+            icono(d, x + 46, cy, ok)
+            ty = cy - len(lineas) * 36 / 2 - 2
+            for linea in lineas:
+                d.text((x + 86, ty), linea, font=fi, fill=NAVY if ok else SOFT); ty += 36
+        y += alto + 16
+    y += 18
+    y = parrafo(d, (540, y), 'Usa los dos: Instagram para que te conozcan', fuente(31, 800), NAVY, 940, 1.3,
+                centrado=True)
+    y = parrafo(d, (540, y), 'y tu página para que te compren.', fuente(31, 800), CORAL_D, 940, 1.3, centrado=True)
+    assert y < 1200, y
+    pie_simple(im)
+    return im
+
+
+# ---------- 12. Te armamos un ejemplo gratis de tu página ----------
+
+PASOS_EJEMPLO = [
+    'Nos cuentas de tu negocio',
+    'Te armamos un ejemplo con tu nombre y tus colores',
+    'Lo ves y decides si la quieres',
+]
+
+
+def post_ejemplo_gratis():
+    im = base(1080, 1350)
+    d = ImageDraw.Draw(im)
+    d.ellipse((520, 520, 1340, 1340), fill=BLUSH)
+    pastilla(d, (70, 80), 'PARA TU NEGOCIO', fuente(30, 900), CORAL, NAVY, pad=(30, 16))
+    f = fuente(98, 900)
+    for i, (linea, c) in enumerate((('Te armamos', NAVY), ('un ejemplo gratis', NAVY), ('de tu página', CORAL))):
+        assert 66 + texto_ancho(d, linea, f) < 1030, linea
+        d.text((66, 160 + i * 106), linea, font=f, fill=c)
+    parrafo(d, (72, 498), 'Para que veas cómo quedaría tu negocio en internet antes de decidir.', fuente(34, 500),
+            SOFT, 900, 1.32)
+    # pasos a la izquierda
+    y = 640
+    ft = fuente(34, 800)
+    for n, t in enumerate(PASOS_EJEMPLO, 1):
+        lt = envolver(d, t, ft, 420)
+        alto = max(84, len(lt) * 44)
+        cy = y + alto / 2
+        d.ellipse((72, cy - 36, 144, cy + 36), fill=MENTA)
+        fnum = fuente(42, 900)
+        d.text((108 - texto_ancho(d, str(n), fnum) / 2, cy - 27), str(n), font=fnum, fill=NAVY)
+        ty = cy - len(lt) * 44 / 2 - 4
+        for linea in lt:
+            d.text((172, ty), linea, font=ft, fill=NAVY); ty += 44
+        y += alto + 34
+    x2, yb = pastilla(d, (72, y + 6), 'Comenta PÁGINA y te contamos', fuente(30, 900), CORAL, NAVY, pad=(30, 18))
+    assert x2 < 660 and yb < 1140, (x2, yb)
+    # celular con una página de ejemplo a la derecha
+    _, h = celular_chico(im, (700, 600), pantalla_portada(600, 1170), 300, girar=4)
+    assert 600 + h < 1200, h
+    d = ImageDraw.Draw(im)
+    d.text((72, 1156), 'Negocio y datos de ejemplo', font=fuente(24, 500), fill=SOFT)
+    pie_simple(im)
+    return im
+
+
 # Orden sugerido de publicación (el último en salir queda arriba en el perfil).
 # El 4 es el carrusel de la Heladería, que sale de tools/redes_heladeria.py.
 HELADERIA = 'heladeria'
@@ -532,13 +669,26 @@ FEED = [
     ('9-siguenos.png', post_siguenos, 'Síguenos para más',
      'Síguenos para ver páginas de ejemplo, precios claros y tips para tu negocio. Hacemos páginas web para '
      'negocios en Panamá'),
+    # extra (se publican después del 9, así el 12 queda arriba en el perfil)
+    ('10-tres-cosas-que-pierde-tu-negocio.png', post_pierde_sin_pagina, '3 cosas que pierde tu negocio sin página',
+     '3 cosas que pierde tu negocio sin página: clientes que te buscan, tiempo contestando lo mismo y pedidos '
+     'cuando estás ocupado. Comenta PÁGINA y te contamos'),
+    ('11-pagina-y-no-solo-instagram.png', post_no_solo_instagram, 'Por qué página y no solo Instagram',
+     'Instagram para que te conozcan y tu página para que te compren: tus productos ordenados, tus precios y tu '
+     'horario a la vista y un link que cualquiera abre. Comenta PÁGINA y te contamos'),
+    ('12-ejemplo-gratis-de-tu-pagina.png', post_ejemplo_gratis, 'Te armamos un ejemplo gratis de tu página',
+     'Te armamos un ejemplo gratis de tu página para que veas cómo quedaría tu negocio antes de decidir. '
+     'Comenta PÁGINA y te contamos'),
 ]
+STORY = ('/redes/ejemplo-heladeria/story-encuesta.png', 'Story: ¿Tu negocio tiene página web?',
+         'En el recuadro de arriba va el sticker de encuesta con la pregunta "¿Tu negocio tiene página web?" y '
+         'las opciones Sí / No. En el recuadro de abajo va el sticker de mención @sitioya.pty.')
 SLIDES_HELADERIA = ['heladeria-1-portada.png', 'heladeria-2-sabores.png', 'heladeria-3-pedidos.png',
                     'heladeria-4-cierre.png']
 
 
 def galeria():
-    """redes/posts/index.html: los 9 en orden, con su caption y botón para descargar."""
+    """redes/posts/index.html: los posts en orden + la story, con su caption y botón para descargar."""
     from html import escape as e
     tarjetas = []
     for n, (nombre, _, titulo, caption) in enumerate(FEED, 1):
@@ -552,6 +702,12 @@ def galeria():
         tarjetas.append(
             f'<figure><a href="{img}" download><img src="{img}" alt="{e(alt)}" loading="lazy"></a>'
             f'<figcaption><b>{n}. {e(titulo)}</b><p>{e(caption)}</p>{botones}</figcaption></figure>')
+    s_img, s_titulo, s_texto = STORY
+    tarjetas.append(
+        f'<figure><a href="{s_img}" download><img src="{s_img}" alt="{e(s_titulo)}" loading="lazy"></a>'
+        f'<figcaption><b>{e(s_titulo)}</b><p>{e(s_texto)}</p><a class="b" href="{s_img}" download>Descargar</a>'
+        f'</figcaption></figure>')
+    total = len(FEED)
     html = (
         '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" '
         'content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Posts de '
@@ -562,9 +718,10 @@ def galeria():
         'overflow:hidden;box-shadow:0 10px 30px rgba(27,42,74,.08)}img{width:100%;display:block}figcaption{padding:'
         '16px 18px 20px}figcaption p{color:#5B6680;margin:8px 0 14px;line-height:1.4}.b{display:inline-block;'
         'background:#FF6B5B;color:#1B2A4A;font-weight:800;padding:10px 18px;border-radius:99px;text-decoration:'
-        'none;margin:0 6px 6px 0}</style></head>\n<body><main><h1>Posts de @sitioya.pty</h1><p class="s">Los 9 '
-        'en el orden para publicar (del 1 al 9). El último en salir queda arriba en el perfil. El 4 es un '
-        'carrusel de 4 slides.</p><div class="g">\n' + '\n'.join(tarjetas) + '\n</div></main></body></html>\n')
+        f'none;margin:0 6px 6px 0}}</style></head>\n<body><main><h1>Posts de @sitioya.pty</h1><p class="s">Los '
+        f'{total} en el orden para publicar (del 1 al {total}). El último en salir queda arriba en el perfil. El 4 '
+        f'es un carrusel de 4 slides. Al final, la story de la encuesta (1080x1920).</p><div class="g">\n'
+        + '\n'.join(tarjetas) + '\n</div></main></body></html>\n')
     with open(os.path.join(SALIDA, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(html)
 
