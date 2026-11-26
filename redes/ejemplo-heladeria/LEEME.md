@@ -1,11 +1,11 @@
 # Ejemplo de la semana: Heladería (miércoles)
 
-Para @sitioya.pty. Las imágenes salen de `tools/redes_heladeria.py` (correr `python3 tools/redes_heladeria.py`).
+Para @sitioya.pty. Las imágenes salen de `tools/redes_heladeria.py` (correr `python3 tools/redes_heladeria.py`). Necesita Pillow (`pip install pillow`) y una Mac: usa las letras del sistema SF Pro (`/System/Library/Fonts/SFNS.ttf` y `SFNSRounded.ttf`).
 
 ## Carrusel (4 slides, 1080x1350)
 1. `heladeria-1-portada.png`: Ejemplo de la semana, Heladería
 2. `heladeria-2-sabores.png`: sabores con foto y precio (dice "precios de ejemplo")
-3. `heladeria-3-pedidos.png`: pedidos, horario y cómo llegar
+3. `heladeria-3-pedidos.png`: pedidos, horario y dónde estamos
 4. `heladeria-4-cierre.png`: Así podría quedar la página de tu negocio, comenta PÁGINA
 
 Caption:

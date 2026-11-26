@@ -230,26 +230,27 @@ def pantalla_pedido(w, h):
     y = parrafo(d, (34, 178), 'Potes de 1 litro, conos para fiestas o el carrito para tu evento.', fuente(26, 500), H_SOFT,
                 w - 68, 1.35)
     y += 20
-    d.rounded_rectangle((22, y, w - 22, y + 640), 34, fill=BLANCO)
+    d.rounded_rectangle((22, y, w - 22, y + 610), 34, fill=BLANCO)
     fy = y + 28
     etiquetas = [('Nombre', 'Tu nombre'), ('Pedido', 'Pote de 1 litro  ▾'), ('Sabores', 'Mango, fresa…'), ('Día y hora', 'Sábado · 4:00 pm')]
     for et, val in etiquetas:
         d.text((50, fy), et, font=fuente(22, 800), fill=H_INK)
         d.rounded_rectangle((50, fy + 34, w - 50, fy + 34 + 74), 18, fill='#FBF3EE', outline='#EADBD5', width=2)
         d.text((72, fy + 54), val, font=fuente(25, 500), fill=H_SOFT)
-        fy += 128
+        fy += 120
     fb = fuente(28, 900, True)
     t = 'Enviar pedido'
     d.rounded_rectangle((50, fy + 4, w - 50, fy + 84), 40, fill=H_ROSA)
     d.text(((w - texto_ancho(d, t, fb)) / 2, fy + 25), t, font=fb, fill=BLANCO)
-    y = y + 670
-    # horario y ubicación
-    for titulo, linea1, linea2 in (('Horario', 'Todos los días', '11 am – 10 pm'), ('Dónde estamos', 'Bella Vista,', 'Ciudad de Panamá')):
-        d.rounded_rectangle((22, y, w - 22, y + 150), 30, fill=BLANCO)
-        d.text((50, y + 22), titulo, font=fuente(30, 900, True), fill=H_INK)
-        d.text((50, y + 68), linea1, font=fuente(24, 500), fill=H_SOFT)
-        d.text((50, y + 102), linea2, font=fuente(24, 700), fill=H_INK)
-        y += 172
+    y = y + 632
+    # horario y ubicación, lado a lado
+    cw = (w - 44 - 16) // 2
+    for i, (titulo, linea1, linea2) in enumerate((('Horario', 'Todos los días', '11 am – 10 pm'), ('Dónde estamos', 'Bella Vista,', 'Ciudad de Panamá'))):
+        x = 22 + i * (cw + 16)
+        d.rounded_rectangle((x, y, x + cw, y + 160), 30, fill=BLANCO)
+        d.text((x + 24, y + 22), titulo, font=fuente(28, 900, True), fill=H_INK)
+        d.text((x + 24, y + 70), linea1, font=fuente(22, 500), fill=H_SOFT)
+        d.text((x + 24, y + 104), linea2, font=fuente(22, 700), fill=H_INK)
     return im
 
 
@@ -392,7 +393,7 @@ def slide3():
     y = 380
     for t, s in (('Formulario de pedido', 'Potes, conos para fiestas o el carrito para eventos.'),
                  ('Horario a mano', 'Nadie tiene que preguntar a qué hora abres.'),
-                 ('Cómo llegar', 'Tu dirección y el mapa en un toque.')):
+                 ('Dónde estamos', 'Tu zona siempre a la vista para que lleguen.')):
         d.rounded_rectangle((72, y + 10, 96, y + 34), 7, fill=CORAL)
         d.text((118, y), t, font=fuente(36, 800), fill=NAVY)
         y = parrafo(d, (118, y + 48), s, fuente(28, 500), SOFT, 380, 1.3) + 34
