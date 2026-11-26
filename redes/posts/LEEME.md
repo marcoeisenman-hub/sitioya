@@ -46,7 +46,7 @@ El número es el orden: se publica del 1 al 13. Los 10, 11 y 12 son extra y van 
 13. `13-siguenos-tu-negocio-merece-pagina.png` · Síguenos: Tu negocio merece una página web (celulares con la Heladería del carrusel y el menú de Mesa Lunar)
    > Hacemos páginas web para negocios en Panamá. Síguenos para ver más ejemplos y tips para tu negocio
 
-Story (1080x1920): `redes/ejemplo-heladeria/story-encuesta.png` · ¿Tu negocio tiene página web? Se puede subir el mismo día que el 10. En el recuadro de arriba va el sticker de encuesta con "¿Tu negocio tiene página web?" y las opciones Sí / No (o, en otra story, la cajita de preguntas: "¿Qué quieres saber de tener tu página?"); en el de abajo, el sticker de mención @sitioya.pty. Ya trae el texto "Hacemos páginas web para negocios en Panamá. Síguenos en @sitioya.pty y mira ejemplos" (sale de `tools/redes_heladeria.py`).
+Story (1080x1920): `redes/ejemplo-heladeria/story-encuesta.png` · ¿Tu negocio tiene página web? Se puede subir el mismo día que el 10. En el recuadro de arriba va el sticker de encuesta con "¿Tu negocio tiene página web?" y las opciones Sí / No (o, en otra story con el mismo arte, la cajita de preguntas: "Si no tiene, ¿qué te frena? Pregúntanos"); en el de abajo, el sticker de mención @sitioya.pty. Ya trae el texto "Hacemos páginas web para negocios en Panamá. Síguenos en @sitioya.pty y mira ejemplos" (sale de `tools/redes_heladeria.py`).
 
 Los videos los hace Cam (ver `redes/VIDEOS.md`). Los nombres viejos `4-precios.png` y `5-siguenos.png` redirigen a los nuevos (`vercel.json`).
 

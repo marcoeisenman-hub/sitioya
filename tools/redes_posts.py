@@ -734,8 +734,8 @@ FEED = [
 ]
 STORY = ('/redes/ejemplo-heladeria/story-encuesta.png', 'Story: ¿Tu negocio tiene página web?',
          'En el recuadro de arriba va el sticker de encuesta con la pregunta "¿Tu negocio tiene página web?" y '
-         'las opciones Sí / No (o, en otra story, la cajita de preguntas: "¿Qué quieres saber de tener tu '
-         'página?"). En el recuadro de abajo va el sticker de mención @sitioya.pty.')
+         'las opciones Sí / No (o, en otra story con el mismo arte, la cajita de preguntas: "Si no tiene, ¿qué te '
+         'frena? Pregúntanos"). En el recuadro de abajo va el sticker de mención @sitioya.pty.')
 SLIDES_HELADERIA = ['heladeria-1-portada.png', 'heladeria-2-sabores.png', 'heladeria-3-pedidos.png',
                     'heladeria-4-cierre.png']
 
