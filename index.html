@@ -532,7 +532,7 @@ q.addEventListener("input", apply); apply();
 // "Quiero una así": lleva a cotizar con el ejemplo anotado
 const qej = document.getElementById("qej"), qejv = document.getElementById("qejv");
 const pickEj = s => { const t = T.find(x => x.s === s); if (!t || !qej) return false; qejv.value = `${t.n} (${t.k})`; qej.textContent = `Ejemplo que te gustó: ${t.n} (${t.k})`; qej.hidden = false; return true; };
-document.getElementById("cat").addEventListener("click", e => { const b = e.target.closest("[data-ej]"); if (!b || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); if (pickEj(b.dataset.ej)) history.replaceState(null, "", `?ej=${encodeURIComponent(b.dataset.ej)}#cotizar`); document.getElementById("cotizar").scrollIntoView({ behavior: "smooth" }); });
+document.getElementById("cat").addEventListener("click", e => { const b = e.target.closest("[data-ej]"); if (!b || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); if (pickEj(b.dataset.ej)) { const u = new URL(location.href); u.searchParams.set("ej", b.dataset.ej); u.hash = "cotizar"; history.replaceState(null, "", u); } document.getElementById("cotizar").scrollIntoView({ behavior: "smooth" }); });
 pickEj(new URLSearchParams(location.search).get("ej"));
 
 // marquee
