@@ -23,7 +23,12 @@ MENTA_CLARO = '#DDF4EC'
 def captura(nombre):
     """Captura de celular de una página de ejemplo, sin el botón flotante de abajo."""
     im = Image.open(os.path.join(SHOTS, nombre + '_mob.jpg')).convert('RGBA')
-    return im.crop((0, 0, im.width, 760))
+    im = im.crop((0, 0, im.width, 712))
+    # franja arriba (del color de la página) para que la muesca del celular no tape el nombre
+    franja = 48
+    con_franja = Image.new('RGBA', (im.width, im.height + franja), im.getpixel((2, 2)))
+    con_franja.paste(im, (0, franja))
+    return con_franja
 
 
 def celular_chico(lienzo, xy, pantalla, ancho, girar=0):
@@ -261,7 +266,7 @@ def post_siguenos():
 
 TRES_COSAS = [
     ('Tus productos con foto', 'Que vean lo que vendes sin tener que preguntarte.'),
-    ('Un botón para escribirte', 'Que te pidan o te consulten por WhatsApp con un toque.'),
+    ('Un botón para escribirte', 'Que te pidan o te consulten con un toque.'),
     ('Horario y cómo llegar', 'Que sepan cuándo abres y dónde encontrarte.'),
 ]
 
