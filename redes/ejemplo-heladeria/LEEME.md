@@ -6,7 +6,7 @@ Para @sitioya.pty. Las imágenes salen de `tools/redes_heladeria.py` (correr `py
 1. `heladeria-1-portada.png`: Ejemplo de la semana, Heladería
 2. `heladeria-2-sabores.png`: sabores con foto y precio (dice "precios de ejemplo")
 3. `heladeria-3-pedidos.png`: pedidos, horario y dónde estamos
-4. `heladeria-4-cierre.png`: Así podría quedar la página de tu negocio, comenta PÁGINA
+4. `heladeria-4-cierre.png`: Así podría quedar la página de tu negocio, cierra con "Escríbenos al 6919-7559"
 
 Caption:
 > Ejemplo de la semana: Heladería. Así podría quedar la página de tu negocio. Compártelo con alguien que tenga negocio

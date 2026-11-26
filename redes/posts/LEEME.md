@@ -4,8 +4,8 @@ Salen de `tools/redes_posts.py` (correr `python3 tools/redes_posts.py`): hace la
 
 Se ven y se bajan en https://sitioya.vercel.app/redes/posts/
 
-## Orden sugerido para publicar (feed completo, 13 posts + 1 story)
-El número es el orden: se publica del 1 al 13. Los 10, 11 y 12 son extra y van después del 9. El 13 (Síguenos: Tu negocio merece una página web) es el más nuevo y va después del 12, así queda arriba en el perfil. Si los 1-12 ya salieron, toca publicar el 13.
+## Orden sugerido para publicar (feed completo, 12 posts + 1 story)
+El número es el orden: se publica del 1 al 12. Los 10, 11 y 12 son extra y van después del 9. El 9 es el Síguenos nuevo (Tu negocio merece una página web), que reemplazó al Síguenos viejo; los links viejos `9-siguenos.png` y `13-siguenos-tu-negocio-merece-pagina.png` llevan al nuevo (`vercel.json`).
 
 1. `1-tu-negocio-en-internet.png` · Tu negocio en internet, ya
    > Tu negocio en internet, ya. Hacemos páginas web para negocios en Panamá, listas en pocos días. ¿Tu negocio ya tiene página? Sí o no, te leemos en los comentarios
@@ -31,8 +31,8 @@ El número es el orden: se publica del 1 al 13. Los 10, 11 y 12 son extra y van 
 8. `8-precios.png` · Precios
    > Precios claros: Básica $99, Completa $199 y Diseño único desde $369. Pagas una sola vez y el mantenimiento de $15/mes es opcional. Comenta PÁGINA y te contamos
 
-9. `9-siguenos.png` · Síguenos para más
-   > Síguenos para ver páginas de ejemplo, precios claros y tips para tu negocio. Hacemos páginas web para negocios en Panamá
+9. `9-siguenos-tu-negocio-merece-pagina.png` · Síguenos: Tu negocio merece una página web (celulares con la Heladería del carrusel y el menú de Mesa Lunar)
+   > Hacemos páginas web para negocios en Panamá. Síguenos para ver más ejemplos y tips para tu negocio
 
 10. `10-tres-cosas-que-pierde-tu-negocio.png` · 3 cosas que pierde tu negocio sin página
    > 3 cosas que pierde tu negocio sin página: clientes que te buscan, tiempo contestando lo mismo y pedidos cuando estás ocupado. Guárdalo para cuando lo necesites
@@ -43,15 +43,14 @@ El número es el orden: se publica del 1 al 13. Los 10, 11 y 12 son extra y van 
 12. `12-ejemplo-gratis-de-tu-pagina.png` · Te armamos un ejemplo gratis de tu página
    > Te armamos un ejemplo gratis de tu página para que veas cómo quedaría tu negocio antes de decidir. Comenta PÁGINA y te contamos
 
-13. `13-siguenos-tu-negocio-merece-pagina.png` · Síguenos: Tu negocio merece una página web (celulares con la Heladería del carrusel y el menú de Mesa Lunar)
-   > Hacemos páginas web para negocios en Panamá. Síguenos para ver más ejemplos y tips para tu negocio
+Carrusel aparte "3 mitos de tener página web": la portada (slide 1 de 4) es `redes/mitos-pagina-web/mitos-1-portada.png` (sale de `tools/redes_posts.py`). Los slides 2-4 los arma Cam.
 
 Story (1080x1920): `redes/ejemplo-heladeria/story-encuesta.png` · ¿Tu negocio tiene página web? Se puede subir el mismo día que el 10. En el recuadro de arriba va el sticker de encuesta con "¿Tu negocio tiene página web?" y las opciones Sí / No (o, en otra story con el mismo arte, la cajita de preguntas: "Si no tiene, ¿qué te frena? Pregúntanos"); en el de abajo, el sticker de mención @sitioya.pty. Ya trae el texto "Hacemos páginas web para negocios en Panamá. Síguenos en @sitioya.pty y mira ejemplos" (sale de `tools/redes_heladeria.py`).
 
-Los videos los hace Cam (ver `redes/VIDEOS.md`). Los nombres viejos `4-precios.png` y `5-siguenos.png` redirigen a los nuevos (`vercel.json`).
+Los videos los hace Cam (ver `redes/VIDEOS.md`). Los nombres viejos `4-precios.png`, `5-siguenos.png`, `9-siguenos.png` y `13-siguenos-tu-negocio-merece-pagina.png` redirigen a los nuevos (`vercel.json`).
 
 ## Qué se cuidó
-- Llamados a la acción variados: "Comenta PÁGINA" solo en los de venta (8 Precios y 12 Ejemplo gratis). Los demás usan preguntas para opinar, "Guárdalo", "Compártelo con alguien que tenga negocio" o "Escríbenos por WhatsApp al 6919-7559". Las imágenes 2, 5, 10, 12 y la slide 4 de la Heladería todavía traen el botón "Comenta PÁGINA" dibujado.
+- Llamados a la acción variados: "Comenta PÁGINA" solo en los de venta (8 Precios y 12 Ejemplo gratis). Los demás usan preguntas para opinar, "Guárdalo", "Compártelo con alguien que tenga negocio" o "Escríbenos por WhatsApp al 6919-7559". En las imágenes el botón dibujado "Comenta PÁGINA" solo queda en el 12; el 2 y la slide 4 de la Heladería cierran con "Escríbenos al 6919-7559" y el 5 y el 10 con "Guárdalo".
 - No dicen la palabra de antes en ningún lado: se habla de páginas y de ejemplos.
 - Precios: solo los de la web (Básica $99, Completa $199, Diseño único desde $369, mantenimiento opcional $15/mes). El post 7 no muestra precios.
 - Sin logos ni marcas de terceros: a las capturas se les cortó el botón flotante de abajo; el perfil del post 7 es genérico (sin logo de ninguna red, sin @ ni cifras de seguidores) y el botón "Pedir por WhatsApp" es solo texto. "WhatsApp" e "Instagram" solo aparecen como texto.
