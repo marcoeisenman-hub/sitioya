@@ -53,13 +53,29 @@ try {
     const salida = path.join(trabajo, "video-mudo.mp4");
     ff = spawn(FFMPEG, ["-y", "-hide_banner", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
       "-c:v", "libx264", "-preset", "slow", "-crf", "21", "-pix_fmt", "yuv420p", "-r", String(FPS), salida], { stdio: ["pipe", "inherit", "inherit"] });
-    const fin = new Promise((ok, mal) => ff.on("close", c => c === 0 ? ok() : mal(new Error("ffmpeg salió con " + c))));
+    const fin = new Promise((ok, mal) => {
+      ff.on("error", e => mal(new Error(`no se pudo abrir ffmpeg (${FFMPEG}): ${e.message}`)));
+      ff.on("close", c => c === 0 ? ok() : mal(new Error("ffmpeg salió con " + c)));
+    });
+    let roto = null;
+    fin.catch(e => { roto = e; });
+    ff.stdin.on("error", e => { roto = roto || new Error("ffmpeg cerró la entrada: " + e.message); });
+    const escribir = buf => new Promise((ok, mal) => {
+      if (roto) return mal(roto);
+      const listo = () => { limpiar(); ok(); };
+      const falla = e => { limpiar(); mal(roto || e); };
+      const limpiar = () => { ff.stdin.off("drain", listo); ff.stdin.off("error", falla); ff.off("close", cerro); };
+      const cerro = () => falla(new Error("ffmpeg se cerró antes de tiempo"));
+      if (ff.stdin.write(buf)) return ok();
+      ff.stdin.once("drain", listo); ff.stdin.once("error", falla); ff.once("close", cerro);
+    });
     for (let i = 0; i < total; i++) {
       await p.evaluate(t => window.render(t), i / FPS);
       const buf = await p.screenshot({ type: "jpeg", quality: 93 });
-      if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once("drain", r));
+      await escribir(buf);
       if (i % 150 === 0) console.log(`${video}: ${i}/${total}`);
     }
+    if (roto) throw roto;
     ff.stdin.end();
     await fin;
     console.log("listo", salida);

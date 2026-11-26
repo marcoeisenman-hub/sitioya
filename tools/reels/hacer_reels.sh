@@ -5,14 +5,16 @@
 # Necesita también: python3 con numpy, ffmpeg y ffprobe en el PATH, y uv (para la voz con edge-tts).
 set -euo pipefail
 cd "$(dirname "$0")"
-TRABAJO="${TRABAJO:-$(mktemp -d -t reels-sitioya)}"
+PROPIO=""
+if [ -z "${TRABAJO:-}" ]; then TRABAJO=$(mktemp -d -t reels-sitioya); PROPIO="$TRABAJO"; fi
 SALIDA="../../redes/videos"
 mkdir -p "$SALIDA"
 # una sola corrida a la vez (dos a la vez mezclarían videos y portadas)
 CANDADO="$SALIDA/.hacer_reels.lock"
 mkdir "$CANDADO" 2>/dev/null || { echo "Ya hay otra corrida (si no, borra $CANDADO)" >&2; exit 1; }
 tmpv=""; tmpj=""
-trap 'rm -f "$tmpv" "$tmpj"; rmdir "$CANDADO"' EXIT
+# al salir: borra temporales, suelta el candado y borra la carpeta de trabajo si la creó este script
+trap 'rm -f "$tmpv" "$tmpj"; rmdir "$CANDADO"; [ -n "$PROPIO" ] && rm -rf "$PROPIO"' EXIT
 VIDEOS=("$@"); [ ${#VIDEOS[@]} -eq 0 ] && VIDEOS=(antes-despues como-funciona tu-negocio-en-internet)
 for v in "${VIDEOS[@]}"; do
   case "$v" in antes-despues|como-funciona|tu-negocio-en-internet) ;; *) echo "Video desconocido: $v" >&2; exit 1;; esac
@@ -33,4 +35,5 @@ for v in "${VIDEOS[@]}"; do
   mv -f "$tmpj" "$SALIDA/$v.jpg"; mv -f "$tmpv" "$SALIDA/$v.mp4"; tmpv=""; tmpj=""
   echo "$v: $(ffprobe -v error -show_entries format=duration,size -of csv=p=0 "$SALIDA/$v.mp4")"
 done
-echo "Trabajo en $TRABAJO"
+[ -z "$PROPIO" ] && echo "Trabajo en $TRABAJO"
+true
