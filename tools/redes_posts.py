@@ -68,10 +68,10 @@ def pie_simple(im, oscuro=False):
 # ---------- 1. Precios ----------
 
 PLANES = [
-    ('Básica', '', '$99', 'Lo esencial: tus fotos, textos y precios, botón de WhatsApp, mapa y horario.', None),
-    ('Completa', '', '$199', 'Todo lo de Básica, más menú o catálogo completo y formulario de pedidos o citas.', None),
-    ('Diseño único', 'desde', '$369', 'Diseñada desde cero con tus colores y tu estilo. Incluye 2 rondas de cambios.',
-     '100% original'),
+    ('Básica', '$99', 'Tu página a la medida: nombre, logo, colores, fotos, servicios con precios, horario, mapa, '
+     'WhatsApp y redes. Lista en pocos días. 1 ronda de cambios.', None),
+    ('Completa', '$199', 'Todo lo de la Básica + varias secciones, catálogo o menú, pagos por Yappy o transferencia, '
+     'reservas por WhatsApp, galería, animaciones, perfil de Google y dominio propio (aparte). 2 rondas de cambios.', 'La más pedida'),
 ]
 
 
@@ -84,8 +84,9 @@ def post_precios():
     d.text((66, 238), 'tu página?', font=fuente(92, 900), fill=CORAL)
     d.text((72, 358), 'Pagas una sola vez. Elige el plan para tu negocio.', font=fuente(32, 500), fill=SOFT)
     y = 432
-    for nombre, desde, precio, desc, etiqueta in PLANES:
-        alto = 176
+    fdesc = fuente(25, 500)
+    for nombre, precio, desc, etiqueta in PLANES:
+        alto = 94 + len(envolver(d, desc, fdesc, 620)) * int(25 * 1.3) + 28
         sombra(im, (70, y, 1010, y + alto), 34, desp=(0, 12), difuso=22, alfa=28)
         d = ImageDraw.Draw(im)
         d.rounded_rectangle((70, y, 1010, y + alto), 34, fill=BLANCO)
@@ -94,13 +95,9 @@ def post_precios():
         if etiqueta:
             pastilla(d, (108 + texto_ancho(d, nombre, fn) + 18, y + 34), etiqueta, fuente(22, 800), BLUSH, CORAL_D,
                      pad=(16, 9))
-        parrafo(d, (108, y + 94), desc, fuente(25, 500), SOFT, 560, 1.32)
+        parrafo(d, (108, y + 92), desc, fdesc, SOFT, 620, 1.3)
         fp = fuente(84, 900)
-        px = 972 - texto_ancho(d, precio, fp)
-        d.text((px, y + (alto - 84) / 2 - 8 + (14 if desde else 0)), precio, font=fp, fill=CORAL_D)
-        if desde:
-            fd = fuente(26, 700)
-            d.text((972 - texto_ancho(d, desde, fd), y + 26), desde, font=fd, fill=SOFT)
+        d.text((972 - texto_ancho(d, precio, fp), y + 22), precio, font=fp, fill=CORAL_D)
         y += alto + 20
     # mantenimiento opcional
     y += 6
@@ -600,7 +597,7 @@ def post_ejemplo_gratis():
 
 # ---------- 9. Síguenos: Tu negocio merece una página web ----------
 # Celulares con dos páginas de ejemplo: la Heladería del carrusel "Ejemplo de la
-# semana" (Nieve & Co) y el menú de Mesa Lunar (plantillas/menu.html).
+# semana" (Nieve & Co) y el menú de Mesa Lunar (demo menu.html).
 
 def post_merece_pagina():
     im = base(1080, 1350)
@@ -706,7 +703,7 @@ FEED = [
      '¿Vendes solo por Instagram? Con una página tus clientes ven todo en un solo lugar y te piden directo. '
      'Compártelo con alguien que venda por mensajes'),
     ('8-precios.png', post_precios, 'Precios',
-     'Precios claros: Básica $99, Completa $199 y Diseño único desde $369. Pagas una sola vez y el '
+     'Precios claros y a la medida de tu negocio: Básica $99 y Completa $199. Pagas una sola vez y el '
      'mantenimiento de $15/mes es opcional. Comenta PÁGINA y te contamos'),
     # el 9 es el Síguenos nuevo (Tu negocio merece una página web); reemplazó al Síguenos viejo
     ('9-siguenos-tu-negocio-merece-pagina.png', post_merece_pagina, 'Síguenos: Tu negocio merece una página web',
