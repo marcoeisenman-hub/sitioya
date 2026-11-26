@@ -5,16 +5,20 @@
 # Necesita también: python3 con numpy, ffmpeg y ffprobe en el PATH, y uv (para la voz con edge-tts).
 set -euo pipefail
 cd "$(dirname "$0")"
-PROPIO=""
-if [ -z "${TRABAJO:-}" ]; then TRABAJO=$(mktemp -d -t reels-sitioya); PROPIO="$TRABAJO"; fi
+PROPIO=""; CANDADO=""; tmpv=""; tmpj=""
+# al salir: borra temporales, suelta el candado (solo si es nuestro) y la carpeta de trabajo si la creó este script
+limpiar() {
+  rm -f "$tmpv" "$tmpj"
+  if [ -n "$CANDADO" ]; then rmdir "$CANDADO" 2>/dev/null || true; fi
+  if [ -n "$PROPIO" ]; then rm -rf "$PROPIO"; fi
+}
+trap limpiar EXIT
 SALIDA="../../redes/videos"
 mkdir -p "$SALIDA"
 # una sola corrida a la vez (dos a la vez mezclarían videos y portadas)
+mkdir "$SALIDA/.hacer_reels.lock" 2>/dev/null || { echo "Ya hay otra corrida (si no, borra $SALIDA/.hacer_reels.lock)" >&2; exit 1; }
 CANDADO="$SALIDA/.hacer_reels.lock"
-mkdir "$CANDADO" 2>/dev/null || { echo "Ya hay otra corrida (si no, borra $CANDADO)" >&2; exit 1; }
-tmpv=""; tmpj=""
-# al salir: borra temporales, suelta el candado y borra la carpeta de trabajo si la creó este script
-trap 'rm -f "$tmpv" "$tmpj"; rmdir "$CANDADO"; [ -n "$PROPIO" ] && rm -rf "$PROPIO"' EXIT
+if [ -z "${TRABAJO:-}" ]; then PROPIO=$(mktemp -d -t reels-sitioya); TRABAJO="$PROPIO"; fi
 VIDEOS=("$@"); [ ${#VIDEOS[@]} -eq 0 ] && VIDEOS=(antes-despues como-funciona tu-negocio-en-internet)
 for v in "${VIDEOS[@]}"; do
   case "$v" in antes-despues|como-funciona|tu-negocio-en-internet) ;; *) echo "Video desconocido: $v" >&2; exit 1;; esac
