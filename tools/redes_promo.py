@@ -18,7 +18,7 @@ SALIDA = os.path.join(RAIZ, 'redes', 'promo')
 os.makedirs(SALIDA, exist_ok=True)
 
 TITULO = ('¿Tu negocio necesita', 'página web?')
-SUBTITULO = 'Hacemos páginas para negocios en Panamá, hechas para tu negocio'
+SUBTITULO = 'Páginas web hechas para tu negocio. Con WhatsApp, formas de pago y más'
 TELEFONO = '6919-7559'
 USUARIO = '@sitioya.pty'
 NOTA = 'Negocio y datos de ejemplo'
