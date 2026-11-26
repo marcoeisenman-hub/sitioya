@@ -1,0 +1,190 @@
+{
+ "voz": "es-PA-RobertoNeural",
+ "velocidad": "+12%",
+ "videos": {
+  "antes-despues": [
+   {
+    "id": "gancho",
+    "min": 2.6,
+    "lineas": [
+     {
+      "say": "¿Sigues vendiendo solo por di em?",
+      "sub": "¿Sigues vendiendo solo por DM?",
+      "at": 0.15
+     }
+    ]
+   },
+   {
+    "id": "antes",
+    "min": 7.0,
+    "lineas": [
+     {
+      "say": "Todo el día contestando lo mismo. ¿Precio? ¿Horario? ¿Dónde están?",
+      "sub": "Todo el día contestando lo mismo. ¿Precio? ¿Horario? ¿Dónde están?",
+      "at": 0.5
+     }
+    ]
+   },
+   {
+    "id": "despues",
+    "min": 9.6,
+    "lineas": [
+     {
+      "say": "Con tu página, todo eso ya está a la vista. Tus precios, tu horario y cómo llegar.",
+      "sub": "Con tu página, todo eso ya está a la vista. Tus precios, tu horario y cómo llegar.",
+      "at": 0.6
+     },
+     {
+      "say": "Y te escriben directo para pedir.",
+      "sub": "Y te escriben directo para pedir.",
+      "at": 5.9
+     }
+    ]
+   },
+   {
+    "id": "cierre",
+    "min": 5.4,
+    "lineas": [
+     {
+      "say": "Desde noventa y nueve dólares. Escríbenos por di em.",
+      "sub": "Básica desde $99. Escríbenos por DM @sitioya.pty",
+      "at": 0.45
+     }
+    ]
+   }
+  ],
+  "como-funciona": [
+   {
+    "id": "gancho",
+    "min": 2.6,
+    "lineas": [
+     {
+      "say": "Tu página web, en tres pasos.",
+      "sub": "Tu página web, en 3 pasos.",
+      "at": 0.15
+     }
+    ]
+   },
+   {
+    "id": "paso1",
+    "min": 5.6,
+    "lineas": [
+     {
+      "say": "Uno: nos cuentas de tu negocio, con tus fotos y precios.",
+      "sub": "1. Nos cuentas de tu negocio, con tus fotos y precios.",
+      "at": 0.3
+     }
+    ]
+   },
+   {
+    "id": "paso2",
+    "min": 5.6,
+    "lineas": [
+     {
+      "say": "Dos: la hacemos a tu medida, con tus colores y tu estilo.",
+      "sub": "2. La hacemos a tu medida, con tus colores y tu estilo.",
+      "at": 0.35
+     }
+    ]
+   },
+   {
+    "id": "paso3",
+    "min": 5.6,
+    "lineas": [
+     {
+      "say": "Tres: queda lista para recibir pedidos directo a tu WhatsApp.",
+      "sub": "3. Queda lista para recibir pedidos directo a tu WhatsApp.",
+      "at": 0.35
+     }
+    ]
+   },
+   {
+    "id": "cierre",
+    "min": 5.4,
+    "lineas": [
+     {
+      "say": "Desde noventa y nueve dólares. Escríbenos por di em.",
+      "sub": "Básica desde $99. Escríbenos por DM @sitioya.pty",
+      "at": 0.45
+     }
+    ]
+   }
+  ],
+  "tu-negocio-en-internet": [
+   {
+    "id": "gancho",
+    "min": 2.6,
+    "lineas": [
+     {
+      "say": "Tu negocio en internet, ya.",
+      "sub": "Tu negocio en internet, ya.",
+      "at": 0.15
+     }
+    ]
+   },
+   {
+    "id": "p1",
+    "pagina": "panaderia",
+    "nombre": "Panadería",
+    "min": 3.7,
+    "lineas": [
+     {
+      "say": "Para tu panadería, con tu menú y tus precios.",
+      "sub": "Para tu panadería, con tu menú y tus precios.",
+      "at": 0.15
+     }
+    ]
+   },
+   {
+    "id": "p2",
+    "pagina": "heladeria",
+    "nombre": "Heladería",
+    "min": 3.7,
+    "lineas": [
+     {
+      "say": "Para tu heladería, con tus sabores y tu horario.",
+      "sub": "Para tu heladería, con tus sabores y tu horario.",
+      "at": 0.15
+     }
+    ]
+   },
+   {
+    "id": "p3",
+    "pagina": "restaurante",
+    "nombre": "Restaurante",
+    "min": 3.7,
+    "lineas": [
+     {
+      "say": "Para tu restaurante, con pedidos directo a WhatsApp.",
+      "sub": "Para tu restaurante, con pedidos directo a WhatsApp.",
+      "at": 0.15
+     }
+    ]
+   },
+   {
+    "id": "p4",
+    "pagina": "salon",
+    "nombre": "Salón",
+    "min": 3.7,
+    "lineas": [
+     {
+      "say": "Para tu salón, hecha a tu medida.",
+      "sub": "Para tu salón, hecha a tu medida.",
+      "at": 0.15
+     }
+    ]
+   },
+   {
+    "id": "cierre",
+    "min": 5.6,
+    "lineas": [
+     {
+      "say": "Escríbenos por di em y armamos la tuya.",
+      "sub": "Escríbenos por DM y armamos la tuya. @sitioya.pty",
+      "at": 0.5
+     }
+    ]
+   }
+  ]
+ }
+}

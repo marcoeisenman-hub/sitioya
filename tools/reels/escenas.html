@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<title>Reels SitioYa</title>
+<style>
+@font-face{font-family:DM;src:url(DMSans.ttf) format("truetype");font-weight:100 1000}
+:root{--bg:#FFF6EC;--blush:#FFE3DC;--coral:#FF6B5B;--coral-d:#E2503F;--navy:#1B2A4A;--mint:#7ED6C1;--soft:#5B6680;--yel:#FFD36B;--wa:#1FA855}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+body{font-family:DM,system-ui,sans-serif;color:var(--navy);-webkit-font-smoothing:antialiased}
+#st{position:absolute;inset:0;overflow:hidden;background:var(--bg)}
+.a{position:absolute;left:0;top:0;will-change:transform,opacity}
+.blob{border-radius:50%;filter:blur(2px)}
+.brand{display:flex;align-items:center;gap:16px;font-weight:800;font-size:44px;letter-spacing:-.02em}
+.brand b{color:var(--coral)}
+.handle{font-weight:800;font-size:36px;color:var(--soft)}
+.pill{display:inline-flex;align-items:center;gap:14px;padding:16px 34px;border-radius:999px;font-weight:900;font-size:40px;letter-spacing:.06em;white-space:nowrap}
+.h{font-weight:900;letter-spacing:-.045em;line-height:.98;white-space:nowrap}
+.w{display:inline-block;will-change:transform,opacity}
+/* teléfono */
+.phone{background:#141D33;border-radius:78px;padding:16px;box-shadow:0 60px 110px -40px rgba(27,42,74,.55),0 0 0 3px #2A3A5E inset}
+.screen{position:relative;width:100%;height:100%;border-radius:62px;overflow:hidden;background:#fff}
+.island{position:absolute;left:50%;top:20px;width:150px;height:42px;margin-left:-75px;background:#0B1020;border-radius:30px;z-index:50}
+.screen iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;background:#fff}
+/* chat e inbox */
+.sb{height:96px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 44px 14px;font-weight:700;font-size:26px;color:#111}
+.sbi{display:flex;gap:8px;align-items:center}
+.row{position:absolute;left:0;right:0;height:132px;display:flex;align-items:center;gap:22px;padding:0 30px;background:#fff}
+.av{flex:none;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:36px}
+.row .tx{flex:1;min-width:0}
+.row .nm{font-weight:800;font-size:29px;color:#111}
+.row .ms{font-size:27px;color:#111;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .tm{font-size:22px;color:#8a8f99;font-weight:600}
+.dot{flex:none;width:18px;height:18px;border-radius:50%;background:var(--coral)}
+.bub{position:absolute;max-width:76%;padding:20px 26px;border-radius:30px;font-size:29px;line-height:1.3;font-weight:600}
+.bub.in{left:26px;background:#F0F1F4;color:#111;border-bottom-left-radius:10px}
+.bub.out{right:26px;background:var(--navy);color:#fff;border-bottom-right-radius:10px}
+.bub.wa{right:26px;background:#D9FDD3;color:#111;border-bottom-right-radius:10px}
+.sticker{padding:26px 44px;border-radius:44px;background:#fff;font-weight:900;font-size:66px;letter-spacing:-.03em;box-shadow:0 30px 60px -20px rgba(27,42,74,.35);white-space:nowrap}
+.chip{display:flex;align-items:center;gap:16px;padding:20px 30px 20px 22px;border-radius:28px;background:#fff;font-weight:800;font-size:38px;box-shadow:0 24px 50px -18px rgba(27,42,74,.35);white-space:nowrap}
+.ck{flex:none;width:50px;height:50px;border-radius:50%;background:var(--mint);display:grid;place-items:center}
+/* subtítulos */
+#subs{position:absolute;left:40px;right:40px;top:1508px;height:120px;display:flex;justify-content:center;align-items:center;pointer-events:none}
+#subs .ln{display:inline-flex;flex-wrap:nowrap;gap:0 16px;padding:14px 34px 18px;border-radius:30px;background:var(--navy);color:#fff;font-weight:900;font-size:62px;letter-spacing:-.02em;white-space:nowrap;box-shadow:0 20px 40px -18px rgba(27,42,74,.6)}
+#subs .ln span{transition:none}
+.note{font-size:28px;font-weight:600;color:var(--soft)}
+</style></head>
+<body><div id="st"></div>
+<script>
+"use strict";
+/* ---------- utilidades ---------- */
+const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const P = (t, a, d) => cl((t - a) / d);
+const eo = x => 1 - Math.pow(1 - x, 3);
+const eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const back = x => { const c = 1.9; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const spr = x => x <= 0 ? 0 : x >= 1 ? 1 : 1 - Math.exp(-6.5 * x) * Math.cos(11 * x) * (1 - x) - 0 * x;
+const lerp = (a, b, x) => a + (b - a) * x;
+const kf = (t, ks, ease = eio) => { // ks: [[t, v], ...]
+  if (t <= ks[0][0]) return ks[0][1];
+  for (let i = 1; i < ks.length; i++) if (t <= ks[i][0]) { const [t0, v0] = ks[i - 1], [t1, v1] = ks[i]; return lerp(v0, v1, ease((t - t0) / (t1 - t0))); }
+  return ks[ks.length - 1][1];
+};
+function mk(tag, cls, parent, html, css) {
+  const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html;
+  if (css) Object.assign(e.style, css); (parent || ST).appendChild(e); return e;
+}
+function tf(e, { x = 0, y = 0, s = 1, r = 0, o = 1, sx, sy }) {
+  e.style.transform = `translate(${x.toFixed(2)}px,${y.toFixed(2)}px) rotate(${r.toFixed(3)}deg) scale(${(sx ?? s).toFixed(4)},${(sy ?? s).toFixed(4)})`;
+  e.style.opacity = cl(o).toFixed(3); e.style.visibility = o <= 0.001 ? "hidden" : "visible";
+}
+const ST = document.getElementById("st");
+const LISTOS = [];
+const EV = []; // sonidos: {s, t, v}
+const sfx = (s, t, v = 1) => { if (t >= 0) EV.push({ s, t: +t.toFixed(3), v }); };
+const LOGO = s => `<svg width="${s}" height="${s}" viewBox="0 0 100 100"><rect width="100" height="100" rx="26" fill="#FF6B5B"/><rect x="16" y="20" width="60" height="47" rx="7" fill="#FFF6EC" stroke="#1B2A4A" stroke-width="6"/><path d="M16 33H76" stroke="#1B2A4A" stroke-width="6"/><circle cx="22.5" cy="25.5" r="1.6" fill="#1B2A4A"/><path d="M25 44.5H45M25 56H37" stroke="#1B2A4A" stroke-width="6" stroke-linecap="round"/><path d="M54 46L54 84L63.5 74.5L70 88L76.5 85L70 71.5L83.5 71.5Z" fill="#1B2A4A" stroke="#FF6B5B" stroke-width="9" stroke-linejoin="round" paint-order="stroke"/></svg>`;
+const CHECK = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2A4A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`;
+const PLANE = c => `<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.4" stroke-linejoin="round"><path d="M21 3L3 10.5l7 2.5 2.5 7z"/><path d="M21 3l-11 10"/></svg>`;
+const CHAT = (c, s = 40) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${c}"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.4 1.2 4.6 3.1 6.1L4.3 21l4-1.8c1.2.4 2.4.6 3.7.6 5.5 0 10-3.8 10-8.5S17.5 3 12 3z"/></svg>`;
+const STATUS = (c = "#111") => `<div class="sb" style="color:${c}"><span>9:41</span><span class="sbi"><svg width="34" height="22" viewBox="0 0 34 22"><rect x="0" y="14" width="6" height="8" rx="1.5" fill="${c}"/><rect x="9" y="9" width="6" height="13" rx="1.5" fill="${c}"/><rect x="18" y="4" width="6" height="18" rx="1.5" fill="${c}"/><rect x="27" y="0" width="6" height="22" rx="1.5" fill="${c}"/></svg><svg width="46" height="24" viewBox="0 0 46 24"><rect x="1" y="1" width="38" height="22" rx="6" fill="none" stroke="${c}" stroke-width="2" opacity=".5"/><rect x="4" y="4" width="28" height="16" rx="3.5" fill="${c}"/><rect x="41" y="8" width="3" height="8" rx="1.5" fill="${c}" opacity=".5"/></svg></span></div>`;
+
+/* ---------- piezas comunes ---------- */
+let TL, SC, HIDE_SUBS = [];
+const sc = id => SC[id];
+function wt(id, word, n = 0) { // tiempo en que se dice una palabra dentro de una escena
+  const norm = s => s.toLowerCase().replace(/[^\wáéíóúñü$]/g, "");
+  const ws = SC[id].lineas.flatMap(l => l.subs); let k = 0;
+  for (const w of ws) if (norm(w.w) === norm(word) && k++ === n) return w.t;
+  throw new Error(`palabra "${word}" no está en ${id}`);
+}
+
+function fondo(colores) {
+  const bl = colores.map(([c, s, x, y]) => ({ e: mk("div", "a blob", ST, null, { width: s + "px", height: s + "px", background: c }), x, y, s }));
+  return t => bl.forEach((b, i) => tf(b.e, { x: b.x + Math.sin(t * .35 + i * 2) * 26, y: b.y + Math.cos(t * .3 + i) * 22 }));
+}
+function marca() {
+  const e = mk("div", "a brand", ST, LOGO(64) + "<span>Sitio<b>Ya</b></span>");
+  const h = mk("div", "a handle", ST, "@sitioya.pty");
+  return (t, o) => { tf(e, { x: 70, y: 92, o }); tf(h, { x: 1010 - h.offsetWidth, y: 104, o }); };
+}
+
+function telefono(w, h, parent = ST) {
+  const el = mk("div", "a phone", parent, null, { width: w + "px", height: h + "px" });
+  const scr = mk("div", "screen", el); mk("div", "island", scr);
+  return { el, scr, w, h, sw: w - 32, sh: h - 32 };
+}
+function pagina(ph, nombre) { // la página de ejemplo real dentro del teléfono
+  const k = ph.sw / 390;
+  const f = mk("iframe", "", ph.scr, null, { width: "390px", height: (ph.sh / k) + "px", transform: `scale(${k})` });
+  f.src = `/plantillas/${nombre}.html`;
+  const listo = new Promise(r => f.addEventListener("load", async () => {
+    const d = f.contentDocument;
+    const s = d.createElement("style");
+    s.textContent = "*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.fade,.rv{opacity:1!important;transform:none!important}html{scrollbar-width:none}::-webkit-scrollbar{display:none}";
+    d.head.appendChild(s);
+    for (const i of d.images) i.loading = "eager";
+    await Promise.race([Promise.all([...d.images].map(i => i.complete ? 0 : new Promise(q => { i.onload = i.onerror = q; }))), new Promise(q => setTimeout(q, 8000))]);
+    await d.fonts.ready; r();
+  }, { once: true }));
+  LISTOS.push(listo);
+  return { f, k, listo, scroll: y => { f.contentWindow.scrollTo(0, Math.round(y)); }, rect: sel => { const e = f.contentDocument.querySelector(sel); const r = e.getBoundingClientRect(); return { x: r.left * k, y: r.top * k, w: r.width * k, h: r.height * k }; } };
+}
+function toque(parent) { // dedo que toca: círculo con onda
+  const e = mk("div", "a", parent, null, { width: "90px", height: "90px", marginLeft: "-45px", marginTop: "-45px", borderRadius: "50%", background: "rgba(27,42,74,.28)", border: "5px solid rgba(255,255,255,.9)", zIndex: 60 });
+  const o = mk("div", "a", parent, null, { width: "90px", height: "90px", marginLeft: "-45px", marginTop: "-45px", borderRadius: "50%", border: "5px solid rgba(27,42,74,.5)", zIndex: 60 });
+  return (t, t0, x, y, x0 = x + 60, y0 = y + 160) => {
+    const a = P(t, t0 - .55, .5), b = P(t, t0, .45);
+    const vis = t > t0 - .55 && t < t0 + .6;
+    tf(e, { x: lerp(x0, x, eo(a)), y: lerp(y0, y, eo(a)), s: t < t0 ? 1 : 1 - .25 * Math.sin(b * Math.PI), o: vis ? cl(a * 3) * (1 - P(t, t0 + .3, .3)) : 0 });
+    tf(o, { x, y, s: 1 + b * 1.4, o: t >= t0 && t < t0 + .45 ? 1 - b : 0 });
+  };
+}
+// subtítulos por bloques de pocas palabras, la palabra que suena en coral
+function subtitulos() {
+  const box = mk("div", "", ST); box.id = "subs";
+  const bloques = [];
+  for (const e of TL.escenas) {
+    if (HIDE_SUBS.includes(e.id)) continue;
+    for (const l of e.lineas) {
+      let cur = [];
+      const fin = l.t + l.d;
+      const cierra = () => { if (cur.length) bloques.push({ ws: cur, fin }); cur = []; };
+      l.subs.forEach((w, i) => {
+        const largo = cur.reduce((a, x) => a + x.w.length + 1, 0) + w.w.length;
+        if (cur.length && (largo > 24 || cur.length >= 4)) cierra();
+        cur.push(w);
+        if (/[.?!,:]$/.test(w.w) && cur.length >= 2) cierra();
+      });
+      cierra();
+    }
+  }
+  bloques.forEach((b, i) => { b.a = b.ws[0].t - .06; const sig = bloques[i + 1]; b.b = sig && sig.ws[0].t - .06 < b.fin + .5 ? sig.ws[0].t - .06 : b.fin + .25; });
+  let actual = null, ln = null, spans = [];
+  return t => {
+    const b = bloques.find(x => t >= x.a && t < x.b);
+    if (b !== actual) {
+      box.innerHTML = ""; actual = b; spans = [];
+      if (b) { ln = mk("div", "ln", box); spans = b.ws.map(w => mk("span", "", ln, w.w.replace(/&/g, "&amp;").replace(/</g, "&lt;"))); }
+    }
+    if (!b) return;
+    const p = P(t, b.a, .22);
+    ln.style.transform = `translateY(${(1 - eo(p)) * 26}px) scale(${.92 + .08 * back(p)})`; ln.style.opacity = cl(p * 2.5) * (1 - P(t, b.b - .08, .08));
+    let cur = -1; b.ws.forEach((w, i) => { if (t >= w.t - .04) cur = i; });
+    spans.forEach((s, i) => { s.style.color = i === cur ? "#FF6B5B" : i < cur ? "#fff" : "rgba(255,255,255,.55)"; });
+  };
+}
+// palabras que entran al ritmo de la voz
+function palabras(parent, html, x, y, size, color = "var(--navy)") {
+  const e = mk("div", "a h", parent, null, { fontSize: size + "px", color });
+  const ws = html.map(([txt, extra]) => { const s = mk("span", "w", e, txt, extra ? { color: extra } : null); mk("span", "", e, " "); return s; });
+  return { e, ws, upd: (t, tiempos, o = 1) => { tf(e, { x, y, o }); ws.forEach((s, i) => { const p = spr(P(t, tiempos[i] - .05, .55)); s.style.transform = `translateY(${(1 - p) * 90}px) rotate(${(1 - p) * 6}deg)`; s.style.opacity = cl(P(t, tiempos[i] - .05, .15)); }); } };
+}
+// cierre: logo, precio y DM
+function cierre(id, lineas) {
+  const S = sc(id), t0 = S.t;
+  const g = mk("div", "a", ST, null, { width: "1080px", height: "1920px" });
+  const halo = mk("div", "a blob", g, null, { width: "760px", height: "760px", background: "var(--blush)", left: "160px", top: "180px" });
+  const lg = mk("div", "a", g, LOGO(230), { left: "425px", top: "330px" });
+  const nm = mk("div", "a brand", g, "<span>Sitio<b>Ya</b></span>", { fontSize: "110px", left: "0", width: "1080px", justifyContent: "center", top: "590px" });
+  const confe = [...Array(16)].map((_, i) => mk("div", "a", g, null, { width: (14 + (i % 3) * 8) + "px", height: (14 + (i % 3) * 8) + "px", borderRadius: i % 4 ? "50%" : "6px", background: ["#FF6B5B", "#7ED6C1", "#FFD36B", "#1B2A4A"][i % 4], left: "540px", top: "445px" }));
+  const L = lineas.map(l => ({ ...l, e: mk("div", "a", g, l.html, Object.assign({ left: "0", width: "1080px", textAlign: "center", top: l.y + "px" }, l.css || {})) }));
+  const dm = mk("div", "a pill", g, PLANE("#fff") + "@sitioya.pty", { background: "var(--coral)", color: "#fff", fontSize: "62px", letterSpacing: "-.01em", padding: "26px 54px", fontWeight: "900" });
+  const tq = toque(g);
+  const tDM = L.find(l => l.dm).at;
+  sfx("whoosh", t0 - .15, .9); sfx("pop", t0 + .2, 1); sfx("sparkle", t0 + .25, .6);
+  L.forEach(l => sfx("pop", l.at, .7)); sfx("pop", tDM + .35, .8); sfx("tap", tDM + 1.35, 1);
+  return t => {
+    const on = t >= t0 - .3; g.style.display = on ? "block" : "none"; if (!on) return;
+    const p = spr(P(t, t0 + .15, .8));
+    tf(halo, { s: .6 + .4 * eo(P(t, t0, .8)) + Math.sin(t * 1.4) * .02, o: .9 });
+    tf(lg, { s: p, r: (1 - p) * -25, y: Math.sin((t - t0) * 2) * 8 });
+    tf(nm, { y: (1 - eo(P(t, t0 + .35, .5))) * 60, o: P(t, t0 + .35, .3) });
+    confe.forEach((c, i) => { const a = i / 16 * Math.PI * 2 + .3, q = eo(P(t, t0 + .2, 1.1)); tf(c, { x: Math.cos(a) * 330 * q, y: Math.sin(a) * 300 * q + q * q * 90, r: q * 300, o: 1 - P(t, t0 + .8, .5) }); });
+    L.forEach(l => { const q = spr(P(t, l.at - .05, .6)); tf(l.e, { y: (1 - q) * 70, s: .9 + .1 * q, o: cl(P(t, l.at - .05, .18)) }); });
+    const q = spr(P(t, tDM + .3, .6));
+    const cx = 540 - dm.offsetWidth / 2, cy = 1250;
+    const press = t > tDM + 1.35 && t < tDM + 1.6 ? .94 : 1;
+    tf(dm, { x: cx, y: cy + (1 - q) * 80, s: (.85 + .15 * q) * press, o: cl(P(t, tDM + .3, .15)) });
+    tq(t, tDM + 1.35, 540 + dm.offsetWidth * .28, cy + 60);
+  };
+}
+// transición: barrido coral
+function barrido(t0, forma = "circulo") {
+  const e = mk("div", "a", ST, null, { width: "1080px", height: "1920px", background: "var(--coral)", zIndex: 90 });
+  const lg = mk("div", "a", e, LOGO(170), { left: "455px", top: "875px" });
+  sfx("whoosh", t0 - .35, 1);
+  return t => {
+    const a = P(t, t0 - .35, .35), b = P(t, t0 + .05, .4);
+    if (t < t0 - .35 || b >= 1) { e.style.visibility = "hidden"; return; }
+    e.style.visibility = "visible";
+    e.style.clipPath = `circle(${(eio(a) * 1150).toFixed(1)}px at 540px 960px)`;
+    e.style.transform = `translateY(${(-eio(b) * 1920).toFixed(1)}px)`;
+    tf(lg, { s: .5 + .5 * eo(a), o: a, r: (1 - a) * -30 });
+  };
+}
+
+/* =========================================================
+   1) ANTES Y DESPUÉS
+   ========================================================= */
+function v1() {
+  HIDE_SUBS = ["gancho", "cierre"];
+  const bg = fondo([["#FFE3DC", 620, 620, 1240], ["#D9F3EC", 520, -200, 80]]);
+  const br = marca();
+  const G = sc("gancho"), A = sc("antes"), D = sc("despues"), C = sc("cierre");
+  // gancho
+  const h1 = palabras(ST, [["¿Sigues"]], 80, 290, 160);
+  const h1b = palabras(ST, [["vendiendo"]], 80, 450, 160);
+  const h2 = palabras(ST, [["solo"], ["por"], ["DM?", "var(--coral)"]], 80, 610, 160);
+  const und = mk("div", "a", ST, `<svg width="350" height="40" viewBox="0 0 330 40"><path d="M6 28C80 10 200 6 324 20" stroke="#FF6B5B" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="360" stroke-dashoffset="360"/></svg>`);
+  const undP = und.querySelector("path");
+  const tG = [wt("gancho", "¿Sigues"), wt("gancho", "vendiendo"), wt("gancho", "solo"), wt("gancho", "por"), wt("gancho", "DM?")];
+  tG.forEach(x => sfx("pop", x, .45));
+  // etiquetas
+  const pa = mk("div", "a pill", ST, "ANTES", { background: "var(--navy)", color: "#fff" });
+  const pd = mk("div", "a pill", ST, "DESPUÉS", { background: "var(--mint)", color: "var(--navy)" });
+  const sub1 = mk("div", "a h", ST, "Solo por DM", { fontSize: "64px" });
+  const sub2 = mk("div", "a h", ST, "Con tu página", { fontSize: "64px" });
+  // teléfono con mensajes
+  const ph = telefono(600, 1150);
+  const inbox = mk("div", "", ph.scr, null, { position: "absolute", inset: "0", background: "#fff" });
+  inbox.innerHTML = STATUS() + `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 30px 18px"><div style="font-weight:900;font-size:46px;color:#111;letter-spacing:-.02em">Mensajes</div><div class="cnt" style="min-width:64px;height:54px;padding:0 16px;border-radius:30px;background:#FF6B5B;color:#fff;font-weight:900;font-size:30px;display:grid;place-items:center">0</div></div><div style="margin:0 30px 14px;height:62px;border-radius:20px;background:#F0F1F4;color:#8a8f99;font-size:27px;font-weight:600;display:flex;align-items:center;padding:0 24px">Buscar</div>`;
+  const cnt = inbox.querySelector(".cnt");
+  const lista = mk("div", "", inbox, null, { position: "absolute", left: "0", right: "0", top: "262px", bottom: "0", overflow: "hidden" });
+  const MSG = [
+    ["Ana", "¿Precio?"], ["Luis", "Buenas, ¿a qué hora abren?"], ["Yari", "¿Dónde están ubicados?"], ["Kathy", "info porfa"],
+    ["José", "¿Hacen delivery?"], ["Mari", "Hola, ¿cuánto cuesta?"], ["Rodrigo", "¿Precio?"], ["Dayana", "¿Abren el domingo?"],
+    ["Carlos", "¿Cuál es el horario?"], ["Gaby", "¿Dónde queda el local?"], ["Mitzi", "precio porfa"], ["Edwin", "¿Tienen menú?"],
+    ["Ariel", "¿Cuánto es el envío?"], ["Sofi", "¿precio?"], ["Iván", "¿A qué hora cierran?"], ["Lili", "¿Dónde están?"], ["Abdiel", "info"], ["Nati", "¿precio?"],
+  ];
+  const COL = ["#FF6B5B", "#7ED6C1", "#FFB347", "#6C8EF5", "#B57EDC", "#4CB5AE", "#F28AB2", "#1B2A4A"];
+  const tP = wt("antes", "¿Precio?"), tH = wt("antes", "¿Horario?"), tDo = wt("antes", "¿Dónde");
+  const llegadas = [0.55, 0.95, 1.35, 1.85, 2.35, A.t + .5, A.t + 1.1, A.t + 1.7, A.t + 2.3, tP - .05, tP + .6, tH - .05, tH + .6, tDo - .05, tDo + .35, tDo + .6, tDo + .8, tDo + .95];
+  const rows = MSG.map(([n, m], i) => { const r = mk("div", "row", lista, `<div class="av" style="background:${COL[i % COL.length]}">${n[0]}</div><div class="tx"><div class="nm">${n}</div><div class="ms">${m}</div></div><div style="text-align:right"><div class="tm">ahora</div></div><div class="dot"></div>`); return { r, t: llegadas[i] }; });
+  rows.forEach(({ t }) => sfx("notif", t, .55));
+  // stickers grandes con las preguntas
+  const stk = [["¿Precio?", tP, 40, 620, -6], ["¿Horario?", tH, 600, 820, 5], ["¿Dónde están?", tDo, 60, 1040, -4]].map(([txt, t, x, y, r]) => ({ e: mk("div", "a sticker", ST, txt), t, x, y, r }));
+  stk.forEach(s => sfx("pop", s.t, 1));
+  // después: la página de verdad
+  const pg = pagina(ph, "panaderia");
+  pg.f.style.visibility = "hidden";
+  const wa = mk("div", "", ph.scr, null, { position: "absolute", inset: "0", background: "#EFE7DD", transform: "translateY(100%)" });
+  wa.innerHTML = STATUS("#fff").replace('class="sb"', 'class="sb" style="background:#1F3D2B;color:#fff"') + `<div style="background:#1F3D2B;color:#fff;display:flex;align-items:center;gap:18px;padding:6px 26px 22px"><div class="av" style="background:#F3EEE4;color:#1F3D2B;width:70px;height:70px;font-size:32px">L</div><div><div style="font-weight:800;font-size:32px">Trigo Lucero</div><div style="font-size:22px;opacity:.8">en línea</div></div></div>`;
+  const pedido = mk("div", "bub wa", wa, "Hola, quiero pedir 6 croissants para mañana temprano.", { top: "270px" });
+  const listoB = mk("div", "bub in", wa, "¡Claro! Te los tenemos listos a las 7.", { top: "440px" });
+  const nota = mk("div", "a note", ST, "Negocio y datos de ejemplo");
+  const tq = toque(ph.scr);
+  const tPr = wt("despues", "precios,"), tHo = wt("despues", "horario"), tLl = wt("despues", "llegar."), tPe = wt("despues", "pedir.");
+  const chips = [["Precios a la vista", tPr, 26, 760, -3], ["Tu horario", tHo, 640, 940, 3], ["Cómo llegar", tLl, 40, 1120, -2], ["Pedidos por WhatsApp", tPe - .1, 470, 1300, 2]].map(([txt, t, x, y, r]) => ({ e: mk("div", "a chip", ST, `<span class="ck">${CHECK}</span>${txt}`), t, x, y, r, txt }));
+  chips.forEach(c => sfx("pop", c.t, .8));
+  const tTap = tPe - 1.25;
+  sfx("tap", tTap, 1); sfx("whoosh", tTap + .15, .35); sfx("send", tTap + .9, .8); sfx("ding", tTap + 1.9, .8);
+  sfx("whoosh", D.t + 1.5, .25); sfx("whoosh", tHo - .7, .3);
+  const bar = barrido(D.t);
+  const fin = cierre("cierre", [
+    { html: `<span class="pill" style="background:var(--navy);color:#fff;font-size:54px;letter-spacing:0">Básica desde $99</span>`, at: wt("cierre", "Básica"), y: 800 },
+    { html: `<div class="h" style="font-size:112px">Escríbenos por DM</div>`, at: wt("cierre", "Escríbenos"), y: 1010, dm: true },
+  ]);
+  const subs = subtitulos();
+  const PH_X = 240, PH_Y = 330;
+  return t => {
+    bg(t);
+    br(t, 1 - P(t, C.t - .2, .3));
+    // gancho
+    const sal = eio(P(t, A.t - .25, .45));
+    h1.upd(t, tG.slice(0, 1), 1 - sal); h1b.upd(t, tG.slice(1, 2), 1 - sal); h2.upd(t, tG.slice(2), 1 - sal);
+    h1.e.style.marginTop = h1b.e.style.marginTop = h2.e.style.marginTop = (-sal * 120) + "px";
+    tf(und, { x: 400, y: 780 - sal * 120, o: 1 - sal }); undP.style.strokeDashoffset = 360 * (1 - eo(P(t, tG[4] + .15, .4)));
+    // etiquetas
+    const ia = spr(P(t, A.t + .05, .6)), oa = P(t, D.t - .3, .2);
+    tf(pa, { x: 80, y: 196 + (1 - ia) * -40, o: cl(ia * 2) * (1 - oa) });
+    tf(sub1, { x: 120 + pa.offsetWidth, y: 204, o: cl(P(t, A.t + .2, .3)) * (1 - oa) });
+    const id = spr(P(t, D.t + .25, .6)), od = P(t, C.t - .3, .25);
+    tf(pd, { x: 80, y: 196 + (1 - id) * -40, o: cl(id * 2) * (1 - od) });
+    tf(sub2, { x: 120 + pd.offsetWidth, y: 204, o: cl(P(t, D.t + .4, .3)) * (1 - od) });
+    // teléfono
+    const sube = eio(P(t, A.t - .3, .8));
+    const shake = t > tDo + .5 && t < A.t + A.d - .2 ? Math.sin(t * 70) * 5 * (1 - P(t, A.t + A.d - .6, .4)) : 0;
+    const entra = eo(P(t, .1, .7));
+    const pd2 = spr(P(t, D.t + .1, .8));
+    const salePh = eio(P(t, C.t - .35, .45));
+    const yG = 1160 + (1 - entra) * 700;
+    let y = lerp(yG, PH_Y, sube), r = lerp(-7, 0, sube) + shake * .15;
+    if (t >= D.t) { y = PH_Y + (1 - pd2) * 260 + salePh * 1900; r = salePh * 12; }
+    tf(ph.el, { x: PH_X + shake, y, r, o: t < .1 ? 0 : 1 });
+    // inbox
+    const antes = t < D.t;
+    inbox.style.visibility = antes ? "visible" : "hidden"; pg.f.style.visibility = antes ? "hidden" : "visible";
+    const n = rows.filter(x => t >= x.t).length;
+    cnt.textContent = n; cnt.style.transform = `scale(${1 + .25 * (1 - P(t, rows[Math.max(0, n - 1)].t, .25)) * (n ? 1 : 0)})`;
+    rows.forEach(({ r, t: ti }, i) => {
+      const k = rows.reduce((a, x, j) => a + (j !== i && x.t > ti ? eo(P(t, x.t, .32)) : 0), 0);
+      const p = eo(P(t, ti + .1, .3));
+      tf(r, { y: k * 132, x: (1 - p) * -60, o: t < ti + .1 ? 0 : p });
+      r.style.background = `rgba(255,107,91,${(.16 * (1 - P(t, ti + .3, .9))).toFixed(3)})`;
+    });
+    stk.forEach(s => { const q = spr(P(t, s.t - .05, .6)); tf(s.e, { x: s.x, y: s.y + (1 - q) * 60 + Math.sin(t * 2 + s.x) * 6, s: .4 + .6 * q, r: s.r * q, o: cl(P(t, s.t - .05, .12)) * (1 - P(t, D.t - .4, .2)) }); });
+    // después
+    if (!antes) {
+      pg.scroll(kf(t, [[D.t, 0], [D.t + .9, 0], [D.t + 2.9, 1520], [tHo - .75, 1520], [tHo - .1, 5290]]));
+      const tt = tTap;
+      const wr = { x: ph.sw - 110, y: ph.sh - 120 };
+      tq(t, tt, wr.x, wr.y);
+      const sh = eio(P(t, tt + .15, .5));
+      wa.style.transform = `translateY(${((1 - sh) * 100).toFixed(2)}%)`;
+      const b1 = spr(P(t, tt + .9, .5)), b2 = spr(P(t, tt + 1.9, .5));
+      tf(pedido, { y: (1 - b1) * 40, s: .9 + .1 * b1, o: cl(P(t, tt + .9, .1)) });
+      tf(listoB, { y: (1 - b2) * 40, s: .9 + .1 * b2, o: cl(P(t, tt + 1.9, .1)) });
+    } else wa.style.transform = "translateY(100%)";
+    tf(nota, { x: 540 - nota.offsetWidth / 2, y: 1486 + 160, o: !antes && t < C.t - .3 ? 1 : 0 });
+    chips.forEach(c => { const q = spr(P(t, c.t - .05, .6)); tf(c.e, { x: c.x, y: c.y + (1 - q) * 50 + Math.sin(t * 2.2 + c.y) * 5, s: .5 + .5 * q, r: c.r * q, o: cl(P(t, c.t - .05, .12)) * (1 - P(t, c.txt === "Pedidos por WhatsApp" ? C.t - .4 : tTap + .5, .25)) }); });
+    bar(t); fin(t); subs(t);
+  };
+}
+
+/* =========================================================
+   2) CÓMO FUNCIONA
+   ========================================================= */
+function v2() {
+  HIDE_SUBS = ["gancho", "cierre"];
+  const bg = fondo([["#FFE3DC", 640, 600, 1200], ["#D9F3EC", 480, -180, 120]]);
+  const br = marca();
+  const G = sc("gancho"), S1 = sc("paso1"), S2 = sc("paso2"), S3 = sc("paso3"), C = sc("cierre");
+  // gancho
+  const h1 = palabras(ST, [["Tu"], ["página"], ["web,"]], 80, 330, 140);
+  const h2 = palabras(ST, [["en"]], 80, 640, 140);
+  const tres = mk("div", "a h", ST, "3", { fontSize: "520px", color: "var(--coral)", lineHeight: ".8" });
+  const pasos = mk("div", "a h", ST, "pasos.", { fontSize: "140px" });
+  const tG = ["Tu", "página", "web,", "en", "3", "pasos."].map(w => wt("gancho", w));
+  tG.forEach((x, i) => sfx(i === 4 ? "thud" : "pop", x, i === 4 ? 1 : .45));
+  // pasos arriba
+  const stepper = mk("div", "a", ST, null, { width: "560px", height: "80px" });
+  const linea = mk("div", "", stepper, null, { position: "absolute", left: "40px", right: "40px", top: "36px", height: "8px", borderRadius: "4px", background: "#F1DCCF" });
+  const lineaOn = mk("div", "", linea, null, { position: "absolute", left: "0", top: "0", bottom: "0", borderRadius: "4px", background: "var(--coral)", width: "0" });
+  const dots = [0, 1, 2].map(i => mk("div", "", stepper, String(i + 1), { position: "absolute", left: (i * 240) + "px", top: "0", width: "80px", height: "80px", borderRadius: "50%", display: "grid", placeItems: "center", fontWeight: "900", fontSize: "40px", background: "#fff", color: "var(--navy)", boxShadow: "0 0 0 6px #F1DCCF inset" }));
+  const steps = [S1, S2, S3];
+  const tit = [["Nos cuentas de", "tu negocio"], ["La hacemos", "a tu medida"], ["Lista para", "recibir pedidos"]].map(([a, b]) => mk("div", "a h", ST, `${a}<br><span style="color:var(--coral)">${b}</span>`, { fontSize: "86px", lineHeight: "1" }));
+  steps.forEach(s => { sfx("whoosh", s.t - .1, .55); sfx("pop", s.t + .15, .7); });
+  // teléfono
+  const ph = telefono(520, 1010);
+  const PH_X = 280, PH_Y = 480;
+  // paso 1: chat con SitioYa
+  const chat = mk("div", "", ph.scr, null, { position: "absolute", inset: "0", background: "#fff" });
+  chat.innerHTML = STATUS() + `<div style="display:flex;align-items:center;gap:18px;padding:4px 26px 18px;border-bottom:2px solid #F0F1F4"><div style="width:68px;height:68px">${LOGO(68)}</div><div><div style="font-weight:800;font-size:30px;color:#111">SitioYa</div><div style="font-size:21px;color:#8a8f99;font-weight:600">@sitioya.pty</div></div></div>`;
+  const inp = mk("div", "", chat, null, { position: "absolute", left: "20px", right: "20px", bottom: "26px", height: "78px", borderRadius: "40px", border: "2px solid #E3E5EA", display: "flex", alignItems: "center", padding: "0 26px", fontSize: "26px", fontWeight: "600", color: "#111", whiteSpace: "nowrap", overflow: "hidden" });
+  const T1 = "Hola, tengo una panadería en San Francisco";
+  const tw0 = S1.t + .35, tw1 = wt("paso1", "negocio,") + .1;
+  for (let i = 0; i < 14; i++) sfx("key", tw0 + (tw1 - tw0) * i / 14, .35);
+  const m1 = mk("div", "bub out", chat, T1, { top: "225px" });
+  const fotosT = wt("paso1", "fotos");
+  const m2 = mk("div", "bub out", chat, `<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:330px">${["1742299807170-4eecb934a7a3", "1549413468-cd78edb7e75c", "1509440159596-0249088772ff"].map(f => `<div style="aspect-ratio:1;border-radius:14px;background:#ccc url(/img/f/${f}.jpg) center/cover"></div>`).join("")}</div>`, { top: "405px", padding: "10px" });
+  const precT = wt("paso1", "precios.");
+  const m3 = mk("div", "bub out", chat, `Mis precios:<br><span style="opacity:.85;font-weight:500">Croissant $2 · Pan de masa madre $5</span>`, { top: "540px" });
+  const typing = mk("div", "bub in", chat, `<span class="td">•</span> <span class="td">•</span> <span class="td">•</span>`, { top: "700px", fontSize: "40px", padding: "8px 26px" });
+  const m4 = mk("div", "bub in", chat, "¡Buenísimo! Ya empezamos con tu página.", { top: "700px" });
+  sfx("send", tw1 + .1, .8); sfx("pop", fotosT, .7); sfx("pop", precT, .7); sfx("notif", S1.t + S1.d - .9, .7);
+  const ch1 = [["Tu nombre", tw1 + .1, 20, 780], ["Tus fotos", fotosT, 20, 960], ["Tus precios", precT, 20, 1140]].map(([txt, t, x, y]) => ({ e: mk("div", "a chip", ST, `<span class="ck">${CHECK}</span>${txt}`), t, x, y }));
+  // paso 2: se arma la página
+  const pg = pagina(ph, "panaderia");
+  const esq = mk("div", "", ph.scr, null, { position: "absolute", inset: "0", background: "#fff", padding: "110px 30px 0" });
+  esq.innerHTML = [[60, 70, 0], [70, 62, 0], [40, 90, 1], [100, 380, 0], [48, 160, 0], [48, 160, 0]].map(([w, h, c]) => `<div style="height:${h}px;width:${w}%;border-radius:18px;background:${c ? "#FFD8CF" : "#EEF0F3"};margin-bottom:22px"></div>`).join("");
+  const shine = mk("div", "", ph.scr, null, { position: "absolute", left: "0", right: "0", height: "160px", background: "linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.9),rgba(255,255,255,0))", zIndex: 40 });
+  const tMed = wt("paso2", "medida,"), tCol = wt("paso2", "colores"), tEst = wt("paso2", "estilo.");
+  const pal = mk("div", "a", ST, `<div style="font-weight:800;font-size:30px;margin-bottom:14px">Tus colores</div><div style="display:flex;gap:12px">${["#1F3D2B", "#2F6B45", "#F3EEE4", "#C98B4E"].map(c => `<div style="width:56px;height:56px;border-radius:16px;background:${c};box-shadow:0 0 0 3px #fff,0 0 0 5px #E8E6E0"></div>`).join("")}</div>`, { padding: "24px 26px", borderRadius: "30px", background: "#fff", boxShadow: "0 24px 50px -18px rgba(27,42,74,.35)" });
+  const fnt = mk("div", "a", ST, `<div style="font-family:Georgia,serif;font-size:96px;font-weight:600;line-height:1;color:#1F3D2B">Aa</div><div style="font-weight:800;font-size:30px;margin-top:8px">Tu estilo</div>`, { padding: "24px 30px", borderRadius: "30px", background: "#fff", boxShadow: "0 24px 50px -18px rgba(27,42,74,.35)", textAlign: "center" });
+  const logoChip = mk("div", "a chip", ST, `<span style="color:#2F6B45;font-size:40px">●</span> Lucero`, { fontFamily: "Georgia,serif" });
+  sfx("sparkle", tMed, .8); sfx("pop", tCol, .8); sfx("pop", tEst, .8); sfx("whoosh", S2.t + 3.2, .3);
+  // paso 3: pedido por WhatsApp
+  const wa = mk("div", "", ph.scr, null, { position: "absolute", inset: "0", background: "#EFE7DD", transform: "translateX(100%)", zIndex: 30 });
+  wa.innerHTML = STATUS("#fff").replace('class="sb"', 'class="sb" style="background:#1F3D2B;color:#fff"') + `<div style="background:#1F3D2B;color:#fff;display:flex;align-items:center;gap:18px;padding:6px 26px 22px"><div class="av" style="background:#F3EEE4;color:#1F3D2B;width:68px;height:68px;font-size:32px">L</div><div><div style="font-weight:800;font-size:30px">Trigo Lucero</div><div style="font-size:21px;opacity:.8">en línea</div></div></div>`;
+  const ped = mk("div", "bub wa", wa, "Hola, quiero pedir:<br>2 croissants<br>1 pan de masa madre<br>Paso a buscarlo mañana a las 8.", { top: "260px" });
+  const tq = toque(ph.scr);
+  const tRec = wt("paso3", "recibir"), tWA = wt("paso3", "WhatsApp.");
+  const tTap1 = S3.t + 1.0, tTap2 = tRec - .05;
+  sfx("tap", tTap1, .9); sfx("pop", tTap1 + .1, .5); sfx("tap", tTap2, 1); sfx("whoosh", tTap2 + .1, .4); sfx("send", tTap2 + .75, .8);
+  const notifs = [0, 1, 2].map(i => ({ e: mk("div", "a", ST, `<div style="display:flex;gap:18px;align-items:center"><div style="flex:none;width:72px;height:72px;border-radius:20px;background:var(--wa);display:grid;place-items:center">${CHAT("#fff", 42)}</div><div><div style="font-weight:900;font-size:32px">Nuevo pedido</div><div style="font-weight:600;font-size:26px;color:var(--soft)">${["2 croissants, 1 pan de masa madre", "1 docena de pan de bono", "3 cafés con leche"][i]}</div></div></div>`, { width: "640px", padding: "22px 26px", borderRadius: "30px", background: "rgba(255,255,255,.97)", boxShadow: "0 30px 60px -20px rgba(27,42,74,.4)" }), t: tWA + .1 + i * .62 }));
+  notifs.forEach(n => sfx("ding", n.t, .8));
+  const nota = mk("div", "a note", ST, "Negocio y datos de ejemplo");
+  const fin = cierre("cierre", [
+    { html: `<span class="pill" style="background:var(--navy);color:#fff;font-size:54px;letter-spacing:0">Básica desde $99</span>`, at: wt("cierre", "Básica"), y: 800 },
+    { html: `<div class="h" style="font-size:112px">Escríbenos por DM</div>`, at: wt("cierre", "Escríbenos"), y: 1010, dm: true },
+  ]);
+  const subs = subtitulos();
+  let addRect = null;
+  return t => {
+    bg(t); br(t, 1 - P(t, C.t - .2, .3));
+    // gancho
+    const sal = eio(P(t, S1.t - .3, .4));
+    h1.upd(t, tG.slice(0, 3), 1 - sal); h2.upd(t, tG.slice(3, 4), 1 - sal);
+    const q3 = spr(P(t, tG[4] - .05, .7));
+    tf(tres, { x: 250, y: 470 + (1 - q3) * 200 - sal * 300, s: .3 + .7 * q3, r: (1 - q3) * -40, o: cl(P(t, tG[4] - .05, .1)) * (1 - sal) });
+    const qp = spr(P(t, tG[5] - .05, .55));
+    tf(pasos, { x: 600, y: 700 + (1 - qp) * 90, o: cl(P(t, tG[5] - .05, .12)) * (1 - sal) });
+    // stepper y títulos
+    const idx = t < S2.t ? 0 : t < S3.t ? 1 : 2;
+    const stO = cl(P(t, S1.t - .1, .3)) * (1 - P(t, C.t - .3, .25));
+    tf(stepper, { x: 260, y: 188, o: stO });
+    lineaOn.style.width = (kf(t, [[S2.t - .3, 0], [S2.t + .2, 50], [S3.t - .3, 50], [S3.t + .2, 100]]) ) + "%";
+    dots.forEach((d, i) => { const on = i <= idx && t >= S1.t; const q = i === idx ? spr(P(t, steps[i].t, .5)) : 1; d.style.background = on ? "var(--coral)" : "#fff"; d.style.color = on ? "#fff" : "var(--navy)"; d.style.boxShadow = on ? "none" : "0 0 0 6px #F1DCCF inset"; d.style.transform = `scale(${i === idx && t >= S1.t ? .8 + .3 * q - .1 * q : 1})`; });
+    tit.forEach((e, i) => { const s = steps[i]; const a = spr(P(t, s.t + .05, .6)), b = eio(P(t, s.t + s.d - .3, .3)); tf(e, { x: 80 + (1 - a) * 80 - b * 120, y: 300, o: cl(P(t, s.t, .2)) * (1 - b) }); });
+    // teléfono
+    const pin = spr(P(t, S1.t - .25, .8)), pout = eio(P(t, C.t - .4, .45));
+    tf(ph.el, { x: PH_X, y: PH_Y + (1 - pin) * 1300 + pout * 1900, r: (1 - pin) * 10 + pout * 10, o: t > S1.t - .3 ? 1 : 0 });
+    // paso 1
+    chat.style.visibility = t < S2.t + .1 ? "visible" : "hidden";
+    const n = Math.round(cl((t - tw0) / (tw1 - tw0)) * T1.length);
+    inp.innerHTML = t < tw1 + .1 ? T1.slice(0, n) + `<span style="display:inline-block;width:3px;height:34px;background:#FF6B5B;margin-left:2px;opacity:${Math.floor(t * 3) % 2 ? 1 : .2}"></span>` : `<span style="color:#9aa0aa">Escribe un mensaje...</span>`;
+    const bub = (e, ti) => { const q = spr(P(t, ti, .5)); tf(e, { y: (1 - q) * 50, s: .85 + .15 * q, o: cl(P(t, ti, .1)) }); };
+    bub(m1, tw1 + .1); bub(m2, fotosT); bub(m3, precT);
+    const tTy = S1.t + S1.d - 1.7;
+    typing.style.opacity = t > tTy && t < S1.t + S1.d - .9 ? 1 : 0;
+    typing.querySelectorAll(".td").forEach((d, i) => d.style.opacity = .3 + .7 * Math.max(0, Math.sin(t * 9 - i)));
+    bub(m4, S1.t + S1.d - .9);
+    ch1.forEach(c => { const q = spr(P(t, c.t - .05, .6)), o = P(t, S2.t - .35, .25); tf(c.e, { x: c.x + (1 - q) * -80 - o * 100, y: c.y, s: .6 + .4 * q, o: cl(P(t, c.t - .05, .12)) * (1 - o) }); });
+    // paso 2
+    const v2on = t >= S2.t;
+    esq.style.visibility = v2on && t < tMed + 1.2 ? "visible" : "hidden";
+    const rev = eio(P(t, tMed, 1.0));
+    pg.f.style.visibility = v2on ? "visible" : "hidden";
+    pg.f.style.clipPath = t < S3.t ? `inset(0 0 ${(100 - rev * 100).toFixed(2)}% 0)` : "none";
+    tf(shine, { y: rev * ph.sh - 80, o: rev > 0 && rev < 1 ? 1 : 0 });
+    const esqP = cl((t - S2.t) / .5);
+    esq.querySelectorAll("div").forEach((d, i) => { const q = eo(P(t, S2.t + .1 + i * .12, .4)); d.style.transform = `translateX(${(1 - q) * -40}px)`; d.style.opacity = q * (.6 + .4 * Math.sin(t * 6 + i) ** 2); });
+    if (v2on && t < S3.t) pg.scroll(kf(t, [[S2.t + 3.3, 0], [S2.t + S2.d, 520]]));
+    const p2o = P(t, S3.t - .35, .25);
+    const qp1 = spr(P(t, tCol - .05, .6)); tf(pal, { x: 20 + (1 - qp1) * -60 - p2o * 100, y: 840, r: -4 * qp1, s: .6 + .4 * qp1, o: cl(P(t, tCol - .05, .12)) * (1 - p2o) });
+    const qp2 = spr(P(t, tEst - .05, .6)); tf(fnt, { x: 820 + (1 - qp2) * 60 + p2o * 100, y: 1020, r: 4 * qp2, s: .6 + .4 * qp2, o: cl(P(t, tEst - .05, .12)) * (1 - p2o) });
+    const qp3 = spr(P(t, tMed + .2, .6)); tf(logoChip, { x: 760 + (1 - qp3) * 60 + p2o * 100, y: 700, r: 3 * qp3, s: .6 + .4 * qp3, o: cl(P(t, tMed + .2, .12)) * (1 - p2o) });
+    // paso 3
+    if (t >= S3.t) {
+      pg.scroll(kf(t, [[S3.t, 520], [S3.t + .6, 1330]]));
+      if (!addRect) { const b = [...pg.f.contentDocument.querySelectorAll(".btn.sm")][0]; const r = b.getBoundingClientRect(); addRect = { x: (r.left + r.width / 2) * pg.k, y: (r.top + r.height / 2) * pg.k }; }
+      const tqT = t < tTap1 + .7 ? tTap1 : tTap2;
+      const pos = t < tTap1 + .7 ? addRect : { x: ph.sw - 105, y: ph.sh - 105 };
+      tq(t, tqT, pos.x, pos.y);
+      const sl = eio(P(t, tTap2 + .12, .45));
+      wa.style.transform = `translateX(${((1 - sl) * 100).toFixed(2)}%)`;
+      const q = spr(P(t, tTap2 + .75, .5)); tf(ped, { y: (1 - q) * 50, s: .85 + .15 * q, o: cl(P(t, tTap2 + .75, .1)) });
+    }
+    notifs.forEach((nn, i) => { const q = spr(P(t, nn.t, .55)); const k = notifs.filter((m, j) => j > i && t > m.t).length; tf(nn.e, { x: 220, y: 1180 - k * 135 + (1 - q) * -60, s: (1 - k * .04) * (.8 + .2 * q), o: cl(P(t, nn.t, .12)) * (1 - P(t, C.t - .35, .25)) * (k > 2 ? 0 : 1) }); nn.e.style.zIndex = 70 + i; });
+    tf(nota, { x: 540 - nota.offsetWidth / 2, y: 1648, o: t >= S2.t + .3 && t < C.t - .3 ? 1 : 0 });
+    fin(t); subs(t);
+  };
+}
+
+/* =========================================================
+   3) TU NEGOCIO EN INTERNET, YA
+   ========================================================= */
+function v3() {
+  HIDE_SUBS = ["gancho", "cierre"];
+  const bg = fondo([["#D9F3EC", 560, -220, 1380], ["#FFE3DC", 700, 560, 560]]);
+  const br = marca();
+  const G = sc("gancho"), C = sc("cierre");
+  const PS = ["p1", "p2", "p3", "p4"].map(sc);
+  // gancho estilo post
+  const kick = mk("div", "a pill", ST, "PÁGINAS WEB PARA NEGOCIOS", { background: "var(--coral)", color: "var(--navy)", fontSize: "38px" });
+  const h1 = palabras(ST, [["Tu"], ["negocio"]], 76, 470, 168);
+  const h2 = palabras(ST, [["en"], ["internet,"]], 76, 640, 168);
+  const h3 = palabras(ST, [["ya.", "var(--coral)"]], 76, 810, 168);
+  const tG = ["Tu", "negocio", "en", "internet,", "ya."].map(w => wt("gancho", w));
+  tG.forEach((x, i) => sfx(i === 4 ? "thud" : "pop", x, i === 4 ? 1 : .45));
+  const lead = mk("div", "a", ST, "Hecha a tu medida, en Panamá.", { fontSize: "52px", fontWeight: "700", color: "var(--soft)", letterSpacing: "-.01em" });
+  // ejemplos
+  const pill = mk("div", "a pill", ST, "", { background: "var(--coral)", color: "var(--navy)", fontSize: "34px", padding: "12px 28px" });
+  const nombres = PS.map(s => mk("div", "a h", ST, s.nombre, { fontSize: "112px" }));
+  const ph = telefono(540, 1070);
+  const PH_X = 270, PH_Y = 440;
+  const carril = mk("div", "", ph.scr, null, { position: "absolute", left: "0", top: "0", height: "100%", width: (ph.sw * 4) + "px" });
+  const pgs = PS.map((s, i) => { const holder = mk("div", "", carril, null, { position: "absolute", left: (i * ph.sw) + "px", top: "0", width: ph.sw + "px", height: ph.sh + "px", overflow: "hidden" }); const p = pagina({ scr: holder, sw: ph.sw, sh: ph.sh }, s.pagina); return p; });
+  const halo = mk("div", "a blob", ST, null, { width: "820px", height: "820px", left: "130px", top: "560px", background: "#FFE3DC" });
+  ST.insertBefore(halo, ph.el);
+  const HALO = ["#FFE3DC", "#E7E2F7", "#FFE9C2", "#D9F3EC"];
+  PS.forEach((s, i) => { if (i) sfx("whoosh", s.t - .15, .8); sfx("pop", s.t + .1, .6); });
+  const nota = mk("div", "a note", ST, "Negocios y datos de ejemplo");
+  const fin = cierre("cierre", [
+    { html: `<div class="h" style="font-size:112px">Escríbenos por DM</div>`, at: wt("cierre", "Escríbenos"), y: 800, dm: true },
+    { html: `<div style="font-size:60px;font-weight:700;color:var(--soft)">y armamos la tuya</div>`, at: wt("cierre", "armamos"), y: 950 },
+    { html: `<span class="pill" style="background:var(--navy);color:#fff;font-size:50px;letter-spacing:0">Básica desde $99</span>`, at: wt("cierre", "tuya.") + .2, y: 1070 },
+  ]);
+  const subs = subtitulos();
+  const P1 = PS[0];
+  return t => {
+    bg(t); br(t, 1 - P(t, C.t - .2, .3));
+    const sal = eio(P(t, P1.t - .3, .4));
+    const qk = spr(P(t, .05, .6));
+    tf(kick, { x: 76, y: 300 + (1 - qk) * -40 - sal * 200, o: cl(qk * 2) * (1 - sal) });
+    h1.upd(t, tG.slice(0, 2), 1 - sal); h2.upd(t, tG.slice(2, 4), 1 - sal); h3.upd(t, tG.slice(4), 1 - sal);
+    [h1, h2, h3].forEach(h => h.e.style.marginTop = (-sal * 200) + "px");
+    tf(lead, { x: 80, y: 1010 + (1 - eo(P(t, tG[4] + .2, .5))) * 40 - sal * 200, o: P(t, tG[4] + .2, .3) * (1 - sal) });
+    // teléfono: asoma en el gancho y luego al centro
+    const asoma = spr(P(t, tG[4] - .2, .8)), centro = eio(P(t, P1.t - .35, .6)), sale = eio(P(t, C.t - .4, .45));
+    const x = lerp(PH_X + 330, PH_X, centro), y = lerp(PH_Y + 760 + (1 - asoma) * 600, PH_Y, centro) + sale * 1900;
+    tf(ph.el, { x, y, r: lerp(-9, 0, centro) + sale * 10, o: t > tG[4] - .25 ? 1 : 0 });
+    tf(halo, { x: lerp(330, 0, centro), y: lerp(640, 0, centro) + sale * 1900, s: .8 + .2 * asoma + Math.sin(t * 1.3) * .02, o: t > tG[4] - .25 ? 1 : 0 });
+    // qué página toca
+    let cur = 0; PS.forEach((s, i) => { if (t >= s.t - .2) cur = i; });
+    const sw = PS.map((s, i) => eio(P(t, s.t - .2, .45)));
+    const off = sw.slice(1).reduce((a, b) => a + b, 0);
+    carril.style.transform = `translateX(${(-off * ph.sw).toFixed(1)}px)`;
+    pgs.forEach((p, i) => { const s = PS[i]; p.scroll(kf(t, [[s.t + .4, 0], [s.t + s.d - .2, 1250]])); });
+    const mixH = (a, b, k) => { const h = c => [1, 3, 5].map(j => parseInt(c.slice(j, j + 2), 16)); const A = h(a), B = h(b); return `rgb(${A.map((v, j) => Math.round(lerp(v, B[j], k))).join(",")})`; };
+    halo.style.background = cur > 0 ? mixH(HALO[cur - 1], HALO[cur], sw[cur]) : HALO[0];
+    const vis = t >= P1.t - .05 && t < C.t - .3;
+    pill.textContent = `EJEMPLO ${cur + 1} DE 4`;
+    const qpl = spr(P(t, PS[cur].t - .1, .5));
+    tf(pill, { x: 80, y: 196, s: .9 + .1 * qpl, o: vis ? 1 : 0 });
+    nombres.forEach((e, i) => { const s = PS[i]; const a = spr(P(t, s.t - .1, .55)), b = eio(P(t, s.t + s.d - .2, .3)); tf(e, { x: 80, y: 278 + (1 - a) * 80 - b * 80, o: (i === PS.length - 1 ? cl(P(t, s.t - .1, .15)) * (1 - P(t, C.t - .35, .2)) : cl(P(t, s.t - .1, .15)) * (1 - b)) }); });
+    tf(nota, { x: 540 - nota.offsetWidth / 2, y: 1648, o: vis && t >= P1.t + .2 ? 1 : 0 });
+    fin(t); subs(t);
+  };
+}
+
+/* ---------- arranque ---------- */
+window.preparar = async (nombre, tiempos) => {
+  TL = tiempos; SC = Object.fromEntries(tiempos.escenas.map(e => [e.id, e]));
+  await document.fonts.load("900 60px DM"); await document.fonts.load("600 60px DM");
+  const f = { "antes-despues": v1, "como-funciona": v2, "tu-negocio-en-internet": v3 }[nombre];
+  if (!f) throw new Error("video desconocido " + nombre);
+  window.render = f();
+  await Promise.all(LISTOS);
+  await new Promise(r => setTimeout(r, 1500));
+  window.render(0);
+  return EV.sort((a, b) => a.t - b.t);
+};
+</script></body></html>
