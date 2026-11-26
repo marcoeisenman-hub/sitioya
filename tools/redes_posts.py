@@ -505,9 +505,9 @@ def post_vendes_instagram():
 # ---------- 10. 3 cosas que pierde tu negocio sin página ----------
 
 PIERDE = [
-    ('Clientes que te buscan', 'Te buscan en internet y no te encuentran.'),
+    ('Clientes que te buscan', 'Si te buscan en internet, puede que no te encuentren.'),
     ('Tiempo', 'Contestas lo mismo todo el día: precio, horario y dónde estás.'),
-    ('Pedidos cuando estás ocupado', 'Si no puedes contestar, nadie ve lo que vendes.'),
+    ('Pedidos cuando estás ocupado', 'Si no contestas a tiempo, el cliente puede irse a otro lado.'),
 ]
 
 
@@ -521,11 +521,11 @@ def post_pierde_sin_pagina():
     for i, (linea, c) in enumerate((('3 cosas que', NAVY), ('pierde tu negocio', CORAL), ('sin página', CORAL))):
         assert 66 + texto_ancho(d, linea, f) < 1030, linea
         d.text((66, 134 + i * 100), linea, font=f, fill=c)
-    y = 480
+    y = 470
     ft, fd = fuente(38, 900), fuente(27, 500)
     for n, (titulo, desc) in enumerate(PIERDE, 1):
-        ld = envolver(d, desc, fd, 700)
-        alto = 34 + 48 + 8 + len(ld) * 36 + 32
+        ld = envolver(d, desc, fd, 730)
+        alto = 30 + 48 + 6 + len(ld) * 36 + 28
         sombra(im, (70, y, 1010, y + alto), 34, desp=(0, 12), difuso=22, alfa=28)
         d = ImageDraw.Draw(im)
         d.rounded_rectangle((70, y, 1010, y + alto), 34, fill=BLANCO)
@@ -534,12 +534,12 @@ def post_pierde_sin_pagina():
         fnum = fuente(60, 900)
         s = str(n)
         d.text((156 - texto_ancho(d, s, fnum) / 2, cy - 38), s, font=fnum, fill=CORAL_D)
-        d.text((248, y + 34), titulo, font=ft, fill=NAVY)
-        ty = y + 34 + 48 + 8
+        d.text((248, y + 30), titulo, font=ft, fill=NAVY)
+        ty = y + 30 + 48 + 6
         for linea in ld:
             d.text((248, ty), linea, font=fd, fill=SOFT); ty += 36
-        y += alto + 22
-    fin = boton_pagina(d, y + 18)
+        y += alto + 20
+    fin = boton_pagina(d, y + 16)
     assert fin < 1200, fin
     pie_simple(im)
     return im
@@ -550,7 +550,7 @@ def post_pierde_sin_pagina():
 COMPARA = [
     ('Tus productos se pierden entre posts', 'Tus productos ordenados en un catálogo'),
     ('Te preguntan todo por mensaje', 'Precios, horario y ubicación a la vista'),
-    ('Solo te ven los que usan la app', 'Cualquiera abre tu link, sin cuenta'),
+    ('Lo importante se pierde en historias de 24 horas', 'Lo importante siempre en el mismo lugar'),
     ('Dependes de una sola red', 'Un lugar en internet que es tuyo'),
 ]
 
@@ -675,7 +675,7 @@ FEED = [
      'cuando estás ocupado. Comenta PÁGINA y te contamos'),
     ('11-pagina-y-no-solo-instagram.png', post_no_solo_instagram, 'Por qué página y no solo Instagram',
      'Instagram para que te conozcan y tu página para que te compren: tus productos ordenados, tus precios y tu '
-     'horario a la vista y un link que cualquiera abre. Comenta PÁGINA y te contamos'),
+     'horario a la vista y todo siempre en el mismo lugar. Comenta PÁGINA y te contamos'),
     ('12-ejemplo-gratis-de-tu-pagina.png', post_ejemplo_gratis, 'Te armamos un ejemplo gratis de tu página',
      'Te armamos un ejemplo gratis de tu página para que veas cómo quedaría tu negocio antes de decidir. '
      'Comenta PÁGINA y te contamos'),

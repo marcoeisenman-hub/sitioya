@@ -38,7 +38,7 @@ El número es el orden: se publica del 1 al 12. Los 10, 11 y 12 son extra y van 
    > 3 cosas que pierde tu negocio sin página: clientes que te buscan, tiempo contestando lo mismo y pedidos cuando estás ocupado. Comenta PÁGINA y te contamos
 
 11. `11-pagina-y-no-solo-instagram.png` · Por qué página y no solo Instagram
-   > Instagram para que te conozcan y tu página para que te compren: tus productos ordenados, tus precios y tu horario a la vista y un link que cualquiera abre. Comenta PÁGINA y te contamos
+   > Instagram para que te conozcan y tu página para que te compren: tus productos ordenados, tus precios y tu horario a la vista y todo siempre en el mismo lugar. Comenta PÁGINA y te contamos
 
 12. `12-ejemplo-gratis-de-tu-pagina.png` · Te armamos un ejemplo gratis de tu página
    > Te armamos un ejemplo gratis de tu página para que veas cómo quedaría tu negocio antes de decidir. Comenta PÁGINA y te contamos
