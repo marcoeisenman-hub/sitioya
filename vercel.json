@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/redes/posts/4-precios.png", "destination": "/redes/posts/8-precios.png", "permanent": false },
+    { "source": "/redes/posts/5-siguenos.png", "destination": "/redes/posts/9-siguenos.png", "permanent": false }
+  ]
+}
