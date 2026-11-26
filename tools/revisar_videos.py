@@ -72,10 +72,12 @@ def nombre_libre(video):
 
 
 def recortar(ffmpeg, video, hasta):
+    video = video.resolve()  # ruta absoluta: un nombre que empieza con "-" no se confunde con una opción
     destino = nombre_libre(video)
+    temporal = destino.with_name(f".{destino.stem}.parcial.mp4")
     inicio_fundido = max(hasta - FUNDIDO, 0)
     cmd = [
-        ffmpeg, "-hide_banner", "-loglevel", "error", "-n",
+        ffmpeg, "-hide_banner", "-loglevel", "error", "-y",
         "-i", str(video), "-t", f"{hasta}",
         # medidas pares (libx264 + yuv420p no acepta impares) y fundido al final
         "-vf", f"scale=trunc(iw/2)*2:trunc(ih/2)*2,fade=t=out:st={inicio_fundido}:d={FUNDIDO}",
@@ -86,8 +88,13 @@ def recortar(ffmpeg, video, hasta):
         cmd += ["-af", f"afade=t=out:st={inicio_fundido}:d={FUNDIDO}", "-c:a", "aac", "-b:a", "192k"]
     else:
         cmd += ["-an"]
-    cmd.append(str(destino))
-    subprocess.run(cmd, check=True)
+    cmd.append(str(temporal))
+    try:
+        subprocess.run(cmd, check=True)
+    except BaseException:
+        temporal.unlink(missing_ok=True)  # no deja copias a medias
+        raise
+    temporal.rename(destino)
     return destino
 
 
@@ -98,7 +105,10 @@ def juntar_videos(rutas):
         if p.is_dir():
             videos += sorted(
                 x for x in p.iterdir()
-                if x.suffix.lower() in EXTENSIONES and not re.search(r"-corto(-\d+)?$", x.stem)
+                if x.suffix.lower() in EXTENSIONES
+                and not x.name.startswith(".")
+                # salta solo las copias que hace este script (siempre .mp4)
+                and not (x.suffix.lower() == ".mp4" and re.search(r"-corto(-\d+)?$", x.stem))
             )
         elif p.is_file():
             videos.append(p)
@@ -123,10 +133,12 @@ def main():
         sys.exit("No encontré videos para revisar.")
 
     largos = 0
+    fallos = 0
     for v in videos:
         d = duracion(ffmpeg, v)
         if d is None:
-            print(f"?  {v.name}: no pude leer la duración")
+            fallos += 1
+            print(f"?      {v.name}: no pude leer la duración")
             continue
         if d > MAXIMO:
             largos += 1
@@ -135,9 +147,12 @@ def main():
                 try:
                     destino = recortar(ffmpeg, v, args.hasta)
                 except subprocess.CalledProcessError:
+                    fallos += 1
                     print("       no pude recortarlo (ffmpeg falló), sigo con los demás")
                     continue
-                print(f"       copia corta: {destino.name} ({duracion(ffmpeg, destino):.1f} s)")
+                dc = duracion(ffmpeg, destino)
+                texto = f"{dc:.1f} s" if dc is not None else "no pude leer la duración"
+                print(f"       copia corta: {destino.name} ({texto})")
         elif d < MINIMO:
             print(f"CORTO  {v.name}: {d:.1f} s (mínimo {MINIMO:g} s, se puede dejar si se entiende)")
         else:
@@ -145,6 +160,9 @@ def main():
 
     if largos and not args.recortar:
         print(f"\n{largos} video(s) pasan de 30 s. Para la copia corta: agrega --recortar (y --hasta 25 si quieres).")
+    if fallos:
+        print(f"\n{fallos} video(s) con problemas (ver arriba).")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
