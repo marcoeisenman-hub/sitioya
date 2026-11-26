@@ -8,6 +8,11 @@ cd "$(dirname "$0")"
 TRABAJO="${TRABAJO:-$(mktemp -d -t reels-sitioya)}"
 SALIDA="../../redes/videos"
 mkdir -p "$SALIDA"
+# una sola corrida a la vez (dos a la vez mezclarían videos y portadas)
+CANDADO="$SALIDA/.hacer_reels.lock"
+mkdir "$CANDADO" 2>/dev/null || { echo "Ya hay otra corrida (si no, borra $CANDADO)" >&2; exit 1; }
+tmpv=""; tmpj=""
+trap 'rm -f "$tmpv" "$tmpj"; rmdir "$CANDADO"' EXIT
 VIDEOS=("$@"); [ ${#VIDEOS[@]} -eq 0 ] && VIDEOS=(antes-despues como-funciona tu-negocio-en-internet)
 for v in "${VIDEOS[@]}"; do
   case "$v" in antes-despues|como-funciona|tu-negocio-en-internet) ;; *) echo "Video desconocido: $v" >&2; exit 1;; esac
@@ -17,15 +22,15 @@ for v in "${VIDEOS[@]}"; do
   node render.mjs "$v" "$TRABAJO"
   python3 audio.py "$TRABAJO/$v"
   node render.mjs "$v" "$TRABAJO" --cuadros 2.4   # portada: el gancho ya armado
-  tmpv=$(mktemp "$SALIDA/.$v.XXXXXX"); tmpj=$(mktemp "$SALIDA/.$v.XXXXXX")
-  trap 'rm -f "$tmpv" "$tmpj"' EXIT
+  tmpv=$(mktemp "$SALIDA/.$v.XXXXXX")
+  tmpj=$(mktemp "$SALIDA/.$v.XXXXXX")
   ffmpeg -nostdin -y -hide_banner -loglevel error -i "$TRABAJO/$v/video-mudo.mp4" -i "$TRABAJO/$v/audio.wav" \
     -map 0:v -map 1:a -c:v copy -af "loudnorm=I=-14:TP=-1.5:LRA=9,aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo" \
     -c:a aac -b:a 160k -ar 48000 -movflags +faststart -shortest -f mp4 "$tmpv"
   ffmpeg -nostdin -y -hide_banner -loglevel error -i "$TRABAJO/$v/cuadro-2.40.png" -q:v 3 -f image2 -c:v mjpeg "$tmpj"
   chmod 644 "$tmpv" "$tmpj"
-  mv -f "$tmpv" "$SALIDA/$v.mp4"; mv -f "$tmpj" "$SALIDA/$v.jpg"
-  trap - EXIT
+  # primero la portada y luego el video: si algo falla en medio, el video viejo sigue con su portada casi igual
+  mv -f "$tmpj" "$SALIDA/$v.jpg"; mv -f "$tmpv" "$SALIDA/$v.mp4"; tmpv=""; tmpj=""
   echo "$v: $(ffprobe -v error -show_entries format=duration,size -of csv=p=0 "$SALIDA/$v.mp4")"
 done
 echo "Trabajo en $TRABAJO"
