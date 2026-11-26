@@ -15,6 +15,7 @@ fundido de 0.5 s al final (imagen y sonido). El original no se toca.
 Necesita ffmpeg (en el PATH o el de `pip install imageio-ffmpeg`).
 """
 import argparse
+import errno
 import os
 import re
 import shutil
@@ -43,7 +44,7 @@ def buscar_ffmpeg():
 
 def duracion(ffmpeg, video):
     salida = subprocess.run(
-        [ffmpeg, "-hide_banner", "-i", str(video)],
+        [ffmpeg, "-nostdin", "-hide_banner", "-i", str(video)],
         capture_output=True,
         text=True,
     ).stderr
@@ -56,7 +57,7 @@ def duracion(ffmpeg, video):
 
 def tiene_audio(ffmpeg, video):
     salida = subprocess.run(
-        [ffmpeg, "-hide_banner", "-i", str(video)],
+        [ffmpeg, "-nostdin", "-hide_banner", "-i", str(video)],
         capture_output=True,
         text=True,
     ).stderr
@@ -65,49 +66,57 @@ def tiene_audio(ffmpeg, video):
 
 def publicar(temporal, video):
     """Pone la copia como <nombre>-corto.mp4 sin pisar nada (reel.mov y reel.webm no chocan).
-    os.link falla si el nombre ya existe, así que nunca sobrescribe."""
+    os.link y open("xb") fallan si el nombre ya existe, así que nunca sobrescribe."""
     n = 1
     while True:
         sufijo = "-corto" if n == 1 else f"-corto-{n}"
         destino = video.with_name(f"{video.stem}{sufijo}.mp4")
         try:
             os.link(temporal, destino)
+            return destino
         except FileExistsError:
             n += 1
             continue
-        except OSError:
-            # discos sin enlaces (exFAT): revisa antes y renombra
-            if destino.exists():
-                n += 1
-                continue
-            temporal.rename(destino)
-            return destino
-        temporal.unlink()
+        except OSError as e:
+            # solo si el disco no acepta enlaces (exFAT); otros errores se reportan
+            if e.errno not in (errno.EPERM, errno.ENOTSUP, errno.EOPNOTSUPP, errno.EXDEV, errno.EMLINK):
+                raise
+        try:
+            salida = open(destino, "xb")
+        except FileExistsError:
+            n += 1
+            continue
+        try:
+            with salida, open(temporal, "rb") as entrada:
+                shutil.copyfileobj(entrada, salida)
+        except BaseException:
+            destino.unlink(missing_ok=True)  # no deja una copia a medias
+            raise
         return destino
 
 
 def recortar(ffmpeg, video, hasta):
     video = video.resolve()  # ruta absoluta: un nombre que empieza con "-" no se confunde con una opción
-    # temporal único por ejecución (dos recortes a la vez no se pisan)
-    fd, nombre_tmp = tempfile.mkstemp(prefix=".recorte-", suffix=".parcial.mp4", dir=video.parent)
-    os.close(fd)
-    temporal = Path(nombre_tmp)
+    con_audio = tiene_audio(ffmpeg, video)
     inicio_fundido = max(hasta - FUNDIDO, 0)
     cmd = [
-        ffmpeg, "-hide_banner", "-loglevel", "error", "-y",
+        ffmpeg, "-nostdin", "-hide_banner", "-loglevel", "error", "-y",
         "-i", str(video), "-t", f"{hasta}",
         # medidas pares (libx264 + yuv420p no acepta impares) y fundido al final
         "-vf", f"scale=trunc(iw/2)*2:trunc(ih/2)*2,fade=t=out:st={inicio_fundido}:d={FUNDIDO}",
         "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
         "-movflags", "+faststart",
     ]
-    if tiene_audio(ffmpeg, video):
+    if con_audio:
         cmd += ["-af", f"afade=t=out:st={inicio_fundido}:d={FUNDIDO}", "-c:a", "aac", "-b:a", "192k"]
     else:
         cmd += ["-an"]
-    cmd.append(str(temporal))
+    # temporal único por ejecución (dos recortes a la vez no se pisan)
+    fd, nombre_tmp = tempfile.mkstemp(prefix=".recorte-", suffix=".parcial.mp4", dir=video.parent)
+    os.close(fd)
+    temporal = Path(nombre_tmp)
     try:
-        subprocess.run(cmd, check=True)
+        subprocess.run(cmd + [str(temporal)], check=True)
         return publicar(temporal, video)
     finally:
         temporal.unlink(missing_ok=True)  # no deja copias a medias
