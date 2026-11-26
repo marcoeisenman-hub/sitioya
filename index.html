@@ -429,6 +429,7 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <label>Tipo de negocio<select name="tipo"><option>Comida o café</option><option>Panadería o repostería</option><option>Barbería o salón</option><option>Tienda de ropa</option><option>Gimnasio</option><option>Clínica o salud</option><option>Otro</option></select></label>
     <label>Qué necesitas<select name="plan">
       <option selected>Básica · $99</option><option>Completa · $199</option><option>Diseño único · desde $369</option><option>No sé todavía, ayúdenme</option></select></label>
+    <p id="qej" hidden style="margin:0;font-weight:700;font-size:15px;color:var(--coral-d)"></p><input type="hidden" name="ej" id="qejv">
     <label>Cuéntanos más <small>(opcional)</small><textarea name="msg" placeholder="Qué vendes, si tienes Instagram, para cuándo la necesitas…"></textarea></label>
     <p class="err" id="qerr" aria-live="polite"></p>
     <button type="submit" id="qbtn" disabled><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Enviar por WhatsApp</button>
@@ -529,11 +530,9 @@ bindRow(fs, v => fSty = v); bindRow(fg, v => fGrp = v);
 q.addEventListener("input", apply); apply();
 
 // "Quiero una así": lleva a cotizar con el ejemplo anotado
-const qmsg = document.querySelector('#qform textarea[name="msg"]');
-let ejPre = "";
-const pickEj = s => { const t = T.find(x => x.s === s); if (!t || !qmsg) return; const pre = `Me gustó el ejemplo ${t.n} (${t.k}). `, v = qmsg.value;
-  if (ejPre && v.startsWith(ejPre)) qmsg.value = pre + v.slice(ejPre.length); else if (!v.trim()) qmsg.value = pre; else return; ejPre = pre; };
-document.getElementById("cat").addEventListener("click", e => { const b = e.target.closest("[data-ej]"); if (!b || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); pickEj(b.dataset.ej); document.getElementById("cotizar").scrollIntoView({ behavior: "smooth" }); history.replaceState(null, "", "#cotizar"); });
+const qej = document.getElementById("qej"), qejv = document.getElementById("qejv");
+const pickEj = s => { const t = T.find(x => x.s === s); if (!t || !qej) return false; qejv.value = `${t.n} (${t.k})`; qej.textContent = `Ejemplo que te gustó: ${t.n} (${t.k})`; qej.hidden = false; return true; };
+document.getElementById("cat").addEventListener("click", e => { const b = e.target.closest("[data-ej]"); if (!b || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); if (pickEj(b.dataset.ej)) history.replaceState(null, "", `?ej=${encodeURIComponent(b.dataset.ej)}#cotizar`); document.getElementById("cotizar").scrollIntoView({ behavior: "smooth" }); });
 pickEj(new URLSearchParams(location.search).get("ej"));
 
 // marquee
@@ -598,7 +597,7 @@ addEventListener("scroll", onScroll, {passive: true}); onScroll();
 </script>
 <script>
 (function(){var f=document.getElementById('qform');if(!f)return;document.getElementById('qbtn').disabled=false;f.addEventListener('submit',function(e){e.preventDefault();var d=new FormData(f),n=(d.get('nombre')||'').trim();if(!n){document.getElementById('qerr').textContent='Pon tu nombre para poder contestarte.';f.nombre.focus();return}
-var neg=(d.get('negocio')||'').trim(),m=(d.get('msg')||'').trim();var t='¡Hola, SitioYa! 👋\nMe gustaría cotizar una página web para mi negocio.\n\n*Nombre:* '+n+(neg?'\n*Negocio:* '+neg:'')+'\n*Tipo de negocio:* '+d.get('tipo')+'\n*Plan que me interesa:* '+d.get('plan')+(m?'\n*Detalles:* '+m:'')+'\n\n¿Me cuentan cuáles son los siguientes pasos? ¡Gracias!';
+var neg=(d.get('negocio')||'').trim(),m=(d.get('msg')||'').trim();var t='¡Hola, SitioYa! 👋\nMe gustaría cotizar una página web para mi negocio.\n\n*Nombre:* '+n+(neg?'\n*Negocio:* '+neg:'')+'\n*Tipo de negocio:* '+d.get('tipo')+'\n*Plan que me interesa:* '+d.get('plan')+(d.get('ej')?'\n*Ejemplo que me gustó:* '+d.get('ej'):'')+(m?'\n*Detalles:* '+m:'')+'\n\n¿Me cuentan cuáles son los siguientes pasos? ¡Gracias!';
 window.open('https://wa.me/50769197559?text='+encodeURIComponent(t),'_blank','noopener');document.getElementById('qerr').textContent='';});})();
 </script>
 </body>
