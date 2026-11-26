@@ -497,6 +497,27 @@ function v3() {
   ST.insertBefore(halo, ph.el);
   const HALO = ["#FFE3DC", "#E7E2F7", "#FFE9C2", "#D9F3EC"];
   PS.forEach((s, i) => { if (i) sfx("whoosh", s.t - .15, .8); sfx("pop", s.t + .1, .6); });
+  // restaurante: la página baja hasta su menú y sale el chip "Tu menú en línea"
+  const R = PS[2], tMenu = wt("p3", "menú");
+  const chipMenu = mk("div", "a chip", ST, `<span class="ck">${CHECK}</span>Tu menú en línea`);
+  sfx("pop", tMenu, .9);
+  let menuY = null;
+  // y no solo estos: cualquier negocio en Panamá
+  const O = sc("otros");
+  const o1 = palabras(ST, [["Y"], ["no"], ["solo"], ["estos:"]], 80, 290, 76, "var(--soft)");
+  const o2 = palabras(ST, [["Páginas"], ["para"]], 76, 410, 136);
+  const o3 = palabras(ST, [["cualquier", "var(--coral)"]], 76, 560, 136);
+  const o4 = palabras(ST, [["negocio"]], 76, 710, 136);
+  const tO = ["Y", "no", "solo", "estos:", "páginas", "para", "cualquier", "negocio", "Panamá."].map(w => wt("otros", w));
+  tO.slice(4, 8).forEach(x => sfx("pop", x, .45));
+  const pan = mk("div", "a pill", ST, "EN PANAMÁ", { background: "var(--navy)", color: "#fff", fontSize: "42px" });
+  sfx("thud", tO[8], .9);
+  const nube = mk("div", "a", ST, null, { left: "50px", top: "930px", width: "980px", display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "22px 20px" });
+  const TIPOS = ["Barbería", "Cafetería", "Florería", "Gimnasio", "Taller", "Veterinaria", "Tienda", "Spa", "Fotografía", "¡Y más!"];
+  const chipsO = TIPOS.map((txt, i) => mk("div", "chip", nube, i === TIPOS.length - 1 ? txt : `<span class="ck">${CHECK}</span>${txt}`, Object.assign({ fontSize: "36px", willChange: "transform,opacity" }, i === TIPOS.length - 1 ? { background: "var(--coral)", color: "#fff", padding: "20px 34px" } : {})));
+  const tChip = i => tO[6] + .1 + i * .16;
+  chipsO.forEach((_, i) => { if (i % 2 === 0) sfx("pop", tChip(i), .4); });
+  sfx("whoosh", O.t - .2, .8);
   const nota = mk("div", "a note", ST, "Negocios y datos de ejemplo");
   const fin = cierre("cierre", [
     { html: `<div class="h" style="font-size:112px">Escríbenos por DM</div>`, at: wt("cierre", "Escríbenos"), y: 800, dm: true },
@@ -514,7 +535,7 @@ function v3() {
     [h1, h2, h3].forEach(h => h.e.style.marginTop = (-sal * 200) + "px");
     tf(lead, { x: 80, y: 1010 + (1 - eo(P(t, tG[4] + .2, .5))) * 40 - sal * 200, o: P(t, tG[4] + .2, .3) * (1 - sal) });
     // teléfono: asoma en el gancho y luego al centro
-    const asoma = spr(P(t, tG[4] - .2, .8)), centro = eio(P(t, P1.t - .35, .6)), sale = eio(P(t, C.t - .4, .45));
+    const asoma = spr(P(t, tG[4] - .2, .8)), centro = eio(P(t, P1.t - .35, .6)), sale = eio(P(t, O.t - .3, .45));
     const x = lerp(PH_X + 330, PH_X, centro), y = lerp(PH_Y + 760 + (1 - asoma) * 600, PH_Y, centro) + sale * 1900;
     tf(ph.el, { x, y, r: lerp(-9, 0, centro) + sale * 10, o: t > tG[4] - .25 ? 1 : 0 });
     tf(halo, { x: lerp(330, 0, centro), y: lerp(640, 0, centro) + sale * 1900, s: .8 + .2 * asoma + Math.sin(t * 1.3) * .02, o: t > tG[4] - .25 ? 1 : 0 });
@@ -523,14 +544,28 @@ function v3() {
     const sw = PS.map((s, i) => eio(P(t, s.t - .2, .45)));
     const off = sw.slice(1).reduce((a, b) => a + b, 0);
     carril.style.transform = `translateX(${(-off * ph.sw).toFixed(1)}px)`;
-    pgs.forEach((p, i) => { const s = PS[i]; p.scroll(kf(t, [[s.t + .4, 0], [s.t + s.d - .2, 1250]])); });
+    pgs.forEach((p, i) => {
+      const s = PS[i];
+      if (s !== R) return p.scroll(kf(t, [[s.t + .4, 0], [s.t + s.d - .2, 1250]]));
+      if (menuY === null) { const d = p.f.contentDocument, m = d.getElementById("menu"); menuY = m ? m.getBoundingClientRect().top + d.defaultView.scrollY - 64 : 1250; }
+      p.scroll(kf(t, [[s.t + .3, 0], [tMenu - .05, menuY], [s.t + s.d - .2, menuY + 260]]));
+    });
+    { const q = spr(P(t, tMenu - .05, .6)), o = P(t, R.t + R.d - .3, .25); tf(chipMenu, { x: 590 + (1 - q) * 60, y: 1190 + (1 - q) * 50 + Math.sin(t * 2.2) * 5, s: .5 + .5 * q, r: 3 * q, o: cl(P(t, tMenu - .05, .12)) * (1 - o) }); }
+    // y no solo estos
+    { const ent = t >= O.t - .3, fo = eio(P(t, C.t - .5, .3));
+      o1.upd(t, tO.slice(0, 4), ent ? 1 - fo : 0); o2.upd(t, tO.slice(4, 6), ent ? 1 - fo : 0); o3.upd(t, tO.slice(6, 7), ent ? 1 - fo : 0); o4.upd(t, tO.slice(7, 8), ent ? 1 - fo : 0);
+      [o1, o2, o3, o4].forEach(h => h.e.style.marginTop = (-fo * 120) + "px");
+      const qp = spr(P(t, tO[8] - .05, .6));
+      tf(pan, { x: 116 + o4.e.offsetWidth, y: 752 + (1 - qp) * 50 - fo * 120, s: .6 + .4 * qp, r: -3 * qp, o: cl(P(t, tO[8] - .05, .12)) * (1 - fo) });
+      tf(nube, { y: -fo * 120, o: ent ? 1 - fo : 0 });
+      chipsO.forEach((c, i) => { const q = spr(P(t, tChip(i) - .05, .6)); tf(c, { y: (1 - q) * 60 + Math.sin(t * 2 + i * 1.7) * 6, s: .5 + .5 * q, r: ((i % 3) - 1) * 2.5 * q, o: cl(P(t, tChip(i) - .05, .12)) }); }); }
     const mixH = (a, b, k) => { const h = c => [1, 3, 5].map(j => parseInt(c.slice(j, j + 2), 16)); const A = h(a), B = h(b); return `rgb(${A.map((v, j) => Math.round(lerp(v, B[j], k))).join(",")})`; };
     halo.style.background = cur > 0 ? mixH(HALO[cur - 1], HALO[cur], sw[cur]) : HALO[0];
-    const vis = t >= P1.t - .05 && t < C.t - .3;
+    const vis = t >= P1.t - .05 && t < O.t - .3;
     pill.textContent = `EJEMPLO ${cur + 1} DE 4`;
     const qpl = spr(P(t, PS[cur].t - .1, .5));
     tf(pill, { x: 80, y: 196, s: .9 + .1 * qpl, o: vis ? 1 : 0 });
-    nombres.forEach((e, i) => { const s = PS[i]; const a = spr(P(t, s.t - .1, .55)), b = eio(P(t, s.t + s.d - .2, .3)); tf(e, { x: 80, y: 278 + (1 - a) * 80 - b * 80, o: (i === PS.length - 1 ? cl(P(t, s.t - .1, .15)) * (1 - P(t, C.t - .35, .2)) : cl(P(t, s.t - .1, .15)) * (1 - b)) }); });
+    nombres.forEach((e, i) => { const s = PS[i]; const a = spr(P(t, s.t - .1, .55)), b = eio(P(t, s.t + s.d - .2, .3)); tf(e, { x: 80, y: 278 + (1 - a) * 80 - b * 80, o: (i === PS.length - 1 ? cl(P(t, s.t - .1, .15)) * (1 - P(t, O.t - .35, .2)) : cl(P(t, s.t - .1, .15)) * (1 - b)) }); });
     tf(nota, { x: 540 - nota.offsetWidth / 2, y: 1648, o: vis && t >= P1.t + .2 ? 1 : 0 });
     fin(t); subs(t);
   };

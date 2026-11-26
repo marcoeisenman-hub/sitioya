@@ -155,8 +155,8 @@
     "min": 3.7,
     "lineas": [
      {
-      "say": "Para tu restaurante, con pedidos directo a WhatsApp.",
-      "sub": "Para tu restaurante, con pedidos directo a WhatsApp.",
+      "say": "Para tu restaurante, con tu menú en línea.",
+      "sub": "Para tu restaurante, con tu menú en línea.",
       "at": 0.15
      }
     ]
@@ -175,8 +175,19 @@
     ]
    },
    {
+    "id": "otros",
+    "min": 4.4,
+    "lineas": [
+     {
+      "say": "Y no solo estos: hacemos páginas para cualquier negocio en Panamá.",
+      "sub": "Y no solo estos: hacemos páginas para cualquier negocio en Panamá.",
+      "at": 0.2
+     }
+    ]
+   },
+   {
     "id": "cierre",
-    "min": 5.6,
+    "min": 4.8,
     "lineas": [
      {
       "say": "Escríbenos por di em y armamos la tuya.",

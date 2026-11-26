@@ -40,9 +40,12 @@ Si un video ya hecho es más largo, se recorta siguiendo estos bloques: se acort
 ### 3) Tu negocio en internet, ya
 | Segundos | Qué va |
 |---|---|
-| 0-2 | Gancho: "Tu negocio en internet, ya" |
-| 2-18 | Páginas de ejemplo de sitioya.vercel.app en laptop y celular (3 o 4, unos 4 s cada una) |
-| 18-25 | Cierre: Escríbenos por DM @sitioya.pty |
+| 0-3 | Gancho: "Tu negocio en internet, ya" |
+| 3-19 | 4 páginas de ejemplo en el celular, unos 4 s cada una: panadería, heladería, restaurante ("con tu menú en línea", la página baja hasta su menú) y salón |
+| 19-25 | "Y no solo estos: hacemos páginas para cualquier negocio en Panamá" (barbería, cafetería, florería, gimnasio, taller, veterinaria, tienda, spa, fotografía, ¡y más!) |
+| 25-29 | Cierre: Escríbenos por DM @sitioya.pty |
+
+El que está en `redes/videos/tu-negocio-en-internet.mp4` (2026-11-26) dura 29.4 s y sigue estos tiempos. Se rehace con `tools/reels/hacer_reels.sh tu-negocio-en-internet`.
 
 ### 4) 3 cosas que pierde tu negocio sin página
 | Segundos | Qué va |
