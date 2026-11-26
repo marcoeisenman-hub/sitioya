@@ -398,6 +398,8 @@ def slide3():
         d.text((118, y), t, font=fuente(36, 800), fill=NAVY)
         y = parrafo(d, (118, y + 48), s, fuente(28, 500), SOFT, 380, 1.3) + 34
     celular(im, (560, 380), pantalla_pedido(600, 1300), ancho=460, alto=840, girar=3)
+    d = ImageDraw.Draw(im)
+    d.text((72, 1150), 'Horario y ubicación de ejemplo', font=fuente(24, 500), fill=SOFT)
     pie(im, 3)
     return im
 
@@ -423,8 +425,11 @@ def slide4():
     by = y + 90
     d.rounded_rectangle((x, by, x + ancho_total, by + 96), 48, fill=CORAL)
     tx = x + 40
-    for parte, c in ((t1, NAVY), (t2, CREMA), (t3, NAVY)):
-        d.text((tx, by + 22), parte, font=f, fill=c); tx += texto_ancho(d, parte, f)
+    for parte in (t1, t2, t3):
+        d.text((tx, by + 22), parte, font=f, fill=NAVY)
+        if parte == t2:  # subrayado para resaltar la palabra que hay que comentar
+            d.rounded_rectangle((tx, by + 76, tx + texto_ancho(d, parte, f), by + 82), 3, fill=NAVY)
+        tx += texto_ancho(d, parte, f)
     pie(im, 4, oscuro=True)
     return im
 

@@ -18,4 +18,4 @@ Caption:
 
 ## Nombres revisados
 - La heladería de ejemplo es "Nieve & Co" (nombre ficticio). Codex lo buscó en la web el 2026-11-25 y no encontró ningún negocio en Panamá con ese nombre.
-- No hay logos ni marcas de terceros (sin el botón de WhatsApp, sin centros comerciales) y no hay reseñas ni cifras inventadas. Lo único que es de ejemplo son los precios y el horario, y en los slides dice que son de ejemplo.
+- No hay logos ni marcas de terceros (sin el botón de WhatsApp, sin centros comerciales) y no hay reseñas ni cifras inventadas. Lo único que es de ejemplo son los precios, el horario y la ubicación, y en los slides 2 y 3 dice que son de ejemplo.
