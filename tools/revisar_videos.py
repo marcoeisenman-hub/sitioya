@@ -15,10 +15,12 @@ fundido de 0.5 s al final (imagen y sonido). El original no se toca.
 Necesita ffmpeg (en el PATH o el de `pip install imageio-ffmpeg`).
 """
 import argparse
+import os
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 MINIMO = 15.0
@@ -61,20 +63,28 @@ def tiene_audio(ffmpeg, video):
     return "Audio:" in salida
 
 
-def nombre_libre(video):
-    """<nombre>-corto.mp4 sin pisar nada (reel.mov y reel.webm no chocan)."""
-    destino = video.with_name(f"{video.stem}-corto.mp4")
-    n = 2
-    while destino.exists():
-        destino = video.with_name(f"{video.stem}-corto-{n}.mp4")
-        n += 1
-    return destino
+def publicar(temporal, video):
+    """Pone la copia como <nombre>-corto.mp4 sin pisar nada (reel.mov y reel.webm no chocan).
+    os.link falla si el nombre ya existe, así que nunca sobrescribe."""
+    n = 1
+    while True:
+        sufijo = "-corto" if n == 1 else f"-corto-{n}"
+        destino = video.with_name(f"{video.stem}{sufijo}.mp4")
+        try:
+            os.link(temporal, destino)
+        except FileExistsError:
+            n += 1
+            continue
+        temporal.unlink()
+        return destino
 
 
 def recortar(ffmpeg, video, hasta):
     video = video.resolve()  # ruta absoluta: un nombre que empieza con "-" no se confunde con una opción
-    destino = nombre_libre(video)
-    temporal = destino.with_name(f".{destino.stem}.parcial.mp4")
+    # temporal único por ejecución (dos recortes a la vez no se pisan)
+    fd, nombre_tmp = tempfile.mkstemp(prefix=f".{video.stem}.", suffix=".parcial.mp4", dir=video.parent)
+    os.close(fd)
+    temporal = Path(nombre_tmp)
     inicio_fundido = max(hasta - FUNDIDO, 0)
     cmd = [
         ffmpeg, "-hide_banner", "-loglevel", "error", "-y",
@@ -94,8 +104,7 @@ def recortar(ffmpeg, video, hasta):
     except BaseException:
         temporal.unlink(missing_ok=True)  # no deja copias a medias
         raise
-    temporal.rename(destino)
-    return destino
+    return publicar(temporal, video)
 
 
 def juntar_videos(rutas):
@@ -151,7 +160,9 @@ def main():
                     print("       no pude recortarlo (ffmpeg falló), sigo con los demás")
                     continue
                 dc = duracion(ffmpeg, destino)
-                texto = f"{dc:.1f} s" if dc is not None else "no pude leer la duración"
+                if dc is None:
+                    fallos += 1
+                texto = f"{dc:.1f} s" if dc is not None else "no pude leer la duración de la copia"
                 print(f"       copia corta: {destino.name} ({texto})")
         elif d < MINIMO:
             print(f"CORTO  {v.name}: {d:.1f} s (mínimo {MINIMO:g} s, se puede dejar si se entiende)")
