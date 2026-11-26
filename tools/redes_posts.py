@@ -493,12 +493,19 @@ def post_vendes_instagram():
     d = ImageDraw.Draw(im)
     parrafo(d, (540, 1060), 'Todo en un solo lugar y te piden directo.', fuente(34, 800), NAVY, 940, 1.25,
             centrado=True)
-    d.text((72, 1160), 'Tienda y datos de ejemplo', font=fuente(24, 500), fill=SOFT)
-    pie_simple(im)
+    # texto chico de abajo: 'Hacemos páginas para negocios en Panamá. @sitioya.pty'
+    fs = fuente(28, 600)
+    partes = (('Hacemos páginas para negocios en Panamá. ', SOFT), ('@sitioya.pty', CORAL_D))
+    x = (1080 - sum(texto_ancho(d, t, fs) for t, _ in partes)) / 2
+    for t, c in partes:
+        d.text((x, 1150), t, font=fs, fill=c)
+        x += texto_ancho(d, t, fs)
+    # pie: logo a la izquierda y el aviso de que la tienda es de ejemplo a la derecha
+    logo_sitioya(im, (70, 1350 - 120), 58)
     d = ImageDraw.Draw(im)
-    t = 'Hacemos páginas para negocios en Panamá'
-    fs = fuente(24, 500)
-    d.text((1080 - 70 - texto_ancho(d, t, fs), 1160), t, font=fs, fill=SOFT)
+    t = 'Tienda y datos de ejemplo'
+    fe = fuente(24, 500)
+    d.text((1080 - 70 - texto_ancho(d, t, fe), 1350 - 102), t, font=fe, fill=SOFT)
     return im
 
 

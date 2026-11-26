@@ -25,7 +25,7 @@ El número es el orden: se publica del 1 al 13. Los 10, 11 y 12 son extra y van 
 6. `6-antes-y-despues.png` · Antes y después
    > Antes: te buscan y no te encuentran. Después: tu página con tus precios, tu horario y tu link para compartir. Comenta PÁGINA y te contamos
 
-7. `7-vendes-por-instagram.png` · ¿Vendes por Instagram? (vender solo por mensajes vs con página)
+7. `7-vendes-por-instagram.png` · ¿Vendes por Instagram? Así se vería tu negocio con página (vender solo por mensajes vs con página; abajo en chico "Hacemos páginas para negocios en Panamá. @sitioya.pty")
    > ¿Vendes solo por Instagram? Con una página tus clientes ven todo en un solo lugar y te piden directo. Comenta PÁGINA y te contamos
 
 8. `8-precios.png` · Precios
