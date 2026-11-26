@@ -75,6 +75,13 @@ def publicar(temporal, video):
         except FileExistsError:
             n += 1
             continue
+        except OSError:
+            # discos sin enlaces (exFAT): revisa antes y renombra
+            if destino.exists():
+                n += 1
+                continue
+            temporal.rename(destino)
+            return destino
         temporal.unlink()
         return destino
 
@@ -82,7 +89,7 @@ def publicar(temporal, video):
 def recortar(ffmpeg, video, hasta):
     video = video.resolve()  # ruta absoluta: un nombre que empieza con "-" no se confunde con una opción
     # temporal único por ejecución (dos recortes a la vez no se pisan)
-    fd, nombre_tmp = tempfile.mkstemp(prefix=f".{video.stem}.", suffix=".parcial.mp4", dir=video.parent)
+    fd, nombre_tmp = tempfile.mkstemp(prefix=".recorte-", suffix=".parcial.mp4", dir=video.parent)
     os.close(fd)
     temporal = Path(nombre_tmp)
     inicio_fundido = max(hasta - FUNDIDO, 0)
@@ -101,10 +108,9 @@ def recortar(ffmpeg, video, hasta):
     cmd.append(str(temporal))
     try:
         subprocess.run(cmd, check=True)
-    except BaseException:
+        return publicar(temporal, video)
+    finally:
         temporal.unlink(missing_ok=True)  # no deja copias a medias
-        raise
-    return publicar(temporal, video)
 
 
 def juntar_videos(rutas):
@@ -155,9 +161,9 @@ def main():
             if args.recortar:
                 try:
                     destino = recortar(ffmpeg, v, args.hasta)
-                except subprocess.CalledProcessError:
+                except (subprocess.CalledProcessError, OSError) as e:
                     fallos += 1
-                    print("       no pude recortarlo (ffmpeg falló), sigo con los demás")
+                    print(f"       no pude recortarlo ({e.__class__.__name__}), sigo con los demás")
                     continue
                 dc = duracion(ffmpeg, destino)
                 if dc is None:
