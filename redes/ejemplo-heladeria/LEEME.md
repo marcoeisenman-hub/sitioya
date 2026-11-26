@@ -9,7 +9,7 @@ Para @sitioya.pty. Las imágenes salen de `tools/redes_heladeria.py` (correr `py
 4. `heladeria-4-cierre.png`: Así podría quedar la página de tu negocio, comenta PÁGINA
 
 Caption:
-> Ejemplo de la semana: Heladería. Así podría quedar la página de tu negocio. Comenta PÁGINA y te contamos
+> Ejemplo de la semana: Heladería. Así podría quedar la página de tu negocio. Compártelo con alguien que tenga negocio
 
 ## Story (1080x1920)
 `story-encuesta.png`

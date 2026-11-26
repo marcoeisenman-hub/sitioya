@@ -692,24 +692,25 @@ HELADERIA = 'heladeria'
 FEED = [
     ('1-tu-negocio-en-internet.png', post_tu_negocio, 'Tu negocio en internet, ya',
      'Tu negocio en internet, ya. Hacemos páginas web para negocios en Panamá, listas en pocos días. '
-     'Comenta PÁGINA y te contamos'),
+     '¿Tu negocio ya tiene página? Sí o no, te leemos en los comentarios'),
     ('2-como-funciona.png', post_como_funciona, '¿Cómo funciona?',
      '¿Cómo funciona? 1. Escríbenos 2. Te armamos un ejemplo de tu página 3. Lista en pocos días y compartes '
-     'tu link. Comenta PÁGINA y te contamos'),
+     'tu link. Escríbenos por WhatsApp al 6919-7559 y empezamos'),
     ('3-paginas-de-ejemplo.png', post_ejemplos, '4 páginas de ejemplo',
      '4 páginas de ejemplo: panadería, barbería, tienda y repostería. ¿Cuál estilo va con tu negocio? '
-     'Comenta PÁGINA y te contamos'),
+     'Dinos en los comentarios'),
     (HELADERIA, None, 'Carrusel: Ejemplo de la semana, Heladería',
-     'Ejemplo de la semana: Heladería. Así podría quedar la página de tu negocio. Comenta PÁGINA y te contamos'),
+     'Ejemplo de la semana: Heladería. Así podría quedar la página de tu negocio. Compártelo con alguien que '
+     'tenga negocio'),
     ('5-tres-cosas-que-tu-pagina-debe-tener.png', post_tres_cosas, '3 cosas que tu página debe tener',
      '3 cosas que tu página debe tener: tus productos con foto, un botón para escribirte y tu horario y cómo '
-     'llegar. ¿La tuya las tiene? Comenta PÁGINA y te contamos'),
+     'llegar. ¿La tuya las tiene? Guárdalo para cuando armes la tuya'),
     ('6-antes-y-despues.png', post_antes_despues, 'Antes y después',
      'Antes: te buscan y no te encuentran. Después: tu página con tus precios, tu horario y tu link para '
-     'compartir. Comenta PÁGINA y te contamos'),
+     'compartir. ¿Quieres pasar al después? Escríbenos por WhatsApp al 6919-7559'),
     ('7-vendes-por-instagram.png', post_vendes_instagram, '¿Vendes por Instagram?',
      '¿Vendes solo por Instagram? Con una página tus clientes ven todo en un solo lugar y te piden directo. '
-     'Comenta PÁGINA y te contamos'),
+     'Compártelo con alguien que venda por mensajes'),
     ('8-precios.png', post_precios, 'Precios',
      'Precios claros: Básica $99, Completa $199 y Diseño único desde $369. Pagas una sola vez y el '
      'mantenimiento de $15/mes es opcional. Comenta PÁGINA y te contamos'),
@@ -719,20 +720,22 @@ FEED = [
     # extra (se publican después del 9, así el 12 queda arriba en el perfil)
     ('10-tres-cosas-que-pierde-tu-negocio.png', post_pierde_sin_pagina, '3 cosas que pierde tu negocio sin página',
      '3 cosas que pierde tu negocio sin página: clientes que te buscan, tiempo contestando lo mismo y pedidos '
-     'cuando estás ocupado. Comenta PÁGINA y te contamos'),
+     'cuando estás ocupado. Guárdalo para cuando lo necesites'),
     ('11-pagina-y-no-solo-instagram.png', post_no_solo_instagram, 'Por qué página y no solo Instagram',
      'Instagram para que te conozcan y tu página para que te compren: tus productos ordenados, tus precios y tu '
-     'horario a la vista y todo siempre en el mismo lugar. Comenta PÁGINA y te contamos'),
+     'horario a la vista y todo siempre en el mismo lugar. ¿Tu negocio ya tiene página o solo redes? '
+     'Cuéntanos en los comentarios'),
     ('12-ejemplo-gratis-de-tu-pagina.png', post_ejemplo_gratis, 'Te armamos un ejemplo gratis de tu página',
      'Te armamos un ejemplo gratis de tu página para que veas cómo quedaría tu negocio antes de decidir. '
      'Comenta PÁGINA y te contamos'),
     ('13-siguenos-tu-negocio-merece-pagina.png', post_merece_pagina, 'Síguenos: Tu negocio merece una página web',
-     'Hacemos páginas web para negocios en Panamá. Síguenos para ver ejemplos y tips. Comenta PÁGINA y te '
-     'contamos'),
+     'Hacemos páginas web para negocios en Panamá. Síguenos para ver más ejemplos y tips para tu '
+     'negocio'),
 ]
 STORY = ('/redes/ejemplo-heladeria/story-encuesta.png', 'Story: ¿Tu negocio tiene página web?',
          'En el recuadro de arriba va el sticker de encuesta con la pregunta "¿Tu negocio tiene página web?" y '
-         'las opciones Sí / No. En el recuadro de abajo va el sticker de mención @sitioya.pty.')
+         'las opciones Sí / No (o, en otra story, la cajita de preguntas: "¿Qué quieres saber de tener tu '
+         'página?"). En el recuadro de abajo va el sticker de mención @sitioya.pty.')
 SLIDES_HELADERIA = ['heladeria-1-portada.png', 'heladeria-2-sabores.png', 'heladeria-3-pedidos.png',
                     'heladeria-4-cierre.png']
 
