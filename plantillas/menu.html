@@ -4,7 +4,7 @@
   PÁGINA DE EJEMPLO SITIOYA · Menú digital para restaurante
   Hecha para que casi no haya que tocarla. Lo único que cambia el dueño:
   1. Un plato = un bloque <article class="plato">…</article>. Para agregar uno, copia un bloque y cambia
-     nombre, descripción, precio (data-precio) y foto. Para quitarlo, borra el bloque.
+     nombre, descripción, precio y foto. Para quitarlo, borra el bloque.
   2. ¿Se acabó un plato? Agrégale la palabra  agotado  a la clase:  class="plato agotado"
   3. Horario, dirección y WhatsApp: busca "EDITA AQUÍ".
   Las categorías del menú de arriba se arman solas con las secciones <section class="cat">.
@@ -65,6 +65,7 @@ main{padding:8px 0 40px}
 .box li b{font-weight:600}.box p{margin:4px 0;color:var(--soft)}.box a.l{color:var(--accent-d);font-weight:700;text-decoration:underline}
 footer{border-top:1px solid var(--line);padding-top:22px;padding-bottom:96px;color:var(--soft);font-size:13px;text-align:center}
 .wa{position:fixed;right:16px;bottom:16px;height:54px;padding:0 20px;border-radius:999px;background:#25D366;color:#fff;display:flex;align-items:center;gap:10px;font-weight:700;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:30}
+.demo{position:fixed;left:16px;right:16px;bottom:84px;z-index:120;max-width:440px;margin:0 auto;background:var(--ink);color:#fff;border-radius:16px;padding:14px 16px;font-size:14px;box-shadow:0 12px 30px rgba(0,0,0,.3)}.demo b{display:block;margin-bottom:4px}.demo span{opacity:.85;white-space:pre-line}
 /* ficha del plato */
 dialog{border:0;padding:0;width:min(520px,100%);max-width:100%;max-height:92svh;border-radius:22px 22px 0 0;margin:auto auto 0;background:var(--card);color:var(--ink);overflow:auto}
 dialog::backdrop{background:rgba(20,14,10,.55)}
@@ -95,29 +96,29 @@ dialog .x{position:absolute;right:12px;top:12px;width:44px;height:44px;border-ra
   <p class="aviso">Toca un plato para verlo en grande. Precios de ejemplo.</p>
 
   <section class="cat" id="entradas"><h2>Entradas</h2><p>Para abrir el apetito o compartir.</p><div class="lista">
-    <article class="plato" data-precio="$11"><div><h3>Tartar de res</h3><p>Res picada a cuchillo con alcaparras, cebolla morada y tostadas.</p></div><img src="../img/f/1623695540355-0f4193b51441.jpg" alt="Tartar de res" loading="lazy"><div class="pie"><span class="precio">$11</span></div></article>
-    <article class="plato" data-precio="$9.50"><div><h3>Ensalada de queso a la plancha</h3><p>Hojas verdes, queso dorado a la plancha y vinagreta de la casa.</p></div><img src="../img/f/1669472546359-418a98630699.jpg" alt="Ensalada de queso a la plancha" loading="lazy"><div class="pie"><span class="precio">$9.50</span><span class="tag">Vegetariano</span></div></article>
-    <article class="plato" data-precio="$10"><div><h3>Coliflor glaseada</h3><p>Coliflor asada con salsa de yogur y hierbas frescas.</p></div><img src="../img/f/1712746783860-94fabfbac42c.jpg" alt="Coliflor glaseada" loading="lazy"><div class="pie"><span class="precio">$10</span><span class="tag">Vegetariano</span></div></article>
-    <article class="plato" data-precio="$18"><div><h3>Tabla para compartir</h3><p>Carnes frías, quesos y acompañantes para dos o tres personas.</p></div><img src="../img/f/1717158776685-d4b7c346e1a7.jpg" alt="Tabla para compartir" loading="lazy"><div class="pie"><span class="precio">$18</span></div></article>
+    <article class="plato"><div><h3>Tartar de res</h3><p>Res picada a cuchillo con alcaparras, cebolla morada y tostadas.</p></div><img src="../img/f/1623695540355-0f4193b51441.jpg" alt="Tartar de res" loading="lazy"><div class="pie"><span class="precio">$11</span></div></article>
+    <article class="plato"><div><h3>Ensalada de queso a la plancha</h3><p>Hojas verdes, queso dorado a la plancha y vinagreta de la casa.</p></div><img src="../img/f/1669472546359-418a98630699.jpg" alt="Ensalada de queso a la plancha" loading="lazy"><div class="pie"><span class="precio">$9.50</span><span class="tag">Vegetariano</span></div></article>
+    <article class="plato"><div><h3>Coliflor glaseada</h3><p>Coliflor asada con salsa de yogur y hierbas frescas.</p></div><img src="../img/f/1712746783860-94fabfbac42c.jpg" alt="Coliflor glaseada" loading="lazy"><div class="pie"><span class="precio">$10</span><span class="tag">Vegetariano</span></div></article>
+    <article class="plato"><div><h3>Tabla para compartir</h3><p>Carnes frías, quesos y acompañantes para dos o tres personas.</p></div><img src="../img/f/1717158776685-d4b7c346e1a7.jpg" alt="Tabla para compartir" loading="lazy"><div class="pie"><span class="precio">$18</span></div></article>
   </div></section>
 
   <section class="cat" id="fuertes"><h2>Platos fuertes</h2><p>Todos vienen con un acompañante.</p><div class="lista">
-    <article class="plato" data-precio="$14"><div><h3>Pollo con vegetales</h3><p>Pechuga a la plancha con papas y vegetales salteados en mantequilla de hierbas.</p></div><img src="../img/f/1627858034922-72a657d6b3c2.jpg" alt="Pollo con vegetales" loading="lazy"><div class="pie"><span class="precio">$14</span></div></article>
-    <article class="plato" data-precio="$19"><div><h3>Pescado del día</h3><p>Filete de pescado blanco con vegetales asados y salsa de limón.</p></div><img src="../img/f/1676471926534-d5c9771909fa.jpg" alt="Pescado del día" loading="lazy"><div class="pie"><span class="precio">$19</span></div></article>
-    <article class="plato" data-precio="$22"><div><h3>Lomo con vegetales</h3><p>Lomo de res a la parrilla con vegetales de temporada y puré.</p></div><img src="../img/f/1565895405227-31cffbe0cf86.jpg" alt="Lomo con vegetales" loading="lazy"><div class="pie"><span class="precio">$22</span></div></article>
-    <article class="plato" data-precio="$24"><div><h3>Filete con reducción</h3><p>Filete de res con papa dorada y reducción de la casa.</p></div><img src="../img/f/1663530761401-15eefb544889.jpg" alt="Filete con reducción" loading="lazy"><div class="pie"><span class="precio">$24</span></div></article>
+    <article class="plato"><div><h3>Pollo con vegetales</h3><p>Pechuga a la plancha con papas y vegetales salteados en mantequilla de hierbas.</p></div><img src="../img/f/1627858034922-72a657d6b3c2.jpg" alt="Pollo con vegetales" loading="lazy"><div class="pie"><span class="precio">$14</span></div></article>
+    <article class="plato"><div><h3>Pescado del día</h3><p>Filete de pescado blanco con vegetales asados y salsa de limón.</p></div><img src="../img/f/1676471926534-d5c9771909fa.jpg" alt="Pescado del día" loading="lazy"><div class="pie"><span class="precio">$19</span></div></article>
+    <article class="plato"><div><h3>Lomo con vegetales</h3><p>Lomo de res a la parrilla con vegetales de temporada y puré.</p></div><img src="../img/f/1565895405227-31cffbe0cf86.jpg" alt="Lomo con vegetales" loading="lazy"><div class="pie"><span class="precio">$22</span></div></article>
+    <article class="plato"><div><h3>Filete con reducción</h3><p>Filete de res con papa dorada y reducción de la casa.</p></div><img src="../img/f/1663530761401-15eefb544889.jpg" alt="Filete con reducción" loading="lazy"><div class="pie"><span class="precio">$24</span></div></article>
   </div></section>
 
   <section class="cat" id="postres"><h2>Postres</h2><p>Hechos en casa.</p><div class="lista">
-    <article class="plato" data-precio="$7"><div><h3>Pastel de frutos rojos</h3><p>Bizcocho suave con crema y frutos rojos frescos.</p></div><img src="../img/f/1693059857299-3f5ee0eaad7e.jpg" alt="Pastel de frutos rojos" loading="lazy"><div class="pie"><span class="precio">$7</span></div></article>
-    <article class="plato" data-precio="$6"><div><h3>Tartaletas de fruta</h3><p>Masa crujiente con crema pastelera y fruta de temporada.</p></div><img src="../img/f/1495147466023-ac5c588e2e94.jpg" alt="Tartaletas de fruta" loading="lazy"><div class="pie"><span class="precio">$6</span></div></article>
-    <article class="plato" data-precio="$5"><div><h3>Helado en cono</h3><p>Dos bolas de chocolate en cono crujiente.</p></div><img src="../img/f/1580915411954-282cb1b0d780.jpg" alt="Helado en cono" loading="lazy"><div class="pie"><span class="precio">$5</span></div></article>
+    <article class="plato"><div><h3>Pastel de frutos rojos</h3><p>Bizcocho suave con crema y frutos rojos frescos.</p></div><img src="../img/f/1693059857299-3f5ee0eaad7e.jpg" alt="Pastel de frutos rojos" loading="lazy"><div class="pie"><span class="precio">$7</span></div></article>
+    <article class="plato"><div><h3>Tartaletas de fruta</h3><p>Masa crujiente con crema pastelera y fruta de temporada.</p></div><img src="../img/f/1495147466023-ac5c588e2e94.jpg" alt="Tartaletas de fruta" loading="lazy"><div class="pie"><span class="precio">$6</span></div></article>
+    <article class="plato"><div><h3>Helado en cono</h3><p>Dos bolas de chocolate en cono crujiente.</p></div><img src="../img/f/1580915411954-282cb1b0d780.jpg" alt="Helado en cono" loading="lazy"><div class="pie"><span class="precio">$5</span></div></article>
   </div></section>
 
   <section class="cat" id="bebidas"><h2>Bebidas</h2><p>Café de grano y bebidas frías.</p><div class="lista">
-    <article class="plato" data-precio="$2.50"><div><h3>Café americano</h3><p>Café de grano recién molido.</p></div><img src="../img/f/1514432324607-a09d9b4aefdd.jpg" alt="Café americano" loading="lazy"><div class="pie"><span class="precio">$2.50</span></div></article>
-    <article class="plato" data-precio="$3.50"><div><h3>Cappuccino</h3><p>Espresso con leche cremosa y espuma.</p></div><img src="../img/f/1550731358-491ded4af838.jpg" alt="Cappuccino" loading="lazy"><div class="pie"><span class="precio">$3.50</span></div></article>
-    <article class="plato" data-precio="$3.75"><div><h3>Latte</h3><p>Espresso suave con bastante leche. Pídelo frío si quieres.</p></div><img src="../img/f/1545731939-9c302d5d27ed.jpg" alt="Latte" loading="lazy"><div class="pie"><span class="precio">$3.75</span></div></article>
+    <article class="plato"><div><h3>Café americano</h3><p>Café de grano recién molido.</p></div><img src="../img/f/1514432324607-a09d9b4aefdd.jpg" alt="Café americano" loading="lazy"><div class="pie"><span class="precio">$2.50</span></div></article>
+    <article class="plato"><div><h3>Cappuccino</h3><p>Espresso con leche cremosa y espuma.</p></div><img src="../img/f/1550731358-491ded4af838.jpg" alt="Cappuccino" loading="lazy"><div class="pie"><span class="precio">$3.50</span></div></article>
+    <article class="plato"><div><h3>Latte</h3><p>Espresso suave con bastante leche. Pídelo frío si quieres.</p></div><img src="../img/f/1545731939-9c302d5d27ed.jpg" alt="Latte" loading="lazy"><div class="pie"><span class="precio">$3.75</span></div></article>
   </div></section>
 
   <p class="nada" id="nada">No encontramos ese plato. Escríbenos por WhatsApp y te contamos qué hay hoy.</p>
@@ -132,6 +133,8 @@ dialog .x{position:absolute;right:12px;top:12px;width:44px;height:44px;border-ra
 <footer class="w">© <span id="y"></span> Mesa Lunar · Página de ejemplo hecha por SitioYa</footer>
 <a class="wa" href="#" data-wa="Hola, quiero hacer un pedido"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 27l2-6A11 11 0 1 1 11 25z"/><path d="M12 11c0 5 4 9 9 9l1.5-2.5-3-1.5-1.5 1.5c-1.5-.5-3-2-3.5-3.5l1.5-1.5-1.5-3z"/></svg> Pedir</a>
 
+<div class="demo" id="demo" role="status" hidden><b>Así le llega el pedido al WhatsApp del restaurante:</b><span></span></div>
+
 <dialog id="ficha" aria-labelledby="fn"><button class="x" type="button" aria-label="Cerrar">✕</button><img id="fi" alt=""><div class="in"><h3 id="fn"></h3><p id="fd"></p><div class="row"><span class="precio" id="fp"></span><a class="btn" id="fw" href="#" target="_blank" rel="noopener">Pedir este plato</a></div></div></dialog>
 
 <script>
@@ -144,8 +147,15 @@ const HORARIO = [[1], [2, "12:00", "22:00"], [3, "12:00", "22:00"], [4, "12:00",
 // ========================
 {
 const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-const wa = m => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m);
-const link = (a, m) => { a.href = wa(m); a.target = "_blank"; a.rel = "noopener"; };
+// Mientras el número sea el de ejemplo, los botones no abren WhatsApp: muestran cómo llegaría el pedido.
+const DEMO = WHATSAPP === "50760000000";
+const aviso = document.getElementById("demo");
+let avisoT = 0;
+const mostrarDemo = m => { const f = document.getElementById("ficha"); if (f.open) { if (f.close) f.close(); else f.removeAttribute("open"); } aviso.querySelector("span").textContent = "«" + m + "»"; aviso.hidden = false; clearTimeout(avisoT); avisoT = setTimeout(() => aviso.hidden = true, 6000); };
+const link = (a, m) => {
+  if (DEMO) { a.href = "#"; a.removeAttribute("target"); a.onclick = e => { e.preventDefault(); mostrarDemo(m); }; return; }
+  a.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m); a.target = "_blank"; a.rel = "noopener"; a.onclick = null;
+};
 document.querySelectorAll("[data-wa]").forEach(a => link(a, a.dataset.wa));
 document.getElementById("y").textContent = new Date().getFullYear();
 document.getElementById("dir").textContent = DIRECCION;
@@ -154,7 +164,7 @@ document.getElementById("mapa").href = MAPA;
 // horario y "abierto ahora" (hora de Panamá)
 const h12 = s => { let [h, m] = s.split(":").map(Number); const ap = h < 12 ? "am" : "pm"; h = h % 12 || 12; return h + (m ? ":" + String(m).padStart(2, "0") : "") + " " + ap; };
 document.getElementById("horario").innerHTML = HORARIO.map(([d, a, c]) => `<li><span>${DIAS[d]}</span><b>${a ? h12(a) + " – " + h12(c) : "Cerrado"}</b></li>`).join("");
-try {
+const estado = () => { try {
   const p = Object.fromEntries(new Intl.DateTimeFormat("en-US", {timeZone: "America/Panama", weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23"}).formatToParts(new Date()).map(x => [x.type, x.value]));
   const dia = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(p.weekday), ahora = +p.hour * 60 + +p.minute;
   const min = s => { const [h, m] = s.split(":").map(Number); return h * 60 + m; };
@@ -164,15 +174,17 @@ try {
   const deAyer = ayer && ayer[1] && min(ayer[2]) <= min(ayer[1]) && ahora < min(ayer[2]);
   if (dia >= 0 && deAyer) {
     el.querySelector("span").textContent = "Abierto ahora · cierra a las " + h12(ayer[2]);
+    el.querySelector("i").style.background = "";
     el.hidden = false;
   } else if (dia >= 0 && hoy) {
     const cierre = hoy[1] ? min(hoy[2]) + (min(hoy[2]) <= min(hoy[1]) ? 1440 : 0) : 0;
     const abierto = hoy[1] && ahora >= min(hoy[1]) && ahora < cierre;
     el.querySelector("span").textContent = abierto ? "Abierto ahora · cierra a las " + h12(hoy[2]) : (hoy[1] && ahora < min(hoy[1]) ? "Hoy abrimos a las " + h12(hoy[1]) : "Cerrado ahora");
-    if (!abierto) el.querySelector("i").style.background = "#E8A23B";
+    el.querySelector("i").style.background = abierto ? "" : "#E8A23B";
     el.hidden = false;
-  }
-} catch (e) {}
+  } else el.hidden = true;
+} catch (e) {} };
+estado(); setInterval(estado, 60000); // se actualiza solo cada minuto
 
 // barra de categorías (se arma sola)
 const cats = [...document.querySelectorAll(".cat")];
@@ -210,14 +222,15 @@ q.addEventListener("input", filtrar);
 
 // ficha del plato
 const ficha = document.getElementById("ficha");
+const precio = p => p.querySelector(".precio").textContent.trim(); // el precio se escribe una sola vez, en la tarjeta
 let desde = null;
 const abrir = p => {
   const n = p.querySelector("h3").textContent, img = p.querySelector("img");
   document.getElementById("fn").textContent = n;
   document.getElementById("fd").textContent = p.querySelector("p").textContent;
-  document.getElementById("fp").textContent = p.classList.contains("agotado") ? "Agotado hoy" : p.dataset.precio;
+  document.getElementById("fp").textContent = p.classList.contains("agotado") ? "Agotado hoy" : precio(p);
   const fi = document.getElementById("fi"); fi.src = img.currentSrc || img.src; fi.alt = img.alt;
-  const fw = document.getElementById("fw"); fw.hidden = p.classList.contains("agotado"); link(fw, "Hola, quiero pedir: " + n + " (" + p.dataset.precio + ")");
+  const fw = document.getElementById("fw"); fw.hidden = p.classList.contains("agotado"); link(fw, "Hola, quiero pedir: " + n + " (" + precio(p) + ")");
   desde = p;
   if (ficha.showModal) ficha.showModal(); else ficha.setAttribute("open", "");
 };
@@ -226,7 +239,7 @@ ficha.addEventListener("close", () => { if (desde) desde.focus(); });
 ficha.querySelector(".x").addEventListener("click", cerrar);
 ficha.addEventListener("click", e => { if (e.target === ficha) cerrar(); });
 document.querySelectorAll(".plato").forEach(p => {
-  p.tabIndex = 0; p.setAttribute("role", "button"); p.setAttribute("aria-label", p.querySelector("h3").textContent + ", " + p.dataset.precio + ". Ver detalle");
+  p.tabIndex = 0; p.setAttribute("role", "button"); p.setAttribute("aria-label", p.querySelector("h3").textContent + ", " + precio(p) + ". Ver detalle");
   p.addEventListener("click", () => abrir(p));
   p.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(p); } });
 });
