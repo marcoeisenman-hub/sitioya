@@ -49,7 +49,7 @@ h1 span{background:linear-gradient(90deg,var(--coral),var(--yel));-webkit-backgr
 .body p{color:var(--soft);font-size:14px;margin-top:4px;line-height:1.45}
 .acts{display:flex;gap:8px;margin-top:16px}
 .b{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:12px;font:inherit;font-weight:800;font-size:14px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--txt)}
-.b.p{background:var(--coral);border-color:var(--coral);color:#fff}
+.b.p{background:var(--coral);border-color:var(--coral);color:#1B2A4A}
 /* ventana: buscador y ficha del ejemplo */
 .ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding:10vh 16px 16px}
 .ov.on{display:flex}
@@ -68,7 +68,6 @@ h1 span{background:linear-gradient(90deg,var(--coral),var(--yel));-webkit-backgr
 .pm h3{font-size:22px;font-weight:900}.pm .k{color:var(--soft);font-size:14px;margin-top:4px}
 .unl{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
 .unl .b{flex:1 1 200px}
-.wa{background:#25D366!important;border-color:#25D366!important;color:#fff!important}
 .note{font-size:12.5px;color:var(--soft);margin-top:12px}
 footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--soft);font-size:14px;text-align:center}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.it{opacity:1;transform:none}}
@@ -131,8 +130,8 @@ function showEj(s, from) {
   const t = T.find(x => x.s === s);
   openOv(`<div class="pm"><button class="x" aria-label="Cerrar" onclick="closeOv()">✕</button><h3>${esc(t.n)}</h3><div class="k">${esc(t.k)} · ${esc(t.fm)}</div>
     <p class="note">Así podría quedar la página de tu negocio, con tu nombre, tus fotos y tus precios.</p>
-    <div class="unl"><a class="b wa" href="${cot(t)}" target="_blank" rel="noopener">Cotiza tu página</a><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a></div></div>`, from);
-  md.querySelector(".wa").focus();
+    <div class="unl"><a class="b p" href="${cot(t)}" target="_blank" rel="noopener">Cotiza tu página</a><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a></div></div>`, from);
+  md.querySelector(".unl .p").focus();
 }
 
 function openSearch() {

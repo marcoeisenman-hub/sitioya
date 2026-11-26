@@ -7,11 +7,11 @@
   var st = document.createElement("style");
   st.textContent =
     "#sy-cotiza{position:fixed;left:16px;bottom:20px;z-index:2147483000;display:flex;align-items:center;gap:8px;" +
-    "height:46px;padding:0 16px 0 8px;border-radius:999px;background:#FF6B5B;color:#fff;text-decoration:none;" +
+    "height:46px;padding:0 16px 0 8px;border-radius:999px;background:#FF6B5B;color:#1B2A4A;text-decoration:none;" +
     "font:800 14px/1 'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;letter-spacing:0;" +
     "box-shadow:0 10px 24px rgba(0,0,0,.28);mix-blend-mode:normal;white-space:nowrap}" +
     "#sy-cotiza:hover{filter:brightness(1.06)}" +
-    "#sy-cotiza:focus-visible{outline:3px solid #1B2A4A;outline-offset:3px}" +
+    "#sy-cotiza:focus-visible{outline:3px solid #1B2A4A;outline-offset:2px;box-shadow:0 0 0 7px #FFF6EC}" +
     "#sy-cotiza svg{flex:none;display:block}" +
     "@media(max-width:400px){#sy-cotiza{left:12px;gap:6px;padding:0 14px 0 7px;font-size:13px}}" +
     // en celulares muy angostos no cabe al lado del botón de WhatsApp: va encima
@@ -30,4 +30,12 @@
     '<path d="M52 47L52 80L60 72L66 84L71.5 81.5L65.5 69.5L77 69.5Z" fill="#1B2A4A" stroke="#FFF6EC" stroke-width="7" stroke-linejoin="round" paint-order="stroke"/></svg>' +
     "<span>Cotiza tu página</span>";
   (document.body || document.documentElement).appendChild(a);
+  // Espacio vacío al final del pie (con su mismo fondo) para que, al llegar abajo, ni este botón
+  // ni el de WhatsApp del ejemplo tapen el texto del pie.
+  var fs = document.getElementsByTagName("footer"), f = fs[fs.length - 1];
+  if (!f) return;
+  var base = parseFloat(getComputedStyle(f).paddingBottom) || 0, mq = matchMedia("(max-width:359px)");
+  function espacio() { f.style.paddingBottom = base + (mq.matches ? 140 : 84) + "px"; }
+  espacio();
+  if (mq.addEventListener) mq.addEventListener("change", espacio);
 })();
