@@ -16,21 +16,26 @@ const FPS = 30;
 const FFMPEG = process.env.FFMPEG || "ffmpeg";
 const tiempos = JSON.parse(fs.readFileSync(path.join(trabajo, "tiempos.json"), "utf8"));
 
-// servidor local solo de lectura para la carpeta del sitio (páginas de ejemplo, fotos, escenas)
-const TIPOS = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".svg": "image/svg+xml", ".ttf": "font/ttf", ".woff2": "font/woff2" };
+// servidor local de solo lectura, solo con lo que usa el render: escenas, letra, páginas de ejemplo y fotos
+const PERMITIDO = /^\/(tools\/reels\/(escenas\.html|DMSans\.ttf)|plantillas\/[a-z-]+\.html|img\/[\w\/.-]+\.(jpe?g|png|webp|svg))$/;
+const TIPOS = { ".html": "text/html; charset=utf-8", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".svg": "image/svg+xml", ".ttf": "font/ttf" };
+const raizReal = fs.realpathSync(raiz);
 const srv = http.createServer((req, res) => {
-  const u = decodeURIComponent(new URL(req.url, "http://x").pathname);
-  const f = path.resolve(raiz, "." + u);
-  if (!f.startsWith(raiz + path.sep) || !fs.existsSync(f) || !fs.statSync(f).isFile()) { res.writeHead(404); return res.end(); }
+  let u;
+  try { u = decodeURIComponent(new URL(req.url, "http://x").pathname); } catch { res.writeHead(400); return res.end(); }
+  if (!PERMITIDO.test(u) || u.includes("..")) { res.writeHead(404); return res.end(); }
+  let f;
+  try { f = fs.realpathSync(path.join(raizReal, u)); } catch { res.writeHead(404); return res.end(); }
+  if (!f.startsWith(raizReal + path.sep) || !fs.statSync(f).isFile()) { res.writeHead(404); return res.end(); }
   res.writeHead(200, { "content-type": TIPOS[path.extname(f).toLowerCase()] || "application/octet-stream" });
   fs.createReadStream(f).pipe(res);
 });
 await new Promise(r => srv.listen(0, "127.0.0.1", r));
 const base = `http://127.0.0.1:${srv.address().port}`;
 
-const b = await chromium.launch({ headless: true });
-let ff;
+let b, ff;
 try {
+  b = await chromium.launch({ headless: true });
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   // sin internet: las letras de Google de las páginas de ejemplo no deben trabar la carga
   await p.route(/^https?:\/\/(?!127\.0\.0\.1)/, r => r.request().url().includes("fonts.g") ? r.continue() : r.abort());
@@ -61,5 +66,6 @@ try {
   }
 } finally {
   if (ff && ff.exitCode === null && !ff.stdin.writableEnded) ff.kill();
-  await b.close(); srv.close();
+  if (b) await b.close().catch(() => {});
+  srv.close();
 }

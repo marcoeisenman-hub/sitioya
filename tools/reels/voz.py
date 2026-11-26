@@ -1,6 +1,6 @@
 """Genera la voz de cada línea (edge-tts, voz panameña) y arma la línea de tiempo.
 
-Uso: uv run --with edge-tts python3 voz.py <carpeta-trabajo>
+Uso: uv run --with edge-tts python3 voz.py <carpeta-trabajo> [video ...]  (sin videos hace todos)
 Escribe <trabajo>/<video>/linea-N.mp3 y <trabajo>/<video>/tiempos.json
 """
 import asyncio, difflib, hashlib, json, re, subprocess, sys
@@ -71,9 +71,14 @@ def subtitulos(sub: str, palabras, inicio: float, largo: float):
     return [{"w": w, "t": round(inicio + x, 3)} for w, x in zip(ws, t)]
 
 
-async def main(trabajo: Path):
+async def main(trabajo: Path, pedidos):
     g = json.loads((AQUI / "guiones.json").read_text())
+    malos = [v for v in pedidos if v not in g["videos"]]
+    if malos:
+        sys.exit("Video desconocido: " + ", ".join(malos))
     for nombre, escenas in g["videos"].items():
+        if pedidos and nombre not in pedidos:
+            continue
         d = trabajo / nombre
         d.mkdir(parents=True, exist_ok=True)
         t, n, salida = 0.0, 0, []
@@ -100,6 +105,6 @@ async def main(trabajo: Path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        sys.exit("Uso: voz.py <carpeta-trabajo>")
-    asyncio.run(main(Path(sys.argv[1]).resolve()))
+    if len(sys.argv) < 2:
+        sys.exit("Uso: voz.py <carpeta-trabajo> [video ...]")
+    asyncio.run(main(Path(sys.argv[1]).resolve(), sys.argv[2:]))
