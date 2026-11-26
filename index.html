@@ -503,7 +503,7 @@ document.getElementById("cat").innerHTML = T.map((t, i) => {
   <div class="tb"><div class="top"><h3>${esc(t.n)}</h3></div><p>${esc(t.d)}</p>
    <div class="sty">${t.st.map(x => `<span>${esc(STY[x])}</span>`).join("")}</div>
    <div class="feat">${t.f.map(x => `<span>${esc(x)}</span>`).join("")}</div>
-   <div class="row"><a class="btn ghost sm" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a><a class="btn sm" href="#cotizar" data-ej="${esc(t.s)}">Quiero una así</a></div></div>
+   <div class="row"><a class="btn ghost sm" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a><a class="btn sm" href="?ej=${encodeURIComponent(t.s)}#cotizar" data-ej="${esc(t.s)}">Quiero una así</a></div></div>
  </article>`}).join("");
 const sizeWins = () => document.querySelectorAll(".win").forEach(w => w.style.setProperty("--h", w.clientHeight + "px"));
 sizeWins(); addEventListener("resize", sizeWins);
@@ -530,8 +530,10 @@ q.addEventListener("input", apply); apply();
 
 // "Quiero una así": lleva a cotizar con el ejemplo anotado
 const qmsg = document.querySelector('#qform textarea[name="msg"]');
-const pickEj = s => { const t = T.find(x => x.s === s); if (!t || !qmsg) return; const v = qmsg.value.trim(); if (!v || /^Me gustó el ejemplo /.test(v)) qmsg.value = `Me gustó el ejemplo ${t.n} (${t.k}). `; };
-document.getElementById("cat").addEventListener("click", e => { const b = e.target.closest("[data-ej]"); if (b) pickEj(b.dataset.ej); });
+let ejPre = "";
+const pickEj = s => { const t = T.find(x => x.s === s); if (!t || !qmsg) return; const pre = `Me gustó el ejemplo ${t.n} (${t.k}). `, v = qmsg.value;
+  if (ejPre && v.startsWith(ejPre)) qmsg.value = pre + v.slice(ejPre.length); else if (!v.trim()) qmsg.value = pre; else return; ejPre = pre; };
+document.getElementById("cat").addEventListener("click", e => { const b = e.target.closest("[data-ej]"); if (!b || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); pickEj(b.dataset.ej); document.getElementById("cotizar").scrollIntoView({ behavior: "smooth" }); history.replaceState(null, "", "#cotizar"); });
 pickEj(new URLSearchParams(location.search).get("ej"));
 
 // marquee
