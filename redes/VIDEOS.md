@@ -14,8 +14,8 @@ python3 tools/revisar_videos.py --recortar --hasta 25 video-largo.mp4
 - Con `--recortar` hace `<nombre>-corto.mp4` al lado del original, con los primeros segundos y un fundido de 0.5 s al final. El original no se toca y nunca pisa un archivo que ya exista (si ya hay uno, sale `-corto-2.mp4`).
 - Ese recorte corta el final del video. Si el cierre con el DM queda afuera, mejor quitar escenas del medio en el editor siguiendo los tiempos de abajo.
 
-## Estado de los videos ya hechos (2026-11-25)
-En esta carpeta no hay ningún video guardado todavía (los de antes/después y los animados los hace Cam). Cuando los pase, se revisan con el script y a los que pasen de 30 s se les arma la versión corta con los tiempos de abajo.
+## Estado de los videos ya hechos (2026-11-26)
+En `redes/videos/` hay 3 reels hechos con `tools/reels/hacer_reels.sh`, todos de menos de 30 s: `antes-despues.mp4`, `como-funciona.mp4` y `tu-negocio-en-internet.mp4` (cada uno con su portada `.jpg`). Los videos que pase Cam se revisan con el script y a los que pasen de 30 s se les arma la versión corta con los tiempos de abajo.
 
 ## Tiempos para que cada reel quede en unos 25 s
 Si un video ya hecho es más largo, se recorta siguiendo estos bloques: se acortan o se quitan las escenas del medio y se dejan siempre el gancho y el cierre.

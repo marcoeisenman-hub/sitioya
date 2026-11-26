@@ -514,7 +514,7 @@ function v3() {
   sfx("thud", tO[8], .9);
   const nube = mk("div", "a", ST, null, { left: "50px", top: "930px", width: "980px", display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "22px 20px" });
   const TIPOS = ["Barbería", "Cafetería", "Florería", "Gimnasio", "Taller", "Veterinaria", "Tienda", "Spa", "Fotografía", "¡Y más!"];
-  const chipsO = TIPOS.map((txt, i) => mk("div", "chip", nube, i === TIPOS.length - 1 ? txt : `<span class="ck">${CHECK}</span>${txt}`, Object.assign({ fontSize: "36px", willChange: "transform,opacity" }, i === TIPOS.length - 1 ? { background: "var(--coral)", color: "#fff", padding: "20px 34px" } : {})));
+  const chipsO = TIPOS.map((txt, i) => mk("div", "chip", nube, i === TIPOS.length - 1 ? txt : `<span class="ck">${CHECK}</span>${txt}`, Object.assign({ fontSize: "36px", willChange: "transform,opacity" }, i === TIPOS.length - 1 ? { background: "var(--coral)", color: "var(--navy)", padding: "20px 34px" } : {})));
   const tChip = i => tO[6] + .1 + i * .16;
   chipsO.forEach((_, i) => { if (i % 2 === 0) sfx("pop", tChip(i), .4); });
   sfx("whoosh", O.t - .2, .8);
