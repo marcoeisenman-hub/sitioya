@@ -86,4 +86,5 @@ const y = document.getElementById("y"); if (y) y.textContent = new Date().getFul
 const peek=document.querySelector(".peek"),pim=peek.querySelector("img");
 if(matchMedia("(hover:hover)").matches){document.querySelectorAll(".row").forEach(r=>{r.addEventListener("mouseenter",()=>{pim.src=r.dataset.img;peek.classList.add("on")});r.addEventListener("mouseleave",()=>peek.classList.remove("on"))});
 addEventListener("mousemove",e=>{peek.style.left=e.clientX+"px";peek.style.top=e.clientY+"px"})}
-const par=document.querySelector(".par img");addEventListener("scroll",()=>{const r=par.parentElement.getBoundingClientRect();par.style.transform=`translateY(${(r.top/innerHeight)*-12-6}%)`},{passive:true});}</script></body></html>
+const par=document.querySelector(".par img");addEventListener("scroll",()=>{const r=par.parentElement.getBoundingClientRect();par.style.transform=`translateY(${(r.top/innerHeight)*-12-6}%)`},{passive:true});}</script><script src="cotiza.js" defer></script>
+</body></html>

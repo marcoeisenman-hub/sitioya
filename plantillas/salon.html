@@ -63,4 +63,5 @@ document.querySelectorAll("form[data-wa-form]").forEach(f => f.addEventListener(
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold: .12});
 document.querySelectorAll(".fade,.rise,.zoom").forEach(el => io.observe(el));
 const y = document.getElementById("y"); if (y) y.textContent = new Date().getFullYear();
-}</script></body></html>
+}</script><script src="cotiza.js" defer></script>
+</body></html>

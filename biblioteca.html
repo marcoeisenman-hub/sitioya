@@ -50,7 +50,7 @@ h1 span{background:linear-gradient(90deg,var(--coral),var(--yel));-webkit-backgr
 .acts{display:flex;gap:8px;margin-top:16px}
 .b{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:12px;font:inherit;font-weight:800;font-size:14px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--txt)}
 .b.p{background:var(--coral);border-color:var(--coral);color:#fff}
-/* modal prompt */
+/* ventana: buscador y ficha del ejemplo */
 .ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding:10vh 16px 16px}
 .ov.on{display:flex}
 .md{width:min(640px,100%);background:#0D111B;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -20px rgba(0,0,0,.8);animation:in .25s cubic-bezier(.2,.8,.2,1)}
@@ -66,9 +66,6 @@ h1 span{background:linear-gradient(90deg,var(--coral),var(--yel));-webkit-backgr
 .ft kbd{font-family:inherit;border:1px solid var(--line);border-radius:5px;padding:0 5px;margin-right:4px}
 .pm{padding:22px;position:relative}.x{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--txt);font-size:16px;cursor:pointer}
 .pm h3{font-size:22px;font-weight:900}.pm .k{color:var(--soft);font-size:14px;margin-top:4px}
-.code{position:relative;margin-top:16px;background:#060810;border:1px solid var(--line);border-radius:14px;padding:18px;font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.6;color:#C9D1E3;white-space:pre-wrap;max-height:300px;overflow:hidden}
-.code .lock{filter:blur(5px);user-select:none}
-.code::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60%;background:linear-gradient(transparent,#060810)}
 .unl{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
 .unl .b{flex:1 1 200px}
 .wa{background:#25D366!important;border-color:#25D366!important;color:#fff!important}
@@ -93,7 +90,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--soft);fo
   <div class="chips" id="chips"></div>
 </header>
 <main class="w"><div class="grid" id="grid"></div></main>
-<footer class="w">SitioYa · Páginas web para negocios en Panamá 🇵🇦 · <a href="./#cotizar" style="color:var(--coral);font-weight:700">¿Te gustó alguno? Cotiza tu página aquí</a></footer>
+<footer class="w">SitioYa · Páginas web para negocios en Panamá 🇵🇦 · <a href="https://wa.me/50769197559?text=Hola%2C%20vi%20un%20ejemplo%20en%20SitioYa%20y%20quiero%20cotizar%20una%20p%C3%A1gina%20para%20mi%20negocio" target="_blank" rel="noopener" style="color:var(--coral);font-weight:700">¿Te gustó alguno? Cotiza tu página por WhatsApp</a></footer>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="Buscar"><div class="md" id="md"></div></div>
 
@@ -102,7 +99,7 @@ const T = [{"s": "panaderia", "n": "Trigo Lucero", "k": "Panadería y café", "g
 const WA = "50769197559";
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-const cot = t => `./?ej=${encodeURIComponent(t.s)}#cotizar`;
+const cot = t => `https://wa.me/${WA}?text=${encodeURIComponent(`Hola, vi un ejemplo en SitioYa (${t.k}) y quiero cotizar una página para mi negocio`)}`;
 document.getElementById("cnt").textContent = T.length;
 
 // filtros
@@ -118,7 +115,7 @@ function draw() {
   const grid = document.getElementById("grid");
   grid.innerHTML = L.map(t => `<article class="it"><a class="shot" href="plantillas/${t.s}.html" target="_blank" rel="noopener"><img src="img/shots/${t.s}.jpg" alt="Ejemplo ${esc(t.k)}" loading="lazy"><span class="tg">${esc(t.k)}</span></a>
     <div class="body"><h3>${esc(t.n)}</h3><p>${esc(t.d)}</p>
-    <div class="acts"><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a><a class="b p" href="${cot(t)}">Quiero una así</a></div></div></article>`).join("");
+    <div class="acts"><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a><a class="b p" href="${cot(t)}" target="_blank" rel="noopener">Cotiza tu página</a></div></div></article>`).join("");
   grid.querySelectorAll(".it").forEach((el, i) => { el.style.transitionDelay = (i % 6) * 60 + "ms"; io.observe(el); });
 }
 draw();
@@ -134,7 +131,7 @@ function showEj(s, from) {
   const t = T.find(x => x.s === s);
   openOv(`<div class="pm"><button class="x" aria-label="Cerrar" onclick="closeOv()">✕</button><h3>${esc(t.n)}</h3><div class="k">${esc(t.k)} · ${esc(t.fm)}</div>
     <p class="note">Así podría quedar la página de tu negocio, con tu nombre, tus fotos y tus precios.</p>
-    <div class="unl"><a class="b wa" href="${cot(t)}">Quiero una así</a><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a></div></div>`, from);
+    <div class="unl"><a class="b wa" href="${cot(t)}" target="_blank" rel="noopener">Cotiza tu página</a><a class="b" href="plantillas/${t.s}.html" target="_blank" rel="noopener">Ver demo</a></div></div>`, from);
   md.querySelector(".wa").focus();
 }
 

@@ -78,4 +78,5 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting
 document.querySelectorAll(".fade,.rise,.zoom").forEach(el => io.observe(el));
 const y = document.getElementById("y"); if (y) y.textContent = new Date().getFullYear();
 const nav=document.querySelector(".nav");addEventListener("scroll",()=>nav.classList.toggle("s",scrollY>60),{passive:true});
-document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));document.querySelectorAll(".dish").forEach(d=>d.style.display=(t.dataset.c==="all"||d.dataset.c===t.dataset.c)?"":"none")}));}</script></body></html>
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));document.querySelectorAll(".dish").forEach(d=>d.style.display=(t.dataset.c==="all"||d.dataset.c===t.dataset.c)?"":"none")}));}</script><script src="cotiza.js" defer></script>
+</body></html>

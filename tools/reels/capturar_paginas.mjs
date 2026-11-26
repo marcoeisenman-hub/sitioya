@@ -16,7 +16,7 @@ try {
     if (!/^[a-z-]+$/.test(n)) throw new Error("nombre raro: " + n);
     const p = await ctx.newPage();
     await p.goto(pathToFileURL(path.join(aqui, "../../plantillas", n + ".html")).href, { waitUntil: "load", timeout: 30000 });
-    await p.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important}.fade,.rv{opacity:1!important;transform:none!important}" });
+    await p.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important}.fade,.rv{opacity:1!important;transform:none!important}#sy-cotiza{display:none!important}" });
     await p.evaluate(async () => { for (let y = 0; y < 5000; y += 400) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 60)); } window.scrollTo(0, 0); });
     await p.evaluate(() => Promise.race([
       Promise.all([...document.images].map(i => { i.loading = "eager"; return i.complete ? 0 : new Promise(r => { i.addEventListener("load", r); i.addEventListener("error", r); }); })),
