@@ -110,12 +110,21 @@ def main():
         except BaseException:
             shutil.rmtree(nuevo, ignore_errors=True)
             raise
-        if d.exists():  # con --rehacer, el viejo se guarda en contenido/_anterior/
-            viejo = SALIDA / "_anterior" / f"{fecha}-{time.strftime('%Y%m%d-%H%M%S')}"
-            viejo.parent.mkdir(exist_ok=True)
+        viejo = None
+        if d.exists():  # con --rehacer, el viejo se guarda en contenido/_anterior/ (nombre único)
+            (SALIDA / "_anterior").mkdir(exist_ok=True)
+            caja = Path(tempfile.mkdtemp(prefix=f"{fecha}-{time.strftime('%Y%m%d-%H%M%S')}-", dir=SALIDA / "_anterior"))
+            viejo = caja / fecha
             d.rename(viejo)
+        try:
+            nuevo.rename(d)
+        except BaseException:
+            if viejo is not None:
+                viejo.rename(d)  # vuelve el anterior a su lugar
+            shutil.rmtree(nuevo, ignore_errors=True)
+            raise
+        if viejo is not None:
             print(f"{fecha}: el anterior quedó en {viejo.relative_to(RAIZ)}")
-        nuevo.rename(d)
         resumen.append("")
     (SALIDA / "LEEME.txt").write_text("\n".join(resumen), encoding="utf-8")
     print("listo:", SALIDA)
