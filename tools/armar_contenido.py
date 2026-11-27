@@ -133,13 +133,12 @@ def main():
 
 if __name__ == "__main__":
     # una sola corrida a la vez (dos a la vez se pelearían las mismas carpetas)
+    # flock se suelta solo cuando el proceso termina, aunque lo maten
+    import fcntl
     SALIDA.mkdir(exist_ok=True)
-    candado = SALIDA / ".armando.lock"
-    try:
-        candado.mkdir()
-    except FileExistsError:
-        raise SystemExit(f"Ya hay otra corrida (si no, borra {candado})")
-    try:
+    with open(SALIDA / ".armando.lock", "w") as candado:
+        try:
+            fcntl.flock(candado, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise SystemExit("Ya hay otra corrida de armar_contenido.py")
         main()
-    finally:
-        candado.rmdir()
