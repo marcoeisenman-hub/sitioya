@@ -21,6 +21,7 @@ TITULO = ('¿Tu negocio necesita', 'página web?')
 SUBTITULO = 'Páginas web hechas para tu negocio. Con WhatsApp, formas de pago y más'
 TELEFONO = '6919-7559'
 USUARIO = '@sitioya.pty'
+NOMBRE = 'Marco Eisenman'  # va arriba del contacto (pedido 26-nov)
 NOTA = 'Negocio y datos de ejemplo'
 
 
@@ -49,13 +50,17 @@ def frase(d, xy, partes, f, centrado=False):
 
 
 def caja_contacto(d, caja, tam):
-    """Caja azul oscuro con 'Escríbenos por WhatsApp 6919-7559 o en @sitioya.pty'."""
+    """Caja azul oscuro con 'Marco Eisenman', 'Escríbenos por WhatsApp 6919-7559 o en @sitioya.pty'."""
     x0, y0, x1, y1 = caja
     d.rounded_rectangle(caja, int(tam * 1.1), fill=NAVY)
     cx = (x0 + x1) / 2
+    f0 = fuente(int(tam * 1.15), 900)
     f1, f2, f3 = fuente(tam, 800), fuente(int(tam * 1.9), 900), fuente(tam, 800)
-    alto = f1.size * 1.3 + f2.size * 1.15 + f3.size
+    alto = f0.size * 1.45 + f1.size * 1.3 + f2.size * 1.15 + f3.size
     y = y0 + ((y1 - y0) - alto) / 2 - tam * 0.1
+    w = texto_ancho(d, NOMBRE, f0)
+    d.text((cx - w / 2, y), NOMBRE, font=f0, fill=CREMA)
+    y += f0.size * 1.45
     for t, f, c in (('Escríbenos por WhatsApp', f1, CREMA), (TELEFONO, f2, CORAL)):
         w = texto_ancho(d, t, f)
         assert w < (x1 - x0) - 40, t
@@ -84,17 +89,17 @@ def story():
     assert len(sub) <= 2, sub
     y = lineas(d, (W / 2, y + 26), sub, fs, SOFT, interlineado=1.3, centrado=True)
     # celular con la heladería
-    ancho = 372
-    y_tel = y + 46
+    ancho = 350
+    y_tel = y + 40
     w, h = celular_chico(im, ((W - ancho) / 2, y_tel), pantalla_portada(600, 1170), ancho)
     d = ImageDraw.Draw(im)
     pastilla(d, (W / 2, y_tel + h - 40), 'Página de ejemplo: Heladería', fuente(32, 900), NAVY, CREMA,
              pad=(28, 14), centro=True)
     fin_tel = y_tel + h + 6
     # contacto
-    caja = (90, fin_tel + 40, W - 90, fin_tel + 40 + 250)
+    caja = (90, fin_tel + 34, W - 90, fin_tel + 34 + 300)
     caja_contacto(d, caja, 40)
-    nota_y = caja[3] + 22
+    nota_y = caja[3] + 20
     d.text(((W - texto_ancho(d, NOTA, fuente(24, 500))) / 2, nota_y), NOTA, font=fuente(24, 500), fill=SOFT)
     # todo tiene que quedar arriba de la barra de "responder" de la story (~200 px de abajo)
     assert nota_y + 30 < H - 200, nota_y
@@ -126,17 +131,20 @@ def cuadrado():
              pad=(22, 12), centro=True)
     assert y_tel + h < 820, y_tel + h
     # contacto abajo, de lado a lado
-    caja = (66, 832, W - 66, 1010)
+    caja = (66, 826, W - 66, 1024)
     d.rounded_rectangle(caja, 44, fill=NAVY)
-    fc = fuente(46, 900)
-    cy = caja[1] + 30
+    fn = fuente(38, 900)
+    cy = caja[1] + 22
+    w = frase(d, (W / 2, cy), ((NOMBRE, CREMA),), fn, centrado=True)
+    cy += 52
+    fc = fuente(44, 900)
     for partes in ((('Escríbenos por WhatsApp ', CREMA), (TELEFONO, CORAL)),
                    (('o en ', CREMA), (USUARIO, CORAL))):
         w = frase(d, (W / 2, cy), partes, fc, centrado=True)
         assert w < caja[2] - caja[0] - 60, w
-        cy += 64
+        cy += 60
     f_nota = fuente(22, 500)
-    d.text((W - 66 - texto_ancho(d, NOTA, f_nota), 1030), NOTA, font=f_nota, fill=SOFT)
+    d.text((W - 66 - texto_ancho(d, NOTA, f_nota), 1036), NOTA, font=f_nota, fill=SOFT)
     return im
 
 
