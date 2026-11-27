@@ -196,6 +196,63 @@
      }
     ]
    }
+  ],
+  "planes": [
+   {
+    "id": "gancho",
+    "min": 2.6,
+    "lineas": [
+     {
+      "say": "¿Cuánto cuesta tu página web?",
+      "sub": "¿Cuánto cuesta tu página web?",
+      "at": 0.15
+     }
+    ]
+   },
+   {
+    "id": "basica",
+    "min": 6.4,
+    "lineas": [
+     {
+      "say": "La Básica, noventa y nueve: tu logo fotos precios horario mapa y botón de WhatsApp.",
+      "sub": "La Básica, $99: tu logo, fotos, precios, horario, mapa y botón de WhatsApp.",
+      "at": 0.2
+     }
+    ]
+   },
+   {
+    "id": "completa",
+    "min": 6.6,
+    "lineas": [
+     {
+      "say": "La Completa, ciento noventa y nueve: todo eso más menú pagos reservas galería y tu dominio.",
+      "sub": "La Completa, $199: todo eso más menú, pagos, reservas, galería y tu dominio.",
+      "at": 0.2
+     }
+    ]
+   },
+   {
+    "id": "medida",
+    "min": 2.6,
+    "lineas": [
+     {
+      "say": "Las dos, a tu medida.",
+      "sub": "Las dos, a tu medida.",
+      "at": 0.15
+     }
+    ]
+   },
+   {
+    "id": "cierre",
+    "min": 5.0,
+    "lineas": [
+     {
+      "say": "Escríbenos por di em o al seis nueve uno nueve siete cinco cinco nueve.",
+      "sub": "Escríbenos por DM @sitioya.pty o al 6919-7559",
+      "at": 0.3
+     }
+    ]
+   }
   ]
  }
 }

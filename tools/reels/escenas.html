@@ -571,11 +571,112 @@ function v3() {
   };
 }
 
+/* =========================================================
+   4) PLANES: BÁSICA $99 Y COMPLETA $199
+   ========================================================= */
+function v4() {
+  HIDE_SUBS = ["gancho", "cierre"];
+  const bg = fondo([["#FFE3DC", 640, 560, 1240], ["#D9F3EC", 500, -200, 100]]);
+  const br = marca();
+  const G = sc("gancho"), B = sc("basica"), K = sc("completa"), M = sc("medida"), C = sc("cierre");
+  // gancho
+  const h1 = palabras(ST, [["¿Cuánto"]], 80, 290, 168);
+  const h2 = palabras(ST, [["cuesta"]], 80, 460, 168);
+  const h3 = palabras(ST, [["tu"], ["página"]], 80, 630, 168);
+  const h4 = palabras(ST, [["web?", "var(--coral)"]], 80, 800, 168);
+  const und = mk("div", "a", ST, `<svg width="420" height="40" viewBox="0 0 330 40"><path d="M6 28C80 10 200 6 324 20" stroke="#FF6B5B" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="360" stroke-dashoffset="360"/></svg>`);
+  const undP = und.querySelector("path");
+  const tG = ["¿Cuánto", "cuesta", "tu", "página", "web?"].map(w => wt("gancho", w));
+  tG.forEach((x, i) => sfx(i === 4 ? "thud" : "pop", x, i === 4 ? 1 : .45));
+  const stG = [["$99", tG[4] + .35, 600, 1080, -6, "#fff", "var(--navy)"], ["$199", tG[4] + .6, 250, 1250, 5, "var(--coral)", "#fff"]]
+    .map(([txt, t, x, y, r, bgc, col]) => ({ e: mk("div", "a sticker", ST, txt, { fontSize: "104px", background: bgc, color: col }), t, x, y, r }));
+  stG.forEach(s => sfx("pop", s.t, 1));
+  // un nivel: etiqueta, nombre, precio, frase y lista de lo que trae
+  function nivel(S, n, nombre, precio, pillBg, pillCol, linea, tLinea, items) {
+    const g = mk("div", "a", ST, null, { width: "1080px", height: "1920px" });
+    const pill = mk("div", "a pill", g, `NIVEL ${n} DE 2`, { background: pillBg, color: pillCol, fontSize: "34px", padding: "12px 28px" });
+    const tit = mk("div", "a h", g, nombre, { fontSize: "120px" });
+    const pr = mk("div", "a h", g, precio, { fontSize: "156px", color: "var(--coral)" });
+    const ln = mk("div", "a", g, linea, { fontSize: "44px", fontWeight: "700", color: "var(--soft)", letterSpacing: "-.01em", whiteSpace: "nowrap" });
+    const chips = items.map(([txt, w], i) => ({ e: mk("div", "a chip", g, `<span class="ck">${CHECK}</span>${txt}`), t: wt(S.id, w), y: 520 + i * 128 }));
+    const tNom = wt(S.id, nombre), tPr = wt(S.id, precio);
+    sfx("pop", tNom, .6); sfx("thud", tPr, .9); sfx("pop", tLinea, .4); chips.forEach(c => sfx("pop", c.t, .7));
+    return { chips, upd: (t, o) => {
+      tf(g, { o }); if (o <= 0.001) return;
+      const qp = spr(P(t, S.t + .05, .5)); tf(pill, { x: 80, y: 196 + (1 - qp) * -40, o: cl(qp * 2) });
+      const qn = spr(P(t, tNom - .1, .55)); tf(tit, { x: 80 + (1 - qn) * 80, y: 270, o: cl(P(t, tNom - .1, .15)) });
+      const qr = spr(P(t, tPr - .05, .6)); tf(pr, { x: 1000 - pr.offsetWidth, y: 236 + (1 - qr) * 80, s: .5 + .5 * qr, r: (1 - qr) * -12, o: cl(P(t, tPr - .05, .12)) });
+      tf(ln, { x: 80, y: 412 + (1 - eo(P(t, tLinea, .4))) * 30, o: P(t, tLinea, .3) });
+      chips.forEach(c => { const q = spr(P(t, c.t - .05, .6)); tf(c.e, { x: 30 + (1 - q) * -80, y: c.y + Math.sin(t * 2.2 + c.y) * 4, s: .6 + .4 * q, o: cl(P(t, c.t - .05, .12)) }); });
+    } };
+  }
+  const N1 = nivel(B, 1, "Básica", "$99", "var(--navy)", "#fff", "Una página hecha para tu negocio", wt("basica", "tu") - .45,
+    [["Tu logo", "logo,"], ["Tus fotos", "fotos,"], ["Precios", "precios,"], ["Horario", "horario,"], ["Mapa", "mapa"], ["Botón de WhatsApp", "WhatsApp."]]);
+  const N2 = nivel(K, 2, "Completa", "$199", "var(--coral)", "var(--navy)", "Todo lo de la Básica, y además:", wt("completa", "todo"),
+    [["Catálogo o menú", "menú,"], ["Formas de pago", "pagos,"], ["Reservas", "reservas,"], ["Galería", "galería"], ["Tu propio dominio", "dominio."]]);
+  const tDom = wt("completa", "dominio.");
+  const notaDom = mk("div", "a note", ST, "El dominio se paga aparte", { fontSize: "26px" });
+  // teléfono con las páginas de ejemplo de verdad
+  const ph = telefono(460, 920);
+  const PH_X = 580, PH_Y = 470;
+  const pgB = pagina(ph, "panaderia"), pgK = pagina(ph, "restaurante");
+  const tMenu = wt("completa", "menú,");
+  let menuY = null;
+  const nota = mk("div", "a note", ST, "Negocios y datos de ejemplo");
+  sfx("whoosh", B.t - .2, .7);
+  const bar = barrido(K.t);
+  // las dos, a tu medida
+  const tarjeta = (nom, pre, fondoC, colN) => mk("div", "a", ST, `<div style="font-weight:800;font-size:60px;letter-spacing:-.02em;color:${colN}">${nom}</div><div class="h" style="font-size:150px;color:var(--coral);margin-top:14px">${pre}</div>`,
+    { width: "440px", padding: "50px 40px", borderRadius: "48px", background: fondoC, boxShadow: "0 40px 80px -30px rgba(27,42,74,.45)", textAlign: "center" });
+  const cards = [[tarjeta("Básica", "$99", "#fff", "var(--navy)"), wt("medida", "Las"), 80, -4], [tarjeta("Completa", "$199", "var(--navy)", "#fff"), wt("medida", "dos,"), 560, 4]];
+  cards.forEach(([, t]) => sfx("pop", t, .9));
+  const tMed = wt("medida", "a");
+  const sello = mk("div", "a sticker", ST, `Hechas a la medida<br><span style="color:var(--coral)">de tu negocio</span>`, { fontSize: "72px", lineHeight: "1.05", textAlign: "center" });
+  sfx("sparkle", tMed, .8); sfx("thud", tMed + .05, .7);
+  const fin = cierre("cierre", [
+    { html: `<div class="h" style="font-size:112px">Escríbenos por DM</div>`, at: wt("cierre", "Escríbenos"), y: 800, dm: true },
+    { html: `<span class="pill" style="background:#fff;color:var(--navy);font-size:46px;letter-spacing:0;box-shadow:0 20px 40px -18px rgba(27,42,74,.35)">Básica $99 · Completa $199</span>`, at: wt("cierre", "Escríbenos") + .35, y: 960 },
+    { html: `<span class="pill" style="background:var(--wa);color:#fff;font-size:56px;letter-spacing:0">${CHAT("#fff", 50)}o al 6919-7559</span>`, at: wt("cierre", "al") + .4, y: 1430 },
+  ]);
+  const subs = subtitulos();
+  return t => {
+    bg(t); br(t, 1 - P(t, C.t - .2, .3));
+    // gancho
+    const sal = eio(P(t, B.t - .25, .45));
+    h1.upd(t, tG.slice(0, 1), 1 - sal); h2.upd(t, tG.slice(1, 2), 1 - sal); h3.upd(t, tG.slice(2, 4), 1 - sal); h4.upd(t, tG.slice(4), 1 - sal);
+    [h1, h2, h3, h4].forEach(h => h.e.style.marginTop = (-sal * 160) + "px");
+    tf(und, { x: 76, y: 975 - sal * 160, o: 1 - sal }); undP.style.strokeDashoffset = 360 * (1 - eo(P(t, tG[4] + .15, .4)));
+    stG.forEach(s => { const q = spr(P(t, s.t - .05, .6)); tf(s.e, { x: s.x, y: s.y + (1 - q) * 60 + Math.sin(t * 2 + s.x) * 6 + sal * 300, s: .4 + .6 * q, r: s.r * q, o: cl(P(t, s.t - .05, .12)) * (1 - sal) }); });
+    // niveles (el barrido tapa el cambio de uno a otro)
+    N1.upd(t, t >= B.t - .3 && t < K.t ? 1 : 0);
+    N2.upd(t, t >= K.t ? 1 - P(t, M.t - .3, .25) : 0);
+    { const q = eo(P(t, tDom + .25, .4)); tf(notaDom, { x: 44, y: 520 + 5 * 128 + 4 + (1 - q) * 20, o: q * (1 - P(t, M.t - .3, .25)) }); }
+    // teléfono
+    const pin = spr(P(t, B.t - .2, .8)), pin2 = spr(P(t, K.t + .1, .8)), pout = eio(P(t, M.t - .35, .45));
+    let y = PH_Y + (1 - pin) * 1400, r = (1 - pin) * 8;
+    if (t >= K.t) { y = PH_Y + (1 - pin2) * 260; r = 0; }
+    tf(ph.el, { x: PH_X, y: y + pout * 1900, r: r + pout * 10, o: t > B.t - .25 && pout < 1 ? 1 : 0 });
+    const esB = t < K.t;
+    pgB.f.style.visibility = esB ? "visible" : "hidden"; pgK.f.style.visibility = esB ? "hidden" : "visible";
+    if (esB) pgB.scroll(kf(t, [[B.t + .7, 0], [B.t + B.d - .1, 2400]]));
+    else {
+      if (menuY === null) { const d = pgK.f.contentDocument, m = d.getElementById("menu"); menuY = m ? m.getBoundingClientRect().top + d.defaultView.scrollY - 64 : 1250; }
+      pgK.scroll(kf(t, [[K.t + .3, 0], [tMenu - .05, menuY], [K.t + K.d - .1, menuY + 700]]));
+    }
+    tf(nota, { x: 540 - nota.offsetWidth / 2, y: 1648, o: t >= B.t + .3 && t < M.t - .3 ? 1 : 0 });
+    // las dos, a tu medida
+    const mo = P(t, C.t - .35, .25), on = t >= M.t - .1;
+    cards.forEach(([e, ti, x, rr]) => { const q = spr(P(t, ti - .05, .6)); tf(e, { x, y: 470 + (1 - q) * 120, s: .7 + .3 * q, r: rr * q, o: on ? cl(P(t, ti - .05, .12)) * (1 - mo) : 0 }); });
+    { const q = spr(P(t, tMed - .05, .6)); tf(sello, { x: 540 - sello.offsetWidth / 2, y: 980 + (1 - q) * 60, s: .4 + .6 * q, r: -3 * q, o: on ? cl(P(t, tMed - .05, .12)) * (1 - mo) : 0 }); }
+    bar(t); fin(t); subs(t);
+  };
+}
+
 /* ---------- arranque ---------- */
 window.preparar = async (nombre, tiempos) => {
   TL = tiempos; SC = Object.fromEntries(tiempos.escenas.map(e => [e.id, e]));
   await document.fonts.load("900 60px DM"); await document.fonts.load("600 60px DM");
-  const f = { "antes-despues": v1, "como-funciona": v2, "tu-negocio-en-internet": v3 }[nombre];
+  const f = { "antes-despues": v1, "como-funciona": v2, "tu-negocio-en-internet": v3, planes: v4 }[nombre];
   if (!f) throw new Error("video desconocido " + nombre);
   window.render = f();
   await Promise.race([Promise.all(LISTOS), new Promise((_, mal) => setTimeout(() => mal(new Error("las páginas de ejemplo no cargaron en 45 s")), 45000))]);

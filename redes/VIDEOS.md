@@ -15,7 +15,7 @@ python3 tools/revisar_videos.py --recortar --hasta 25 video-largo.mp4
 - Ese recorte corta el final del video. Si el cierre con el DM queda afuera, mejor quitar escenas del medio en el editor siguiendo los tiempos de abajo.
 
 ## Estado de los videos ya hechos (2026-11-26)
-En `redes/videos/` hay 3 reels hechos con `tools/reels/hacer_reels.sh`, todos de menos de 30 s: `antes-despues.mp4`, `como-funciona.mp4` y `tu-negocio-en-internet.mp4` (cada uno con su portada `.jpg`). Los videos que pase Cam se revisan con el script y a los que pasen de 30 s se les arma la versión corta con los tiempos de abajo.
+En `redes/videos/` hay 4 reels hechos con `tools/reels/hacer_reels.sh`, todos de menos de 30 s: `antes-despues.mp4`, `como-funciona.mp4`, `tu-negocio-en-internet.mp4` y `planes.mp4` (cada uno con su portada `.jpg`). Los videos que pase Cam se revisan con el script y a los que pasen de 30 s se les arma la versión corta con los tiempos de abajo.
 
 ## Tiempos para que cada reel quede en unos 25 s
 Si un video ya hecho es más largo, se recorta siguiendo estos bloques: se acortan o se quitan las escenas del medio y se dejan siempre el gancho y el cierre.
@@ -55,5 +55,16 @@ El que está en `redes/videos/tu-negocio-en-internet.mp4` (2026-11-26) dura 29.4
 | 8-14 | Lo 2.º |
 | 14-20 | Lo 3.º |
 | 20-25 | Cierre: Escríbenos por DM @sitioya.pty |
+
+### 5) Planes: Básica $99 y Completa $199
+| Segundos | Qué va |
+|---|---|
+| 0-3 | Gancho: "¿Cuánto cuesta tu página web?" (salen $99 y $199) |
+| 3-9 | Básica $99: tu logo, fotos, precios, horario, mapa y botón de WhatsApp (página de la panadería en el celular) |
+| 9-16 | Completa $199: todo lo de la Básica + catálogo o menú, formas de pago, reservas, galería y tu propio dominio (el restaurante baja a su menú; nota chica: el dominio se paga aparte) |
+| 16-19 | "Las dos, a tu medida": las 2 tarjetas y el sello "Hechas a la medida de tu negocio" |
+| 19-25 | Cierre: Escríbenos por DM @sitioya.pty o al 6919-7559 |
+
+`redes/videos/planes.mp4` (2026-11-26) dura 25.0 s. Se rehace con `tools/reels/hacer_reels.sh planes`. Sin "plantilla" ni "desde cero": las 2 son a la medida.
 
 Recordatorio: negocios ficticios, sin marcas ni logos de terceros y sin reseñas ni cifras inventadas.

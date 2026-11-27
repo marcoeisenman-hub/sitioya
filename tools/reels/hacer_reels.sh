@@ -1,6 +1,6 @@
 #!/bin/bash
-# Hace los 3 reels de @sitioya.pty: voz -> cuadros -> audio -> mp4 + portada en redes/videos/
-# Uso: tools/reels/hacer_reels.sh [video ...]   (sin nombres hace los 3)
+# Hace los reels de @sitioya.pty: voz -> cuadros -> audio -> mp4 + portada en redes/videos/
+# Uso: tools/reels/hacer_reels.sh [video ...]   (sin nombres los hace todos)
 # Una sola vez: cd tools/reels && npm i && npx playwright install chromium-headless-shell
 # Necesita también: python3 con numpy, ffmpeg y ffprobe en el PATH, y uv (para la voz con edge-tts).
 set -euo pipefail
@@ -19,9 +19,9 @@ mkdir -p "$SALIDA"
 mkdir "$SALIDA/.hacer_reels.lock" 2>/dev/null || { echo "Ya hay otra corrida (si no, borra $SALIDA/.hacer_reels.lock)" >&2; exit 1; }
 CANDADO="$SALIDA/.hacer_reels.lock"
 if [ -z "${TRABAJO:-}" ]; then PROPIO=$(mktemp -d -t reels-sitioya); TRABAJO="$PROPIO"; fi
-VIDEOS=("$@"); [ ${#VIDEOS[@]} -eq 0 ] && VIDEOS=(antes-despues como-funciona tu-negocio-en-internet)
+VIDEOS=("$@"); [ ${#VIDEOS[@]} -eq 0 ] && VIDEOS=(antes-despues como-funciona tu-negocio-en-internet planes)
 for v in "${VIDEOS[@]}"; do
-  case "$v" in antes-despues|como-funciona|tu-negocio-en-internet) ;; *) echo "Video desconocido: $v" >&2; exit 1;; esac
+  case "$v" in antes-despues|como-funciona|tu-negocio-en-internet|planes) ;; *) echo "Video desconocido: $v" >&2; exit 1;; esac
 done
 uv run --quiet --with edge-tts python3 voz.py "$TRABAJO" "${VIDEOS[@]}"
 for v in "${VIDEOS[@]}"; do
