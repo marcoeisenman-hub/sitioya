@@ -50,7 +50,7 @@ def frase(d, xy, partes, f, centrado=False):
 
 
 def caja_contacto(d, caja, tam):
-    """Caja azul oscuro con 'Marco Eisenman', 'Escríbenos por WhatsApp 6919-7559 o en @sitioya.pty'."""
+    """Caja azul oscuro con NOMBRE arriba y 'Escríbenos por WhatsApp 6919-7559 o en @sitioya.pty'."""
     x0, y0, x1, y1 = caja
     d.rounded_rectangle(caja, int(tam * 1.1), fill=NAVY)
     cx = (x0 + x1) / 2
