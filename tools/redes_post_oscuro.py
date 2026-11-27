@@ -26,7 +26,7 @@ def post_oscuro():
     d = ImageDraw.Draw(im)
     y = 520
     for nombre, precio, detalle in (('Básica', '$99', 'Lo esencial y tu WhatsApp'),
-                                    ('Completa', '$199', 'Menú, pagos, reservas y dominio')):
+                                    ('Completa', '$199', 'Menú, pagos, reservas y más')):
         d.rounded_rectangle((70, y, 520, y + 170), 30, fill='#2a4170')
         d.text((104, y + 26), nombre, font=fuente(40, 900), fill=CREMA)
         d.text((104, y + 84), detalle, font=fuente(24, 600), fill='#c8d2e6')
