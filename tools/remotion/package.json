@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "studio": "remotion studio src/index.ts",
+    "studio": "python3 sonido.py && remotion studio src/index.ts",
     "render": "bash hacer.sh"
   },
   "dependencies": {

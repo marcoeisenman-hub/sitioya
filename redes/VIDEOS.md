@@ -77,7 +77,7 @@ El que está en `redes/videos/tu-negocio-en-internet.mp4` (2026-11-26) dura 29.4
 | 15-19.5 | "Antes de decidir, te armamos un ejemplo de tu página" + sello GRATIS |
 | 19.5-25 | Escríbenos al WhatsApp 6919-7559, tarjeta @sitioya.pty que pasa a "Siguiendo" y "¡Síguenos para más ejemplos!" |
 
-Se rehace con `tools/remotion/hacer.sh` (una vez: `cd tools/remotion && npm i`). Para verlo y editarlo en vivo: `cd tools/remotion && npm run studio`. Los tiempos de escenas y sonidos están en `tools/remotion/src/linea.json`.
+Se rehace con `bash tools/remotion/hacer.sh` (una vez: `cd tools/remotion && npm i`). Para verlo y editarlo en vivo: `cd tools/remotion && npm run studio` (primero arma el audio). Los tiempos de escenas y sonidos están en `tools/remotion/src/linea.json`.
 
 Caption:
 > ¿Tu negocio todavía no tiene página web? Te la hacemos a la medida: Básica $99 o Completa $199. Antes de decidir, te armamos un ejemplo gratis para que veas cómo quedaría tu negocio. Escríbenos al WhatsApp 6919-7559 y síguenos para ver más ejemplos
@@ -85,6 +85,6 @@ Caption:
 > #Panamá #EmprendedoresPanamá #NegociosPanamá #PáginaWeb #SitioYa
 
 ## Paquete de la semana para Drive
-`python3 tools/armar_contenido.py` arma `contenido/<fecha>/` (del 2026-11-27 al 2026-12-03, según el plan semanal) con cada imagen o video final y su caption en un `.txt` al lado. `contenido/` no va a Git ni a Vercel: es para subirlo a la carpeta de Drive. El post giveaway de los viernes queda pendiente hasta definir premio y reglas.
+`python3 tools/armar_contenido.py` arma `contenido/<fecha>/` (los días que ya existen no se tocan; `--rehacer` los arma de nuevo y guarda el anterior en `contenido/_anterior/`) (del 2026-11-27 al 2026-12-03, según el plan semanal) con cada imagen o video final y su caption en un `.txt` al lado. `contenido/` no va a Git ni a Vercel: es para subirlo a la carpeta de Drive. El post giveaway de los viernes queda pendiente hasta definir premio y reglas.
 
 Recordatorio: negocios ficticios, sin marcas ni logos de terceros y sin reseñas ni cifras inventadas.

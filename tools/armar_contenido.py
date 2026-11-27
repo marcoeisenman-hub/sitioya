@@ -1,6 +1,7 @@
 """Arma el paquete de contenido de la semana de @sitioya.pty, listo para subir a Drive.
 
-Uso: python3 tools/armar_contenido.py
+Uso: python3 tools/armar_contenido.py [--rehacer]
+Sin --rehacer no toca los días que ya existen; con --rehacer los arma de nuevo y guarda el viejo en contenido/_anterior/.
 Crea contenido/<fecha>/ (una carpeta por día de publicación) con la imagen o el video final
 y al lado un .txt con el caption listo para copiar (o, en las stories, qué sticker va).
 Las imágenes y videos se copian de redes/ (no se rehacen). contenido/ no va a Git ni a Vercel.
@@ -10,7 +11,7 @@ mié post ejemplo de la semana + story encuesta · jue video cómo funciona · v
 sáb y dom stories. El giveaway del viernes queda pendiente (falta definir el premio y las reglas):
 el viernes 27 va el reel nuevo "A la medida" (Síguenos) con el post de Síguenos.
 """
-import shutil
+import shutil, sys, tempfile, time
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -75,26 +76,46 @@ PLAN = [
 ]
 
 
+def armar_dia(d, items, resumen):
+    for i, (tipo, src, txt) in enumerate(items, 1):
+        s = RAIZ / src
+        if not s.is_file():
+            raise SystemExit(f"Falta {src}")
+        base = f"{i:02d}-{tipo}-{s.stem}"
+        shutil.copy2(s, d / f"{base}{s.suffix}")
+        if txt:
+            (d / f"{base}.txt").write_text(txt, encoding="utf-8")
+        resumen.append(f"  {base}{s.suffix}")
+
+
 def main():
+    rehacer = "--rehacer" in sys.argv[1:]
     resumen = ["Contenido de @sitioya.pty, una carpeta por día de publicación.",
                "En cada carpeta: el archivo final y al lado un .txt con el caption listo para copiar.",
                "El carrusel del miércoles lleva su caption en el .txt de la slide 4.",
                "Pendiente: el post giveaway de los viernes (falta definir premio y reglas).", ""]
+    SALIDA.mkdir(exist_ok=True)
     for fecha, dia, items in PLAN:
         d = SALIDA / fecha
-        if d.exists():
-            shutil.rmtree(d)
-        d.mkdir(parents=True)
         resumen.append(f"{fecha} ({dia})")
-        for i, (tipo, src, txt) in enumerate(items, 1):
-            s = RAIZ / src
-            if not s.is_file():
-                raise SystemExit(f"Falta {src}")
-            base = f"{i:02d}-{tipo}-{s.stem}"
-            shutil.copy2(s, d / f"{base}{s.suffix}")
-            if txt:
-                (d / f"{base}.txt").write_text(txt, encoding="utf-8")
-            resumen.append(f"  {base}{s.suffix}")
+        if d.exists() and not rehacer:
+            # no pisa lo que ya está (captions editados a mano, archivos agregados)
+            print(f"{fecha}: ya existe, no se toca (usa --rehacer para armarlo de nuevo)")
+            resumen += [f"  {p.name}" for p in sorted(d.iterdir()) if p.suffix != ".txt"] + [""]
+            continue
+        # se arma aparte y recién al final se pone en su lugar: si algo falla, el día viejo queda igual
+        nuevo = Path(tempfile.mkdtemp(prefix=f".{fecha}-", dir=SALIDA))
+        try:
+            armar_dia(nuevo, items, resumen)
+        except BaseException:
+            shutil.rmtree(nuevo, ignore_errors=True)
+            raise
+        if d.exists():  # con --rehacer, el viejo se guarda en contenido/_anterior/
+            viejo = SALIDA / "_anterior" / f"{fecha}-{time.strftime('%Y%m%d-%H%M%S')}"
+            viejo.parent.mkdir(exist_ok=True)
+            d.rename(viejo)
+            print(f"{fecha}: el anterior quedó en {viejo.relative_to(RAIZ)}")
+        nuevo.rename(d)
         resumen.append("")
     (SALIDA / "LEEME.txt").write_text("\n".join(resumen), encoding="utf-8")
     print("listo:", SALIDA)

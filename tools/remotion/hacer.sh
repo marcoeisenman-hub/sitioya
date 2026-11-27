@@ -1,7 +1,7 @@
 #!/bin/bash
 # Reel "A la medida" (Síguenos) de @sitioya.pty hecho con Remotion.
-# Uso: tools/remotion/hacer.sh            -> redes/videos/a-la-medida.mp4 + a-la-medida.jpg
-#      tools/remotion/hacer.sh --cuadros 45 230 ...  -> solo PNG de esos cuadros en /tmp/sy-stills (para revisar)
+# Uso: bash tools/remotion/hacer.sh            -> redes/videos/a-la-medida.mp4 + a-la-medida.jpg
+#      bash tools/remotion/hacer.sh --cuadros 45 230 ...  -> solo PNG de esos cuadros en /tmp/sy-stills (para revisar)
 # Una sola vez: cd tools/remotion && npm i   (Remotion baja su Chrome solo la primera vez)
 # Necesita python3 con numpy (para la música y los efectos, que se sintetizan en sonido.py).
 set -euo pipefail
