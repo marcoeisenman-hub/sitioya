@@ -132,4 +132,14 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # una sola corrida a la vez (dos a la vez se pelearían las mismas carpetas)
+    SALIDA.mkdir(exist_ok=True)
+    candado = SALIDA / ".armando.lock"
+    try:
+        candado.mkdir()
+    except FileExistsError:
+        raise SystemExit(f"Ya hay otra corrida (si no, borra {candado})")
+    try:
+        main()
+    finally:
+        candado.rmdir()
