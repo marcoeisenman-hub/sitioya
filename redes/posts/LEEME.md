@@ -29,7 +29,7 @@ El número es el orden: se publica del 1 al 12. Los 10, 11 y 12 son extra y van 
    > ¿Vendes solo por Instagram? Con una página tus clientes ven todo en un solo lugar y te piden directo. Compártelo con alguien que venda por mensajes
 
 8. `8-precios.png` · Precios
-   > Precios claros y a la medida de tu negocio: Básica $99 y Completa $199. Pagas una sola vez y el mantenimiento de $15/mes es opcional. Comenta PÁGINA y te contamos
+   > Precios claros y a la medida de tu negocio: Básica $99 y Completa $199. Pagas una sola vez y el mantenimiento de $29/mes (con 3 cambios incluidos) es opcional. Comenta PÁGINA y te contamos
 
 9. `9-siguenos-tu-negocio-merece-pagina.png` · Síguenos: Tu negocio merece una página web (celulares con la Heladería del carrusel y el menú de Mesa Lunar)
    > Hacemos páginas web para negocios en Panamá. Síguenos para ver más ejemplos y tips para tu negocio
@@ -52,6 +52,6 @@ Los videos los hace Cam (ver `redes/VIDEOS.md`). Los nombres viejos `4-precios.p
 ## Qué se cuidó
 - Llamados a la acción variados: "Comenta PÁGINA" solo en los de venta (8 Precios y 12 Ejemplo gratis). Los demás usan preguntas para opinar, "Guárdalo", "Compártelo con alguien que tenga negocio" o "Escríbenos por WhatsApp al 6919-7559". En las imágenes el botón dibujado "Comenta PÁGINA" solo queda en el 12; el 2 y la slide 4 de la Heladería cierran con "Escríbenos al 6919-7559" y el 5 y el 10 con "Guárdalo".
 - No dicen la palabra de antes en ningún lado: se habla de páginas y de ejemplos.
-- Precios: solo los de la web (Básica $99, Completa $199, mantenimiento opcional $15/mes). El post 7 no muestra precios.
+- Precios: solo los de la web (Básica $99, Completa $199, mantenimiento opcional $29/mes con 3 cambios incluidos). El post 7 no muestra precios.
 - Sin logos ni marcas de terceros: a las capturas se les cortó el botón flotante de abajo; el perfil del post 7 es genérico (sin logo de ninguna red, sin @ ni cifras de seguidores) y el botón "Pedir por WhatsApp" es solo texto. "WhatsApp" e "Instagram" solo aparecen como texto.
 - Los negocios (Luna, Norte Barber, brisa., Dulce Nube, Nieve & Co, Mesa Lunar) son ficticios, igual que sus datos, y cada post con capturas lo dice ("Negocios y datos de ejemplo"). Sin reseñas ni cifras inventadas.

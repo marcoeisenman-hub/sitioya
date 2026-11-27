@@ -103,10 +103,10 @@ def post_precios():
     y += 6
     d.rounded_rectangle((70, y, 1010, y + 150), 34, fill=MENTA_CLARO)
     d.text((108, y + 26), 'Mantenimiento opcional', font=fuente(36, 900), fill=NAVY)
-    parrafo(d, (108, y + 76), 'Te cambiamos precios, fotos y horarios cuando lo necesites.', fuente(24, 500), SOFT,
+    parrafo(d, (108, y + 76), 'Incluye 3 cambios chiquitos al mes (precios, fotos, horarios). Cambio extra $15.', fuente(24, 500), SOFT,
             560, 1.3)
     fp = fuente(56, 900)
-    t = '$15/mes'
+    t = '$29/mes'
     d.text((972 - texto_ancho(d, t, fp), y + 44), t, font=fp, fill=NAVY)
     pie_simple(im)
     return im
@@ -704,7 +704,7 @@ FEED = [
      'Compártelo con alguien que venda por mensajes'),
     ('8-precios.png', post_precios, 'Precios',
      'Precios claros y a la medida de tu negocio: Básica $99 y Completa $199. Pagas una sola vez y el '
-     'mantenimiento de $15/mes es opcional. Comenta PÁGINA y te contamos'),
+     'mantenimiento de $29/mes (con 3 cambios incluidos) es opcional. Comenta PÁGINA y te contamos'),
     # el 9 es el Síguenos nuevo (Tu negocio merece una página web); reemplazó al Síguenos viejo
     ('9-siguenos-tu-negocio-merece-pagina.png', post_merece_pagina, 'Síguenos: Tu negocio merece una página web',
      'Hacemos páginas web para negocios en Panamá. Síguenos para ver más ejemplos y tips para tu '
