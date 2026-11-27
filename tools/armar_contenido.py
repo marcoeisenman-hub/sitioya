@@ -136,7 +136,7 @@ if __name__ == "__main__":
     # flock se suelta solo cuando el proceso termina, aunque lo maten
     import fcntl
     SALIDA.mkdir(exist_ok=True)
-    with open(SALIDA / ".armando.lock", "w") as candado:
+    with open(SALIDA / ".candado", "w") as candado:
         try:
             fcntl.flock(candado, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
