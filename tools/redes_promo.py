@@ -21,7 +21,7 @@ TITULO = ('¿Tu negocio necesita', 'página web?')
 SUBTITULO = 'Páginas web hechas para tu negocio. Con WhatsApp, formas de pago y más'
 TELEFONO = '6919-7559'
 USUARIO = '@sitioya.pty'
-NOMBRE = 'Marco Eisenman'  # va arriba del contacto (pedido 26-nov)
+NOMBRE = 'Marco Eisenman y Camille Shabetay'  # los dos socios (Marco, 26-nov)
 NOTA = 'Negocio y datos de ejemplo'
 
 
