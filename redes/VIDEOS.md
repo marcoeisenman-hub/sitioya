@@ -67,4 +67,24 @@ El que está en `redes/videos/tu-negocio-en-internet.mp4` (2026-11-26) dura 29.4
 
 `redes/videos/planes.mp4` (2026-11-26) dura 25.0 s. Se rehace con `tools/reels/hacer_reels.sh planes`. Sin "plantilla" ni "desde cero": las 2 son a la medida.
 
+### 6) A la medida (Síguenos), hecho con Remotion
+`redes/videos/a-la-medida.mp4` (+ portada `.jpg`, 2026-11-26, 25 s). Sin voz: todo con texto grande animado, música y efectos sintetizados en `tools/remotion/sonido.py` (sin música con derechos).
+| Segundos | Qué va |
+|---|---|
+| 0-3 | Gancho: "¿Tu negocio todavía no tiene página web?" (palabra por palabra) |
+| 3-8.5 | "Te la hacemos a la medida": cinta métrica + celular que se arma solo con "Tu negocio" (tus colores, fotos, precios, horario y mapa, botón de WhatsApp) |
+| 8.5-15 | "Dos planes, a tu medida": Básica $99 y Completa $199 (el dominio se paga aparte) |
+| 15-19.5 | "Antes de decidir, te armamos un ejemplo de tu página" + sello GRATIS |
+| 19.5-25 | Escríbenos al WhatsApp 6919-7559, tarjeta @sitioya.pty que pasa a "Siguiendo" y "¡Síguenos para más ejemplos!" |
+
+Se rehace con `tools/remotion/hacer.sh` (una vez: `cd tools/remotion && npm i`). Para verlo y editarlo en vivo: `cd tools/remotion && npm run studio`. Los tiempos de escenas y sonidos están en `tools/remotion/src/linea.json`.
+
+Caption:
+> ¿Tu negocio todavía no tiene página web? Te la hacemos a la medida: Básica $99 o Completa $199. Antes de decidir, te armamos un ejemplo gratis para que veas cómo quedaría tu negocio. Escríbenos al WhatsApp 6919-7559 y síguenos para ver más ejemplos
+>
+> #Panamá #EmprendedoresPanamá #NegociosPanamá #PáginaWeb #SitioYa
+
+## Paquete de la semana para Drive
+`python3 tools/armar_contenido.py` arma `contenido/<fecha>/` (del 2026-11-27 al 2026-12-03, según el plan semanal) con cada imagen o video final y su caption en un `.txt` al lado. `contenido/` no va a Git ni a Vercel: es para subirlo a la carpeta de Drive. El post giveaway de los viernes queda pendiente hasta definir premio y reglas.
+
 Recordatorio: negocios ficticios, sin marcas ni logos de terceros y sin reseñas ni cifras inventadas.

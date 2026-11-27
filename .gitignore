@@ -1,3 +1,5 @@
 .DS_Store
 .vercel
 .env*
+# paquete de la semana para subir a Drive (sale de tools/armar_contenido.py)
+contenido/
