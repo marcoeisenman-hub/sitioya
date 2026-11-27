@@ -77,7 +77,7 @@ El que está en `redes/videos/tu-negocio-en-internet.mp4` (2026-11-26) dura 29.4
 | 15-19.5 | "Antes de decidir, te armamos un ejemplo de tu página" + sello GRATIS |
 | 19.5-25 | Escríbenos al WhatsApp 6919-7559, tarjeta @sitioya.pty que pasa a "Siguiendo" y "¡Síguenos para más ejemplos!" |
 
-Se rehace con `bash tools/remotion/hacer.sh` (una vez: `cd tools/remotion && npm i`). Para verlo y editarlo en vivo: `cd tools/remotion && npm run studio` (primero arma el audio). Los tiempos de escenas y sonidos están en `tools/remotion/src/linea.json`.
+Se rehace con `bash tools/remotion/hacer.sh` (una vez: `cd tools/remotion && npm i`). Para verlo y editarlo en vivo: `cd tools/remotion && npm run studio` (primero arma el audio, así que necesita python3 con numpy, igual que `hacer.sh`). Los tiempos de escenas y sonidos están en `tools/remotion/src/linea.json`.
 
 Caption:
 > ¿Tu negocio todavía no tiene página web? Te la hacemos a la medida: Básica $99 o Completa $199. Antes de decidir, te armamos un ejemplo gratis para que veas cómo quedaría tu negocio. Escríbenos al WhatsApp 6919-7559 y síguenos para ver más ejemplos
