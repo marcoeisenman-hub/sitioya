@@ -49,7 +49,7 @@ Story (1080x1920): `redes/ejemplo-heladeria/story-encuesta.png` · ¿Tu negocio 
 
 Los videos los hace Cam (ver `redes/VIDEOS.md`). Los nombres viejos `4-precios.png`, `5-siguenos.png`, `9-siguenos.png` y `13-siguenos-tu-negocio-merece-pagina.png` redirigen a los nuevos (`vercel.json`).
 
-Giveaway (premio: una página Básica gratis, ganador el viernes 4 de diciembre): `giveaway-1080x1350.png` (feed) y `giveaway-story-1080x1920.png` (story), salen de `tools/redes_giveaway.py`. El caption listo para copiar está en `giveaway-caption.txt`.
+Giveaway (premio: una página Básica gratis, se participa hasta el jueves 3 y el ganador se anuncia el viernes 4 de diciembre): `giveaway-1080x1350.png` (feed) y `giveaway-story-1080x1920.png` (story), salen de `tools/redes_giveaway.py`. El caption listo para copiar está en `giveaway-caption.txt`.
 
 ## Qué se cuidó
 - Llamados a la acción variados: "Comenta PÁGINA" solo en los de venta (8 Precios y 12 Ejemplo gratis). Los demás usan preguntas para opinar, "Guárdalo", "Compártelo con alguien que tenga negocio" o "Escríbenos por WhatsApp al 6919-7559". En las imágenes el botón dibujado "Comenta PÁGINA" solo queda en el 12; el 2 y la slide 4 de la Heladería cierran con "Escríbenos al 6919-7559" y el 5 y el 10 con "Guárdalo".

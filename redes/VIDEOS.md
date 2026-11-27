@@ -85,6 +85,6 @@ Caption:
 > #Panamá #EmprendedoresPanamá #NegociosPanamá #PáginaWeb #SitioYa
 
 ## Paquete de la semana para Drive
-`python3 tools/armar_contenido.py` arma `contenido/<fecha>/` (los días que ya existen no se tocan; `--rehacer` los arma de nuevo y guarda el anterior en `contenido/_anterior/`) (del 2026-11-27 al 2026-12-03, según el plan semanal) con cada imagen o video final y su caption en un `.txt` al lado. `contenido/` no va a Git ni a Vercel: es para subirlo a la carpeta de Drive. El post giveaway de los viernes queda pendiente hasta definir premio y reglas.
+`python3 tools/armar_contenido.py` arma `contenido/<fecha>/` (los días que ya existen no se tocan; `--rehacer` los arma de nuevo y guarda el anterior en `contenido/_anterior/`) (del 2026-11-27 al 2026-12-03, según el plan semanal) con cada imagen o video final y su caption en un `.txt` al lado. `contenido/` no va a Git ni a Vercel: es para subirlo a la carpeta de Drive. El post del giveaway (premio: página Básica gratis; cierra jue 3-dic, ganador vie 4-dic) sale de `tools/redes_giveaway.py` (ver `redes/posts/LEEME.md`).
 
 Recordatorio: negocios ficticios, sin marcas ni logos de terceros y sin reseñas ni cifras inventadas.

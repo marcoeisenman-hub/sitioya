@@ -10,7 +10,7 @@ from PIL import ImageDraw
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from redes_heladeria import (  # noqa: E402
-    BLANCO, BLUSH, CORAL, CORAL_D, CREMA, NAVY, SOFT,
+    BLANCO, BLUSH, CORAL, CORAL_D, CREMA, MENTA, NAVY, SOFT,
     base, envolver, fuente, logo_sitioya, pantalla_portada, pastilla, sombra, texto_ancho,
 )
 from redes_posts import MENTA_CLARO, SALIDA, celular_chico  # noqa: E402
@@ -25,6 +25,7 @@ REGLAS = (
     (('Etiqueta a 2 amigos que tengan negocio', NAVY),),
 )
 FECHA = 'viernes 4 de diciembre'
+CIERRE = 'Participa hasta el jueves 3 de diciembre'
 ETIQUETA_TEL = 'Página de ejemplo'
 
 
@@ -51,13 +52,16 @@ def reglas(im, caja, tam, hueco):
 
 
 def caja_fecha(d, caja, tam):
-    """Caja azul: 'Anunciamos al ganador el' + fecha grande en coral."""
+    """Caja azul: fecha de cierre + 'Anunciamos al ganador el' + fecha grande en coral."""
     x0, y0, x1, y1 = caja
     d.rounded_rectangle(caja, 34, fill=NAVY)
-    f1, f2 = fuente(tam, 800), fuente(int(tam * 1.5), 900)
+    f0, f1, f2 = fuente(int(tam * 0.85), 600), fuente(tam, 800), fuente(int(tam * 1.5), 900)
     cx = (x0 + x1) / 2
-    alto = f1.size * 1.3 + f2.size
+    alto = f0.size * 1.5 + f1.size * 1.3 + f2.size
     y = y0 + ((y1 - y0) - alto) / 2 - tam * 0.12
+    w = texto_ancho(d, CIERRE, f0)
+    d.text((cx - w / 2, y), CIERRE, font=f0, fill=MENTA)
+    y += f0.size * 1.5
     for t, f, c in (('Anunciamos al ganador el', f1, CREMA), (FECHA, f2, CORAL)):
         w = texto_ancho(d, t, f)
         assert w < (x1 - x0) - 50, t
@@ -95,14 +99,14 @@ def feed():
              pad=(22, 12), centro=True)
     fin_tel = y_tel + h
     # reglas
-    top = max(y, fin_tel) + 26
-    caja_r = (66, top, W - 66, top + 250)
-    d = reglas(im, caja_r, 34, 14)
+    top = max(y, fin_tel) + 20
+    caja_r = (66, top, W - 66, top + 230)
+    d = reglas(im, caja_r, 33, 10)
     # fecha
-    caja_f = (66, caja_r[3] + 20, W - 66, caja_r[3] + 20 + 150)
+    caja_f = (66, caja_r[3] + 16, W - 66, caja_r[3] + 16 + 180)
     caja_fecha(d, caja_f, 32)
     # firma
-    fy = caja_f[3] + 26
+    fy = caja_f[3] + 22
     fn = fuente(30, 900)
     d.text((66, fy), NOMBRE, font=fn, fill=NAVY)
     fu = fuente(28, 700)
@@ -127,7 +131,7 @@ def story():
     y = lineas(d, (W / 2, 322), ('Gana tu',), f, NAVY, centrado=True, ancho_max=990)
     y = lineas(d, (W / 2, y), ('página web',), f, CORAL_D, centrado=True, ancho_max=990)
     # celular a la izquierda, premio a la derecha
-    ancho = 284
+    ancho = 262
     x_tel, y_tel = 90, y + 30
     w, h = celular_chico(im, (x_tel, y_tel), pantalla_portada(600, 1170), ancho, girar=-3)
     d = ImageDraw.Draw(im)
@@ -148,9 +152,9 @@ def story():
     # reglas + fecha + firma
     caja_r = (70, fin + 30, W - 70, fin + 30 + 270)
     d = reglas(im, caja_r, 37, 14)
-    caja_f = (70, caja_r[3] + 20, W - 70, caja_r[3] + 20 + 160)
+    caja_f = (70, caja_r[3] + 20, W - 70, caja_r[3] + 20 + 200)
     caja_fecha(d, caja_f, 36)
-    fy = caja_f[3] + 26
+    fy = caja_f[3] + 22
     fn = fuente(34, 900)
     w = texto_ancho(d, NOMBRE, fn)
     d.text(((W - w) / 2, fy), NOMBRE, font=fn, fill=NAVY)
